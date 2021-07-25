@@ -40,13 +40,14 @@ if (isset($_POST['login'])) {
             $_SESSION['verified'] = $user['verify'];
 
             header('Location:dashboard.php?login-succesful ');
+            exit();
         }
     } else {
         $_SESSION['fees'] = "Username or Password Incorrect! ";
         $_SESSION['msg_type'] = "danger";
         header('Location:portal_login.php?wrong-credentials');
+        exit();
     }
-    exit();
 }
 
 

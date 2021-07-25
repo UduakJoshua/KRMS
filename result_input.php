@@ -20,16 +20,18 @@ include_once './model/inc/dashboard_header.php';
 
     <section>
 
-        <div class="row justify-content-center">
-            <?php
+        <?php
 
-            if (isset($_SESSION['upload'])) : ?>
-                <div class="alert alert-<?= $_SESSION['msg_type'] ?>">
-                    <?php echo $_SESSION['upload'];
-                    unset($_SESSION['upload']);
-                    ?>
-                </div>
-            <?php endif ?>
+        if (isset($_SESSION['upload'])) : ?>
+            <div class="alert alert-<?= $_SESSION['msg_type'] ?>">
+                <?php echo $_SESSION['upload'];
+                unset($_SESSION['upload']);
+                ?>
+            </div>
+        <?php endif; ?>
+
+        <div class="row justify-content-center">
+
             <div class="col-md-9">
                 <form action="result_input.php" method="POST" enctype="multipart/form-data">
                     <div class="row">

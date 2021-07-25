@@ -19,6 +19,16 @@ include_once './model/inc/dashboard_header.php';
 
 
     <section>
+        <?php
+
+        if (isset($_SESSION['message'])) : ?>
+            <div class="alert alert-<?= $_SESSION['msg_type'] ?> red-icon-message">
+                <span class="fa fa-exclamation-triangle red-icon"></span>
+                <?php echo $_SESSION['message'];
+                unset($_SESSION['message']);
+                ?>
+            </div>
+        <?php endif ?>
         <div class="row justify-content-center">
             <div class="col-md-9">
                 <form action="student.php" method="POST" enctype="multipart/form-data">
@@ -48,7 +58,7 @@ include_once './model/inc/dashboard_header.php';
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="surname">Surname <span class="required">*</span></label>
-                                <input type="text" class="form-control " required name="surname" id="surname" aria-describedby="surname" placeholder="Enter Surname">
+                                <input type="text" class="form-control " value="<?php echo $surname; ?>" required name="surname" id="surname" aria-describedby="surname" placeholder="Enter Surname">
                             </div>
                         </div>
 
@@ -143,7 +153,7 @@ include_once './model/inc/dashboard_header.php';
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="st_password">Password <span class="required">*</span></label>
-                                <input type="password" class="form-control " name="st_password" id="st_password" aria-describedby="admission number" required placeholder="Enter Admission number">
+                                <input type="password" class="form-control " name="st_password" id="st_password" aria-describedby="admission number" required placeholder="Enter Password">
                             </div>
                         </div>
 

@@ -1,13 +1,12 @@
 <?php
-require "./controller/subject_logic.php";
+require "./controller/student_logic.php";
 require "./controller/accounts-management.php";
+require "./controller/pagination.php";
 $title = "BCA | Student List";
 include_once './model/inc/dashboard_header.php';
-
-$query = "SELECT * FROM student order by class_name";
-$result = $conn->query($query);
-
 ?>
+
+<!-- main content-->
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h6">Account Management / List</h1>
@@ -22,7 +21,39 @@ $result = $conn->query($query);
 
 
     <section>
-        <div class="container-fluid">
+        <!--search -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <h4>Search Students Record</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-7">
+                                <form action="" method="GET">
+                                    <div class="input-group">
+                                        <input type="text" name="search" value="<?php if (isset($_GET['search'])) {
+                                                                                    echo $_GET['search'];
+                                                                                } ?>" class="form-control" placeholder="search data">
+                                        <button type="submit" class="btn btn-primary">Search</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <!-- end of search table -->
+        <hr>
+
+
+        <div class="card mt-4">
+
             <?php
 
             if (isset($_SESSION['update'])) : ?>
@@ -32,26 +63,28 @@ $result = $conn->query($query);
                     ?>
                 </div>
             <?php endif ?>
+
             <div class="card-header">
-                <h6>Please select a student to activate or suspend the account</h6>
+                <p>Please select a student to activate or suspend the account</p>
             </div>
 
-            <br />
-            <form action="accounts.php" method="post">
-                <div class="table-responsive">
-                    <table id="example" class="table table-striped table-bordered">
-                        <thead class="dark">
+            <div class="card-body">
+                <form action="accounts.php" method="post">
+                    <table class="table table-striped table-sm w-auto table-responsive width-auto" id="example">
+                        <thead class="thead-dark ">
                             <tr style="font-size: 12px;">
                                 <th scope="col">Select</th>
                                 <th scope="col">Image</th>
                                 <th scope="col">Admission No</th>
-                                <th>Name</th>
+                                <th scope="col">Surname</th>
+                                <th scope="col">Firstname</th>
+                                <th scope="col">Middlename</th>
                                 <th scope="col">Class</th>
                                 <th scope="col">Status</th>
-                                <th>Account Action</th>
+                                <th colspan="2" scope="col">Account Action</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="ml-2 pt-2" style="font-size: 12px;">
                             <?php
                             while ($row = mysqli_fetch_assoc($result)) : ?>
                                 <tr>
@@ -66,7 +99,9 @@ $result = $conn->query($query);
                                     </td>
 
                                     <td><?php echo $row['admissionNo'] ?></td>
-                                    <td><?php echo $row['surname'] . " " . $row['firstname'] ?></td>
+                                    <td><?php echo $row['surname'] ?></td>
+                                    <td><?php echo $row['firstname'] ?></td>
+                                    <td><?php echo $row['middlename'] ?></td>
                                     <td><?php echo $row['class_name'] . " " . $row['classArm'] ?></td>
                                     <td>
                                         <?php if ($row['stat'] == 1) : ?>
@@ -86,13 +121,37 @@ $result = $conn->query($query);
                             <?php endwhile; ?>
                         </tbody>
                     </table>
-                </div>
+                    <div>
+                        <button type="submit" class="btn btn-success" name="activate">Activate</button>
+                        <button type="submit" class="btn btn-warning" name="suspend">Suspend</button>
 
-            </form>
+                    </div>
+                </form>
+
+            </div>
+            <div class="bg-light pt-2">
+                <?php
+                $page_query =    "SELECT * FROM student ORDER BY class_name ASC";
+                $page_result = $conn->query($page_query);
+
+                $total_records = mysqli_num_rows($page_result);
+
+                $total_pages = ceil($total_records / $record_per_page);
+
+                for ($i = 1; $i <= $total_pages; $i++) {
+
+                    echo  "<a href='accounts.php?page=" . $i . "' class='btn btn-primary ml-2 mb-2'>$i </a>";
+                }
+                ?>
+
+
+            </div>
+        </div>
         </div>
 
     </section>
     <hr>
 
-
-    <?php include_once './model/inc/dashboard_footer.php'; ?>
+    <?php
+    include_once './model/inc/dashboard_footer.php';
+    ?>

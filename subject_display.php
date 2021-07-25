@@ -1,88 +1,72 @@
 <?php
-require './controller/subject_logic.php';
-$title = "BCA | Class List";
-include_once './model/inc/dashboard_header.php';
-
+require "./controller/subject_logic.php";
+$title = "BCA | Student List";
+$query = "SELECT * FROM student ";
+$result = mysqli_query($conn, $query);
+include_once './model/inc/sampleHeader.php';
 ?>
 
-<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h4">Subject Display</h1>
-        <div class=" mb-2 mb-md-0">
-            <div class="mr-2">
-
-                <p>Welcome <?php echo $_SESSION['username']; ?></p>
-            </div>
-
-        </div>
-    </div>
-
-
-    <section>
-        <div class=" container-fluid  justify-content-center">
-            <?php
-
-            if (isset($_SESSION['message'])) : ?>
-                <div class="alert alert-<?= $_SESSION['msg_type'] ?>">
-                    <?php echo $_SESSION['message'];
-                    unset($_SESSION['message']);
-                    ?>
-                </div>
-            <?php endif ?>
-
-
-            <?php
-            require_once './controller/subject_logic.php';
-            $select_sql = "SELECT * FROM subject LIMIT 20";
-            $sql_result = $conn->query($select_sql);
-            ?>
-
-            <table class="table table-striped table-sm display" id="example" style="width:100%">
-                <thead class="thead-dark ">
+<section>
+    <div class="container">
+        <h3 align="center">Student List</h3>
+        <br />
+        <div class="table-responsive">
+            <table id="example" class="table table-striped table-bordered">
+                <thead>
                     <tr>
-                        <th scope="col">Subject</th>
-                        <th scope="col">Section</th>
+                        <td>Name</td>
+                        <td>Address</td>
+                        <td>Gender</td>
+                        <td>Designation</td>
+                        <td>Age</td>
                         <th colspan="2" scope="col">Action</th>
                     </tr>
                 </thead>
-                <tbody class="ml-2">
-                    <?php
-                    while ($row = $sql_result->fetch_assoc()) : ?>
+                <?php
+                while ($row = mysqli_fetch_array($result)) {
+                    echo '  
+                               <tr>  
+                                    <td>' . $row["firstname"] . '</td>  
+                                    <td>' . $row["surname"] . '</td> 
+                                    <td>' . $row["middlename"] . '</td> 
+                                    <td>' . $row["class_name"] . '</td> 
+                                    <td>' . $row["dob"] . '</td> 
+                                     <td>
 
-                        <tr>
-                            <td><?php echo $row['subject_title'] ?></td>
-                            <td><?php echo $row['section'] ?></td>
-                            <td>
-                                <a href="subject.php?edit=<?php echo $row['id']; ?>" class=" btn btn-info btn-sm"> Edit</a>
-                                <a href="./controller/subject_logic.php?delete=<?php echo $row['id']; ?>" class=" btn btn-danger btn-sm">Delete</i></a>
-                            </td>
-                        </tr>
+                                        <a href="./controller/student_logic.php?delete=<?php echo ' . $row['id'] . '; ?>" class=" btn btn-danger btn-sm">Del</a>
 
-                    <?php endwhile; ?>
-
-                </tbody>
+                                    </td>
+                               </tr>  
+                               ';
+                }
+                ?>
             </table>
-
         </div>
+    </div>
+</section>
+
+</main>
+</div>
+</div>
+<footer>
+    <p class="text-center">Powered by Blessed Children Academy | Designed by KodeNet Solutions</p>
+</footer>
 
 
-        <div class="row justify-content-center">
-            <div class="col-md-9">
-
-                <div>
-                    <a href="subject.php"><button class="btn btn-primary mt-4 " name="addMore"> Add Subject</button></a>
-                </div>
-
-            </div>
-        </div>
 
 
 
-    </section>
-    <hr>
+<script src="assets/dist/js/bootstrap.bundle.min.js"></script>
+<script src="assets/dist/js/img_preview.js"></script>
 
-    <?php
+<script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+<script src="dashboard.js"></script>
+</body>
 
-    include_once './model/inc/dashboard_footer.php';
-
-    ?>
+</html>
+<script>
+    $(document).ready(function() {
+        $('#example').DataTable();
+    });
+</script>

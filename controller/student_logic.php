@@ -51,13 +51,16 @@ if (isset($_POST['save'])) {
             $_SESSION['message'] = "Student Registered Successfully!";
             $_SESSION['msg_type'] = "success";
             header("location:./student_display.php");
+            exit();
         } else {
             $_SESSION['message'] = "<script type=text/javascript> alert('Failed to upload file! Please try again')</script>";
             $_SESSION['msg_type'] = "danger";
         }
-    } else {
-
-        echo "Error: " . $sql . "<br>" . $conn->error;
+    } elseif ($conn->error) {
+        $_SESSION['message'] = " The admission number $admin_no already exist, please check your input and try again!";
+        $_SESSION['msg_type'] = "danger";
+        header("location:./student.php");
+        exit();
     }
 
     $conn->close();
@@ -75,6 +78,7 @@ if (isset($_GET['delete'])) {
         $_SESSION['message'] = "Student Record deleted Successfully";
         $_SESSION['msg_type'] = "danger";
         header("location:../student_display.php");
+        exit();
     } else {
         echo "Error deleting record: " . $conn->error;
     }
@@ -172,13 +176,16 @@ if (isset($_POST['update'])) {
             $_SESSION['message'] = "Student Registered Successfully!";
             $_SESSION['msg_type'] = "success";
             header("location:./student_display.php");
+            exit();
         } else {
             $_SESSION['message'] = "<script type=text/javascript> alert('Failed to upload file! Please try again')</script>";
             $_SESSION['msg_type'] = "danger";
         }
-    } else {
-
-        echo "Error: " . $sql . "<br>" . $conn->error;
+    } elseif ($conn->error) {
+        $_SESSION['message'] = " The admission number .'$admin_no'. already exist, please check your input and try again!";
+        $_SESSION['msg_type'] = "danger";
+        header("location:./student_display.php");
+        exit();
     }
 
 

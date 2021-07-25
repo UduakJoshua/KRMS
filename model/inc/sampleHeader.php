@@ -1,8 +1,3 @@
-<?php
-if (!isset($_SESSION['ad-user_id'])) {
-    header('location:portal_login.php?invalid-session');
-}
-?>
 <!doctype html>
 <html lang="en">
 
@@ -14,17 +9,15 @@ if (!isset($_SESSION['ad-user_id'])) {
     <meta name="generator" content="Hugo 0.80.0">
     <title> <?php echo $title; ?></title>
 
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css">
-
     <!--jquery link -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <!--jquery datable -->
+
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
-    <!--favicon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css">
+
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon/favicon32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon/favicon16.png">
@@ -34,6 +27,11 @@ if (!isset($_SESSION['ad-user_id'])) {
     <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
     <!--font awesome-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
+
+
 
     <!-- Custom styles for this template -->
     <link href="dashboard.css" rel="stylesheet">
@@ -45,6 +43,7 @@ if (!isset($_SESSION['ad-user_id'])) {
         #sidebarMenu,
         #navbar {
             background-color: maroon !important;
+
         }
 
         #sidebarMenu a {
@@ -186,20 +185,30 @@ if (!isset($_SESSION['ad-user_id'])) {
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="accounts.php">
-                                <span data-feather="user-plus"></span>
-                                Account Management
-                            </a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link" href="#">
                                 <span data-feather="dollar-sign"></span>
                                 Fees Management
                             </a>
                         </li>
 
-
+                        <li class="nav-item">
+                            <a class="nav-link" href="accounts.php">
+                                <span data-feather="user-plus"></span>
+                                Account Management
+                            </a>
+                        </li>
                     </ul>
 
                 </div>
             </nav>
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h6">Student Management / List</h1>
+                    <div class=" mb-2 mb-md-0">
+                        <div class="mr-2">
+
+                            <p>Welcome <?php echo $_SESSION['username']; ?></p>
+                        </div>
+
+                    </div>
+                </div>

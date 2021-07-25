@@ -27,15 +27,21 @@ if (isset($_POST['mt_upload'])) {
 
     if ($conn->query($sql) === TRUE) {
         if (move_uploaded_file($file, $target)) {
-            $_SESSION['fees'] = "Account Suspended For fees Indebtedness! ";
-            $_SESSION['msg_type'] = "danger";
+            $_SESSION['upload'] = "Result Uploaded Successfully! ";
+            $_SESSION['msg_type'] = "success";
             header("location:result_input.php?upload-successful");
+            exit();
         } else {
             $_SESSION['upload'] = "<script type=text/javascript> alert('Failed to upload file! Please try again')</script>";
             $_SESSION['msg_type'] = "danger";
         }
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+    } elseif ($conn->error) {
+        $_SESSION['upload'] = "There is a problem uploading your file, check to be sure there are no
+        duplicate admission number!";
+        $_SESSION['msg_type'] = "danger";
+        header("location:result_input.php");
+        exit();
+        //echo "Error: " . $sql . "<br>" . $conn->error;
     }
 
     $conn->close();

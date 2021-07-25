@@ -19,6 +19,7 @@ if (isset($_POST['activate'])) {
                 $_SESSION['update'] = "Account Activated Successfully!";
                 $_SESSION['msg_type'] = "success";
                 header("location:./accounts.php");
+                exit();
             } else {
                 $errors = "Please select at least one student to activate!";
                 header("location:./accounts.php?please-select");
@@ -35,12 +36,14 @@ if (isset($_POST['suspend'])) {
             $_SESSION['update'] = "Account Suspended Successfully!";
             $_SESSION['msg_type'] = "danger";
             header("location:./accounts.php");
+            exit();
         }
     }
 }
 
 
-if (isset($_POST['submit'])) {
-    $search = $_POST['search'];
-    //header("location:accounts.php");
-}
+/*if (isset($_GET['search'])) {
+    $search = $_GET['search'];
+    header("location:./accounts.php");
+    exit();
+}*/
