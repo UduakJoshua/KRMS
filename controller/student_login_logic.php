@@ -47,6 +47,7 @@ if (isset($_POST['st_login'])) {
                 $_SESSION['st-user_id'] = $user['id'];
                 $_SESSION['st-username'] = $user['surname'] . " " . $user['firstname'];
                 $_SESSION['admin_no'] = $user['admissionNo'];
+                $_SESSION['student_class'] = $user['class_name'];
 
                 header('Location:student_dashboard.php?success');
             }

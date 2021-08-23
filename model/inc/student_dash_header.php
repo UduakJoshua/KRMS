@@ -15,7 +15,7 @@ if (!isset($_SESSION['st-user_id'])) {
     <title> <?php echo $title; ?></title>
     <!-- Latest compiled and minified CSS -->
 
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="canonical" href="https://getbootstrap.com/docs/4.6/examples/dashboard/">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -97,6 +97,27 @@ if (!isset($_SESSION['st-user_id'])) {
             border-radius: 4px;
         }
 
+        .icon {
+            color: cornsilk;
+            font-size: 3rem;
+            margin-top: 20px;
+
+        }
+
+        .icon_div {
+            display: flex;
+            height: 100px;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            margin: 10px;
+        }
+
+        .icon_div p {
+            font-size: 23px;
+        }
+
+
 
 
         @media (min-width: 768px) {
@@ -150,19 +171,19 @@ if (!isset($_SESSION['st-user_id'])) {
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="exam.php">
+                            <a class="nav-link" href="exam_result.php">
                                 <span data-feather="file"></span>
                                 Examination Result
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="exam.php">
+                            <a class="nav-link" href="e_learning.php">
                                 <span data-feather="monitor"></span>
                                 E-Learning
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="exam.php">
+                            <a class="nav-link" href="cbt.php">
                                 <span data-feather="edit"></span>
                                 CBT Practice
                             </a>

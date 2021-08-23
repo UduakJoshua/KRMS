@@ -1,5 +1,5 @@
 <?php
-require "./controller/score_logic.php";
+require "./controller/dbase_conn.php";
 $title = "BCA | Result Management";
 include_once './model/inc/dashboard_header.php';
 ?>
@@ -33,7 +33,22 @@ include_once './model/inc/dashboard_header.php';
 
       <!--col 2 -->
       <div class="col-md-6">
-        <a href="#"><button class="btn btn-warning btn-block mt-4"> Upload Examination Result</button></a>
+        <a href="exam_upload.php"><button class="btn btn-warning btn-block mt-4"> Upload Examination Result</button></a>
+
+      </div>
+    </div>
+    <div class="row">
+
+
+
+      <div class="col-md-6">
+        <a href="#"><button class="btn btn-primary btn-block mt-4">Multiple Upload For Midterm Result</button></a>
+
+      </div>
+
+      <!--col 2 -->
+      <div class="col-md-6">
+        <a href="multipleUpload.php"><button class="btn btn-warning btn-block mt-4"> Multiple Upload Examination Result</button></a>
 
       </div>
     </div>

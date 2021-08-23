@@ -49,26 +49,26 @@ include_once './model/inc/dashboard_header.php';
                             </div>
                         </div>
 
-                        <div class="col-md-3">
+                        <!--div class="col-md-3">
                             <div class="form-group">
                                 <label for="classes">Class:</label>
                                 <input type="text" name="classes" class="form-control">
                             </div>
-                        </div>
+                        </div-->
                     </div>
 
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="term">Term:</label>
-                                <input type="text" name="term" class="form-control">
+                                <input type="text" value="3rd Term" name="term" class="form-control">
                             </div>
                         </div>
 
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="aSession">Session:</label>
-                                <input type="text" name="aSession" class="form-control">
+                                <input type="text" value="2020/2021" name="aSession" class="form-control">
                             </div>
                         </div>
 

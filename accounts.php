@@ -1,6 +1,6 @@
 <?php
 require "./controller/subject_logic.php";
-require "./controller/accounts-management.php";
+
 $title = "BCA | Student List";
 include_once './model/inc/dashboard_header.php';
 
@@ -23,15 +23,10 @@ $result = $conn->query($query);
 
     <section>
         <div class="container-fluid">
-            <?php
 
-            if (isset($_SESSION['update'])) : ?>
-                <div class="alert alert-<?= $_SESSION['msg_type'] ?>">
-                    <?php echo $_SESSION['update'];
-                    unset($_SESSION['update']);
-                    ?>
-                </div>
-            <?php endif ?>
+            <?php
+            include_once "./controller/accounts-management.php";
+            ?>
             <div class="card-header">
                 <h6>Please select a student to activate or suspend the account</h6>
             </div>

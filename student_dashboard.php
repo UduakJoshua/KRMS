@@ -45,7 +45,7 @@ include_once './model/inc/student_dash_header.php';
 
       <!--col 2 -->
       <div class="col-md-6">
-        <a href="exam.php" class="text-decoration-none"><button class="btn btn-warning btn-block mt-4"> Check Examination Result</button></a>
+        <a href="exam_result.php" class="text-decoration-none"><button class="btn btn-warning btn-block mt-4"> Check Examination Result</button></a>
 
       </div>
     </div>
@@ -55,13 +55,13 @@ include_once './model/inc/student_dash_header.php';
 
 
       <div class="col-md-6">
-        <a href="#" class="text-decoration-none"><button class="btn btn-primary btn-block mt-4">Take a Lesson</button></a>
+        <a href="e_learning.php" class="text-decoration-none"><button class="btn btn-primary btn-block mt-4">Take a Lesson</button></a>
 
       </div>
 
       <!--col 2 -->
       <div class="col-md-6">
-        <a href="#" class="text-decoration-none"><button class="btn btn-warning btn-block mt-4"> Test Yourself</button></a>
+        <a href="cbt.php" class="text-decoration-none"><button class="btn btn-warning btn-block mt-4"> Test Yourself</button></a>
 
       </div>
     </div>

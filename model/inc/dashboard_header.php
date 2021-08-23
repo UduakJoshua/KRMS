@@ -112,6 +112,15 @@ if (!isset($_SESSION['ad-user_id'])) {
             font-size: 1.1rem;
         }
 
+        #error {
+
+            border-radius: 6px;
+            height: auto;
+            margin-top: 2px;
+            font-size: 1rem;
+            padding: 2px;
+        }
+
 
 
         @media (min-width: 768px) {
@@ -186,6 +195,12 @@ if (!isset($_SESSION['ad-user_id'])) {
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" href="e_videos.php">
+                                <span data-feather="dollar-sign"></span>
+                                E-Learning
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="accounts.php">
                                 <span data-feather="user-plus"></span>
                                 Account Management
@@ -197,6 +212,7 @@ if (!isset($_SESSION['ad-user_id'])) {
                                 Fees Management
                             </a>
                         </li>
+
 
 
                     </ul>

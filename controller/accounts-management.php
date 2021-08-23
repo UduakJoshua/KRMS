@@ -16,10 +16,13 @@ if (isset($_POST['activate'])) {
             $sql = "UPDATE student SET stat='1' WHERE id=$check";
             if (mysqli_query($conn, $sql)) {
 
-                $_SESSION['update'] = "Account Activated Successfully!";
-                $_SESSION['msg_type'] = "success";
-                header("location:./accounts.php");
-                exit();
+                //$errors['suspend'] = "Account Suspended Successfully!";
+                $errors = "Account Activated Successfully!";
+                echo "<div class= 'alert-success' id='error'>";
+                echo $errors;
+                echo "</div> ";
+                //header("location:./accounts.php");
+                //exit();
             } else {
                 $errors = "Please select at least one student to activate!";
                 header("location:./accounts.php?please-select");
@@ -32,11 +35,13 @@ if (isset($_POST['suspend'])) {
     foreach ($_POST['chk'] as $check) {
         $sql = "UPDATE student SET stat='0' WHERE id=$check";
         if (mysqli_query($conn, $sql)) {
-
-            $_SESSION['update'] = "Account Suspended Successfully!";
-            $_SESSION['msg_type'] = "danger";
-            header("location:./accounts.php");
-            exit();
+            //$errors['suspend'] = "Account Suspended Successfully!";
+            $errors = "Account Suspended Successfully!";
+            echo "<div class= 'alert-danger' id='error'>";
+            echo $errors;
+            echo "</div> ";
+            // header("location:./accounts.php");
+            // exit();
         }
     }
 }

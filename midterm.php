@@ -72,7 +72,7 @@ include_once './model/inc/student_dash_header.php';
                 ?>
 
                 <a href="<?php echo $file; ?>" target="_blank">
-                    <button class="btn btn-primary">Download Result for: <br></for:br> <?php echo $fileName; ?></button></a>
+                    <button class="btn btn-primary">Download Midterm Result for: <br> <?php echo $fileName; ?></button></a>
             </div>
 
         </div>

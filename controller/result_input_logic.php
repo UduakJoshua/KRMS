@@ -2,7 +2,7 @@
 require_once 'dbase_conn.php';
 include_once 'function.php';
 
-$filename = $admission_no = $term = $aSession = $classes = "";
+$filename = $admission_no = $term = $aSession =  "";
 
 
 
@@ -17,12 +17,12 @@ if (isset($_POST['mt_upload'])) {
     $admission_no = test_input($_POST['admission_no']);
     $term = test_input($_POST['term']);
     $aSession = test_input($_POST['aSession']);
-    $classes = test_input($_POST['classes']);
+    // $classes = test_input($_POST['classes']);
 
 
 
-    $sql = "INSERT INTO mid_term_result (id, admissionNo, result_file, path, term, session, class, size, download) VALUES ('', '$admission_no','$filename', ' $target','$term',
-    '$aSession', '$classes', '$size', 0)";
+    $sql = "INSERT INTO mid_term_result (id, admissionNo, result_file, path, term, session,  size, download) VALUES ('', '$admission_no','$filename', ' $target','$term',
+    '$aSession',  '$size', 0)";
 
 
     if ($conn->query($sql) === TRUE) {
