@@ -1,5 +1,5 @@
 <?php
-require "./controller/multiple_upload_init.php";
+require "./controller/multiple_upload_init2.php";
 $title = "BCA | Result Management";
 include_once 'model/inc/dashboard_header.php';
 ?>
@@ -27,7 +27,7 @@ include_once 'model/inc/dashboard_header.php';
                         <h6>Select a Class and Subject then click the Initialize button to input student's scores.</h6>
                     </div>
                     <div class="card-body">
-                        <form action="multipleUpload.php" method="POST">
+                        <form action="mult_update.php" method="POST">
                             <div class="row">
 
                                 <div class="col-md-2">
@@ -125,7 +125,7 @@ include_once 'model/inc/dashboard_header.php';
 
 
         <?php
-        include_once 'controller/multiple_upload_logic.php';
+        include_once 'controller/multiple_upload_logic_update.php';
 
         if (isset($_SESSION['upload'])) : ?>
             <div class="alert alert-<?= $_SESSION['msg_type'] ?>">
@@ -141,7 +141,7 @@ include_once 'model/inc/dashboard_header.php';
                     <div class="card-header">
                         <h6>Input Student's score</h6>
                     </div>
-                    <form action="multipleUpload.php" method="POST" enctype="multipart/form-data">
+                    <form action="mult_update.php" method="POST" enctype="multipart/form-data">
                         <div class="card-body input-group input-group-sm">
 
 

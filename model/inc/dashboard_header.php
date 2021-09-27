@@ -158,7 +158,7 @@ if (!isset($_SESSION['ad-user_id'])) {
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="class.php">
+                            <a class="nav-link" href="class_management.php">
                                 <span data-feather="layers"></span>
                                 Class Management
                             </a>

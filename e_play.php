@@ -7,7 +7,7 @@ include_once './model/inc/student_dash_header.php';
 
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h4">E-Videos</h1>
+        <h1 class="h4">Video List</h1>
         <div class=" mb-2 mb-md-0">
             <div class="mr-2">
 
@@ -21,15 +21,6 @@ include_once './model/inc/student_dash_header.php';
 
     <section>
         <div class=" container-fluid  justify-content-center">
-            <div>
-                <h5>How to Watch the E-Videos</h5>
-                <ul>
-                    <li>Go through the available topics.</li>
-                    <li>Tap on the Watch Video Button</li>
-                    <li>Scroll down to watch the video</li>
-                </ul>
-            </div>
-            <hr>
             <?php
 
             if (isset($_SESSION['message'])) : ?>
@@ -66,15 +57,7 @@ include_once './model/inc/student_dash_header.php';
                                 <td><?php echo $row['e_subject'] ?></td>
                                 <td><?php echo $row['topic'] ?></td>
                                 <td><?php echo $row['target_class'] ?></td>
-                                <td>
-                                    <button class="btn btn-sm btn-danger" id="hideButton">
-                                        <a href="<?php echo $row['video_url'] ?>" target="video" id="videoPick">
-
-                                            <span class="fa fa-youtube"></span> Watch Video
-
-                                        </a>
-                                    </button>
-                                </td>
+                                <td><a href="<?php echo $row['video_url'] ?>" target="video" id="videoPick" onclick="myFunction()"><?php echo $row['video_url'] ?></a></td>
 
                             </tr>
 
@@ -84,7 +67,7 @@ include_once './model/inc/student_dash_header.php';
                 </table>
             </div>
         </div>
-        <iframe width="100%" height="500" src="" name="video" title="YouTube video player" frameborder="0" transparency="true" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe width="90%" height="500" src="" name="video" title="YouTube video player" frameborder="1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 
     </section>

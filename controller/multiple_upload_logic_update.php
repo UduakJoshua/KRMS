@@ -54,12 +54,10 @@ if (isset($_POST['save_result'])) {
                             echo $errors;
                             echo "</div> ";
                         } else {
-                            $sql = "INSERT INTO exam_result (id, admissionNo, class_name, class_arm, exam_file, path, term, session,  size, download) 
-            VALUES 
-            ('', '$admission_no', '$class', '$arm', '$fileName', '$fileDestination','$term', '$a_session',  '$fileSize', 0)";
+                            $sql = "UPDATE exam_result SET class_name ='$class', class_arm = '$arm', exam_file = '$fileName', path = '$fileDestination', size ='$fileSize' WHERE admissionNo=$admission_no";
 
                             if ($conn->query($sql) === TRUE) {
-                                $errors = " Result for " . $admission_no . " succesfully uploaded!";
+                                $errors = " Result for " . $admission_no . " succesfully updated!";
                                 echo "<div class= 'alert-success' id='error'>";
                                 echo $errors;
                                 echo "</div> ";
