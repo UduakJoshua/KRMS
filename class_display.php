@@ -73,6 +73,11 @@ include_once './model/inc/dashboard_header.php';
                 </div>
 
             </div>
+            <div class="col-md-3">
+                <div class="form-group ">
+                    <button class="btn btn-primary mt-4"><a href="class_management.php" class="text-decoration-none text-white">Back</a></button>
+                </div>
+            </div>
         </div>
 
 

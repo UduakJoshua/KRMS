@@ -41,15 +41,23 @@ include_once './model/inc/dashboard_header.php';
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="form-group ">
+                                <?php if ($update == true) :
+                                ?>
+                                    <button type="submit" class="btn btn-primary " name="update">Update</button>
+                                <?php else : ?>
 
-                    <div class="form-group ">
-                        <?php if ($update == true) :
-                        ?>
-                            <button type="submit" class="btn btn-primary " name="update">Update</button>
-                        <?php else : ?>
-
-                            <button type="submit" class="btn btn-primary " name="addClass">Create Class</button>
-                        <?php endif; ?>
+                                    <button type="submit" class="btn btn-primary " name="addClass">Create Class</button>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group ">
+                                <button class="btn btn-primary"><a href="class_management.php" class="text-decoration-none text-white">Back</a></button>
+                            </div>
+                        </div>
                     </div>
                 </form>
 

@@ -27,8 +27,14 @@ $result = $conn->query($query);
             <?php
             include_once "./controller/class_promotion_logic.php";
             ?>
-            <div class="card-header">
-                <h6>Please select a student to activate or suspend the account</h6>
+            <div class="card-header bg-danger text-white">
+                <h6>How To Promote a Student to the next class</h6>
+                <ul>
+                    <li>Select the student(s)</li>
+                    <li>Pick the class to be promoted to</li>
+                    <li>Select an arm</li>
+                    <li>Click the Promote button</li>
+                </ul>
             </div>
 
             <br />

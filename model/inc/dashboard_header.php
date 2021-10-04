@@ -65,12 +65,39 @@ if (!isset($_SESSION['ad-user_id'])) {
             user-select: none;
         }
 
+        .school-header {
+            display: flex;
+            justify-content: space-between !important;
+            align-items: center;
 
+        }
+
+        .school-header2 {
+            flex-direction: column;
+
+        }
+
+        .portal_logo {
+            border-radius: 10px;
+
+            margin: 4px;
+            width: 100px;
+            height: 100px;
+            padding: 2px;
+        }
 
         .img_div img {
             height: 4rem;
             width: 3.5rem;
             border-radius: 4px;
+        }
+
+        .img_div_2 img {
+            height: 110px;
+            width: 100px;
+            border-radius: 4px;
+            border: 3px solid maroon;
+            margin-top: 20px;
         }
 
         .img_preview img {
@@ -119,13 +146,77 @@ if (!isset($_SESSION['ad-user_id'])) {
             margin-top: 2px;
             font-size: 1rem;
             padding: 2px;
+            margin-bottom: 4px;
         }
+
+        .icon {
+            color: cornsilk;
+            font-size: 3rem;
+            margin-top: 20px;
+
+        }
+
+        .icon_div {
+            display: flex;
+            height: 100px;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            margin: 10px;
+        }
+
+        .icon_div p {
+            font-size: 23px;
+        }
+
+        .report_background {
+            background-color: #FFFee0;
+            background-repeat: repeat;
+            background-size: contain;
+        }
+
 
 
 
         @media (min-width: 768px) {
             .bd-placeholder-img-lg {
                 font-size: 3.5rem;
+            }
+        }
+
+        @media print {
+
+            body {
+                visibility: hidden;
+            }
+
+            .print-container,
+            .print-container * {
+                visibility: visible;
+
+            }
+
+
+            .table th {
+                background-color: maroon !important;
+                color: white !important;
+            }
+
+            .print-container {
+                position: absolute;
+                left: 0px;
+                top: 2px;
+                width: 100% !important;
+                padding: 0 !important;
+                margin: 0 !important;
+
+            }
+
+            #sidebarMenu {
+                visibility: hidden;
+                margin: 0px;
+                display: none;
+
             }
         }
     </style>
@@ -189,7 +280,7 @@ if (!isset($_SESSION['ad-user_id'])) {
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="score_upload.php">
+                            <a class="nav-link" href="result_management.php">
                                 <span data-feather="bar-chart-2"></span>
                                 Result Management
                             </a>

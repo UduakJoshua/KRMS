@@ -16,6 +16,11 @@ if (isset($_POST['promote'])) {
                 echo "<div class= 'alert-success' id='error'>";
                 echo $errors;
                 echo "</div> ";
+            } else {
+                $errors = "Student was not Promoted Successfully!";
+                echo "<div class= 'alert-danger' id='error'>";
+                echo $errors;
+                echo "</div> ";
             }
         }
     }

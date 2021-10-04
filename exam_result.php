@@ -27,8 +27,8 @@ include_once './model/inc/student_dash_header.php';
         </div>
 
         <div>
-            <p>Term: 3rd Term <br>
-                Session: 2020/2021</p>
+            <p>Term: 1st Term <br>
+                Session: 2021/2022</p>
         </div>
     </div>
 

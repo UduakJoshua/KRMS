@@ -19,9 +19,9 @@ include_once './model/inc/dashboard_header.php';
     <section>
         <div class="row">
 
-            <div class="col-md-3 icon_div" style="background-color: #f5d442">
+            <div class="col-md-3 icon_div" style="background-color: #30CDCF;">
                 <div>
-                    <span class="fa fa-desktop icon" aria-hidden="true"></span>
+                    <span class="fa fa-pencil icon" aria-hidden="true"></span>
                 </div>
                 <div>
                     <a href="class.php" class="text-decoration-none icon-a">
@@ -31,9 +31,9 @@ include_once './model/inc/dashboard_header.php';
             </div>
 
             <!--col 2 -->
-            <div class="col-md-3 icon_div" style="background-color: #f54259;">
+            <div class="col-md-3 icon_div" style="background-color: #CF8230;">
                 <div>
-                    <span class="fa fa-pencil icon" aria-hidden="true"></span>
+                    <span class="fa fa-graduation-cap icon" aria-hidden="true"></span>
                 </div>
                 <div>
                     <a href="class_display.php" class="text-decoration-none icon-a">
@@ -42,9 +42,9 @@ include_once './model/inc/dashboard_header.php';
                 </div>
             </div>
 
-            <div class="col-md-3 icon_div" style="background-color: #126e29;">
+            <div class="col-md-3 icon_div" style="background-color: #cf3230;">
                 <div>
-                    <span class="fa fa-book icon" aria-hidden="true"></span>
+                    <span class="fa fa-users icon" aria-hidden="true"></span>
                 </div>
                 <div>
                     <a href="class_promotion.php" class="text-decoration-none icon-a">
