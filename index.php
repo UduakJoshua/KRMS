@@ -12,14 +12,14 @@ $title = "BCA | Dashboard";
     <div class="row mt-4 ml-auto ">
         <!--user role-->
         <div class="col-md-4 btn-base">
-            <a href="student_login.php" target="_blank">
+            <a href="student_login.php">
                 <button class="btn btn-primary btn-desig">Student Login</button>
             </a>
             <p class="text-center">For Students and Parents only!</p>
         </div>
         <!--teacher role-->
         <div class="col-md-4 btn-base">
-            <a href="#" target="_blank">
+            <a href="staff_login.php">
                 <button class="btn btn-success btn-desig">Teacher's Login</button>
             </a>
             <p class="text-center">For Teachers only!</p>

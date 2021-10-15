@@ -39,13 +39,13 @@ include_once './model/inc/student_dash_header.php';
 
 
       <div class="col-md-6">
-        <a href="midterm.php" class="text-decoration-none"><button class="btn btn-primary btn-block mt-4">Check Midterm Result</button></a>
+        <a href="exam_notification.php" class="text-decoration-none"><button class="btn btn-primary btn-block mt-4">Check Midterm Result</button></a>
 
       </div>
 
       <!--col 2 -->
       <div class="col-md-6">
-        <a href="exam_result.php" class="text-decoration-none"><button class="btn btn-warning btn-block mt-4"> Check Examination Result</button></a>
+        <a href="exam_notification.php" class="text-decoration-none"><button class="btn btn-warning btn-block mt-4"> Check Examination Result</button></a>
 
       </div>
     </div>

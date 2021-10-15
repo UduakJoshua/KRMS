@@ -35,7 +35,7 @@ include_once './model/inc/dashboard_header.php';
 
             <div class="row justify-content-center">
                 <div class="col-md-12">
-                    <form action="result_display_init.php" method="POST">
+                    <form action="midterm_display_init.php" method="POST">
                         <div class="card">
                             <!--card header begins here-->
                             <div class="row">

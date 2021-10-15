@@ -29,6 +29,8 @@ if (!isset($_SESSION['st-user_id'])) {
 
     <!-- Bootstrap core CSS -->
     <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+
 
 
 
@@ -61,6 +63,27 @@ if (!isset($_SESSION['st-user_id'])) {
             user-select: none;
         }
 
+        .school-header {
+            display: flex;
+            justify-content: space-between !important;
+            align-items: center;
+
+        }
+
+        .school-header2 {
+            flex-direction: column;
+
+        }
+
+        .portal_logo {
+            border-radius: 10px;
+
+            margin: 4px;
+            width: 100px;
+            height: 100px;
+            padding: 2px;
+        }
+
 
 
         .img_div img {
@@ -75,6 +98,14 @@ if (!isset($_SESSION['st-user_id'])) {
             width: 6.5rem;
 
 
+        }
+
+        .img_div_2 img {
+            height: 110px;
+            width: 100px;
+            border-radius: 4px;
+            border: 3px solid maroon;
+            margin-top: 20px;
         }
 
         .thd {
@@ -117,6 +148,16 @@ if (!isset($_SESSION['st-user_id'])) {
             font-size: 23px;
         }
 
+        .report_background {
+            background-color: #ffffd3;
+            background-repeat: repeat;
+            background-size: contain;
+        }
+
+        .student-details p {
+            font-size: 18px;
+        }
+
 
 
 
@@ -124,6 +165,111 @@ if (!isset($_SESSION['st-user_id'])) {
             .bd-placeholder-img-lg {
                 font-size: 3.5rem;
             }
+        }
+
+        /* media queries*/
+        @media screen and (max-width: 480px) {
+            .table th {
+                background-color: #DC3545 !important;
+                color: white !important;
+            }
+
+            .table td {
+                background-color: inherit !important;
+            }
+
+            .school-header {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+
+            }
+
+            .report_background {
+                margin: 4px;
+            }
+
+            .title-head {
+                font-size: 18px;
+                text-align: center;
+            }
+
+            .head-text {
+                font-size: 13px;
+                text-align: center;
+
+            }
+
+            .school-header .head2 {
+                text-align: center;
+                font-size: 12px;
+            }
+
+            .head3 {
+                font-size: 15px;
+            }
+
+            .display thead tr th {
+                font-size: 11px !important;
+
+            }
+
+            tbody tr td {
+                font-size: 11px;
+            }
+        }
+
+
+
+        @media print {
+            body {
+                background-color: #ffffd3;
+            }
+
+
+            .print-container,
+            .print-container * {
+                visibility: visible;
+                -webkit-print-color-adjust: exact
+            }
+
+
+            .table th {
+                background-color: #DC3545 !important;
+                color: white !important;
+            }
+
+            .table td {
+                background-color: inherit !important;
+            }
+
+
+            .print-container {
+                position: absolute;
+                left: 0px;
+                top: 2px;
+                width: 100% !important;
+                padding: 2px !important;
+                margin: 0 !important;
+
+            }
+
+            #sidebarMenu,
+            nav,
+            .print_button,
+
+            hr,
+            footer {
+                visibility: hidden;
+                margin: 0px;
+                display: none;
+
+
+
+            }
+
+
         }
     </style>
 
@@ -165,13 +311,13 @@ if (!isset($_SESSION['st-user_id'])) {
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="midterm.php">
+                            <a class="nav-link" href="exam_notification.php">
                                 <span data-feather="file"></span>
                                 Midterm Result
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="exam_result.php">
+                            <a class="nav-link" href="#">
                                 <span data-feather="file"></span>
                                 Examination Result
                             </a>

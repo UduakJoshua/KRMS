@@ -35,7 +35,7 @@ if (isset($_POST['save_scores'])) {
         $row = $result->fetch_assoc();
 
 
-        if (!empty($row) && $row['admission_no'] == $admission_no && $row['term'] == $term && $row['session'] == $a_session && $row['subject'] == $subject) {
+        if (!empty($row) && $row['admission_no'] = $admission_no && $row['term'] = $term && $row['session'] = $a_session && $row['subject'] == $subject) {
             $errors = "Result already exist for " . $admission_no . ", please check your parameters and try again!  ";
             echo "<div class= 'alert-warning' id='error'>";
             echo $errors;
@@ -76,35 +76,37 @@ if (isset($_POST['save_mid'])) {
         $T2 = test_input($_POST['T2'][$i]);
         $subject = test_input($_POST['subject']);
 
-        $sql = "SELECT * FROM mid_term_scores WHERE admission_no = ? LIMIT 1";
+        $sql = "SELECT * FROM mid_term_scores WHERE admission_no = ?  && subject = ? && term = ? && session = ?";
         $stmt = $conn->prepare($sql);
 
-        $stmt->bind_param('s', $admission_no);
+        $stmt->bind_param('ssss', $admission_no, $subject, $term, $a_session);
         $stmt->execute();
 
         $result = $stmt->get_result();
         $row = $result->fetch_assoc();
 
 
-        if (!empty($row) && $row['admission_no'] == $admission_no && $row['term'] == $term && $row['session'] == $a_session && $row['subject'] == $subject) {
-            $errors = "Result already exist for " . $student_name . " with" . $admission_no . ", please check your parameters and try again!  ";
-            echo "<div class= 'alert-warning' id='error'>";
+        if (!empty($row) && $row['admission_no'] === $admission_no) {
+
+            $errors = "Scores already exist for " . $subject . " for " . $student_name . "  for " . $term . " - " . $a_session . ", please check your parameters and try again! ";
+            //$errors = "Score exist" . $student_name . " with" . $admission_no . ", please check your parameters and try again! ";
+            echo "<div class='alert-warning' id='error'>";
             echo $errors;
             echo "</div> ";
         } else {
-            $sql = "INSERT INTO mid_term_scores 
-            (id, student_name, admission_no, student_class, subject,  T2, session, term) 
-            VALUES 
-            ('','$student_name' ,'$admission_no' , '$student_class' ,'$subject' ,$T2, '$a_session' , '$term')";
+            $sql = "INSERT INTO mid_term_scores
+    (id, student_name, admission_no, student_class, subject, T2, session, term)
+    VALUES
+    ('','$student_name' ,'$admission_no' , '$student_class' ,'$subject' ,$T2, '$a_session' , '$term')";
 
             if ($conn->query($sql) === TRUE) {
-                $errors = "Mid-Term Scores for " . $subject . " for " . $student_name . " with " . $admission_no . " succesfully uploaded!";
-                echo "<div class= 'alert-success' id='error'>";
+                $errors = "Mid-Term Scores for " . $subject . " for " . $student_name . " with " . $admission_no . " for " . $term . " - " . $a_session . " succesfully uploaded!";
+                echo "<div class='alert-success' id='error'>";
                 echo $errors;
                 echo "</div> ";
             }
         }
     }
-
+    exit();
     // echo $term . ' ' . $subject . ' ' . $T1 . ' ' . $T2 . ' ' . $admission_no . '' . $student_class . ' ' . $student_name . '<br>';
 }

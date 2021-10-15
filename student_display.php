@@ -68,6 +68,7 @@ $result = $conn->query($query);
                                 <td><?php echo $row['class_name'] . " " . $row['classArm'] ?></td>
                                 <td><?php echo $row['fatherNo'] ?></td>
                                 <td>
+                                    <a href="edit_student.php?edit=<?php echo $row['id']; ?>" class=" btn btn-info btn-sm"> Edit</a>
                                     <a href="./controller/student_logic.php?delete=<?php echo $row['id']; ?>" class=" btn btn-danger btn-sm">Del</a>
                                 </td>
                             </tr>

@@ -2,6 +2,7 @@
 require "./controller/dbase_conn.php";
 $title = "BCA | Result Management";
 include_once './model/inc/dashboard_header.php';
+
 ?>
 
 <!-- main content-->

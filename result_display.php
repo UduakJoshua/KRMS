@@ -39,7 +39,6 @@ include_once './model/inc/dashboard_header.php';
             <?php endif ?>
             <div class="school-header">
 
-
                 <div>
                     <img src="assets/img/bca_logo.png" alt="school_logo" class="portal_logo img-responsive">
                 </div>

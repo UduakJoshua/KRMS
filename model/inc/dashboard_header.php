@@ -34,9 +34,13 @@ if (!isset($_SESSION['ad-user_id'])) {
     <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
     <!--font awesome-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@600&display=swap" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="dashboard.css" rel="stylesheet">
+
+
     <style>
         section {
             min-height: 60vh;
@@ -109,13 +113,16 @@ if (!isset($_SESSION['ad-user_id'])) {
         }
 
         .thd {
-            font-size: 11px;
+            font-size: 13px;
 
         }
+
+
 
         .thd th {
 
             text-align: center;
+            font-size: 13px;
         }
 
         input {
@@ -149,6 +156,10 @@ if (!isset($_SESSION['ad-user_id'])) {
             margin-bottom: 4px;
         }
 
+        .title-head {
+            font-family: 'Roboto Slab', serif;
+        }
+
         .icon {
             color: cornsilk;
             font-size: 3rem;
@@ -166,17 +177,18 @@ if (!isset($_SESSION['ad-user_id'])) {
         }
 
         .icon_div p {
-            font-size: 23px;
+            font-size: 20px;
         }
 
         .report_background {
-            background-color: #FFFee0;
+            background-color: #FeFff0;
             background-repeat: repeat;
             background-size: contain;
         }
 
-
-
+        .student-details p {
+            font-size: 18px;
+        }
 
         @media (min-width: 768px) {
             .bd-placeholder-img-lg {
@@ -187,8 +199,10 @@ if (!isset($_SESSION['ad-user_id'])) {
         @media print {
 
             body {
-                visibility: hidden;
+                background-color: #FeFff0;
             }
+
+
 
             .print-container,
             .print-container * {
@@ -198,9 +212,14 @@ if (!isset($_SESSION['ad-user_id'])) {
 
 
             .table th {
-                background-color: maroon !important;
+                background-color: #DC3545 !important;
                 color: white !important;
             }
+
+            .table td {
+                background-color: inherit !important;
+            }
+
 
             .print-container {
                 position: absolute;
@@ -212,7 +231,12 @@ if (!isset($_SESSION['ad-user_id'])) {
 
             }
 
-            #sidebarMenu {
+            #sidebarMenu,
+            nav,
+            .print_button,
+
+            hr,
+            footer {
                 visibility: hidden;
                 margin: 0px;
                 display: none;
@@ -261,7 +285,7 @@ if (!isset($_SESSION['ad-user_id'])) {
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="staff_registeration.php">
                                 <span data-feather="users"></span>
                                 Staff Management
                             </a>
@@ -286,7 +310,7 @@ if (!isset($_SESSION['ad-user_id'])) {
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="e_videos.php">
+                            <a class="nav-link" href="e_learning_admin.php">
                                 <span data-feather="dollar-sign"></span>
                                 E-Learning
                             </a>

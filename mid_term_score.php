@@ -3,6 +3,7 @@ require "./controller/score_upload_init.php";
 require "./controller/student_logic.php";
 $title = "BCA | Mid-Term Score Input";
 include_once './model/inc/dashboard_header.php';
+
 ?>
 
 <!-- main content-->
@@ -151,9 +152,9 @@ include_once './model/inc/dashboard_header.php';
 
         </div>
 
-    </section>
 
-    <section>
+
+        <hr>
 
         <?php
         include_once 'controller/score_upload_logic.php';
@@ -177,7 +178,8 @@ include_once './model/inc/dashboard_header.php';
 
 
                             <?php
-                            include_once 'controller/student_logic.php';
+
+                            include_once 'controller/score_upload_init.php';
 
 
                             $c_arm = $_SESSION['arm'];

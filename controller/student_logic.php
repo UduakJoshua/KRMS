@@ -167,13 +167,13 @@ if (isset($_POST['update'])) {
 
     $sql = "UPDATE student SET  image='$image', admissionNo = '$admin_no', surname = '$surname',
     firstname = '$firstname', middlename = '$middlename', dob = '$dob', gender = '$gender', religion = '$religion', 
-    class_name = '$class', classArm = '$class_arm', admissionYear = '$admin_year',  homeAddress = '$address', 
+    class_name = '$class', classArm = '$class_arm', st_password = '$st_password',admissionYear = '$admin_year',  homeAddress = '$address', 
     nationality = '$nationality', states = '$state', lga = '$lga', fatherName = '$father', fatherNo = '$father_no', 
     fatherMail = '$father_mail', motherName = '$mother', motherNo = '$mother_no', motherMail = '$mother_mail', 
     fatherJob = '$fatherJob', motherJob = '$motherJob' WHERE id=$id";
     if ($conn->query($sql) === TRUE) {
         if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
-            $_SESSION['message'] = "Student Registered Successfully!";
+            $_SESSION['message'] = "Student Updated Successfully!";
             $_SESSION['msg_type'] = "success";
             header("location:./student_display.php");
             exit();
