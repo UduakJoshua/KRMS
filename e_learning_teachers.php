@@ -1,7 +1,7 @@
 <?php
 require "./controller/dbase_conn.php";
 $title = "BCA | E-Learning";
-include_once './model/inc/student_dash_header.php';
+include_once './model/inc/staff_dashboard_header.php';
 ?>
 
 <!-- main content-->
@@ -11,14 +11,14 @@ include_once './model/inc/student_dash_header.php';
     <div class=" mb-2 mb-md-0">
       <div class="mr-2">
 
-        <p><?php echo $_SESSION['st-username']; ?></p>
+        <p><?php echo $_SESSION['staff-username']; ?></p>
       </div>
 
     </div>
   </div>
 
   <section>
-    <h5 style="font-weight:600; font-size:30px;"> Hello <?php echo $_SESSION['st-username']; ?></h5>
+    <h5 style="font-weight:600; font-size:30px;"> Hello <?php echo $_SESSION['staff-username']; ?></h5>
     <h6>What would you like to do? </h6>
 
     <div class="row">
@@ -28,8 +28,8 @@ include_once './model/inc/student_dash_header.php';
           <span class="fa fa-desktop icon" aria-hidden="true"></span>
         </div>
         <div>
-          <a href="e_videos_students.php" class="text-decoration-none icon-a">
-            <p class="text-center text-white">Watch a Learning Video</p>
+          <a href="e_videos.php" class="text-decoration-none icon-a">
+            <p class="text-center text-white">Upload E-Video</p>
           </a>
         </div>
       </div>
@@ -41,22 +41,20 @@ include_once './model/inc/student_dash_header.php';
         </div>
         <div>
           <a href="#" class="text-decoration-none icon-a">
-            <p class="text-center text-white">Take Test</p>
+            <p class="text-center text-white">Upload E-Note</p>
           </a>
         </div>
       </div>
-
       <div class="col-md-3 icon_div" style="background-color: #126e29;">
         <div>
           <span class="fa fa-book icon" aria-hidden="true"></span>
         </div>
         <div>
-          <a href="#" class="text-decoration-none icon-a">
-            <p class="text-center text-white">View Assignment</p>
+          <a href="e_assignment_teachers.php" class="text-decoration-none icon-a">
+            <p class="text-center text-white">Upload Assignment</p>
           </a>
         </div>
       </div>
-
     </div>
   </section>
   <hr>

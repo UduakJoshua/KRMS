@@ -185,7 +185,7 @@ if (!isset($_SESSION['staff-user_id'])) {
         }
 
         .report_background {
-            background-color: #ffffd3;
+            background-color: #fffef2;
             background-repeat: repeat;
             background-size: contain;
         }
@@ -257,7 +257,7 @@ if (!isset($_SESSION['staff-user_id'])) {
 
         @media print {
             body {
-                background-color: #ffffd3;
+                background-color: #fffef2;
             }
 
 
@@ -347,7 +347,7 @@ if (!isset($_SESSION['staff-user_id'])) {
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="e_learning_teachers.php">
                                 <span data-feather="monitor"></span>
                                 E-Learning
                             </a>

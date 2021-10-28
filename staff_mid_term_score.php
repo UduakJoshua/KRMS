@@ -124,8 +124,6 @@ include_once './model/inc/staff_dashboard_header.php';
                                             <label for="aSession">Session</label>
 
                                             <select name="aSession" id="aSession" class="form-control ">
-
-                                                <option value="2020/2021"> 2020/2021 </option>
                                                 <option value="2021/2022"> 2021/2022 </option>
                                                 <option value="2022/2023"> 2022/2023</option>
 
@@ -187,14 +185,9 @@ include_once './model/inc/staff_dashboard_header.php';
                             $term = $_SESSION['term'];
                             $aSession = $_SESSION['aSession'];
                             $subject = $_SESSION['subject'];
-                            //$_SESSION['term'] = "";
-
-
-
                             // create a select query
-                            $sql = "SELECT * FROM student WHERE classArm =  '$c_arm' && class_name = '$class'";
+                            $sql = "SELECT *  FROM student   WHERE class_name = '$class' && classArm = '$c_arm' ORDER BY surname ASC";
                             $result = mysqli_query($conn, $sql);
-
                             if (mysqli_num_rows($result) > 0) : ?>
 
                                 <?php while ($row = mysqli_fetch_assoc($result)) : ?>
@@ -223,13 +216,15 @@ include_once './model/inc/staff_dashboard_header.php';
                                             </div>
 
                                             <div class="col-md-2">
-                                                <div class="form-group">
 
+                                                <div class="form-group">
                                                     <input type="number" name="T2[]" placeholder="Enter T2 " class="form-control">
+
                                                 </div>
                                             </div>
 
                                             <div class="col-md-2">
+
                                                 <div class="form-group">
 
                                                     <input type="text" readonly name="subject" value="<?php echo $subject ?>" class="form-control">

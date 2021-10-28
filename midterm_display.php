@@ -75,15 +75,13 @@ include_once './model/inc/dashboard_header.php';
                         <h4 class="text-center">Mid-Term Result Sheet For <i><?php echo $row['surname'] . " " . $row['firstname'] . " " . $row['middlename']; ?></i>
                         </h4>
                 </div>
-                <div class="d-flex justify-content-between mt-3">
+                <div class="d-flex justify-content-between mt-2">
                     <div class=" student-details">
                         <p><strong>Admission Number:</strong> <?php echo $row['admissionNo'] ?></p>
                         <p><strong>Name:</strong> <?php echo $row['surname'] . " " . $row['firstname'] . " " . $row['middlename']; ?> </p>
                         <p><strong>Class:</strong> <?php echo $row['class_name'] . " " . $row['classArm']; ?> </p>
-
                         <p><strong>Term: </strong><?php echo $_SESSION['term']; ?></p>
-                        <p><strong>Academic Session:</strong> <?php echo $_SESSION['aSession']; ?> </p>
-
+                        <p><strong>Academic Session:</strong> <?php echo $_SESSION['aSession']; ?><span> <strong>Date: 30<sup>th</sup> - October - 2021</strong></span> </p>
                         <p><strong>Sex:</strong> <?php echo $row['gender']; ?> </p>
 
                     </div>
@@ -105,16 +103,16 @@ include_once './model/inc/dashboard_header.php';
             if (isset($_GET['displayMT'])) {
                 $admission_no = $_GET['displayMT'];
 
-                $select_sql = "SELECT * FROM mid_term_scores WHERE admission_no='$admission_no' && term= '1st Term'";
+                $select_sql = "SELECT * FROM mid_term_scores WHERE admission_no='$admission_no' && term= '1st Term' ORDER BY subject ASC";
                 $sql_result = $conn->query($select_sql);
             }
             ?>
 
             <table class="table table-striped table-sm display">
                 <thead class="thead-dark ">
-                    <tr style="font-size: 18px; text-align:center;">
-                        <th scope="col " style="font-size: 18px; text-align:left;">Subject</th>
-                        <th scope="col">T2<br> (20%)</th>
+                    <tr style="font-size: 16px; text-align:center;">
+                        <th scope="col " style="font-size: 16px; text-align:left;">Subject</th>
+                        <th scope="col">T2 (20)</th>
                         <th scope="col">Grade</th>
                         <th scope="col">Remarks</th>
 
@@ -130,7 +128,7 @@ include_once './model/inc/dashboard_header.php';
 
                     ?>
 
-                        <tr style="font-size: 18px; text-align:center;">
+                        <tr style="font-size: 14px; text-align:center;">
                             <td style=" text-align:left;"><?php echo $row['subject'] ?></td>
 
                             <td><?php echo $T2 ?></td>
@@ -174,7 +172,7 @@ include_once './model/inc/dashboard_header.php';
                 if (isset($_GET['displayMT'])) {
                     $admission_no = $_GET['displayMT'];
 
-                    $select_sql = "SELECT * FROM mid_term_scores WHERE admission_no='$admission_no' && term= '1st Term' && T2 <= '5'";
+                    $select_sql = "SELECT * FROM mid_term_scores WHERE admission_no='$admission_no' && term= '1st Term' && T2 < '5'";
                     $sql_result = $conn->query($select_sql);
                 }
                 ?>
@@ -185,7 +183,7 @@ include_once './model/inc/dashboard_header.php';
                                 <th scope=" col" colspan="3">Grading System</th>
                             </tr>
                         </thead>
-                        <tbody class="ml-2 table-bordered">
+                        <tbody class="ml-2 table-bordered" style="font-size: 12px;">
                             <tr>
                                 <td>Key</td>
                                 <td>Grade</td>
@@ -199,7 +197,7 @@ include_once './model/inc/dashboard_header.php';
                             <tr>
                                 <td>15 - 17</td>
                                 <td>B</td>
-                                <td>Very Goood</td>
+                                <td>Very Good</td>
                             </tr>
                             <tr>
                                 <td>10 - 14</td>
@@ -220,7 +218,7 @@ include_once './model/inc/dashboard_header.php';
                 </div>
                 <!--comments-->
                 <div>
-                    <table class="table table-sm table-condensed  table-striped">
+                    <table class=" table table-sm table-condensed table-striped">
                         <thead class=" thead-dark text-center ">
                             <tr>
                                 <th scope=" col" colspan="2">Subjects to improve on</th>
@@ -253,10 +251,22 @@ include_once './model/inc/dashboard_header.php';
 
                     </table>
                     <div class="mt-2 bg-danger">
+                        <?php
+                        $arm = $_SESSION['arm'];
+                        $class = $_SESSION['class'];
+                        $select_sql = "SELECT * FROM form_teachers WHERE class ='$class' && arm= '$arm' ";
+                        $sql_result = $conn->query($select_sql);
 
-                        <p class="bg-danger text-center text-white h6 p-2"> Form Teacher: <br>
-                            Mr. Joshua </p>
+                        ?>
+                        <?php
 
+                        while ($row = $sql_result->fetch_assoc()) :
+
+
+                        ?>
+                            <p class="bg-danger text-center text-white h6 p-2"> Form Teacher: <br>
+                                <?php echo $row['teachers_name'] ?></p>
+                        <?php endwhile; ?>
 
 
                     </div>
@@ -264,7 +274,7 @@ include_once './model/inc/dashboard_header.php';
                 </div>
                 <!-- stamp-->
                 <div class=" school-header school-header2">
-                    <img src="assets/img/bca-stamp.png" alt="" style="width: 70%;">
+                    <img src="assets/img/bca-stamp.png" alt="" style="width: 65%;">
                     <h6 class="bg-danger text-center text-white mt-2 p-3">BCA Exams & Records</h6>
                 </div>
 

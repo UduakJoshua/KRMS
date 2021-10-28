@@ -80,12 +80,9 @@ include_once './model/inc/staff_dashboard_header.php';
                         <p><strong>Admission Number:</strong> <?php echo $row['admissionNo'] ?></p>
                         <p><strong>Name:</strong> <?php echo $row['surname'] . " " . $row['firstname'] . " " . $row['middlename']; ?> </p>
                         <p><strong>Class:</strong> <?php echo $row['class_name'] . " " . $row['classArm']; ?> </p>
-
                         <p><strong>Term: </strong><?php echo $_SESSION['term']; ?></p>
                         <p><strong>Academic Session:</strong> <?php echo $_SESSION['aSession']; ?><span> <strong>Date: 12<sup>th</sup> - Dec - 2021</strong></span> </p>
-
                         <p><strong>Sex:</strong> <?php echo $row['gender']; ?> </p>
-
                     </div>
 
                     <div>
@@ -105,16 +102,16 @@ include_once './model/inc/staff_dashboard_header.php';
             if (isset($_GET['displayMT'])) {
                 $admission_no = $_GET['displayMT'];
 
-                $select_sql = "SELECT * FROM mid_term_scores WHERE admission_no='$admission_no' && term= '1st Term'";
+                $select_sql = "SELECT * FROM mid_term_scores WHERE admission_no='$admission_no' && term= '1st Term' ORDER by subject";
                 $sql_result = $conn->query($select_sql);
             }
             ?>
 
             <table class="table table-striped table-sm display">
                 <thead class="thead-dark ">
-                    <tr style="font-size: 18px; text-align:center;">
-                        <th scope="col " style="font-size: 18px; text-align:left;">Subject</th>
-                        <th scope="col">T2<br> (20%)</th>
+                    <tr style="font-size: 14px; text-align:center;">
+                        <th scope="col " style="font-size: 14px; text-align:left;">Subject</th>
+                        <th scope="col">T2 (20%)</th>
                         <th scope="col">Grade</th>
                         <th scope="col">Remarks</th>
 

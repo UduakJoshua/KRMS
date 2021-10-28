@@ -2,10 +2,9 @@
 require_once 'dbase_conn.php';
 include_once 'function.php';
 
-$student_name = $admission_no = $term = $a_session = $student_class = $subject = $T1 = $T2
-    = $project = $assignment = $exam =   "";
+$student_name = $admission_no = $term = $a_session = $student_class = $subject = $T1 =  $project = $assignment = $exam =   "";
 
-
+$T2 = 0;
 
 if (isset($_POST['save_scores'])) {
     // get the total number of student to populate
@@ -75,20 +74,23 @@ if (isset($_POST['save_mid'])) {
         $student_name = test_input($_POST['student_name'][$i]);
         $T2 = test_input($_POST['T2'][$i]);
         $subject = test_input($_POST['subject']);
-        $_SESSION['term'] = $term;
-        $_SESSION['session'] = $a_session;
-        $sql = "SELECT * FROM mid_term_scores WHERE admission_no = ? LIMIT 1";
+
+        $sql = "SELECT * FROM mid_term_scores WHERE admission_no = ?  && subject = ? && term = ? && session = ?";
+
         $stmt = $conn->prepare($sql);
 
-        $stmt->bind_param('s', $admission_no);
+        $stmt->bind_param('ssss', $admission_no, $subject, $term, $a_session);
         $stmt->execute();
 
         $result = $stmt->get_result();
         $row = $result->fetch_assoc();
 
 
-        if (!empty($row) && $row['admission_no'] == $admission_no && $row['term'] == $term && $row['session'] == $a_session && $row['subject'] == $subject) {
-            $errors = "Result already exist for " . $student_name . " with" . $admission_no . ", please check your parameters and try again! ";
+        if (!empty($row) && $row['admission_no'] === $admission_no) {
+
+
+            $errors = "Scores already exist for " . $subject . " for " . $student_name . "  for " . $term . " - " . $a_session . ", please check your parameters and try again! ";
+            //$errors = "Score exist" . $student_name . " with" . $admission_no . ", please check your parameters and try again! ";
             echo "<div class='alert-warning' id='error'>";
             echo $errors;
             echo "</div> ";
@@ -96,16 +98,68 @@ if (isset($_POST['save_mid'])) {
             $sql = "INSERT INTO mid_term_scores
     (id, student_name, admission_no, student_class, subject, T2, session, term)
     VALUES
-    ('','$student_name' ,'$admission_no' , '$student_class' ,'$subject' ,$T2, '$a_session' , '$term')";
+    ('','$student_name' ,'$admission_no' , '$student_class','$subject' ,$T2, '$a_session' , '$term')";
 
             if ($conn->query($sql) === TRUE) {
-                $errors = "Mid-Term Scores for " . $subject . " for " . $student_name . " with " . $admission_no . " succesfully uploaded!";
+                $errors = "Mid-Term Scores for " . $subject . " for " . $student_name . " with " . $admission_no . " for " . $term . " - " . $a_session . " succesfully uploaded!";
                 echo "<div class='alert-success' id='error'>";
                 echo $errors;
                 echo "</div> ";
             }
         }
     }
+    exit();
+    // echo $term . ' ' . $subject . ' ' . $T1 . ' ' . $T2 . ' ' . $admission_no . '' . $student_class . ' ' . $student_name . '<br>';
+}
 
+// JSS3 and SS3 Mock logic
+
+if (isset($_POST['save_mock'])) {
+    // get the total number of student to populate
+    $total_score = count($_POST['score']);
+
+    // Looping over all files
+    for ($i = 0; $i < $total_score; $i++) {
+        $admission_no = test_input($_POST['admin_no'][$i]);
+        $term = test_input($_POST['term']);
+        $a_session = test_input($_POST['a_session']);
+        $student_class = test_input($_POST['student_class']);
+        $student_name = test_input($_POST['student_name'][$i]);
+        $score = test_input($_POST['score'][$i]);
+        $subject = test_input($_POST['subject']);
+        $mock_no = test_input($_POST['mock_no']);
+
+        $sql = "SELECT * FROM mock_scores WHERE admission_no = ?  && subject_title = ? && term = ? && session = ? && mock_no = ?";
+        $stmt = $conn->prepare($sql);
+
+        $stmt->bind_param('sssss', $admission_no, $subject, $term, $a_session, $mock_no);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+
+
+        if (!empty($row) && $row['admission_no'] === $admission_no) {
+
+            $errors = "Scores already exist for " . $subject . " for " . $student_name . "  for " . $term . " - " . $a_session . ", please check your parameters and try again! ";
+            //$errors = "Score exist" . $student_name . " with" . $admission_no . ", please check your parameters and try again! ";
+            echo "<div class='alert-warning' id='error'>";
+            echo $errors;
+            echo "</div> ";
+        } else {
+            $sql = "INSERT INTO mock_scores
+    (id, admission_no, student_name,  student_class, subject_title, score, session, term, mock_no)
+    VALUES
+    ('','$admission_no','$student_name' , '$student_class' ,'$subject' ,$score, '$a_session' , '$term', '$mock_no')";
+
+            if ($conn->query($sql) === TRUE) {
+                $errors = "Mock Scores for " . $subject . " for " . $student_name . " with " . $admission_no . " for " . $term . " - " . $mock_no . " succesfully uploaded!";
+                echo "<div class='alert-success' id='error'>";
+                echo $errors;
+                echo "</div> ";
+            }
+        }
+    }
+    exit();
     // echo $term . ' ' . $subject . ' ' . $T1 . ' ' . $T2 . ' ' . $admission_no . '' . $student_class . ' ' . $student_name . '<br>';
 }

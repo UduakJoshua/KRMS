@@ -1,7 +1,7 @@
 <?php
 require './controller/e_videos_logic.php';
 $title = "BCA | E-Learning";
-include_once './model/inc/dashboard_header.php';
+include_once './model/inc/staff_dashboard_header.php';
 
 ?>
 
@@ -11,7 +11,7 @@ include_once './model/inc/dashboard_header.php';
         <div class=" mb-2 mb-md-0">
             <div class="mr-2">
 
-                <p>Welcome <?php echo $_SESSION['username']; ?></p>
+                <p><?php echo $_SESSION['staff-username']; ?></p>
             </div>
 
         </div>
@@ -61,7 +61,7 @@ include_once './model/inc/dashboard_header.php';
 
                                 <td>
                                     <!--a href="e_assignment.php?edit=php echo $row['id']; ?>" class=" btn btn-info btn-sm"> Edit</a-->
-                                    <a href="./controller/e_videos_logic.php?deleteAss=<?php echo $row['id']; ?>" class=" btn btn-danger btn-sm">Delete</i></a>
+                                    <a href="./controller/e_videos_logic.php?deleteAssT=<?php echo $row['id']; ?>" class=" btn btn-danger btn-sm">Delete</i></a>
                                 </td>
                             </tr>
 
@@ -77,7 +77,7 @@ include_once './model/inc/dashboard_header.php';
             <div class="col-md-9">
 
                 <div>
-                    <a href="e_assignment.php"><button class="btn btn-primary mt-4 " name="addMore"> Post Another Assignment</button></a>
+                    <a href="e_assignment_teachers.php"><button class="btn btn-primary mt-4 " name="addMore"> Post Another Assignment</button></a>
                 </div>
 
             </div>

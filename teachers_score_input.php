@@ -67,19 +67,6 @@ include_once './model/inc/staff_dashboard_header.php';
       </div>
 
       <!--col 2 -->
-      <div class="col-md-3 icon_div" style="background-color: #CF8230;">
-        <div>
-          <span class="fa fa-graduation-cap icon" aria-hidden="true"></span>
-        </div>
-        <div>
-          <a href="staff_midterm_display_init.php" class="text-decoration-none icon-a">
-            <p class="text-center text-white">View Mid-Term Result</p>
-          </a>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <!--col 2-->
       <div class="col-md-3 icon_div" style="background-color: #3045eF;">
         <div>
           <span class="fa fa-pencil icon" aria-hidden="true"></span>
@@ -90,18 +77,23 @@ include_once './model/inc/staff_dashboard_header.php';
           </a>
         </div>
       </div>
-      <!--col 4-->
-      <div class="col-md-3 icon_div" style="background-color: #cf3230;">
+
+      <!--col 1-->
+      <div class="col-md-3 icon_div" style="background-color: #30CDCF;">
         <div>
-          <span class="fa fa-users icon" aria-hidden="true"></span>
+          <span class="fa fa-pencil icon" aria-hidden="true"></span>
         </div>
         <div>
-          <a href="#" class="text-decoration-none icon-a">
-            <p class="text-center text-white">View Exam Result</p>
+          <a href="mock.php" class="text-decoration-none icon-a">
+            <p class="text-center text-white">Input Mock Scores</p>
           </a>
         </div>
       </div>
+
     </div>
+
+
+
 
   </section>
   <hr>

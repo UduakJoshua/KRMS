@@ -77,6 +77,16 @@ include_once './model/inc/dashboard_header.php';
           </a>
         </div>
       </div>
+      <div class="col-md-3 icon_div" style="background-color: #cf3230;">
+        <div>
+          <span class="fa fa-users icon" aria-hidden="true"></span>
+        </div>
+        <div>
+          <a href="mock_admin_init_dis.php" class="text-decoration-none icon-a">
+            <p class="text-center text-white">Print Mock Result</p>
+          </a>
+        </div>
+      </div>
     </div>
     <div class="row">
       <!--col 2-->
@@ -98,6 +108,17 @@ include_once './model/inc/dashboard_header.php';
         <div>
           <a href="result_display_init.php" class="text-decoration-none icon-a">
             <p class="text-center text-white">Print Exam Result</p>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-md-3 icon_div" style="background-color: #30CDCF;">
+        <div>
+          <span class="fa fa-pencil icon" aria-hidden="true"></span>
+        </div>
+        <div>
+          <a href="mock_admin.php" class="text-decoration-none icon-a">
+            <p class="text-center text-white">Input Mock Scores</p>
           </a>
         </div>
       </div>

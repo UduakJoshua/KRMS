@@ -192,8 +192,11 @@ include_once './model/inc/dashboard_header.php';
 
 
                             // create a select query
-                            $sql = "SELECT * FROM student WHERE classArm =  '$c_arm' && class_name = '$class'";
+                            $sql = "SELECT  student.admissionNo, student.firstname, student.surname, mid_term_scores.* FROM student
+                            INNER JOIN mid_term_scores ON student.admissionNo = mid_term_scores.admission_no 
+                             WHERE class_arm =  '$c_arm' && class_name = '$class' && term='$term' && subject='$subject' || subject = ''";
                             $result = mysqli_query($conn, $sql);
+                            print_r($result);
 
                             if (mysqli_num_rows($result) > 0) : ?>
 
@@ -225,9 +228,10 @@ include_once './model/inc/dashboard_header.php';
                                             <div class="col-md-2">
                                                 <div class="form-group">
 
-                                                    <input type="number" name="T2[]" placeholder="Enter T2 " class="form-control">
+                                                    <input type="number" name="T2[]" value="<?php echo $row['T2']; ?>" placeholder=" Enter T2 " class=" form-control">
                                                 </div>
                                             </div>
+
 
                                             <div class="col-md-2">
                                                 <div class="form-group">
@@ -239,7 +243,13 @@ include_once './model/inc/dashboard_header.php';
                                             <div class="col-md-2">
                                                 <div class="form-group ">
 
-                                                    <input type=" text" name="term" class="form-control" readonly value="<?php echo $term ?>">
+                                                    <input type=" text" name="student_class" class="form-control" readonly value="<?php echo $class ?>">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group ">
+
+                                                    <input type=" text" name="class_arm" class="form-control" readonly value="<?php echo $c_arm ?>">
                                                 </div>
                                             </div>
 
@@ -247,9 +257,13 @@ include_once './model/inc/dashboard_header.php';
                                             <div class="col-md-2">
                                                 <div class="form-group ">
 
-                                                    <input type=" text" name="student_class" class="form-control" readonly value="<?php echo $class . " " . $c_arm ?>">
+                                                    <input type=" text" name="term" class="form-control" readonly value="<?php echo $term ?>">
                                                 </div>
                                             </div>
+
+
+
+
                                             <div class="col-md-2">
                                                 <div class="form-group ">
 

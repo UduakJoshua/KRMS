@@ -2,9 +2,10 @@
 require_once 'dbase_conn.php';
 include_once 'function.php';
 
-$student_name = $admission_no = $term = $a_session = $student_class = $subject = $T1 =  $project = $assignment = $exam =   "";
+$student_name = $admission_no = $term = $a_session = $student_class = $subject = $T1 = $T2
+    = $project = $assignment = $exam =   "";
 
-$T2 = 0;
+
 
 if (isset($_POST['save_scores'])) {
     // get the total number of student to populate
@@ -71,13 +72,11 @@ if (isset($_POST['save_mid'])) {
         $term = test_input($_POST['term']);
         $a_session = test_input($_POST['a_session']);
         $student_class = test_input($_POST['student_class']);
-        $class_arm = test_input($_POST['class_arm']);
         $student_name = test_input($_POST['student_name'][$i]);
         $T2 = test_input($_POST['T2'][$i]);
         $subject = test_input($_POST['subject']);
 
         $sql = "SELECT * FROM mid_term_scores WHERE admission_no = ?  && subject = ? && term = ? && session = ?";
-
         $stmt = $conn->prepare($sql);
 
         $stmt->bind_param('ssss', $admission_no, $subject, $term, $a_session);
@@ -89,7 +88,6 @@ if (isset($_POST['save_mid'])) {
 
         if (!empty($row) && $row['admission_no'] === $admission_no) {
 
-
             $errors = "Scores already exist for " . $subject . " for " . $student_name . "  for " . $term . " - " . $a_session . ", please check your parameters and try again! ";
             //$errors = "Score exist" . $student_name . " with" . $admission_no . ", please check your parameters and try again! ";
             echo "<div class='alert-warning' id='error'>";
@@ -97,9 +95,9 @@ if (isset($_POST['save_mid'])) {
             echo "</div> ";
         } else {
             $sql = "INSERT INTO mid_term_scores
-    (id, student_name, admission_no, student_class, class_arm, subject, T2, session, term)
+    (id, student_name, admission_no, student_class, subject, T2, session, term)
     VALUES
-    ('','$student_name' ,'$admission_no' , '$student_class', '$class_arm', '$subject' ,$T2, '$a_session' , '$term')";
+    ('','$student_name' ,'$admission_no' , '$student_class' ,'$subject' ,$T2, '$a_session' , '$term')";
 
             if ($conn->query($sql) === TRUE) {
                 $errors = "Mid-Term Scores for " . $subject . " for " . $student_name . " with " . $admission_no . " for " . $term . " - " . $a_session . " succesfully uploaded!";

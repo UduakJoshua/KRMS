@@ -49,6 +49,7 @@ if (!isset($_SESSION['ad-user_id'])) {
         #sidebarMenu,
         #navbar {
             background-color: maroon !important;
+
         }
 
         #sidebarMenu a {
@@ -90,18 +91,12 @@ if (!isset($_SESSION['ad-user_id'])) {
             padding: 2px;
         }
 
-        .img_div img {
-            height: 4rem;
-            width: 3.5rem;
-            border-radius: 4px;
-        }
 
-        .img_div_2 img {
-            height: 110px;
-            width: 100px;
-            border-radius: 4px;
-            border: 3px solid maroon;
-            margin-top: 20px;
+
+        .img_div img {
+            height: 5rem;
+            width: 4.5rem;
+            border-radius: 50%;
         }
 
         .img_preview img {
@@ -112,17 +107,22 @@ if (!isset($_SESSION['ad-user_id'])) {
 
         }
 
-        .thd {
-            font-size: 13px;
-
+        .img_div_2 img {
+            height: 110px;
+            width: 100px;
+            border-radius: 4px;
+            border: 3px solid maroon;
+            margin-top: 20px;
         }
 
+        .thd {
+            font-size: 11px;
 
+        }
 
         .thd th {
 
             text-align: center;
-            font-size: 13px;
         }
 
         input {
@@ -133,31 +133,6 @@ if (!isset($_SESSION['ad-user_id'])) {
         .score {
             border: 1px solid gainsboro;
             border-radius: 4px;
-        }
-
-        .red-icon {
-            font-size: 3rem;
-            color: red;
-            margin-right: 1.5rem;
-
-        }
-
-        .red-icon-message {
-            font-size: 1.1rem;
-        }
-
-        #error {
-
-            border-radius: 6px;
-            height: auto;
-            margin-top: 2px;
-            font-size: 1rem;
-            padding: 2px;
-            margin-bottom: 4px;
-        }
-
-        .title-head {
-            font-family: 'Roboto Slab', serif;
         }
 
         .icon {
@@ -177,11 +152,11 @@ if (!isset($_SESSION['ad-user_id'])) {
         }
 
         .icon_div p {
-            font-size: 20px;
+            font-size: 23px;
         }
 
         .report_background {
-            background-color: #FeFff0;
+            background-color: #fffef2;
             background-repeat: repeat;
             background-size: contain;
         }
@@ -190,24 +165,80 @@ if (!isset($_SESSION['ad-user_id'])) {
             font-size: 18px;
         }
 
+
+
+
         @media (min-width: 768px) {
             .bd-placeholder-img-lg {
                 font-size: 3.5rem;
             }
         }
 
-        @media print {
-
-            body {
-                background-color: #FeFff0;
+        /* media queries*/
+        @media screen and (max-width: 480px) {
+            .table th {
+                background-color: #DC3545 !important;
+                color: white !important;
             }
 
+            .table td {
+                background-color: inherit !important;
+            }
+
+            .school-header {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+
+            }
+
+            .report_background {
+                margin: 4px;
+            }
+
+            .title-head {
+                font-size: 18px;
+                text-align: center;
+            }
+
+            .head-text {
+                font-size: 13px;
+                text-align: center;
+
+            }
+
+            .school-header .head2 {
+                text-align: center;
+                font-size: 12px;
+            }
+
+            .head3 {
+                font-size: 15px;
+            }
+
+            .display thead tr th {
+                font-size: 11px !important;
+
+            }
+
+            tbody tr td {
+                font-size: 11px;
+            }
+        }
+
+
+
+        @media print {
+            body {
+                background-color: #fffef2;
+            }
 
 
             .print-container,
             .print-container * {
                 visibility: visible;
-
+                -webkit-print-color-adjust: exact
             }
 
 
@@ -226,7 +257,7 @@ if (!isset($_SESSION['ad-user_id'])) {
                 left: 0px;
                 top: 2px;
                 width: 100% !important;
-                padding: 0 !important;
+                padding: 2px !important;
                 margin: 0 !important;
 
             }
@@ -241,7 +272,11 @@ if (!isset($_SESSION['ad-user_id'])) {
                 margin: 0px;
                 display: none;
 
+
+
             }
+
+
         }
     </style>
 </head>
@@ -322,7 +357,7 @@ if (!isset($_SESSION['ad-user_id'])) {
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="fees_billing.php">
                                 <span data-feather="dollar-sign"></span>
                                 Fees Management
                             </a>

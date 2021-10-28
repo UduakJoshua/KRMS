@@ -67,7 +67,7 @@ $result = $conn->query($query);
 
                                             <?php
                                             require_once './controller/class_logic.php';
-                                            $select_sql = "SELECT * FROM classes WHERE className = 'Bloomers' ";
+                                            $select_sql = "SELECT * FROM classes ";
                                             $sql_result = $conn->query($select_sql);
                                             ?>
                                             <label for="student_class">Choose a class:</label>
@@ -85,8 +85,20 @@ $result = $conn->query($query);
                                         <div class="form-group">
                                             <label for="arm">Choose arm:</label>
                                             <select name="arm" id="arm" class="form-control ">
-
+                                                <option value="Art"> Art</option>
+                                                <option value="Faithfulness"> Faithfulness</option>
+                                                <option value="Gracefulness"> Gracefulness</option>
+                                                <option value="Goodness"> Goodness</option>
+                                                <option value="Holiness"> Holiness</option>
                                                 <option value="Humility"> Humility</option>
+                                                <option value="Joyfulness"> Joyfulness</option>
+                                                <option value="Kindness"> Kindness</option>
+                                                <option value="Love"> Love</option>
+                                                <option value="Meekness"> Meekness</option>
+                                                <option value="Peace"> Peace</option>
+                                                <option value="Purity"> Purity</option>
+                                                <option value="Science"> Science</option>
+                                                <option value="Virtue"> Virtue</option>
 
                                             </select>
                                         </div>

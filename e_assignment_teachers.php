@@ -1,7 +1,7 @@
 <?php
 require_once "./controller/e_videos_logic.php";
 $title = "BCA | E-Learning";
-include_once './model/inc/dashboard_header.php';
+include_once './model/inc/staff_dashboard_header.php';
 
 
 
@@ -15,7 +15,7 @@ include_once './model/inc/dashboard_header.php';
         <div class=" mb-2 mb-md-0">
             <div class="mr-2">
 
-                <p>Welcome <?php echo $_SESSION['username']; ?></p>
+                <p> <?php echo $_SESSION['staff-username']; ?></p>
             </div>
 
         </div>
@@ -36,7 +36,7 @@ include_once './model/inc/dashboard_header.php';
         <div class="row justify-content-center">
 
             <div class="col-md-9">
-                <form action="e_assignment.php" method="POST" enctype="multipart/form-data">
+                <form action="e_assignment_teachers.php" method="POST" enctype="multipart/form-data">
                     <input type="hidden" class="form-control " name="id" value="<?php echo $id ?>">
 
                     <div class="row">
@@ -123,10 +123,10 @@ include_once './model/inc/dashboard_header.php';
                             <div class="form-group ">
                                 <?php if ($update == true) :
                                 ?>
-                                    <button type="submit" class="btn btn-primary " name="update_v">Update</button>
+                                    <button type="submit" class="btn btn-primary " name="update_te">Update</button>
                                 <?php else : ?>
 
-                                    <button type="submit" class="btn btn-primary " name="assignment">Set Assignment</button>
+                                    <button type="submit" class="btn btn-primary " name="t_assignment">Set Assignment</button>
                                 <?php endif; ?>
 
 

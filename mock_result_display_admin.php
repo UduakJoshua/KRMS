@@ -2,18 +2,18 @@
 require './controller/dbase_conn.php';
 require './controller/result_display_logic.php';
 require './controller/score_upload_logic.php';
-$title = "BCA | Mid-Term Result View";
-include_once './model/inc/student_dash_header.php';
+$title = "BCA |Mock Result View";
+include_once './model/inc/dashboard_header.php';
 
 ?>
 
 <main role="main" class="col-lg-10 ml-sm-auto col-lg-10 px-md-4">
     <div class=" page-head d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h4">Print/View Mid-term Result</h1>
+        <h1 class="h4">Print/View Mock Result</h1>
         <div class=" mb-2 mb-md-0">
             <div class="mr-2">
 
-                <p>Welcome <?php echo $_SESSION['st-username']; ?></p>
+                <p>Welcome <?php echo $_SESSION['username']; ?></p>
             </div>
 
         </div>
@@ -57,10 +57,10 @@ include_once './model/inc/student_dash_header.php';
                 <?php
                 $term = $_SESSION['term'];
                 $academic_session = $_SESSION['aSession'];
+                $admission_no = $_GET['displayMT'];
+                $mock_no = $_SESSION['mock_no'];
 
-                $ad_no = $_SESSION['admin_no'];
-
-                $select_sql = "SELECT * FROM student WHERE admissionNo='$ad_no' ";
+                $select_sql = "SELECT * FROM student WHERE admissionNo='$admission_no' ";
                 $sql_result = $conn->query($select_sql);
 
                 ?>
@@ -70,12 +70,11 @@ include_once './model/inc/student_dash_header.php';
                     while ($row = $sql_result->fetch_assoc()) :
                     ?>
 
-                        <h4 class="text-center head3">Mid-Term Result Sheet For <i><?php echo $row['surname'] . " " . $row['firstname'] . " " . $row['middlename']; ?></i>
+                        <h4 class="text-center head3"> <?php echo $mock_no ?> Result Sheet For <i><?php echo $row['surname'] . " " . $row['firstname'] . " " . $row['middlename']; ?></i>
                         </h4>
                 </div>
                 <div class="d-flex justify-content-between mt-3">
                     <div class=" student-details">
-
                         <p><strong>Admission Number:</strong> <?php echo $row['admissionNo'] ?></p>
                         <p><strong>Name:</strong> <?php echo $row['surname'] . " " . $row['firstname'] . " " . $row['middlename']; ?> </p>
                         <p><strong>Class:</strong> <?php echo $row['class_name'] . " " . $row['classArm']; ?> </p>
@@ -93,7 +92,6 @@ include_once './model/inc/student_dash_header.php';
                         echo "<img src='assets/img/" . $row['image'] . "' >";
                         echo "</div>";
                         ?>
-
                     <?php endwhile; ?>
 
                     </div>
@@ -103,9 +101,10 @@ include_once './model/inc/student_dash_header.php';
             <?php
             $term = $_SESSION['term'];
             $academic_session = $_SESSION['aSession'];
-            $ad_no = $_SESSION['admin_no'];
+            $admission_no = $_GET['displayMT'];
+            $mock_no = $_SESSION['mock_no'];
 
-            $select_sql = "SELECT * FROM mid_term_scores WHERE admission_no='$ad_no' && term= '$term' && session = '$academic_session'";
+            $select_sql = "SELECT * FROM mock_scores WHERE admission_no='$admission_no' && term= '$term' && session = '$academic_session' && mock_no = '$mock_no'";
             $sql_result = $conn->query($select_sql);
 
             ?>
@@ -114,7 +113,7 @@ include_once './model/inc/student_dash_header.php';
                 <thead class="thead-dark ">
                     <tr style="font-size: 18px; text-align:center;">
                         <th scope="col " style="font-size: 18px; text-align:left;">Subject</th>
-                        <th scope="col">T2 (20%)</th>
+                        <th scope="col">Score (100%)</th>
                         <th scope="col">Grade</th>
                         <th scope="col">Remarks</th>
 
@@ -125,24 +124,26 @@ include_once './model/inc/student_dash_header.php';
 
                     while ($row = $sql_result->fetch_assoc()) :
 
-                        $T2 = $row['T2'];
+                        $score = $row['score'];
 
 
                     ?>
 
                         <tr style="font-size: 18px; text-align:center;">
-                            <td style=" text-align:left;"><?php echo $row['subject'] ?></td>
+                            <td style=" text-align:left;"><?php echo $row['subject_title'] ?></td>
 
-                            <td><?php echo $T2 ?></td>
+                            <td><?php echo $score ?></td>
 
                             <td>
                                 <?php
-                                if ($T2 >= 18) {
+                                if ($score >= 80) {
                                     echo "A";
-                                } elseif ($T2 >= 15) {
+                                } elseif ($score >= 60) {
                                     echo "B";
-                                } elseif ($T2 >= 10) {
+                                } elseif ($score >= 50) {
                                     echo "C";
+                                } elseif ($score >= 40) {
+                                    echo "P";
                                 } else {
                                     echo "F";
                                 } ?>
@@ -150,12 +151,14 @@ include_once './model/inc/student_dash_header.php';
                             <!--remarks-->
                             <td>
                                 <?php
-                                if ($T2 >= 18) {
+                                if ($score >= 80) {
                                     echo "Excellent";
-                                } elseif ($T2 >= 15) {
+                                } elseif ($score >= 60) {
                                     echo "Very Good";
-                                } elseif ($T2 >= 10) {
+                                } elseif ($score >= 50) {
                                     echo "Credit";
+                                } elseif ($score >= 40) {
+                                    echo "Pass";
                                 } else {
                                     echo "Fail";
                                 } ?>
@@ -171,9 +174,9 @@ include_once './model/inc/student_dash_header.php';
             <div class="school-header">
                 <?php
 
-                $ad_no = $_SESSION['admin_no'];
+                $admission_no = $_GET['displayMT'];
 
-                $select_sql = "SELECT * FROM mid_term_scores WHERE admission_no='$ad_no' && term= '$term' && session = '$academic_session' && T2 <= '5'";
+                $select_sql = "SELECT * FROM mock_scores WHERE admission_no='$admission_no' && term= '$term' && session = '$academic_session' && score <= '30'";
                 $sql_result = $conn->query($select_sql);
 
                 ?>
@@ -191,22 +194,27 @@ include_once './model/inc/student_dash_header.php';
                                 <td>Remark</td>
                             </tr>
                             <tr>
-                                <td>18 - 20</td>
+                                <td>80 - 100</td>
                                 <td>A</td>
                                 <td>Excellent</td>
                             </tr>
                             <tr>
-                                <td>15 - 17</td>
+                                <td>60 - 79</td>
                                 <td>B</td>
                                 <td>Very Goood</td>
                             </tr>
                             <tr>
-                                <td>10 - 14</td>
+                                <td>50 - 59</td>
                                 <td>C</td>
                                 <td>Credit</td>
                             </tr>
                             <tr>
-                                <td>0 - 9</td>
+                                <td>40 - 49</td>
+                                <td>P</td>
+                                <td>Pass</td>
+                            </tr>
+                            <tr>
+                                <td>0 - 39</td>
                                 <td>F</td>
                                 <td>Fail</td>
                             </tr>
@@ -227,24 +235,21 @@ include_once './model/inc/student_dash_header.php';
                         </thead>
                         <tbody class="ml-2 table-bordered">
                             <tr>
-                                <td>You need to put in more effort in the subject(s) listed below before the examination!</td>
+                                <td>You need to put in more effort in the subject(s) listed below before the next mock!</td>
                             </tr>
                             <?php
 
                             while ($row = $sql_result->fetch_assoc()) :
 
-                                $T2 = $row['T2'];
-                                $subject = $row['subject'];
+                                $T2 = $row['score'];
+                                $subject = $row['subject_title'];
                             ?>
 
                                 <td>
                                     <?php
                                     if ($T2 = $T2) {
                                         echo " $subject ";
-                                    } else {
-                                        $_SESSION['remark'] = "This is a beautiful performance! Do not relax for the exam.";
-                                        echo $_SESSION['remark'];
-                                    } ?>
+                                    }  ?>
                                 </td>
 
 

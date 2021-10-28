@@ -2,7 +2,7 @@
 require_once 'dbase_conn.php';
 include_once 'function.php';
 $errors = array();
-$adminNo = "";
+
 
 if (isset($_POST['promote'])) {
     if ((isset($_POST['chk']))) {
@@ -12,9 +12,10 @@ if (isset($_POST['promote'])) {
             $sql = "UPDATE student SET class_name = '$class_name', classArm = '$class_arm' WHERE id=$check";
             if (mysqli_query($conn, $sql)) {
 
-                $errors = "Student Promoted Successfully!";
+                $errors = "Student with the id $check has been Promoted Successfully to $class_name $class_arm ";
                 echo "<div class= 'alert-success' id='error'>";
                 echo $errors;
+
                 echo "</div> ";
             } else {
                 $errors = "Student was not Promoted Successfully!";

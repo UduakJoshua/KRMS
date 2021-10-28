@@ -149,7 +149,7 @@ if (!isset($_SESSION['st-user_id'])) {
         }
 
         .report_background {
-            background-color: #ffffd3;
+            background-color: #fffef2;
             background-repeat: repeat;
             background-size: contain;
         }
@@ -224,7 +224,7 @@ if (!isset($_SESSION['st-user_id'])) {
 
         @media print {
             body {
-                background-color: #ffffd3;
+                background-color: #fffef2;
             }
 
 
@@ -311,15 +311,9 @@ if (!isset($_SESSION['st-user_id'])) {
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="mock_result_display.php">
-                                <span data-feather="file"></span>
-                                Mock Result
-                            </a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link" href="exam_notification.php">
                                 <span data-feather="file"></span>
-                                Midterm Result
+                                Mock Result
                             </a>
                         </li>
                         <li class="nav-item">

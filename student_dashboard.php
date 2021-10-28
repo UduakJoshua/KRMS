@@ -36,15 +36,18 @@ include_once './model/inc/student_dash_header.php';
 
     <div class="row">
 
+      <div class="col-md-4">
+        <a href="mock_result_display.php" class="text-decoration-none"><button class="btn btn-primary btn-block mt-4">Check Mock Result (JSS3 & SSS3)</button></a>
 
+      </div>
 
-      <div class="col-md-6">
+      <div class="col-md-4">
         <a href="exam_notification.php" class="text-decoration-none"><button class="btn btn-primary btn-block mt-4">Check Midterm Result</button></a>
 
       </div>
 
       <!--col 2 -->
-      <div class="col-md-6">
+      <div class="col-md-4">
         <a href="exam_notification.php" class="text-decoration-none"><button class="btn btn-warning btn-block mt-4"> Check Examination Result</button></a>
 
       </div>
@@ -54,13 +57,13 @@ include_once './model/inc/student_dash_header.php';
 
 
 
-      <div class="col-md-6">
-        <a href="e_learning.php" class="text-decoration-none"><button class="btn btn-primary btn-block mt-4">Take a Lesson</button></a>
+      <div class="col-md-4">
+        <a href="e_learning_students.php" class="text-decoration-none"><button class="btn btn-primary btn-block mt-4">Take a Lesson</button></a>
 
       </div>
 
       <!--col 2 -->
-      <div class="col-md-6">
+      <div class="col-md-4">
         <a href="cbt.php" class="text-decoration-none"><button class="btn btn-warning btn-block mt-4"> Test Yourself</button></a>
 
       </div>
