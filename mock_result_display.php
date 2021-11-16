@@ -2,6 +2,7 @@
 require './controller/dbase_conn.php';
 require './controller/result_display_logic.php';
 require './controller/score_upload_logic.php';
+require './controller/student_logic.php';
 $title = "BCA |Mock Result View";
 include_once './model/inc/student_dash_header.php';
 
@@ -55,10 +56,11 @@ include_once './model/inc/student_dash_header.php';
 
 
                 <?php
-                $term = $_SESSION['term'];
-                $academic_session = $_SESSION['aSession'];
+
+                $term = "1st Term";
+                $academic_session = "2021/2022";
                 $ad_no = $_SESSION['admin_no'];
-                $mock_no = $_SESSION['mock_no'];
+                $mock_no = "Mock I";
 
                 $select_sql = "SELECT * FROM student WHERE admissionNo='$ad_no' ";
                 $sql_result = $conn->query($select_sql);
@@ -80,7 +82,7 @@ include_once './model/inc/student_dash_header.php';
                         <p><strong>Class:</strong> <?php echo $row['class_name'] . " " . $row['classArm']; ?> </p>
 
                         <p><strong>Term:</strong> <?php echo $term ?></p>
-                        <p><strong>Academic Session: </strong><?php echo $academic_session ?><span> | </span> <span> <strong>Date: </strong> 12<sup>th</sup> - Dec - 2021</span> </p>
+                        <p><strong>Academic Session: </strong><?php echo $academic_session ?><span> | </span> <span> <strong>Date: </strong> 5<sup>th</sup> - November - 2021</span> </p>
 
                         <p><strong>Sex:</strong> <?php echo $row['gender']; ?> </p>
 
@@ -99,12 +101,12 @@ include_once './model/inc/student_dash_header.php';
             </div>
 
             <?php
-            $term = $_SESSION['term'];
-            $academic_session = $_SESSION['aSession'];
+            $term = "1st Term";
+            $academic_session = "2021/2022";
             $ad_no = $_SESSION['admin_no'];
-            $mock_no = $_SESSION['mock_no'];
+            $mock_no = "1st Mock";
 
-            $select_sql = "SELECT * FROM mock_scores WHERE admission_no='$ad_no' && term= '$term' && session = '$academic_session' && mock_no = '$mock_no'";
+            $select_sql = "SELECT * FROM mock_scores WHERE admission_no='$ad_no' && term= '$term' && session = '$academic_session' && mock_no = '$mock_no' ORDER BY subject_title ASC";
             $sql_result = $conn->query($select_sql);
 
             ?>
@@ -172,14 +174,7 @@ include_once './model/inc/student_dash_header.php';
                 </tbody>
             </table>
             <div class="school-header">
-                <?php
 
-                $ad_no = $_SESSION['admin_no'];
-
-                $select_sql = "SELECT * FROM mock_scores WHERE admission_no='$ad_no' && term= '$term' && session = '$academic_session' && score <= '30'";
-                $sql_result = $conn->query($select_sql);
-
-                ?>
                 <div class="grading-system">
                     <table class="table table-sm table-condensed  table-striped">
                         <thead class=" thead-dark ">
@@ -201,7 +196,7 @@ include_once './model/inc/student_dash_header.php';
                             <tr>
                                 <td>60 - 79</td>
                                 <td>B</td>
-                                <td>Very Goood</td>
+                                <td>Very Good</td>
                             </tr>
                             <tr>
                                 <td>50 - 59</td>
@@ -227,40 +222,14 @@ include_once './model/inc/student_dash_header.php';
                 </div>
                 <!--comments-->
                 <div class="griding">
-                    <table class="table table-sm table-condensed  table-striped">
-                        <thead class=" thead-dark text-center ">
-                            <tr>
-                                <th scope=" col" colspan="2">Subjects to improve on</th>
-                            </tr>
-                        </thead>
-                        <tbody class="ml-2 table-bordered">
-                            <tr>
-                                <td>You need to put in more effort in the subject(s) listed below before the next mock!</td>
-                            </tr>
-                            <?php
-
-                            while ($row = $sql_result->fetch_assoc()) :
-
-                                $T2 = $row['score'];
-                                $subject = $row['subject_title'];
-                            ?>
-
-                                <td>
-                                    <?php
-                                    if ($T2 = $T2) {
-                                        echo " $subject ";
-                                    }  ?>
-                                </td>
 
 
-                        </tbody>
-                    <?php endwhile; ?>
 
-                    </table>
-                    <div class="mt-2 bg-danger">
+
+                    <div class="mt-2 bg-danger p-2">
                         <?php
-                        $arm = $_SESSION['arm'];
-                        $class = $_SESSION['class'];
+                        $arm = $_SESSION['class_arm'];
+                        $class = $_SESSION['student_class'];
                         $select_sql = "SELECT * FROM form_teachers WHERE class ='$class' && arm= '$arm' ";
                         $sql_result = $conn->query($select_sql);
 
@@ -270,13 +239,15 @@ include_once './model/inc/student_dash_header.php';
                         while ($row = $sql_result->fetch_assoc()) :
 
 
+
                         ?>
                             <p class="bg-danger text-center text-white h6 p-2"> Form Teacher: <br>
                                 <?php echo $row['teachers_name'] ?></p>
+
                         <?php endwhile; ?>
 
-
                     </div>
+
 
                 </div>
                 <!-- stamp-->

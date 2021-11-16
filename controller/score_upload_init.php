@@ -25,7 +25,7 @@ if (isset($_POST['initialize'])) {
 
     echo $_SESSION['arm'];
 
-    header("location:batch_result_input.php");
+    header("location:batch_score_input.php");
     exit();
 }
 
@@ -36,14 +36,13 @@ if (isset($_POST['mid_initialize'])) {
     $subject = test_input($_POST['subject']);
     $term =  test_input($_POST['term']);
     $academic_session = test_input($_POST['aSession']);
+
     // create a select query
     $_SESSION['arm'] = $arm;
     $_SESSION['class'] = $class;
     $_SESSION['term'] = $term;
     $_SESSION['subject'] = $subject;
     $_SESSION['aSession'] = $academic_session;
-
-    echo $_SESSION['arm'];
 
     header("location:mid_term_score.php");
     exit();
@@ -62,12 +61,8 @@ if (isset($_POST['staff_mid_initialize'])) {
     $_SESSION['term'] = $term;
     $_SESSION['subject'] = $subject;
     $_SESSION['aSession'] = $academic_session;
-
-
-
-
-    //header("location:staff_mid_term_score.php");
-    // exit();
+    header("location:staff_mid_term_score.php");
+    exit();
 }
 
 
@@ -109,5 +104,23 @@ if (isset($_POST['mock_init_admin'])) {
     $_SESSION['mock_no'] = $mock_no;
 
     header("location:mock_admin.php");
+    exit();
+}
+
+if (isset($_POST['psycho_init'])) {
+
+    $class = test_input($_POST['student_class']);
+    $arm =  test_input($_POST['arm']);
+
+    $term =  test_input($_POST['term']);
+    $academic_session = test_input($_POST['aSession']);
+
+    $_SESSION['arm'] = $arm;
+    $_SESSION['class'] = $class;
+    $_SESSION['term'] = $term;
+
+    $_SESSION['aSession'] = $academic_session;
+
+    header("location:students_psychomotor.php");
     exit();
 }

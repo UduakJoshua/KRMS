@@ -39,7 +39,7 @@ include_once './model/inc/dashboard_header.php';
                             <div class="form-group">
 
                                 <label for="image">Student's Image</label>
-                                <input type="file" name=" image" accept="image/*" onchange="loadFile(event)">
+                                <input type="file" name=" image" accept="image/*" onchange="loadFile(event)" required>
 
                             </div>
 
@@ -132,10 +132,21 @@ include_once './model/inc/dashboard_header.php';
                             </div>
                         </div>
 
-                        <div class="col-md-4">
+                        <div class="col-md-2">
                             <div class="form-group">
                                 <label for="class_arm">Arm <span class="required">*</span></label>
                                 <input type="text" class="form-control " name="class_arm" id="class_arm" placeholder="Enter Arm" required>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="section">Section <span class="required">*</span></label>
+                                <select name="section" id="section" class="form-control " value>
+
+                                    <option value="Basic">Basic</option>
+                                    <option value="High">High</option>
+
+                                </select>
                             </div>
                         </div>
                     </div>

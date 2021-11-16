@@ -43,7 +43,7 @@ include_once './model/inc/staff_dashboard_header.php';
       <!--col 2 -->
       <div class="col-md-4">
 
-        <div class="card bg-warning text-white mt-4 shadow" style="width: 16rem; height:6rem; ">
+        <div class="card bg-warning text-white mt-4 shadow" style="width: 14rem; height:4rem; ">
           <div class="card-body">
 
             <a href="./teachers_score_input.php" class="card-link text-white">
@@ -59,9 +59,9 @@ include_once './model/inc/staff_dashboard_header.php';
       <!--col 3-->
       <div class="col-md-4">
 
-        <div class="card bg-primary text-white mt-4 shadow" style="width: 16rem; height:6rem; ">
+        <div class="card bg-primary text-white mt-4 shadow" style="width: 14rem; height:4rem; ">
           <div class="card-body">
-            <a href="#" class="card-link text-white">
+            <a href="e_assignment_teachers.php" class="card-link text-white">
               <h5 class="card-title">Set Assignment</h5>
             </a>
 

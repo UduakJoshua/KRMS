@@ -7,15 +7,15 @@
     <div>
 
         <img src="https://portal.blessedchildrenacademy.com/assets/img/birthday_message.png" alt="">
-        <h4> Dear Mr.Henry Iwuala,</h4>
+        <h4> Dear Mr. Okene Kenyekatchi,</h4>
         <p>We realize how important today is for you because it's your birthday,
             and it will not pass by without wishing you the best.</p>
         <p>Thank you for being a member of Blessed Children Academy Family.</p>
         <p>To Celebrate your special day, we are excited to credit you with a Free airtime.</p>
         <p>Kindly accept these numbers as a token to say <strong>HAPPY BIRTHDAY</strong>.</p>
-        <p>We Love you Mr. Henry.</p>
+        <p>We Love you Mr. Katch.</p>
         <p>Network: MTN</p>
-        <p>54906151671929409</p>
+        <p>1361-1757-9097-42960</p>
 
     </div>
     <p> Best Regards,<br>

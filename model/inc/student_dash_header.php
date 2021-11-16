@@ -317,16 +317,24 @@ if (!isset($_SESSION['st-user_id'])) {
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="exam_notification.php">
+                            <a class="nav-link" href="student_result_display.php">
                                 <span data-feather="file"></span>
                                 Midterm Result
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span data-feather="file"></span>
-                                Examination Result
-                            </a>
+                            <?php $admin_no = $_SESSION['st-user_id'];
+                            $sql = "SELECT * FROM student WHERE id = '$admin_no' ";
+                            $result = $conn->query($sql);
+                            while ($row = mysqli_fetch_assoc($result)) : ?>
+                                <?php if ($row['section'] == "High") :
+                                ?>
+                                    <a class="nav-link" href="student_exam_result.php" class="text-decoration-none"> Examination Result</a>
+                                <?php else : ?>
+
+                                    <a class="nav-link" href="student_exam_result_basic.php" class="text-decoration-none">Examination Result</a>
+                                <?php endif; ?>
+                            <?php endwhile ?>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="e_learning_students.php">

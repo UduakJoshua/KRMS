@@ -87,7 +87,18 @@ include_once './model/inc/dashboard_header.php';
           </a>
         </div>
       </div>
+      <div class="col-md-2 icon_div" style="background-color: #cf3230;">
+        <div>
+          <span class="fa fa-users icon" aria-hidden="true"></span>
+        </div>
+        <div>
+          <a href="#" class="text-decoration-none icon-a">
+            <p class="text-center text-white">View Mid Term Scores</p>
+          </a>
+        </div>
+      </div>
     </div>
+    <!--row 2 begins here-->
     <div class="row">
       <!--col 2-->
       <div class="col-md-3 icon_div" style="background-color: #3045eF;">
@@ -119,6 +130,17 @@ include_once './model/inc/dashboard_header.php';
         <div>
           <a href="mock_admin.php" class="text-decoration-none icon-a">
             <p class="text-center text-white">Input Mock Scores</p>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-md-2 icon_div" style="background-color: #cf3230;">
+        <div>
+          <span class="fa fa-eye icon" aria-hidden="true"></span>
+        </div>
+        <div>
+          <a href="scores_input_view.php" class="text-decoration-none icon-a">
+            <p class="text-center text-white">View Exam Scores</p>
           </a>
         </div>
       </div>

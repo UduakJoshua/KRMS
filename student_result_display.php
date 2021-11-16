@@ -55,9 +55,8 @@ include_once './model/inc/student_dash_header.php';
 
 
                 <?php
-                $term = $_SESSION['term'];
-                $academic_session = $_SESSION['aSession'];
-
+                $term = "1st Term";
+                $academic_session = "2021/2022";
                 $ad_no = $_SESSION['admin_no'];
 
                 $select_sql = "SELECT * FROM student WHERE admissionNo='$ad_no' ";
@@ -80,8 +79,8 @@ include_once './model/inc/student_dash_header.php';
                         <p><strong>Name:</strong> <?php echo $row['surname'] . " " . $row['firstname'] . " " . $row['middlename']; ?> </p>
                         <p><strong>Class:</strong> <?php echo $row['class_name'] . " " . $row['classArm']; ?> </p>
 
-                        <p><strong>Term:</strong> <?php echo $term ?></p>
-                        <p><strong>Academic Session: </strong><?php echo $academic_session ?><span> | </span> <span> <strong>Date: </strong> 12<sup>th</sup> - Dec - 2021</span> </p>
+                        <p><strong>Term:</strong> 1<sup>st</sup> Term</p>
+                        <p><strong>Academic Session: </strong><?php echo $academic_session ?><span> | </span> <span> <strong>Date: </strong> 5<sup>th</sup> - November - 2021</span> </p>
 
                         <p><strong>Sex:</strong> <?php echo $row['gender']; ?> </p>
 
@@ -101,11 +100,11 @@ include_once './model/inc/student_dash_header.php';
             </div>
 
             <?php
-            $term = $_SESSION['term'];
-            $academic_session = $_SESSION['aSession'];
+            $term = "1st Term";
+            $academic_session = "2021/2022";
             $ad_no = $_SESSION['admin_no'];
 
-            $select_sql = "SELECT * FROM mid_term_scores WHERE admission_no='$ad_no' && term= '$term' && session = '$academic_session'";
+            $select_sql = "SELECT * FROM mid_term_scores WHERE admission_no='$ad_no' && term= '$term' && session = '$academic_session' ORDER BY subject ASC";
             $sql_result = $conn->query($select_sql);
 
             ?>
@@ -143,6 +142,8 @@ include_once './model/inc/student_dash_header.php';
                                     echo "B";
                                 } elseif ($T2 >= 10) {
                                     echo "C";
+                                } elseif ($T2 >= 7) {
+                                    echo "P";
                                 } else {
                                     echo "F";
                                 } ?>
@@ -156,6 +157,8 @@ include_once './model/inc/student_dash_header.php';
                                     echo "Very Good";
                                 } elseif ($T2 >= 10) {
                                     echo "Credit";
+                                } elseif ($T2 >= 7) {
+                                    echo "Pass";
                                 } else {
                                     echo "Fail";
                                 } ?>
@@ -169,14 +172,7 @@ include_once './model/inc/student_dash_header.php';
                 </tbody>
             </table>
             <div class="school-header">
-                <?php
 
-                $ad_no = $_SESSION['admin_no'];
-
-                $select_sql = "SELECT * FROM mid_term_scores WHERE admission_no='$ad_no' && term= '$term' && session = '$academic_session' && T2 <= '5'";
-                $sql_result = $conn->query($select_sql);
-
-                ?>
                 <div class="grading-system">
                     <table class="table table-sm table-condensed  table-striped">
                         <thead class=" thead-dark ">
@@ -198,7 +194,7 @@ include_once './model/inc/student_dash_header.php';
                             <tr>
                                 <td>15 - 17</td>
                                 <td>B</td>
-                                <td>Very Goood</td>
+                                <td>Very Good</td>
                             </tr>
                             <tr>
                                 <td>10 - 14</td>
@@ -206,7 +202,12 @@ include_once './model/inc/student_dash_header.php';
                                 <td>Credit</td>
                             </tr>
                             <tr>
-                                <td>0 - 9</td>
+                                <td>7 - 9</td>
+                                <td>P</td>
+                                <td>Pass</td>
+                            </tr>
+                            <tr>
+                                <td>0 - 6</td>
                                 <td>F</td>
                                 <td>Fail</td>
                             </tr>
@@ -218,62 +219,33 @@ include_once './model/inc/student_dash_header.php';
 
                 </div>
                 <!--comments-->
-                <div class="griding">
-                    <table class="table table-sm table-condensed  table-striped">
-                        <thead class=" thead-dark text-center ">
-                            <tr>
-                                <th scope=" col" colspan="2">Subjects to improve on</th>
-                            </tr>
-                        </thead>
-                        <tbody class="ml-2 table-bordered">
-                            <tr>
-                                <td>You need to put in more effort in the subject(s) listed below before the examination!</td>
-                            </tr>
-                            <?php
-
-                            while ($row = $sql_result->fetch_assoc()) :
-
-                                $T2 = $row['T2'];
-                                $subject = $row['subject'];
-                            ?>
-
-                                <td>
-                                    <?php
-                                    if ($T2 = $T2) {
-                                        echo " $subject ";
-                                    } else {
-                                        $_SESSION['remark'] = "This is a beautiful performance! Do not relax for the exam.";
-                                        echo $_SESSION['remark'];
-                                    } ?>
-                                </td>
 
 
-                        </tbody>
+
+
+                <div class="mt-2 bg-danger p-2">
+                    <?php
+                    $arm = $_SESSION['class_arm'];
+                    $class = $_SESSION['student_class'];
+                    $select_sql = "SELECT * FROM form_teachers WHERE class ='$class' && arm= '$arm' ";
+                    $sql_result = $conn->query($select_sql);
+
+                    ?>
+                    <?php
+
+                    while ($row = $sql_result->fetch_assoc()) :
+
+
+
+                    ?>
+                        <p class="bg-danger text-center text-white h6 p-2"> Form Teacher: <br>
+                            <?php echo $row['teachers_name'] ?></p>
+
                     <?php endwhile; ?>
 
-                    </table>
-                    <div class="mt-2 bg-danger">
-                        <?php
-                        $arm = $_SESSION['arm'];
-                        $class = $_SESSION['class'];
-                        $select_sql = "SELECT * FROM form_teachers WHERE class ='$class' && arm= '$arm' ";
-                        $sql_result = $conn->query($select_sql);
-
-                        ?>
-                        <?php
-
-                        while ($row = $sql_result->fetch_assoc()) :
-
-
-                        ?>
-                            <p class="bg-danger text-center text-white h6 p-2"> Form Teacher: <br>
-                                <?php echo $row['teachers_name'] ?></p>
-                        <?php endwhile; ?>
-
-
-                    </div>
-
                 </div>
+
+
                 <!-- stamp-->
                 <div class=" school-header school-header2">
                     <img src="assets/img/bca-stamp.png" alt="" style="width: 70%;">

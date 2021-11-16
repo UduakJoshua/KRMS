@@ -1,14 +1,13 @@
 <?php
-require "./controller/score_upload_init.php";
 require "./controller/student_logic.php";
-$title = "BCA | Score Input";
+$title = "BCA | Update Student Record";
 include_once './model/inc/dashboard_header.php';
 ?>
 
 <!-- main content-->
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h6">Student's Score Input</h1>
+        <h1 class="h6">Student Section</h1>
         <div class=" mb-2 mb-md-0">
             <div class="mr-2">
 
@@ -21,19 +20,11 @@ include_once './model/inc/dashboard_header.php';
 
     <section>
 
-        <?php
 
-        if (isset($_SESSION['upload'])) : ?>
-            <div class="alert alert-<?= $_SESSION['msg_type'] ?>">
-                <?php echo $_SESSION['upload'];
-                unset($_SESSION['upload']);
-                ?>
-            </div>
-        <?php endif; ?>
 
         <div class="row justify-content-center">
             <div class="col-md-12">
-                <form action="batch_result_input.php" method="POST">
+                <form action="section_init.php" method="POST">
                     <div class="card">
                         <!--card header begins here-->
                         <div class="row">
@@ -48,7 +39,7 @@ include_once './model/inc/dashboard_header.php';
                             <div class="col-md-12">
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-md-2">
+                                        <div class="col-md-3">
                                             <label for="student_class">Student's Class</label>
 
                                             <?php
@@ -65,7 +56,7 @@ include_once './model/inc/dashboard_header.php';
                                             </select>
                                         </div>
 
-                                        <div class="col-md-2 form-group">
+                                        <div class="col-md-3 form-group">
                                             <label for="class">Arm</label>
                                             <select name="arm" id="arm" class="form-control ">
 
@@ -87,49 +78,9 @@ include_once './model/inc/dashboard_header.php';
 
                                             </select>
                                         </div>
-                                        <!-- subject select-->
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label for="subject">Subject</label>
-
-                                                <?php
-                                                require_once "controller/subject_logic.php";
-                                                $select_sql = "SELECT * FROM subject ORDER BY subject_title ASC";
-                                                $sql_result = $conn->query($select_sql);
-                                                ?>
-                                                <select name="subject" id="subject" class="form-control ">
-                                                    // using a while loop to iterate the subject table
-                                                    <?php
-                                                    while ($row = $sql_result->fetch_assoc()) : ?>
-                                                        <option value="<?php echo $row['subject_title']; ?>"><?php echo $row['subject_title']; ?></option>
-                                                    <?php endwhile; ?>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-2">
-                                            <label for="term">Term</label>
-
-                                            <select name="term" id="term" class="form-control ">
-
-                                                <option value="1st Term"> 1st Term </option>
-                                                <option value="2nd Term"> 2nd Term </option>
-                                                <option value="3rd Term"> 3rd Term </option>
-
-                                            </select>
-                                        </div>
-
-                                        <div class="col-md-2">
-                                            <label for="aSession">Session</label>
-
-                                            <select name="aSession" id="aSession" class="form-control ">
 
 
-                                                <option value="2021/2022"> 2021/2022 </option>
-                                                <option value="2022/2023"> 2022/2023</option>
 
-                                            </select>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -139,7 +90,7 @@ include_once './model/inc/dashboard_header.php';
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary" name="initialize">Initialize</button>
+                                    <button type="submit" class="btn btn-primary" name="section_init">Initialize</button>
                                 </div>
                             </div>
                         </div>

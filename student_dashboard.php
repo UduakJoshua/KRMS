@@ -18,7 +18,7 @@ include_once './model/inc/student_dash_header.php';
           echo "<img src='assets/img/" . $row['image'] . "' >";
           echo "</div>";
           ?>
-        <?php endwhile; ?>
+
 
         </div>
 
@@ -42,14 +42,20 @@ include_once './model/inc/student_dash_header.php';
       </div>
 
       <div class="col-md-4">
-        <a href="exam_notification.php" class="text-decoration-none"><button class="btn btn-primary btn-block mt-4">Check Midterm Result</button></a>
+        <a href="student_result_display.php" class="text-decoration-none"><button class="btn btn-primary btn-block mt-4">Check Midterm Result</button></a>
 
       </div>
 
-      <!--col 2 -->
+      <!--col 2  and logic to check student section-->
       <div class="col-md-4">
-        <a href="exam_notification.php" class="text-decoration-none"><button class="btn btn-warning btn-block mt-4"> Check Examination Result</button></a>
 
+        <?php if ($row['section'] == "High") :
+        ?>
+          <a href="student_exam_result.php" class="text-decoration-none"><button class="btn btn-warning btn-block mt-4"> Check Examination Result</button></a>
+        <?php else : ?>
+
+          <a href="student_exam_result_basic.php" class="text-decoration-none"><button class="btn btn-primary btn-block mt-4"> Check Examination Result</button></a>
+        <?php endif; ?>
       </div>
     </div>
 
@@ -68,7 +74,7 @@ include_once './model/inc/student_dash_header.php';
 
       </div>
     </div>
-
+  <?php endwhile; ?>
 
 
   </section>

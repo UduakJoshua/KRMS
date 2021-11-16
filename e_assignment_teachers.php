@@ -22,7 +22,18 @@ include_once './model/inc/staff_dashboard_header.php';
     </div>
 
 
-    <section>
+    <section class="container-fluid">
+        <div class="bg-info p-2 text-white">
+            <h5><strong>Attention!</strong></h5>
+            <ul>
+                <li>Select the Subject, Class and Term to give Assignment</li>
+                <li>Type in the instructions on how to do the assignment and the due date</li>
+                <li>Set the Exercise no e.g Ex 1, Ex 2 ...</li>
+                <li>Attach the assignment ( PDF or JPG Format Only)</li>
+                <li>Click the Set Assignment Button</li>
+            </ul>
+        </div>
+        <hr>
         <?php
 
         if (isset($_SESSION['message'])) : ?>
@@ -103,8 +114,17 @@ include_once './model/inc/staff_dashboard_header.php';
                         <div class="col-md-4">
 
                             <div class="form-group">
-                                <label for="assignment_no">Exercise</label>
-                                <input type="text" name="assignment_no" class="form-control">
+                                <label for="assignment_no">Exercise No:</label>
+                                <select name="assignment_no" id="assignment_no" class="form-control " value>
+                                    <option value="Ex 1"> Ex-1 </option>
+                                    <option value="Ex 2"> Ex-2 </option>
+                                    <option value="Ex 3"> Ex-3 </option>
+                                    <option value="Ex 4"> Ex-4 </option>
+                                    <option value="Ex 5"> Ex-5 </option>
+                                    <option value="Ex 6"> Ex-6 </option>
+                                    <option value="Ex 7"> Ex-7 </option>
+                                    <option value="Ex 8"> Ex-8 </option>2
+                                </select>
                             </div>
                         </div>
                         <div class="col-md-4">

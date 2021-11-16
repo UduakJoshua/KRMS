@@ -108,7 +108,7 @@ include_once './model/inc/dashboard_header.php';
             }
             ?>
 
-            <table class="table table-striped table-sm display">
+            <table class="table table-striped table-sm display table-bordered">
                 <thead class="thead-dark ">
                     <tr style="font-size: 16px; text-align:center;">
                         <th scope="col " style="font-size: 16px; text-align:left;">Subject</th>

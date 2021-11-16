@@ -1,0 +1,157 @@
+<?php
+require_once 'controller/score_upload_logic_test.php';
+$title = "BCA | Uploaded Scores";
+include_once './model/inc/dashboard_header.php';
+
+?>
+
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h4">View Uploaded Scores</h1>
+        <div class=" mb-2 mb-md-0">
+            <div class="mr-2">
+
+                <p>Welcome <?php echo $_SESSION['username']; ?></p>
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <section>
+        <?php
+
+        if (isset($_SESSION['message'])) : ?>
+            <div class="alert alert-<?= $_SESSION['msg_type'] ?>">
+                <?php echo $_SESSION['message'];
+                unset($_SESSION['message']);
+                ?>
+            </div>
+        <?php endif; ?>
+        <div class="row justify-content-center">
+
+            <div class="col-md-12">
+                <?php
+                include_once 'controller/score_upload_logic_test.php';
+
+                $c_arm = $_SESSION['arm'];
+                $class = $_SESSION['class'];
+                $term = $_SESSION['term'];
+                $aSession = $_SESSION['aSession'];
+                $subject = $_SESSION['subject'];
+
+                // create a select query
+
+                $sql = "SELECT * FROM students_score WHERE student_class = '$class' && class_arm = '$c_arm' 
+                    && subject = '$subject' && term ='$term'";
+                $result = mysqli_query($conn, $sql);
+
+                if (mysqli_num_rows($result) > 0) : ?>
+
+                    <div class="card">
+                        <!--card header begins here-->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card-header">
+                                    <h5>Display Scores for <?php echo $class . " " . $c_arm ?></h5>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- card body begins here-->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card-body">
+                                    <table class="table table-condensed table-responsive table-bordered ">
+                                        <thead class="thead-dark ">
+                                            <tr style="font-size: 12px;">
+                                                <th scope="col">Select</th>
+                                                <th scope="col">Admission No</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Subject</th>
+                                                <th scope="col">T1<br> (10%)</th>
+                                                <th scope="col">T2<br> (20%)</th>
+                                                <th scope="col">Project<br> (10%)</th>
+                                                <th scope="col">Assignment<br> (20%)</th>
+                                                <th scope="col">Exam<br> (40%)</th>
+                                                <th scope="col">Total<br> (100%)</th>
+                                                <th scope="col">Action</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody class="ml-1 pt-2" style="font-size: 14px;">
+
+                                            <?php while ($row = mysqli_fetch_assoc($result)) :
+                                                $ad_no = $row['admission_no'];
+                                                $s_name = $row['student_name'];
+                                                $subject = $row['subject'];
+                                                $class = $row['student_class'];
+                                                $class = $row['class_arm'];
+                                                $T1 = $row['T1'];
+                                                $T2 = $row['T2'];
+                                                $assignment = $row['assignment'];
+                                                $project = $row['project'];
+                                                $exam = $row['exam'];
+                                                $total = $row['total'];
+                                                $a_session = $row['session'];
+                                                $term = $row['term']; ?>
+                                                <tr>
+                                                    <td><input type="checkbox" name="chk[]" value="<?php echo $row['id'] ?>" /></td>
+                                                    <td><?php echo $ad_no; ?></td>
+                                                    <td><?php echo $s_name; ?></td>
+                                                    <td><?php echo $subject; ?></td>
+                                                    <td class="td_align"><?php echo $T1 ?></td>
+                                                    <td class="td_align"><?php echo $T2 ?></td>
+                                                    <td class="td_align"><?php echo $project ?></td>
+                                                    <td class="td_align"><?php echo $assignment ?></td>
+                                                    <td class="td_align"><?php echo  $exam ?></td>
+                                                    <td class="td_align"><?php echo  $total ?></td>
+                                                    <td>
+                                                        <a href="scores_edit.php?edit_ex_score=<?php echo $row['id']; ?>" class=" btn btn-info btn-sm"> Edit</a>
+                                                        <button class="btn btn-sm btn-danger" name="delete_ex_score">Del</button>
+                                                    </td>
+                                                </tr>
+                                            <?php endwhile ?>
+
+
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--card footer begins here-->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card-footer">
+                                    <a href="scores_input_view.php"><button type="button" class="btn btn-primary mr-4">Back</button></a>
+                                    <a href="batch_result_input.php"><button type="button" class="btn btn-primary ml-4">Input Another Score</button></a>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    <?php else : ?>
+                        <div class="col-md-12 bg-warning text-center mt-4 pt-4">
+                            <h3>Scores for the Selected Subject Not Available</h3>
+                            <a href="batch_result_input.php"><button type="button" class="btn btn-primary m-4">Input Score</button></a>
+                        </div>
+                    <?php endif ?>
+                    </div>
+
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <hr>
+
+    <?php
+
+    include_once './model/inc/dashboard_footer.php';
+
+    ?>

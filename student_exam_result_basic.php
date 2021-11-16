@@ -7,8 +7,9 @@ require './controller/result_display_logic.php';
 require './controller/score_upload_logic.php';
 require './controller/psychomotor_logic.php';
 $title = "BCA | Result View";
-include_once './model/inc/dashboard_header.php';
-
+include_once './model/inc/student_dash_header.php';
+$term = "1st Term";
+$academic_session = "2021/2022";
 ?>
 
 <main role="main" class="col-lg-10 ml-sm-auto col-lg-10.b.gb./b/vbV//b px-md-4">
@@ -17,7 +18,7 @@ include_once './model/inc/dashboard_header.php';
         <div class=" mb-2 mb-md-0">
             <div class="mr-2">
 
-                <p>Welcome <?php echo $_SESSION['username']; ?></p>
+                <p>Welcome <?php echo $_SESSION['st-username']; ?></p>
             </div>
 
         </div>
@@ -59,13 +60,10 @@ include_once './model/inc/dashboard_header.php';
 
 
                 <?php
-
-                if (isset($_GET['display'])) {
-                    $admission_no = $_GET['display'];
-
-                    $select_sql = "SELECT * FROM student WHERE admissionNo='$admission_no' ";
-                    $sql_result = $conn->query($select_sql);
-                }
+                // get student admission number from the session
+                $admin_no = $_SESSION['admin_no'];
+                $select_sql = "SELECT * FROM student WHERE admissionNo='$admin_no' ";
+                $sql_result = $conn->query($select_sql);
                 ?>
 
                 <div class="bg-danger text-white pt-3 " style="height: 80px;">
@@ -81,7 +79,7 @@ include_once './model/inc/dashboard_header.php';
                         <p><strong>Admission Number:</strong> <?php echo $row['admissionNo'] ?></p>
                         <p><strong>Name:</strong> <?php echo $row['surname'] . " " . $row['firstname'] . " " . $row['middlename']; ?> </p>
                         <p><strong>Class:</strong> <?php echo $row['class_name'] . " " . $row['classArm']; ?> </p>
-                        <p><strong>Academic Session: </strong> 2021/2022 <span> | </span> <span> <strong>Term:</strong> 1st Term</span> </p>
+                        <p><strong>Academic Session: </strong> <?php echo $academic_session ?> <span> | </span> <span> <strong>Term:</strong> <?php echo $term ?> </span> </p>
                         <p><strong>Sex:</strong> <?php echo $row['gender']; ?> </p>
                         <p>Next Term Begins: </p>
                     </div>
@@ -101,24 +99,21 @@ include_once './model/inc/dashboard_header.php';
                 <div class="col-md-9">
                     <?php
 
-                    if (isset($_GET['display'])) {
-                        $admission_no = $_GET['display'];
+                    $admin_no = $_SESSION['admin_no'];
 
-                        $select_sql = "SELECT * FROM (SELECT *, rank() OVER ( partition by subject order by total desc ) 
-                AS 'rank'   FROM students_score WHERE  term= '1st Term') as temp WHERE admission_no= '$admission_no'";
-                        $sql_result = $conn->query($select_sql);
-                    }
+                    $select_sql = "SELECT * FROM (SELECT *, rank() OVER ( partition by subject order by total desc ) 
+                AS 'rank'   FROM students_score WHERE  term= '$term') as temp WHERE admission_no= '$admin_no' ";
+                    $sql_result = $conn->query($select_sql);
+
                     ?>
                     <div class="table-responsive">
                         <table class="table table-striped table-sm table-bordered display">
                             <thead class="thead-dark ">
                                 <tr>
                                     <th scope="col">Subject</th>
-                                    <th scope="col">T1<br> (10%)</th>
+                                    <th scope="col">T1<br> (20%)</th>
                                     <th scope="col">T2<br> (20%)</th>
-                                    <th scope="col">Project<br> (10%)</th>
-                                    <th scope="col">Assignment<br> (20%)</th>
-                                    <th scope="col">Exam<br> (40%)</th>
+                                    <th scope="col">Exam<br> (60%)</th>
                                     <th scope="col">Total<br> (100%)</th>
                                     <th scope="col">Grade</th>
                                     <th scope="col">Subject <br> Position</th>
@@ -136,8 +131,6 @@ include_once './model/inc/dashboard_header.php';
 
                                     $T1 = $row['T1'];
                                     $T2 = $row['T2'];
-                                    $project = $row['project'];
-                                    $assignment = $row['assignment'];
                                     $exam = $row['exam'];
                                     $total = $row['total'];
                                     $sp = $row['rank'];
@@ -149,8 +142,6 @@ include_once './model/inc/dashboard_header.php';
                                         <td><strong><?php echo $row['subject'] ?></strong></td>
                                         <td class="td_center"><?php echo $T1 ?></td>
                                         <td class="td_center"><?php echo $T2 ?></td>
-                                        <td class="td_center"><?php echo $project ?></td>
-                                        <td class="td_center"><?php echo $assignment ?></td>
                                         <td class="td_center"><?php echo $exam ?></td>
                                         <td class="td_center"><?php echo $total ?></td>
 
@@ -220,12 +211,11 @@ include_once './model/inc/dashboard_header.php';
                     <table class=" table table-stripped table-sm  tab">
                         <?php
 
-                        if (isset($_GET['display'])) {
-                            $admission_no = $_GET['display'];
+                        $admin_no = $_SESSION['admin_no'];
 
-                            $select_sql = "SELECT * FROM psychomotor WHERE admission_no= '$admission_no'";
-                            $sql_result = $conn->query($select_sql);
-                        }
+                        $select_sql = "SELECT * FROM psychomotor WHERE admission_no= '$admin_no' && term = '$term'";
+                        $sql_result = $conn->query($select_sql);
+
                         ?>
 
                         <thead class="thead-dark ">
@@ -338,10 +328,9 @@ include_once './model/inc/dashboard_header.php';
 
 
                     <?php
-
-                    $class = $_SESSION['class'];
-
-                    $select_sql = "SELECT COUNT(subject) AS no_subjects, SUM(T1+T2+project+assignment+exam) AS overall,  (SELECT no_of_subjects FROM no_of_subjects WHERE class_name = '$class') subject_total   FROM students_score WHERE admission_no='$admission_no' && term= '1st Term'";
+                    $admin_no = $_SESSION['admin_no'];
+                    $class = $_SESSION['student_class'];
+                    $select_sql = "SELECT COUNT(subject) AS no_subjects, SUM(T1+T2+exam) AS overall,  (SELECT no_of_subjects FROM no_of_subjects WHERE class_name = '$class') subject_total   FROM students_score WHERE admission_no='$admin_no' && term= '1st Term'";
                     $sql_result = $conn->query($select_sql);
 
                     ?>
@@ -361,9 +350,10 @@ include_once './model/inc/dashboard_header.php';
                             while ($row = $sql_result->fetch_assoc()) :
                                 $overalTot = $row['overall'];
                                 $overasubject = $row['no_subjects'];
-                                $average_score = round(($overalTot / $overasubject), 2);
                                 $no_subject = $row['subject_total'];
                                 $total_mark = $no_subject * 100;
+                                $average_score = round(($overalTot / $no_subject), 2);
+
 
                             ?>
                                 <tr>
@@ -400,7 +390,7 @@ include_once './model/inc/dashboard_header.php';
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Principal's Comment</td>
+                                    <td>Head Teacher's Comment</td>
                                     <td>
                                         <?php
                                         if ($average_score  >= 80) {
@@ -422,10 +412,10 @@ include_once './model/inc/dashboard_header.php';
                             <tr>
                                 <th colspan="3">
                                     <?php
-                                    $c_arm = $_SESSION['arm'];
-                                    $class = $_SESSION['class'];
-                                    $term = $_SESSION['term'];
-                                    $aSession = $_SESSION['aSession'];
+                                    $c_arm = $_SESSION['class_arm'];
+                                    $class = $_SESSION['student_class'];
+                                    $term = "1st Term";
+                                    $aSession = "2021/2022";
 
                                     $select_sql = "SELECT * FROM form_teachers WHERE class ='$class' && arm= '$c_arm' ";
                                     $sql_result = $conn->query($select_sql);
@@ -509,7 +499,7 @@ include_once './model/inc/dashboard_header.php';
                         <tr>
                             <th colspan="3" style="padding: 10px;">
                                 <p style="font-size: 12px; text-align:left ; margin-bottom:2px;">CAT : Continuous Assessment Test</p>
-                                <p style="font-size: 12px; text-align:left; margin-bottom:2px;">Average Score : Total Score / No. of Subjects taken</p>
+                                <p style="font-size: 12px; text-align:left; margin-bottom:2px;">Average Score : Total Score / Total Subjects Offered</p>
 
                             </th>
                         </tr>

@@ -89,3 +89,25 @@ if (isset($_POST['update'])) {
 
     $conn->close();
 }
+
+
+// add no of subject logic
+
+if (isset($_POST['add_subject_no'])) {
+    $no_of_subject = test_input($_POST['no_subject']);
+    $student_class = test_input($_POST['student_class']);
+
+    $sql = "INSERT INTO no_of_subjects ( class_name, no_of_subjects) VALUES (?,?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('si',  $student_class,  $no_of_subject);
+
+    if ($stmt->execute()) {
+        $_SESSION['message'] = "Your Records  have been succesfully saved!";
+        $_SESSION['msg_type'] = "success";
+        header('Location:subject_count.php');
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+
+    $conn->close();
+}

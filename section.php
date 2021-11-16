@@ -1,16 +1,13 @@
 <?php
-require "./controller/subject_logic.php";
+require "./controller/student_logic.php";
 
-$title = "BCA | Class Promotion";
+$title = "BCA | Student Record Update";
 include_once './model/inc/dashboard_header.php';
-
-$query = "SELECT * FROM student order by class_name";
-$result = $conn->query($query);
 
 ?>
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h6">Class Promotion / List</h1>
+        <h1 class="h6">Student Record Update</h1>
         <div class=" mb-2 mb-md-0">
             <div class="mr-2">
 
@@ -24,8 +21,15 @@ $result = $conn->query($query);
     <section>
         <div class="container-fluid">
             <?php
-            include_once "./controller/class_promotion_logic.php";
-            ?>
+            include_once 'controller/student_logic.php';
+
+            if (isset($_SESSION['message'])) : ?>
+                <div class="alert alert-<?= $_SESSION['msg_type'] ?>">
+                    <li><?php echo $_SESSION['message'] ?></li>
+                    <?php unset($_SESSION['message']);
+                    ?>
+                </div>
+            <?php endif; ?>
 
             <div class="card-header bg-danger text-white">
                 <h6>How To Promote a Student to the next class</h6>
@@ -40,7 +44,18 @@ $result = $conn->query($query);
 
             <hr>
 
-            <form action="class_promotion.php" method="POST">
+            <form action="section.php" method="POST">
+                <?php
+
+
+                $c_arm = $_SESSION['arm'];
+                $class = $_SESSION['class'];
+
+                //query
+                $sql = "SELECT * FROM student WHERE classArm =  '$c_arm' && class_name = '$class' ORDER BY surname ASC";
+                $result = $conn->query($sql);
+                ?>
+
                 <div class="table-responsive">
                     <table id="example" class="table table-striped table-bordered">
                         <thead class="dark">
@@ -49,7 +64,6 @@ $result = $conn->query($query);
                                 <th scope="col">Admission No</th>
                                 <th scope="col">Name</th>
                                 <th scope="col"> Current Class</th>
-                                <th scope="col">New Class</th>
                                 <th scope="col">Arm</th>
                                 <th>Action</th>
                             </tr>
@@ -92,17 +106,20 @@ $result = $conn->query($query);
                                         </div>
                                     </td>
 
-                                    <td>
-                                        <button type="submit" class="btn btn-primary btn-sm" name="promote">Promote</button>
 
-                                    </td>
                                 </tr>
                             <?php endwhile; ?>
                         </tbody>
+
+
                     </table>
 
-                </div>
 
+                </div>
+                <hr>
+                <div>
+                    <button type="submit" class="btn btn-primary btn-md" name="add_section">Add Section</button>
+                </div>
 
             </form>
         </div>

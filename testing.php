@@ -1,5 +1,5 @@
 <?php
-$pass = "n/1185";
+$pass = "blessed";
 $password = password_hash($pass, PASSWORD_DEFAULT);
 echo $password;
 ?>

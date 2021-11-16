@@ -141,6 +141,8 @@ include_once './model/inc/dashboard_header.php';
                             <div class="col-md-12">
                                 <div class="card-footer">
                                     <button type="submit" class="btn btn-primary" name="mid_initialize">Initialize</button>
+
+                                    <button type="submit" class="btn btn-primary" name="view_scores">View Scores</button>
                                 </div>
                             </div>
                         </div>
@@ -187,20 +189,27 @@ include_once './model/inc/dashboard_header.php';
                             $term = $_SESSION['term'];
                             $aSession = $_SESSION['aSession'];
                             $subject = $_SESSION['subject'];
-                            //$_SESSION['term'] = "";
+
+
 
 
 
                             // create a select query
-                            $sql = "SELECT  student.admissionNo, student.firstname, student.surname, mid_term_scores.* FROM student
-                            INNER JOIN mid_term_scores ON student.admissionNo = mid_term_scores.admission_no 
-                             WHERE class_arm =  '$c_arm' && class_name = '$class' && term='$term' && subject='$subject' || subject = ''";
+                            // $sql = "SELECT *
+                            //FROM student WHERE classArm =  '$c_arm' && class_name = '$class' ORDER BY surname LIMIT 40";
+                            //$result = mysqli_query($conn, $sql);
+
+                            $sql = "SELECT mid_term_scores.T2, student.*  FROM mid_term_scores JOIN student
+                            ON  admission_no=admissionNo && subject = '$subject'  WHERE classArm =  '$c_arm' && class_name = '$class ' ";
                             $result = mysqli_query($conn, $sql);
                             print_r($result);
 
+
+
                             if (mysqli_num_rows($result) > 0) : ?>
 
-                                <?php while ($row = mysqli_fetch_assoc($result)) : ?>
+                                <?php while ($row = mysqli_fetch_assoc($result)) :
+                                ?>
 
                                     <!--?php foreach ($row as $rowa) : ?-->
 
@@ -208,7 +217,7 @@ include_once './model/inc/dashboard_header.php';
                                     <div class="score ">
                                         <div class="row mt-1 ml-auto mr-2">
 
-
+                                            <input type="hidden" class="form-control " name="id" value="<?php echo $id ?>">
                                             <div class="col-md-2">
                                                 <div class="form-group ">
 
@@ -243,15 +252,10 @@ include_once './model/inc/dashboard_header.php';
                                             <div class="col-md-2">
                                                 <div class="form-group ">
 
-                                                    <input type=" text" name="student_class" class="form-control" readonly value="<?php echo $class ?>">
+                                                    <input type=" text" name="student_class" class="form-control" readonly value="<?php echo $class . " " . $c_arm ?>">
                                                 </div>
                                             </div>
-                                            <div class="col-md-2">
-                                                <div class="form-group ">
 
-                                                    <input type=" text" name="class_arm" class="form-control" readonly value="<?php echo $c_arm ?>">
-                                                </div>
-                                            </div>
 
 
                                             <div class="col-md-2">

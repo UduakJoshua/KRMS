@@ -20,6 +20,7 @@ if (!isset($_SESSION['ad-user_id'])) {
 
     <!--jquery link -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <!--jquery datable -->
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
@@ -80,14 +81,26 @@ if (!isset($_SESSION['ad-user_id'])) {
         .school-header2 {
             flex-direction: column;
 
+
+        }
+
+        .school-header h1 {
+            text-transform: uppercase;
+        }
+
+        .head-text {
+            font-size: 18px;
+            font-weight: bold;
+
+
         }
 
         .portal_logo {
             border-radius: 10px;
 
             margin: 4px;
-            width: 100px;
-            height: 100px;
+            width: 140px;
+            height: 130px;
             padding: 2px;
         }
 
@@ -101,32 +114,46 @@ if (!isset($_SESSION['ad-user_id'])) {
 
         .img_preview img {
             border: 2px solid maroon;
-            height: 7rem;
-            width: 6.5rem;
+            height: 8rem;
+            width: 7.5rem;
 
 
         }
 
         .img_div_2 img {
-            height: 110px;
-            width: 100px;
+            height: 140px;
+            width: 130px;
             border-radius: 4px;
             border: 3px solid maroon;
             margin-top: 20px;
         }
 
+        .table,
         .thd {
-            font-size: 11px;
+            font-size: 14px;
+            padding: 1.5px !important;
+
 
         }
 
-        .thd th {
+        .table .thead-dark th {
+            text-align: center !important;
+            border: 1.2px solid white;
+            padding: 6px;
+            font-size: 16px;
+        }
 
+
+        .thd th {
+            text-align: center;
+        }
+
+        .td_center {
             text-align: center;
         }
 
         input {
-            font-size: 14px !important;
+            font-size: 16px !important;
 
         }
 
@@ -152,7 +179,7 @@ if (!isset($_SESSION['ad-user_id'])) {
         }
 
         .icon_div p {
-            font-size: 23px;
+            font-size: 25px;
         }
 
         .report_background {
@@ -162,7 +189,21 @@ if (!isset($_SESSION['ad-user_id'])) {
         }
 
         .student-details p {
-            font-size: 18px;
+            font-size: 16px;
+            line-height: 1rem;
+        }
+
+        .tab {
+            padding: 0.3px !important;
+        }
+
+        .th h6 {
+            text-align: center;
+        }
+
+        .td_align {
+            width: 40px;
+            text-align: center;
         }
 
 
@@ -183,6 +224,7 @@ if (!isset($_SESSION['ad-user_id'])) {
 
             .table td {
                 background-color: inherit !important;
+
             }
 
             .school-header {
@@ -200,6 +242,7 @@ if (!isset($_SESSION['ad-user_id'])) {
             .title-head {
                 font-size: 18px;
                 text-align: center;
+                padding: 3px;
             }
 
             .head-text {
@@ -218,12 +261,12 @@ if (!isset($_SESSION['ad-user_id'])) {
             }
 
             .display thead tr th {
-                font-size: 11px !important;
+                font-size: 12px !important;
 
             }
 
             tbody tr td {
-                font-size: 11px;
+                font-size: 12px;
             }
         }
 
@@ -231,7 +274,7 @@ if (!isset($_SESSION['ad-user_id'])) {
 
         @media print {
             body {
-                background-color: #fffef2;
+                background-color: #fffef2 !important;
             }
 
 
