@@ -238,19 +238,27 @@ if (isset($_POST['section_init'])) {
 if (isset($_POST['add_section'])) {
     $id = $_POST['id'];
     $section = $_POST['section'];
+    $name = $_POST['surname'];
+    $first = $_POST['firstname'];
+    $class = $_POST['class'];
 
-    $sql = "UPDATE student SET   section = '$section' WHERE id=$id";
+
+
+    $sql = "UPDATE student SET  section = '$section' WHERE id=$id";
     if ($conn->query($sql) === TRUE) {
 
-        $_SESSION['message'] = "Student Updated Successfully!";
+        $_SESSION['message'] = "Section  Updated Successfully for $name in $class!";
         $_SESSION['msg_type'] = "success";
-        header("location:./student_display.php");
+        header("location:./section.php");
         exit();
     } elseif ($conn->error) {
-        $_SESSION['message'] = " The admission number .'$admin_no'. already exist, please check your input and try again!";
+        $_SESSION['message'] = " $conn->error";
         $_SESSION['msg_type'] = "danger";
-        header("location:./student_display.php");
+        header("location:./section.php");
         exit();
     }
+
+
+
     $conn->close();
 }

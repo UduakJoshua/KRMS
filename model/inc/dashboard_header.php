@@ -369,15 +369,9 @@ if (!isset($_SESSION['ad-user_id'])) {
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="student.php">
+                            <a class="nav-link" href="student_management.php">
                                 <span data-feather="users"></span>
                                 Student Management
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" href="student_display.php">
-                                <span data-feather="users"></span>
-                                Student Display
                             </a>
                         </li>
 

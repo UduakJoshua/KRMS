@@ -44,7 +44,7 @@ $result = $conn->query($query);
                             <th scope="col">Sex</th>
                             <th scope="col">Date Of Birth</th>
                             <th scope="col">Class</th>
-                            <th scope="col">Parent's No</th>
+                            <th scope="col">Section</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -66,7 +66,7 @@ $result = $conn->query($query);
                                 <td><?php echo $row['gender'] ?></td>
                                 <td><?php echo $row['dob'] ?></td>
                                 <td><?php echo $row['class_name'] . " " . $row['classArm'] ?></td>
-                                <td><?php echo $row['fatherNo'] ?></td>
+                                <td><?php echo $row['section'] ?></td>
                                 <td>
                                     <a href="edit_student.php?edit=<?php echo $row['id']; ?>" class=" btn btn-info btn-sm"> Edit</a>
                                     <a href="./controller/student_logic.php?delete=<?php echo $row['id']; ?>" class=" btn btn-danger btn-sm">Del</a>

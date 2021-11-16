@@ -3,6 +3,8 @@ require "./controller/student_logic.php";
 
 $title = "BCA | Student Record Update";
 include_once './model/inc/dashboard_header.php';
+$c_arm = $_SESSION['arm'];
+$class = $_SESSION['class'];
 
 ?>
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
@@ -32,12 +34,12 @@ include_once './model/inc/dashboard_header.php';
             <?php endif; ?>
 
             <div class="card-header bg-danger text-white">
-                <h6>How To Promote a Student to the next class</h6>
+                <h6>How To Add/Change Student's Sectiont</h6>
                 <ul>
-                    <li>Check the box against the Student to promote</li>
-                    <li>Select the class and arm</li>
-                    <li>Click the promote button</li>
-                    <li>Refresh your window</li>
+                    <li>Check the box against the Student</li>
+                    <li>Select the Section</li>
+                    <li>Click the Add Section button below</li>
+
                 </ul>
 
             </div>
@@ -45,12 +47,8 @@ include_once './model/inc/dashboard_header.php';
             <hr>
 
             <form action="section.php" method="POST">
+
                 <?php
-
-
-                $c_arm = $_SESSION['arm'];
-                $class = $_SESSION['class'];
-
                 //query
                 $sql = "SELECT * FROM student WHERE classArm =  '$c_arm' && class_name = '$class' ORDER BY surname ASC";
                 $result = $conn->query($sql);
@@ -60,11 +58,11 @@ include_once './model/inc/dashboard_header.php';
                     <table id="example" class="table table-striped table-bordered">
                         <thead class="dark">
                             <tr style="font-size: 12px;">
-                                <th scope="col">Select</th>
+
                                 <th scope="col">Admission No</th>
                                 <th scope="col">Name</th>
                                 <th scope="col"> Current Class</th>
-                                <th scope="col">Arm</th>
+                                <th scope="col"> status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -72,40 +70,20 @@ include_once './model/inc/dashboard_header.php';
                             <?php
                             while ($row = mysqli_fetch_assoc($result)) : ?>
                                 <tr>
-                                    <td><input type="checkbox" name="chk[]" value="<?php echo $row['id'] ?>" /></td>
+
                                     <td><?php echo $row['admissionNo'] ?></td>
                                     <td><?php echo $row['surname'] . " " . $row['firstname'] ?></td>
                                     <td><?php echo $row['class_name'] . " " . $row['classArm'] ?></td>
                                     <td>
-                                        <div class="form-group">
+                                        <?php if ($row['section'] != " "  && $row['section'] == 'High' || $row['section'] == 'Basic') : ?>
 
-                                            <?php
-                                            require_once './controller/class_logic.php';
-                                            $select_sql = "SELECT * FROM classes WHERE className = 'Alumni'";
-                                            $sql_result = $conn->query($select_sql);
-                                            ?>
-                                            <label for="student_class">Choose a class:</label>
+                                            <button class="btn btn-primary btn-sm " disabled>Section Added</button>
 
-                                            <select name="student_class" id="student_class" class="form-control ">
-                                                // using a while loop to iterate the class table
-                                                <?php
-                                                while ($row = $sql_result->fetch_assoc()) : ?>
-                                                    <option value="<?php echo $row['className'] ?>"><?php echo $row['className']; ?></option>
-                                                <?php endwhile; ?>
-                                            </select>
-                                        </div>
+                                        <?php else : ?>
+                                            <button class="btn btn-danger btn-sm " disabled>Section Not Added</button>
+                                        <?php endif; ?>
                                     </td>
-                                    <td>
-                                        <div class="form-group">
-                                            <label for="arm">Choose arm:</label>
-                                            <select name="arm" id="arm" class="form-control ">
-
-                                                <option value="Art"> Art </option>
-
-                                            </select>
-                                        </div>
-                                    </td>
-
+                                    <td> <a href="add_section.php?edit=<?php echo $row['id']; ?>" class=" btn btn-info btn-sm"> Edit</a></a></td>
 
                                 </tr>
                             <?php endwhile; ?>
@@ -118,7 +96,7 @@ include_once './model/inc/dashboard_header.php';
                 </div>
                 <hr>
                 <div>
-                    <button type="submit" class="btn btn-primary btn-md" name="add_section">Add Section</button>
+                    <a href="section_init.php" class=" btn btn-info btn-sm"> Update Another Class</a>
                 </div>
 
             </form>
