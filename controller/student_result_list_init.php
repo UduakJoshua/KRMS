@@ -113,3 +113,19 @@ if (isset($_POST['fees_bill'])) {
     header("location:fees_billing.php");
     exit();
 }
+
+if (isset($_POST['initializeR'])) {
+
+    $class = test_input($_POST['student_class']);
+    $arm =  test_input($_POST['arm']);
+    $term =  test_input($_POST['term']);
+    $academic_session = test_input($_POST['aSession']);
+    // create a select query
+    $_SESSION['arm'] = $arm;
+    $_SESSION['class'] = $class;
+    $_SESSION['term'] = $term;
+    $_SESSION['aSession'] = $academic_session;
+
+    header("location:result_display_table.php");
+    exit();
+}

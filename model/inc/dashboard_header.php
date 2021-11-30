@@ -128,6 +128,16 @@ if (!isset($_SESSION['ad-user_id'])) {
             margin-top: 20px;
         }
 
+        #error {
+
+            border-radius: 6px;
+            height: auto;
+            margin-top: 2px;
+            font-size: 1rem;
+            padding: 0.4rem;
+            margin-bottom: 4px;
+        }
+
         .table,
         .thd {
             font-size: 14px;
@@ -164,8 +174,9 @@ if (!isset($_SESSION['ad-user_id'])) {
 
         .icon {
             color: cornsilk;
-            font-size: 3rem;
+            font-size: 2rem;
             margin-top: 20px;
+
 
         }
 
@@ -175,11 +186,12 @@ if (!isset($_SESSION['ad-user_id'])) {
             justify-content: center;
             flex-direction: column;
             align-items: center;
-            margin: 10px;
+            margin: 20px;
+
         }
 
         .icon_div p {
-            font-size: 25px;
+            font-size: 16px;
         }
 
         .report_background {
@@ -267,6 +279,15 @@ if (!isset($_SESSION['ad-user_id'])) {
 
             tbody tr td {
                 font-size: 12px;
+            }
+
+            .icon_div {
+                margin: 8px;
+
+            }
+
+            .icon_div p {
+                font-size: 20px;
             }
         }
 

@@ -1,6 +1,6 @@
 <?php
 require "./controller/form_teacher_logic.php";
-
+require_once "./controller/staff_login_logic.php";
 $title = "BCA | Form Teachers";
 include_once './model/inc/dashboard_header.php';
 
@@ -32,7 +32,9 @@ include_once './model/inc/dashboard_header.php';
                                 require_once './controller/staff_logic.php';
                                 $select_sql = "SELECT * FROM staff ";
                                 $sql_result = $conn->query($select_sql);
+
                                 ?>
+
                                 <select name="staff_name" id="staff_name" class="form-control " value>
                                     // using a while loop to iterate the class table
                                     <?php
@@ -42,6 +44,8 @@ include_once './model/inc/dashboard_header.php';
                                 </select>
                             </div>
                         </div>
+
+
 
                         <div class="col-md-4">
                             <div class="form-group">

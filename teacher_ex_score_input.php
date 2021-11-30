@@ -2,7 +2,7 @@
 require "./controller/score_upload_init.php";
 require "./controller/student_logic.php";
 $title = "BCA | Score Input";
-include_once './model/inc/dashboard_header.php';
+include_once './model/inc/staff_dashboard_header.php';
 ?>
 
 <!-- main content-->
@@ -12,7 +12,7 @@ include_once './model/inc/dashboard_header.php';
         <div class=" mb-2 mb-md-0">
             <div class="mr-2">
 
-                <p>Welcome <?php echo $_SESSION['username']; ?></p>
+                <p><?php echo $_SESSION['staff-username']; ?></p>
             </div>
 
         </div>
@@ -27,6 +27,7 @@ include_once './model/inc/dashboard_header.php';
                 <li>For columns without scores type in <strong>ZERO</strong></li>
                 <li>Skip any student without score</li>
                 <li>Click the Save Scores Button to upload score</li>
+                <li>Click the Input Another Score Button below the return message to input another score</li>
             </ul>
         </div>
         <hr>
@@ -34,17 +35,11 @@ include_once './model/inc/dashboard_header.php';
         <?php
         include_once 'controller/score_upload_logic.php';
 
-        if (isset($_SESSION['upload'])) : ?>
-            <div class="alert alert-<?= $_SESSION['msg_type'] ?>">
-                <li><?php echo $_SESSION['upload'] ?></li>
-                <?php unset($_SESSION['upload']);
-                ?>
-            </div>
-        <?php endif; ?>
+        ?>
 
         <div class="row justify-content-center">
             <div class="col-md-12">
-                <form action="batch_score_input.php" method="POST">
+                <form action="teacher_ex_score_input.php" method="POST">
 
                     <div class="card">
                         <!--card header begins here-->
@@ -147,6 +142,7 @@ include_once './model/inc/dashboard_header.php';
                                         </div>
                                         <hr>
                                     <?php endwhile; ?>
+
                                 </div>
                             </div>
                         </div>
@@ -158,13 +154,11 @@ include_once './model/inc/dashboard_header.php';
                             </div>
                         </div>
 
-
                     </div>
                 </form>
             </div>
         </div>
 
-        <!--card footer begins here-->
 
     </section>
     <hr>

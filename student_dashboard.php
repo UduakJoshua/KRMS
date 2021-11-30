@@ -31,18 +31,23 @@ include_once './model/inc/student_dash_header.php';
 
   <section>
     <p style="font-weight:600; font-size:30px;"> Welcome <?php echo $_SESSION['st-username']; ?></p>
-    <h5>How would like to get started?</h5>
+    <h5>How would you like to get started?</h5>
 
 
     <div class="row">
-
       <div class="col-md-4">
-        <a href="mock_result_display.php" class="text-decoration-none"><button class="btn btn-primary btn-block mt-4">Check Mock Result (JSS3 & SSS3)</button></a>
+        <a href="e_learning_students.php" class="text-decoration-none"><button class="btn btn-dark btn-block mt-4">E-Learning / Assignment</button></a>
 
       </div>
+      <?php if ($row['class_name'] == "JSS Three" || $row['class_name'] == "SSS Three") :
+      ?>
+        <div class="col-md-4">
+          <a href="mock_result_display.php" class="text-decoration-none"><button class="btn btn-dark btn-block mt-4">Check Mock Result (JSS3 & SSS3)</button></a>
 
+        </div>
+      <?php endif; ?>
       <div class="col-md-4">
-        <a href="student_result_display.php" class="text-decoration-none"><button class="btn btn-primary btn-block mt-4">Check Midterm Result</button></a>
+        <a href="student_result_display.php" class="text-decoration-none"><button class="btn btn-danger btn-block mt-4">Check Midterm Result</button></a>
 
       </div>
 
@@ -51,10 +56,10 @@ include_once './model/inc/student_dash_header.php';
 
         <?php if ($row['section'] == "High") :
         ?>
-          <a href="student_exam_result.php" class="text-decoration-none"><button class="btn btn-warning btn-block mt-4"> Check Examination Result</button></a>
+          <a href="student_exam_result.php" class="text-decoration-none"><button class="btn btn-secondary btn-block mt-4"> Check Examination Result</button></a>
         <?php else : ?>
 
-          <a href="student_exam_result_basic.php" class="text-decoration-none"><button class="btn btn-primary btn-block mt-4"> Check Examination Result</button></a>
+          <a href="student_exam_result_basic.php" class="text-decoration-none"><button class="btn btn-success btn-block mt-4"> Check Examination Result</button></a>
         <?php endif; ?>
       </div>
     </div>
@@ -63,10 +68,7 @@ include_once './model/inc/student_dash_header.php';
 
 
 
-      <div class="col-md-4">
-        <a href="e_learning_students.php" class="text-decoration-none"><button class="btn btn-primary btn-block mt-4">Take a Lesson</button></a>
 
-      </div>
 
       <!--col 2 -->
       <div class="col-md-4">

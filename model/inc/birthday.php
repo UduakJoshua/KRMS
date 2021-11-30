@@ -7,15 +7,17 @@
     <div>
 
         <img src="https://portal.blessedchildrenacademy.com/assets/img/birthday_message.png" alt="">
-        <h4> Dear Mr. Okene Kenyekatchi,</h4>
+        <h4> Dear Miss Anaestecia Ewerum,</h4>
         <p>We realize how important today is for you because it's your birthday,
             and it will not pass by without wishing you the best.</p>
-        <p>Thank you for being a member of Blessed Children Academy Family.</p>
-        <p>To Celebrate your special day, we are excited to credit you with a Free airtime.</p>
-        <p>Kindly accept these numbers as a token to say <strong>HAPPY BIRTHDAY</strong>.</p>
-        <p>We Love you Mr. Katch.</p>
-        <p>Network: MTN</p>
-        <p>1361-1757-9097-42960</p>
+        <p> We acknowledge your great contribution to the growth of the system and want to let
+            you know that you are important to us.<br>
+            Thank you for being a member of Blessed Children Academy Family.</p>
+        <p>We wish you the very best of life and living.</p>
+        <h3>Happy birthday</h3>
+
+        <p>We Love you Miss. Ann.</p>
+
 
     </div>
     <p> Best Regards,<br>

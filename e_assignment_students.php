@@ -46,7 +46,7 @@ include_once './model/inc/student_dash_header.php';
             $student_class = $_SESSION['student_class'];
             //echo $student_class;
 
-            $select_sql = "SELECT * FROM student_assignments WHERE student_class =  '$student_class' ";
+            $select_sql = "SELECT * FROM student_assignments WHERE student_class =  '$student_class' ORDER BY time_posted DESC ";
             $sql_result = $conn->query($select_sql);
             ?>
             <div class="table-responsive">
@@ -57,6 +57,7 @@ include_once './model/inc/student_dash_header.php';
                             <th scope="col">Subject</th>
                             <th scope="col">Exercise</th>
                             <th scope="col">Target Class</th>
+                            <th scope="col">Date</th>
                             <th scope="col">Instruction</th>
                             <th scope="col">Assignment</th>
                             <th scope="col">Term</th>
@@ -71,6 +72,7 @@ include_once './model/inc/student_dash_header.php';
                                 <td><?php echo $row['subject'] ?></td>
                                 <td><?php echo $row['assignment_no'] ?></td>
                                 <td><?php echo $row['student_class'] ?></td>
+                                <td><?php echo $row['date_posted'] ?></td>
                                 <td><?php echo $row['instructions'] ?></td>
                                 <td>
                                     <button class="btn btn-sm btn-primary" id="hideButton">
@@ -89,13 +91,14 @@ include_once './model/inc/student_dash_header.php';
 
                         <?php endwhile; ?>
 
+
                     </tbody>
                 </table>
             </div>
         </div>
         <!--iframe width="100%" height="500" src="" name="video" title="YouTube video player" frameborder="0" transparency="true" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe-->
 
-
+        <?php $conn->close(); ?>
     </section>
 
 

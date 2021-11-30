@@ -33,19 +33,20 @@ include_once './model/inc/dashboard_header.php';
 
             <?php
 
-            $select_sql = "SELECT * FROM student_assignments ";
+            $select_sql = "SELECT * FROM student_assignments ORDER BY time_posted DESC";
             $sql_result = $conn->query($select_sql);
             ?>
             <div class="table-responsive">
-                <table class="table table-striped table-sm display " id="example" style="width:100%">
+                <table class="table table-striped table-sm display" id="example" style="width:100%">
                     <thead class="thead-dark ">
                         <tr>
                             <th scope="col">Subject</th>
                             <th scope="col">Target Class</th>
                             <th scope="col">Assignment</th>
+                            <th scope="col">Date Posted</th>
                             <th scope="col">Instructions</th>
                             <th scope="col">Download Status</th>
-                            <th colspan="2" scope="col">Action</th>
+                            <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody class="ml-2">
@@ -56,11 +57,12 @@ include_once './model/inc/dashboard_header.php';
                                 <td><?php echo $row['subject'] ?></td>
                                 <td><?php echo $row['student_class'] ?></td>
                                 <td><a href="<?php echo $row['file_path'] ?>" target="_blank"><?php echo $row['assignment'] ?></a></td>
+                                <td><?php echo $row['date_posted'] ?></td>
                                 <td><?php echo $row['instructions'] ?></td>
                                 <td><?php echo $row['downloads'] ?></td>
 
                                 <td>
-                                    <!--a href="e_assignment.php?edit=php echo $row['id']; ?>" class=" btn btn-info btn-sm"> Edit</a-->
+
                                     <a href="./controller/e_videos_logic.php?deleteAss=<?php echo $row['id']; ?>" class=" btn btn-danger btn-sm">Delete</i></a>
                                 </td>
                             </tr>
@@ -70,6 +72,7 @@ include_once './model/inc/dashboard_header.php';
                     </tbody>
                 </table>
             </div>
+            <?php $conn->close(); ?>
         </div>
 
 

@@ -166,8 +166,9 @@ if (!isset($_SESSION['staff-user_id'])) {
 
         .icon {
             color: cornsilk;
-            font-size: 3rem;
+            font-size: 2rem;
             margin-top: 20px;
+
 
         }
 
@@ -177,11 +178,12 @@ if (!isset($_SESSION['staff-user_id'])) {
             justify-content: center;
             flex-direction: column;
             align-items: center;
-            margin: 10px;
+            margin: 20px;
+
         }
 
         .icon_div p {
-            font-size: 23px;
+            font-size: 16px;
         }
 
         .report_background {
@@ -250,6 +252,11 @@ if (!isset($_SESSION['staff-user_id'])) {
 
             tbody tr td {
                 font-size: 12px;
+            }
+
+            .icon_div {
+                margin: 6px;
+
             }
         }
 

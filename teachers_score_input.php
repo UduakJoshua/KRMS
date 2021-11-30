@@ -23,41 +23,12 @@ include_once './model/inc/staff_dashboard_header.php';
     <p>How would like to get started?</p>
 
 
-    <!--<div class="row">
 
-
-
-      <div class="col-md-6">
-        <a href="result_input.php"><button class="btn btn-primary btn-block mt-4">Upload Midterm Result</button></a>
-
-      </div>-->
-
-    <!--col 2 
-    <div class="col-md-6">
-      <a href="exam_upload.php"><button class="btn btn-warning btn-block mt-4"> Upload Examination Result</button></a>
-
-    </div>
-    </div>
-    <div class="row">
-
-
-
-      <div class="col-md-6">
-        <a href="#"><button class="btn btn-primary btn-block mt-4">Multiple Upload For Midterm Result</button></a>
-
-      </div>
-
-      <!--col 2 
-      <div class="col-md-6">
-        <a href="multipleUpload.php"><button class="btn btn-warning btn-block mt-4"> Multiple Upload Examination Result</button></a>
-
-      </div>
-    </div>-->
     <div class="row">
       <!--col 1-->
-      <div class="col-md-3 icon_div" style="background-color: #30CDCF;">
+      <div class="col-md-2 icon_div" style="background-color: #9B59B6;">
         <div>
-          <span class="fa fa-pencil icon" aria-hidden="true"></span>
+          <span class="fa fa-pencil-square-o icon" aria-hidden="true"></span>
         </div>
         <div>
           <a href="staff_mid_term_score.php" class="text-decoration-none icon-a">
@@ -65,33 +36,89 @@ include_once './model/inc/staff_dashboard_header.php';
           </a>
         </div>
       </div>
-
       <!--col 2 -->
-      <div class="col-md-3 icon_div" style="background-color: #3045eF;">
+      <div class="col-md-2 icon_div" style="background-color: #E74C3C;">
         <div>
-          <span class="fa fa-pencil icon" aria-hidden="true"></span>
+          <span class="fa fa-eye icon" aria-hidden="true"></span>
         </div>
         <div>
           <a href="#" class="text-decoration-none icon-a">
-            <p class="text-center text-white">Input Exam Scores</p>
+            <p class="text-center text-white">View Mid Term Scores</p>
           </a>
         </div>
       </div>
-
-      <!--col 1-->
-      <div class="col-md-3 icon_div" style="background-color: #30CDCF;">
+      <!--col 3 -->
+      <div class="col-md-2 icon_div" style="background-color: #1F618D ;">
         <div>
-          <span class="fa fa-pencil icon" aria-hidden="true"></span>
+          <span class="fa fa-pencil-square-o icon" aria-hidden="true"></span>
         </div>
         <div>
-          <a href="mock.php" class="text-decoration-none icon-a">
-            <p class="text-center text-white">Input Mock Scores</p>
+          <a href="teacher_exam_init.php" class="text-decoration-none icon-a">
+            <p class="text-center text-white">Input Exam Scores</p>
           </a>
         </div>
       </div>
 
     </div>
 
+    <!--row 2 begins here-->
+    <div class="row">
+      <!--col 1-->
+      <div class="col-md-2 icon_div" style="background-color: #F1C40F;">
+        <div>
+          <span class="fa fa-eye icon" aria-hidden="true"></span>
+        </div>
+        <div>
+          <a href="scores_input_view_teacher.php" class="text-decoration-none icon-a">
+            <p class="text-center text-white">View Exam Scores</p>
+          </a>
+        </div>
+      </div>
+
+      <!--col 2-->
+      <?php
+      $section = $_SESSION['section'];
+      if ($section == "Secondary" || $section == "General") :
+      ?>
+        <div class="col-md-2 icon_div" style="background-color: #229954;">
+          <div>
+            <span class="fa fa-pencil-square-o icon" aria-hidden="true"></span>
+          </div>
+
+          <div>
+            <a href="mock_init_teacher.php" class="text-decoration-none icon-a">
+              <p class="text-center text-white">Input Mock Scores (JSS3 & SSS3 Only)</p>
+            </a>
+          </div>
+        </div>
+        <!--col 3-->
+        <div class="col-md-2 icon_div" style="background-color: #1B2631 ;">
+          <div>
+            <span class="fa fa-eye icon" aria-hidden="true"></span>
+          </div>
+          <div>
+            <a href="mock_view_teacher.php" class="text-decoration-none icon-a">
+              <p class="text-center text-white">View Mock Scores</p>
+            </a>
+          </div>
+        </div>
+      <?php endif; ?>
+      <?php
+      $desig = $_SESSION['role'];
+      if ($desig == "Form Teacher") :
+      ?>
+        <div class="col-md-2 icon_div" style="background-color: #48C9B0;">
+          <div>
+            <span class="fa fa-user-circle-o icon" aria-hidden="true"></span>
+          </div>
+          <div>
+            <a href="teacher_psychomotor_init.php" class="text-decoration-none icon-a">
+              <p class="text-center text-white">Add Psychomotor</p>
+            </a>
+          </div>
+        </div>
+      <?php endif; ?>
+    </div>
 
 
 

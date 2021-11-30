@@ -33,7 +33,7 @@ include_once './model/inc/dashboard_header.php';
 
             <?php
 
-            $select_sql = "SELECT * FROM student_assignments ";
+            $select_sql = "SELECT * FROM student_assignments ORDER BY time_posted DESC";
             $sql_result = $conn->query($select_sql);
             ?>
             <div class="table-responsive">
@@ -43,6 +43,7 @@ include_once './model/inc/dashboard_header.php';
                             <th scope="col">Subject</th>
                             <th scope="col">Target Class</th>
                             <th scope="col">Assignment</th>
+                            <th scope="col">Date Posted</th>
                             <th scope="col">Instructions</th>
                             <th scope="col">Download Status</th>
                             <th colspan="2" scope="col">Action</th>
@@ -56,6 +57,7 @@ include_once './model/inc/dashboard_header.php';
                                 <td><?php echo $row['subject'] ?></td>
                                 <td><?php echo $row['student_class'] ?></td>
                                 <td><a href="<?php echo $row['file_path'] ?>" target="_blank"><?php echo $row['assignment'] ?></a></td>
+                                <td><?php echo $row['date_posted'] ?></td>
                                 <td><?php echo $row['instructions'] ?></td>
                                 <td><?php echo $row['downloads'] ?></td>
 

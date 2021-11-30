@@ -29,7 +29,7 @@
                 <div class="text-center pl-4 ">
                     <h1>Blessed Children Academy</h1>
                     <p class="head-text">18 Amaehule Street, Eliogbolo, Rumuokoro | 1 kono Close Rumuodomaya, Port Harcourt</p>
-                    <p class="head-text">07061666648 | 08179484262 |adminbca@blessedchildrenacademy.com</p>
+                    <p class="head-text">07061666648 | 08179484262 |academyblessedhigh@gmail.com</p>
 
                 </div>
             </nav>

@@ -44,6 +44,7 @@ if (isset($_POST['save_exam_scores'])) {
             echo "<div class= 'alert-warning' id='error'>";
             echo $errors;
             echo "</div> ";
+            exit();
         } else {
             $sql = "INSERT INTO students_score (id, student_name, admission_no, student_class, class_arm, subject, T1, T2, 
             project, assignment, exam , total, session, term) 
@@ -140,6 +141,7 @@ if (isset($_POST['save_mock'])) {
         $term = test_input($_POST['term']);
         $a_session = test_input($_POST['a_session']);
         $student_class = test_input($_POST['student_class']);
+        $class_arm = test_input($_POST['arm']);
         $student_name = test_input($_POST['student_name'][$i]);
         $score = test_input($_POST['score'][$i]);
         $subject = test_input($_POST['subject']);
@@ -164,9 +166,9 @@ if (isset($_POST['save_mock'])) {
             echo "</div> ";
         } else {
             $sql = "INSERT INTO mock_scores
-    (id, admission_no, student_name,  student_class, subject_title, score, session, term, mock_no)
+    (id, admission_no, student_name,  student_class, class_arm, subject_title, score, session, term, mock_no)
     VALUES
-    ('','$admission_no','$student_name' , '$student_class' ,'$subject' ,$score, '$a_session' , '$term', '$mock_no')";
+    ('','$admission_no','$student_name' , '$student_class' , '$class_arm', '$subject' ,$score, '$a_session' , '$term', '$mock_no')";
 
             if ($conn->query($sql) === TRUE) {
                 $errors = "Mock Scores for " . $subject . " for " . $student_name . " with " . $admission_no . " for " . $term . " - " . $mock_no . " succesfully uploaded!";
@@ -356,4 +358,40 @@ if (isset($_POST['delete_ex_score'])) {
             }
         }
     }
+}
+
+// teachers scores preview
+
+if (isset($_POST['scores_view_teacher'])) {
+    $class = test_input($_POST['student_class']);
+    $arm =  test_input($_POST['arm']);
+    $subject = test_input($_POST['subject']);
+    $term =  test_input($_POST['term']);
+    $academic_session = test_input($_POST['aSession']);
+
+    $_SESSION['arm'] = $arm;
+    $_SESSION['class'] = $class;
+    $_SESSION['term'] = $term;
+    $_SESSION['subject'] = $subject;
+    $_SESSION['aSession'] = $academic_session;
+    header("location:scores_view_teacher.php");
+    exit();
+}
+
+//mock view
+
+if (isset($_POST['mock_scores_teacher'])) {
+    $class = test_input($_POST['student_class']);
+    $arm =  test_input($_POST['arm']);
+    $subject = test_input($_POST['subject']);
+    $term =  test_input($_POST['term']);
+    $academic_session = test_input($_POST['aSession']);
+
+    $_SESSION['arm'] = $arm;
+    $_SESSION['class'] = $class;
+    $_SESSION['term'] = $term;
+    $_SESSION['subject'] = $subject;
+    $_SESSION['aSession'] = $academic_session;
+    header("location:mock_scores_display_teacher.php");
+    exit();
 }

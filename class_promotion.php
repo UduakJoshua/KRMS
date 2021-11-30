@@ -1,11 +1,8 @@
 <?php
-require "./controller/subject_logic.php";
-
+require "./controller/dbase_conn.php";
 $title = "BCA | Class Promotion";
 include_once './model/inc/dashboard_header.php';
 
-$query = "SELECT * FROM student order by class_name";
-$result = $conn->query($query);
 
 ?>
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
@@ -25,6 +22,9 @@ $result = $conn->query($query);
         <div class="container-fluid">
             <?php
             include_once "./controller/class_promotion_logic.php";
+
+            $query = "SELECT * FROM student order by class_name";
+            $result = $conn->query($query);
             ?>
 
             <div class="card-header bg-danger text-white">
@@ -67,7 +67,7 @@ $result = $conn->query($query);
 
                                             <?php
                                             require_once './controller/class_logic.php';
-                                            $select_sql = "SELECT * FROM classes WHERE className = 'Alumni'";
+                                            $select_sql = "SELECT * FROM classes WHERE `className` = 'Grade One'";
                                             $sql_result = $conn->query($select_sql);
                                             ?>
                                             <label for="student_class">Choose a class:</label>
@@ -83,10 +83,10 @@ $result = $conn->query($query);
                                     </td>
                                     <td>
                                         <div class="form-group">
-                                            <label for="arm">Choose arm:</label>
+                                            <label for="class">Arm</label>
                                             <select name="arm" id="arm" class="form-control ">
 
-                                                <option value="Art"> Art </option>
+                                                <option value="Love"> Love</option>
 
                                             </select>
                                         </div>

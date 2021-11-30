@@ -114,10 +114,8 @@ include_once './model/inc/dashboard_header.php';
                             <thead class="thead-dark ">
                                 <tr>
                                     <th scope="col">Subject</th>
-                                    <th scope="col">T1<br> (10%)</th>
+                                    <th scope="col">T1<br> (20%)</th>
                                     <th scope="col">T2<br> (20%)</th>
-                                    <th scope="col">Project<br> (10%)</th>
-                                    <th scope="col">Assignment<br> (20%)</th>
                                     <th scope="col">Exam<br> (40%)</th>
                                     <th scope="col">Total<br> (100%)</th>
                                     <th scope="col">Grade</th>
@@ -136,8 +134,6 @@ include_once './model/inc/dashboard_header.php';
 
                                     $T1 = $row['T1'];
                                     $T2 = $row['T2'];
-                                    $project = $row['project'];
-                                    $assignment = $row['assignment'];
                                     $exam = $row['exam'];
                                     $total = $row['total'];
                                     $sp = $row['rank'];
@@ -149,11 +145,8 @@ include_once './model/inc/dashboard_header.php';
                                         <td><strong><?php echo $row['subject'] ?></strong></td>
                                         <td class="td_center"><?php echo $T1 ?></td>
                                         <td class="td_center"><?php echo $T2 ?></td>
-                                        <td class="td_center"><?php echo $project ?></td>
-                                        <td class="td_center"><?php echo $assignment ?></td>
                                         <td class="td_center"><?php echo $exam ?></td>
                                         <td class="td_center"><?php echo $total ?></td>
-
                                         <td class="td_center">
                                             <?php
                                             if ($total >= 80) {
@@ -341,7 +334,7 @@ include_once './model/inc/dashboard_header.php';
 
                     $class = $_SESSION['class'];
 
-                    $select_sql = "SELECT COUNT(subject) AS no_subjects, SUM(T1+T2+project+assignment+exam) AS overall,  (SELECT no_of_subjects FROM no_of_subjects WHERE class_name = '$class') subject_total   FROM students_score WHERE admission_no='$admission_no' && term= '1st Term'";
+                    $select_sql = "SELECT COUNT(subject) AS no_subjects, SUM(T1+T2+exam) AS overall,  (SELECT no_of_subjects FROM no_of_subjects WHERE class_name = '$class') subject_total , student_name   FROM students_score WHERE admission_no='$admission_no' && term= '1st Term'";
                     $sql_result = $conn->query($select_sql);
 
                     ?>
@@ -366,6 +359,9 @@ include_once './model/inc/dashboard_header.php';
                                 $total_mark = $no_subject * 100;
                                 $name = $row['student_name'];
 
+
+
+
                             ?>
                                 <tr>
                                     <td>Overall Total Score</td>
@@ -389,29 +385,33 @@ include_once './model/inc/dashboard_header.php';
                                     <td>
                                         <?php
                                         if ($average_score  >= 80) {
-                                            echo "Excellent Performance, Keep the fire burning";
+                                            echo "Superlative Performance, Keep Soaring Higher!";
                                         } elseif ($average_score  >= 60) {
-                                            echo "Great Performance, do not relent!";
+                                            echo "Brilliant Output, Keep the Fire Burning!";
                                         } elseif ($average_score >= 50) {
-                                            echo "An Average Performance. Work harder next term!";
+                                            echo "Nice Result, Keep working hard!";
+                                        } elseif ($average_score >= 40) {
+                                            echo "Fairly average output, More effort is highly needed!";
                                         } else {
-                                            echo "Poor Performance, put in more effort and don't quit!";
+                                            echo "Fair Performance, put in more effort and don't quit!";
                                         }
                                         ?>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Principal's Comment</td>
+                                    <td>Head Teacher's Comment</td>
                                     <td>
                                         <?php
                                         if ($average_score  >= 80) {
-                                            echo "Excellent Performance, Keep the fire burning";
+                                            echo "Bravo $name!, Keep the flag flying.";
                                         } elseif ($average_score  >= 60) {
-                                            echo "Great Performance, do not relent!";
+                                            echo "Beautiful performance $name!, Keep it up!";
                                         } elseif ($average_score >= 50) {
-                                            echo "An Average Performance. Work harder!";
+                                            echo "Good output $name, Keep pushing forward and strive to do better.";
+                                        } elseif ($average_score >= 40) {
+                                            echo "Don't relent $name, Keep pushing forward.";
                                         } else {
-                                            echo "Poor Performance, put in more effort and don't quit!";
+                                            echo "This is a weak performance $name, put in more effort next term, I believe in you!";
                                         }
                                         ?>
                                     </td>
@@ -506,6 +506,7 @@ include_once './model/inc/dashboard_header.php';
 
                     </tbody>
                     <tfoot class="thead-dark ">
+
                         <tr>
                             <th colspan="3" style="padding: 10px;">
                                 <p style="font-size: 12px; text-align:left ; margin-bottom:2px;">CAT : Continuous Assessment Test</p>

@@ -3,7 +3,7 @@ require "./controller/score_upload_init.php";
 require "./controller/student_logic.php";
 require "./controller/psychomotor_logic.php";
 $title = "BCA | Psychomotor Input";
-include_once './model/inc/dashboard_header.php';
+include_once './model/inc/staff_dashboard_header.php';
 ?>
 
 <!-- main content-->
@@ -13,7 +13,7 @@ include_once './model/inc/dashboard_header.php';
         <div class=" mb-2 mb-md-0">
             <div class="mr-2">
 
-                <p>Welcome <?php echo $_SESSION['username']; ?></p>
+                <p><?php echo $_SESSION['staff-username']; ?></p>
             </div>
 
         </div>
@@ -82,7 +82,7 @@ include_once './model/inc/dashboard_header.php';
 
                                             <div class="col-md-2 mt-1">
                                                 <?php if ($row['approval'] != " "  && $row['approval'] != 1) : ?>
-                                                    <a href="psychomotor.php?display=<?php echo $row['admissionNo']; ?>"><button type="button" class="btn btn-sm btn-warning" name="display_result">Approve Now</button></a>
+                                                    <a href="psychomotor_teacher.php?display=<?php echo $row['admissionNo']; ?>"><button type="button" class="btn btn-sm btn-warning" name="display_result">Approve Now</button></a>
                                                 <?php else : ?>
                                                     <button type="button" disabled class="btn btn-sm btn-success">Approved</button>
                                                 <?php endif; ?>

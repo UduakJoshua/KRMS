@@ -297,59 +297,64 @@ if (!isset($_SESSION['st-user_id'])) {
         <div class="row">
             <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
                 <div class="sidebar-sticky pt-3">
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="student_dashboard.php">
-                                <span data-feather="home"></span>
-                                Dashboard <span class="sr-only">(current)</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="student_profile.php">
-                                <span data-feather="user"></span>
-                                Student Profile
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="mock_result_display.php">
-                                <span data-feather="file"></span>
-                                Mock Result
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="student_result_display.php">
-                                <span data-feather="file"></span>
-                                Midterm Result
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <?php $admin_no = $_SESSION['st-user_id'];
-                            $sql = "SELECT * FROM student WHERE id = '$admin_no' ";
-                            $result = $conn->query($sql);
-                            while ($row = mysqli_fetch_assoc($result)) : ?>
+                    <?php $admin_no = $_SESSION['st-user_id'];
+                    $sql = "SELECT * FROM student WHERE id = '$admin_no' ";
+                    $result = $conn->query($sql);
+                    while ($row = mysqli_fetch_assoc($result)) : ?>
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="student_dashboard.php">
+                                    <span data-feather="home"></span>
+                                    Dashboard <span class="sr-only">(current)</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="student_profile.php">
+                                    <span data-feather="user"></span>
+                                    Student Profile
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <?php if ($row['class_name'] == "JSS Three" || $row['class_name'] == "SSS Three") :
+                                ?>
+                                    <a class="nav-link" href="mock_result_display.php">
+                                        <span data-feather="file"></span>
+                                        Mock Result
+                                    </a>
+                                <?php endif; ?>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="student_result_display.php">
+                                    <span data-feather="file"></span>
+                                    Midterm Result
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+
                                 <?php if ($row['section'] == "High") :
                                 ?>
-                                    <a class="nav-link" href="student_exam_result.php" class="text-decoration-none"> Examination Result</a>
+                                    <a class="nav-link" href="student_exam_result.php" class="text-decoration-none"><span data-feather="file"></span> Examination Result</a>
                                 <?php else : ?>
 
-                                    <a class="nav-link" href="student_exam_result_basic.php" class="text-decoration-none">Examination Result</a>
+                                    <a class="nav-link" href="student_exam_result_basic.php" class="text-decoration-none"><span data-feather="file"></span>Examination Result</a>
                                 <?php endif; ?>
                             <?php endwhile ?>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="e_learning_students.php">
-                                <span data-feather="monitor"></span>
-                                E-Learning
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="cbt.php">
-                                <span data-feather="edit"></span>
-                                CBT Practice
-                            </a>
-                        </li>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="e_learning_students.php">
+                                    <span data-feather="monitor"></span>
+                                    E-Learning
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="cbt.php">
+                                    <span data-feather="edit"></span>
+                                    CBT Practice
+                                </a>
+                            </li>
 
-                    </ul>
+                        </ul>
 
                 </div>
             </nav>

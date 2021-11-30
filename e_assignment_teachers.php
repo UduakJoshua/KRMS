@@ -29,7 +29,7 @@ include_once './model/inc/staff_dashboard_header.php';
                 <li>Select the Subject, Class and Term to give Assignment</li>
                 <li>Type in the instructions on how to do the assignment and the due date</li>
                 <li>Set the Exercise no e.g Ex 1, Ex 2 ...</li>
-                <li>Attach the assignment ( PDF or JPG Format Only)</li>
+                <li>Attach the assignment ( PDF, DOC, PNG or JPG Format Only)</li>
                 <li>Click the Set Assignment Button</li>
             </ul>
         </div>
@@ -57,7 +57,7 @@ include_once './model/inc/staff_dashboard_header.php';
                                 <label for="subject">Subject</label>
                                 <?php
                                 require_once './controller/subject_logic.php';
-                                $select_sql = "SELECT * FROM subject";
+                                $select_sql = "SELECT * FROM subject ORDER BY subject_title ASC";
                                 $sql_result = $conn->query($select_sql);
                                 ?>
                                 <select name="subject" id="subject" class="form-control " value="<?php echo $row['subject_title'] ?>">
@@ -70,12 +70,12 @@ include_once './model/inc/staff_dashboard_header.php';
                             </div>
                         </div>
 
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label for="student_class">Class</label>
                                 <?php
                                 require_once './controller/class_logic.php';
-                                $select_sql = "SELECT * FROM classes ";
+                                $select_sql = "SELECT * FROM classes ORDER BY className ASC";
                                 $sql_result = $conn->query($select_sql);
                                 ?>
                                 <select name="student_class" id="student_class" class="form-control " value>
@@ -88,7 +88,7 @@ include_once './model/inc/staff_dashboard_header.php';
                             </div>
                         </div>
 
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label for="term">Term:</label>
                                 <select name="term" id="term" class="form-control " value>
@@ -111,7 +111,7 @@ include_once './model/inc/staff_dashboard_header.php';
 
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-2">
 
                             <div class="form-group">
                                 <label for="assignment_no">Exercise No:</label>
@@ -127,7 +127,13 @@ include_once './model/inc/staff_dashboard_header.php';
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="assignment_no">Date Posted:</label>
+                                <input type="date" name="ass_date" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
 
                             <div class="form-group">
                                 <label for="file">Select Assignment</label>

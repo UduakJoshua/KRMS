@@ -2,7 +2,7 @@
 require "./controller/score_upload_init.php";
 require "./controller/student_logic.php";
 $title = "BCA | Mock Input";
-include_once './model/inc/dashboard_header.php';
+include_once './model/inc/staff_dashboard_header.php';
 
 ?>
 
@@ -13,7 +13,7 @@ include_once './model/inc/dashboard_header.php';
         <div class=" mb-2 mb-md-0">
             <div class="mr-2">
 
-                <p style="text-transform:capitalize;"> <?php echo $_SESSION['username']; ?></p>
+                <p>Welcome <?php echo $_SESSION['staff-username']; ?></p>
             </div>
 
         </div>
@@ -21,6 +21,7 @@ include_once './model/inc/dashboard_header.php';
 
 
     <section>
+
         <?php
         include_once 'controller/score_upload_logic.php';
 
@@ -38,7 +39,7 @@ include_once './model/inc/dashboard_header.php';
                     <div class="card-header">
                         <h6>Input Student's Mock Scores</h6>
                     </div>
-                    <form action="mock_admin_input.php" method="POST">
+                    <form action="mock_input_teacher.php" method="POST">
                         <div class="card-body input-group input-group-sm">
 
 
@@ -58,7 +59,7 @@ include_once './model/inc/dashboard_header.php';
 
 
                             // create a select query
-                            $sql = "SELECT * FROM student WHERE classArm =  '$c_arm' && class_name = '$class'";
+                            $sql = "SELECT * FROM student WHERE classArm =  '$c_arm' && class_name = '$class' ORDER BY surname ASC";
                             $result = mysqli_query($conn, $sql);
 
                             if (mysqli_num_rows($result) > 0) : ?>

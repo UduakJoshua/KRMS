@@ -206,6 +206,7 @@ if (isset($_POST['t_assignment'])) {
     $assignment_no = test_input($_POST['assignment_no']);
     $instruction = test_input($_POST['instruction']);
     $term = test_input($_POST['term']);
+    $date_posted = test_input($_POST['ass_date']);
     $student_class = test_input($_POST['student_class']);
     $filename = $_FILES['file']['name'];
     $size = $_FILES['file']['size'];
@@ -214,7 +215,7 @@ if (isset($_POST['t_assignment'])) {
     $fileType = $_FILES['file']['type'];
     $fileExt = explode('.', $filename);
     $fileActualExt = strtolower(end($fileExt));
-    $allowedExt = array('pdf', 'jpg', 'doc', 'png', 'jpeg');
+    $allowedExt = array('pdf', 'jpg', 'docx', 'doc', 'png', 'jpeg');
     $target = "assets/assignment/" . $filename;
 
     // $classes = test_input($_POST['classes']);
@@ -229,12 +230,12 @@ if (isset($_POST['t_assignment'])) {
                 if (move_uploaded_file($file, $target) === TRUE) {
 
                     $sql = "INSERT INTO student_assignments 
-                        (id, subject, assignment_no, student_class, assignment, file_path, term, instructions, downloads) 
+                        (id, subject, assignment_no, student_class, date_posted, assignment, file_path, term, instructions, downloads) 
                             VALUES 
-                            ('', '$subject', '$assignment_no','$student_class','$filename', ' $target', '$term',  '$instruction', 0)";
+                            ('', '$subject', '$assignment_no','$student_class','$date_posted', '$filename', ' $target', '$term',  '$instruction', 0)";
 
                     if ($conn->query($sql) === TRUE) {
-                        $_SESSION['message'] = "Assignment Successfully Posted!";
+                        $_SESSION['message'] = "$subject Assignment Successfully Posted for $student_class !";
                         $_SESSION['msg_type'] = "success";
                         header("location:e_ass_disp_teachers.php");
                         exit();

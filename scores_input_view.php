@@ -1,5 +1,5 @@
 <?php
-require_once 'controller/score_upload_logic_test.php';
+require_once 'controller/score_upload_logic.php';
 $title = "BCA | Uploaded Scores";
 include_once './model/inc/dashboard_header.php';
 

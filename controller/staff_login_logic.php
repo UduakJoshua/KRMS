@@ -48,7 +48,7 @@ if (isset($_POST['login'])) {
                 $_SESSION['staff-username'] = $user['surname'] . " " . $user['firstname'];
                 $_SESSION['staff_id'] = $user['staff_id'];
                 $_SESSION['role'] = $user['role'];
-
+                $_SESSION['section'] = $user['section'];
                 header('Location:staff_dashboard.php?success');
             }
         } else {
@@ -65,6 +65,8 @@ if (isset($_POST['login'])) {
         unset($_SESSION['staff-user_id']);
         unset($_SESSION['staff-username']);
         unset($_SESSION['staff_id']);
+        unset($_SESSION['role']);
+        unset($_SESSION['section']);
 
         header('Location:index.php');
         exit();

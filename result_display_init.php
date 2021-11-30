@@ -68,7 +68,7 @@ include_once './model/inc/dashboard_header.php';
                                             </div>
 
                                             <div class="col-md-2 form-group">
-                                                <label for="class">Arm</label>
+                                                <label for="arm">Arm</label>
                                                 <select name="arm" id="arm" class="form-control ">
 
                                                     <option value="Faithfulness"> Faithfulness</option>
@@ -123,7 +123,7 @@ include_once './model/inc/dashboard_header.php';
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="card-footer">
-                                        <button type="submit" class="btn btn-primary" name="initialize">Initialize</button>
+                                        <button type="submit" class="btn btn-primary" name="initializeR">Initialize</button>
                                     </div>
                                 </div>
                             </div>
@@ -136,102 +136,11 @@ include_once './model/inc/dashboard_header.php';
             </div>
 
         </section>
-        <section>
 
-            <?php
-            include_once 'controller/score_upload_logic.php';
+        <hr>
 
-            if (isset($_SESSION['upload'])) : ?>
-                <div class="alert alert-<?= $_SESSION['msg_type'] ?>">
-                    <li><?php echo $_SESSION['upload'] ?></li>
-                    <?php unset($_SESSION['upload']);
-                    ?>
-                </div>
-            <?php endif; ?>
+        <?php
 
-            <div class="row justify-content-center">
-                <div class="col-md-12">
+        include_once './model/inc/dashboard_footer.php';
 
-
-                    <div class="card">
-                        <!--card header begins here-->
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="card-header">
-                                    <h5>Display Result</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- card body begins here-->
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="card-body">
-                                    <table class="table table-condensed table-responsive ">
-                                        <thead class="thead-dark ">
-                                            <tr style="font-size: 12px;">
-                                                <th scope="col">Select</th>
-                                                <th scope="col">Name</th>
-                                                <th scope="col">Admission No</th>
-                                                <th scope="col">Class</th>
-                                                <th scope="col">Session</th>
-                                                <th scope="col">Term</th>
-                                                <th scope="col">Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="ml-1 pt-2" style="font-size: 10px;">
-                                            <?php
-
-
-
-                                            $c_arm = $_SESSION['arm'];
-                                            $class = $_SESSION['class'];
-                                            $term = $_SESSION['term'];
-                                            $aSession = $_SESSION['aSession'];
-
-                                            //query
-                                            $sql = "SELECT * FROM student WHERE classArm =  '$c_arm' && class_name = '$class'";
-                                            $result = $conn->query($sql);
-                                            ?>
-                                            <?php
-                                            while ($row = mysqli_fetch_assoc($result)) : ?>
-                                                <tr>
-                                                    <td><input type="checkbox" name="chk[]" value="<?php echo $row['admissionNo'] ?>" /></td>
-                                                    <td><input type="text" name="student_name[]" value="<?php echo $row['surname'] . " " . $row['firstname'] ?>" readonly class="form-control" size="50"></td>
-                                                    <td><input type="text" name="admin_no" value="<?php echo $row['admissionNo']  ?>" readonly class="form-control" size="30"></td>
-                                                    <td><input type="text" name="student_class" value="<?php echo $row['class_name'] . " " . $row['classArm'] ?>" readonly class="form-control" size="30"></td>
-                                                    <td><input type="text" name="a_session" value="<?php echo $aSession ?>" readonly class="form-control" size="30"></td>
-                                                    <td><input type="text" name="term" value="<?php echo $term ?>" readonly class="form-control" size="30"></td>
-                                                    <td><a href="result_display.php?display=<?php echo $row['admissionNo']; ?>"><button type="button" class="btn btn-primary" name="display_result">Display</button></a></td>
-                                                </tr>
-                                            <?php endwhile; ?>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-
-                        </div>
-                        <!--card footer begins here-->
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="card-footer">
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-                </div>
-
-            </div>
-
-        </section>
-    </section>
-    <hr>
-
-    <?php
-
-    include_once './model/inc/dashboard_footer.php';
-
-    ?>
+        ?>

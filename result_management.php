@@ -22,42 +22,12 @@ include_once './model/inc/dashboard_header.php';
     <h5 style="font-weight:600; font-size:30px;"> Welcome <?php echo $_SESSION['username']; ?></h5>
     <p>How would like to get started?</p>
 
-
-    <!--<div class="row">
-
-
-
-      <div class="col-md-6">
-        <a href="result_input.php"><button class="btn btn-primary btn-block mt-4">Upload Midterm Result</button></a>
-
-      </div>-->
-
-    <!--col 2 
-    <div class="col-md-6">
-      <a href="exam_upload.php"><button class="btn btn-warning btn-block mt-4"> Upload Examination Result</button></a>
-
-    </div>
-    </div>
-    <div class="row">
-
-
-
-      <div class="col-md-6">
-        <a href="#"><button class="btn btn-primary btn-block mt-4">Multiple Upload For Midterm Result</button></a>
-
-      </div>
-
-      <!--col 2 
-      <div class="col-md-6">
-        <a href="multipleUpload.php"><button class="btn btn-warning btn-block mt-4"> Multiple Upload Examination Result</button></a>
-
-      </div>
-    </div>-->
     <div class="row">
       <!--col 1-->
-      <div class="col-md-3 icon_div" style="background-color: #30CDCF;">
+
+      <div class="col-md-2 icon_div" style="background-color: #30CDCF;">
         <div>
-          <span class="fa fa-pencil icon" aria-hidden="true"></span>
+          <span class="fa fa-pencil-square-o icon" aria-hidden="true"></span>
         </div>
         <div>
           <a href="mid_term_score.php" class="text-decoration-none icon-a">
@@ -65,31 +35,9 @@ include_once './model/inc/dashboard_header.php';
           </a>
         </div>
       </div>
-
-      <!--col 2 -->
-      <div class="col-md-3 icon_div" style="background-color: #CF8230;">
+      <div class="col-md-2 icon_div" style="background-color: #196F3D;">
         <div>
-          <span class="fa fa-graduation-cap icon" aria-hidden="true"></span>
-        </div>
-        <div>
-          <a href="midterm_display_init.php" class="text-decoration-none icon-a">
-            <p class="text-center text-white">Print Mid-Term Result</p>
-          </a>
-        </div>
-      </div>
-      <div class="col-md-3 icon_div" style="background-color: #cf3230;">
-        <div>
-          <span class="fa fa-users icon" aria-hidden="true"></span>
-        </div>
-        <div>
-          <a href="mock_admin_init_dis.php" class="text-decoration-none icon-a">
-            <p class="text-center text-white">Print Mock Result</p>
-          </a>
-        </div>
-      </div>
-      <div class="col-md-2 icon_div" style="background-color: #cf3230;">
-        <div>
-          <span class="fa fa-users icon" aria-hidden="true"></span>
+          <span class="fa fa-eye icon" aria-hidden="true"></span>
         </div>
         <div>
           <a href="#" class="text-decoration-none icon-a">
@@ -97,13 +45,40 @@ include_once './model/inc/dashboard_header.php';
           </a>
         </div>
       </div>
+      <!--col 2 -->
+      <div class="col-md-2 icon_div" style="background-color: #E74C3C ;">
+        <div>
+          <span class="fa fa-print icon" aria-hidden="true"></span>
+        </div>
+        <div>
+          <a href="midterm_display_init.php" class="text-decoration-none icon-a">
+            <p class="text-center text-white">Print Mid-Term Result</p>
+          </a>
+        </div>
+      </div>
+
+      <!--col 3 -->
+      <div class="col-md-2 icon_div" style="background-color: #717D7E;">
+        <div>
+          <span class="fa fa-print icon" aria-hidden="true"></span>
+        </div>
+        <div>
+          <a href="mock_admin_init_dis.php" class="text-decoration-none icon-a">
+            <p class="text-center text-white">Print Mock Result</p>
+          </a>
+
+        </div>
+      </div>
+      <!--col 4 -->
+
     </div>
+
     <!--row 2 begins here-->
     <div class="row">
       <!--col 2-->
-      <div class="col-md-3 icon_div" style="background-color: #3045eF;">
+      <div class="col-md-2 icon_div" style="background-color: #1B2631;">
         <div>
-          <span class="fa fa-pencil icon" aria-hidden="true"></span>
+          <span class="fa fa-pencil-square-o icon" aria-hidden="true"></span>
         </div>
         <div>
           <a href="batch_result_input.php" class="text-decoration-none icon-a">
@@ -111,30 +86,8 @@ include_once './model/inc/dashboard_header.php';
           </a>
         </div>
       </div>
-      <!--col 4-->
-      <div class="col-md-3 icon_div" style="background-color: #cf3230;">
-        <div>
-          <span class="fa fa-users icon" aria-hidden="true"></span>
-        </div>
-        <div>
-          <a href="result_display_init.php" class="text-decoration-none icon-a">
-            <p class="text-center text-white">Print Exam Result</p>
-          </a>
-        </div>
-      </div>
 
-      <div class="col-md-3 icon_div" style="background-color: #30CDCF;">
-        <div>
-          <span class="fa fa-pencil icon" aria-hidden="true"></span>
-        </div>
-        <div>
-          <a href="mock_admin.php" class="text-decoration-none icon-a">
-            <p class="text-center text-white">Input Mock Scores</p>
-          </a>
-        </div>
-      </div>
-
-      <div class="col-md-2 icon_div" style="background-color: #cf3230;">
+      <div class="col-md-2 icon_div" style="background-color: #633974;">
         <div>
           <span class="fa fa-eye icon" aria-hidden="true"></span>
         </div>
@@ -144,6 +97,54 @@ include_once './model/inc/dashboard_header.php';
           </a>
         </div>
       </div>
+
+      <!--col 4-->
+      <div class="col-md-2 icon_div" style="background-color: #F4D03F ;">
+        <div>
+          <span class="fa fa-print icon" aria-hidden="true"></span>
+        </div>
+        <div>
+          <a href="result_display_init.php" class="text-decoration-none icon-a">
+            <p class="text-center text-white">Print Exam Result</p>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-md-2 icon_div" style="background-color: #48C9B0;">
+        <div>
+          <span class="fa fa-pencil-square-o icon" aria-hidden="true"></span>
+        </div>
+        <div>
+          <a href="mock_admin.php" class="text-decoration-none icon-a">
+            <p class="text-center text-white">Input Mock Scores</p>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-2 icon_div" style="background-color: #48C930;">
+        <div>
+          <span class="fa fa-eye icon" aria-hidden="true"></span>
+        </div>
+        <div>
+          <a href="mock_scores_init.php" class="text-decoration-none icon-a">
+            <p class="text-center text-white">View Mock Scores</p>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-md-2 icon_div" style="background-color: #48C9B0;">
+        <div>
+          <span class="fa fa-user-circle-o icon" aria-hidden="true"></span>
+        </div>
+        <div>
+          <a href="students_psychomotor_init.php" class="text-decoration-none icon-a">
+            <p class="text-center text-white">Add Psychomotor Rating</p>
+          </a>
+        </div>
+      </div>
+    </div>
+
     </div>
 
   </section>

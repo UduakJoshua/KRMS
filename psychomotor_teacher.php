@@ -2,7 +2,7 @@
 require './controller/dbase_conn.php';
 require './controller/psychomotor_logic.php';
 $title = "BCA | Student's Domain ";
-include_once './model/inc/dashboard_header.php';
+include_once './model/inc/staff_dashboard_header.php';
 
 ?>
 
@@ -12,7 +12,7 @@ include_once './model/inc/dashboard_header.php';
         <div class=" mb-2 mb-md-0">
             <div class="mr-2">
 
-                <p>Welcome <?php echo $_SESSION['username']; ?></p>
+                <p><?php echo $_SESSION['staff-username']; ?></p>
             </div>
 
         </div>
@@ -160,14 +160,11 @@ include_once './model/inc/dashboard_header.php';
                         </div>
                         </div>
 
-
-
-
                         <!-- card footer to submit form-->
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary" name="psychomotor">Save Psychomotor</button>
+                                    <button type="submit" class="btn btn-primary" name="teacher_psychomotor">Save Psychomotor</button>
                                 </div>
                             </div>
                         </div>

@@ -1,4 +1,5 @@
 <?php
+
 if (isset($_GET['display_result'])) {
     $admission_no = $_GET['admissio'];
     $name = $_GET['student_name'];

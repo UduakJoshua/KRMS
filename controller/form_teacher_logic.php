@@ -13,8 +13,9 @@ if (isset($_POST['addTeacher'])) {
     $teachers_name = test_input($_POST['staff_name']);
     $class_assigned = test_input($_POST['student_class']);
     $arm_assigned = test_input($_POST['arm']);
+    $staff_id = test_input($_POST['staff_id']);
 
-    $sql = "INSERT INTO form_teachers (teachers_name, class, arm) VALUES (?,?,?)";
+    $sql = "INSERT INTO form_teachers ( teachers_name, class, arm) VALUES (?,?,?)";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param('sss',  $teachers_name, $class_assigned, $arm_assigned);
 

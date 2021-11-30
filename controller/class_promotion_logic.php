@@ -8,11 +8,11 @@ if (isset($_POST['promote'])) {
     if ((isset($_POST['chk']))) {
         foreach ($_POST['chk'] as $check) {
             $class_name = $_POST['student_class'];
-            $class_arm = $_POST['arm'];
-            $sql = "UPDATE student SET class_name = '$class_name', classArm = '$class_arm' WHERE id=$check";
+            //$class_arm = $_POST['arm'];
+            $sql = "UPDATE student SET class_name = '$class_name' WHERE id=$check";
             if (mysqli_query($conn, $sql)) {
 
-                $errors = "Student with the id $check has been Promoted Successfully to $class_name $class_arm ";
+                $errors = "Student with the id $check has been Promoted Successfully to $class_name ";
                 echo "<div class= 'alert-success' id='error'>";
                 echo $errors;
 

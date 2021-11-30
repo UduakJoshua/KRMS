@@ -1,5 +1,5 @@
 <?php
-require "./controller/score_upload_logic_test.php";
+require "./controller/score_upload_logic.php";
 $title = "BCA | Manage Exam Scores";
 include_once './model/inc/dashboard_header.php';
 
