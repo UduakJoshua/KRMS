@@ -1,5 +1,5 @@
 <?php
-$pass = "supervisor";
+$pass = "h/0429";
 $password = password_hash($pass, PASSWORD_DEFAULT);
 echo $password;
 ?>

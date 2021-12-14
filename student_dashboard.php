@@ -54,12 +54,19 @@ include_once './model/inc/student_dash_header.php';
       <!--col 2  and logic to check student section-->
       <div class="col-md-4">
 
-        <?php if ($row['section'] == "High") :
-        ?>
+        <?php if ($row['section'] == "High" && $row['approval'] == 1) : ?>
           <a href="student_exam_result.php" class="text-decoration-none"><button class="btn btn-secondary btn-block mt-4"> Check Examination Result</button></a>
-        <?php else : ?>
 
-          <a href="student_exam_result_basic.php" class="text-decoration-none"><button class="btn btn-success btn-block mt-4"> Check Examination Result</button></a>
+        <?php elseif ($row['section'] == "Basic" && $row['approval'] == 1) : ?>
+
+          <a href="student_exam_result_basic.php" class="text-decoration-none"><button class="btn btn-primary btn-block mt-4"> Check Examination Result</button></a>
+
+        <?php elseif ($row['section'] == "Nursery" && $row['approval'] == 1) : ?>
+
+          <a href="student_exam_result_nur.php" class="text-decoration-none"><button class="btn btn-success btn-block mt-4"> Check Examination Result</button></a>
+
+        <?php else : ?>
+          <a href="exam_notification.php" class="text-decoration-none"><button class="btn btn-dark btn-block mt-4"> Check Examination Result</button></a>
         <?php endif; ?>
       </div>
     </div>

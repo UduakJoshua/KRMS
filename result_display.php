@@ -8,6 +8,11 @@ require './controller/score_upload_logic.php';
 require './controller/psychomotor_logic.php';
 $title = "BCA | Result View";
 include_once './model/inc/dashboard_header.php';
+$c_arm = $_SESSION['arm'];
+$class = $_SESSION['class'];
+$term = $_SESSION['term'];
+$aSession = $_SESSION['aSession'];
+
 
 ?>
 
@@ -45,7 +50,7 @@ include_once './model/inc/dashboard_header.php';
                 </div>
                 <div class="text-right pl-3 head2">
                     <h1 class="title-head">Blessed Children Academy</h1>
-                    <p class="head-text"><span class="fa fa-home"></span> 18 Amaehule Street, Eliogbolo, Rumuokoro | 1 kono Close Rumuodomaya, Port Harcourt</p>
+                    <p class="head-text"><span class="fa fa-home"></span> 18 Amaehule Street, Eliogbolo, Rumuokoro | 1 Kono Close Rumuodomaya, Port Harcourt</p>
                     <p class="head-text"><span class="fa fa-phone"></span> 07061666648 | 08180810162 | 08037808626 | <span class="fa fa-whatsapp text-gray"> 08179484262</span></p>
                     <p class="head-text"><span class="fa fa-envelope"></span> academyblessedhigh@gmail.com | https://www.blessedchildrenacademy.com</p>
 
@@ -83,7 +88,7 @@ include_once './model/inc/dashboard_header.php';
                         <p><strong>Class:</strong> <?php echo $row['class_name'] . " " . $row['classArm']; ?> </p>
                         <p><strong>Academic Session: </strong> 2021/2022 <span> | </span> <span> <strong>Term:</strong> 1st Term</span> </p>
                         <p><strong>Sex:</strong> <?php echo $row['gender']; ?> </p>
-                        <p>Next Term Begins: </p>
+                        <p><strong>Next Term Begins:</strong> 3<sup>rd</sup> January, 2022. </p>
                     </div>
 
                     <div>
@@ -104,8 +109,10 @@ include_once './model/inc/dashboard_header.php';
                     if (isset($_GET['display'])) {
                         $admission_no = $_GET['display'];
 
+
                         $select_sql = "SELECT * FROM (SELECT *, rank() OVER ( partition by subject order by total desc ) 
-                AS 'rank'   FROM students_score WHERE  term= '1st Term') as temp WHERE admission_no= '$admission_no'";
+                AS 'rank'   FROM students_score WHERE  term= '$term' && student_class = '$class' && class_arm = '$c_arm' && 
+                session = '$aSession') as temp WHERE admission_no= '$admission_no'";
                         $sql_result = $conn->query($select_sql);
                     }
                     ?>
@@ -359,6 +366,7 @@ include_once './model/inc/dashboard_header.php';
                             <?php
 
                             while ($row = $sql_result->fetch_assoc()) :
+
                                 $overalTot = $row['overall'];
                                 $overasubject = $row['no_subjects'];
                                 $no_subject = $row['subject_total'];
@@ -395,7 +403,7 @@ include_once './model/inc/dashboard_header.php';
                                         } elseif ($average_score >= 50) {
                                             echo "An Average Performance. Work harder next term!";
                                         } else {
-                                            echo "Poor Performance, put in more effort and don't quit!";
+                                            echo "Poor Performance, put in more effort next term and don't quit!";
                                         }
                                         ?>
                                     </td>
@@ -405,13 +413,13 @@ include_once './model/inc/dashboard_header.php';
                                     <td>
                                         <?php
                                         if ($average_score  >= 80) {
-                                            echo "Excellent Performance, Keep the fire burning";
+                                            echo "Excellent Performance $name!, Keep the fire burning";
                                         } elseif ($average_score  >= 60) {
-                                            echo "Great Performance, do not relent!";
+                                            echo "Great Performance $name!, keep it up.";
                                         } elseif ($average_score >= 50) {
                                             echo "An Average Performance. Work harder!";
                                         } else {
-                                            echo "Poor Performance, put in more effort and don't quit!";
+                                            echo "This is a poor performance $name, but you can do better next term!";
                                         }
                                         ?>
                                     </td>
@@ -423,10 +431,6 @@ include_once './model/inc/dashboard_header.php';
                             <tr>
                                 <th colspan="3">
                                     <?php
-                                    $c_arm = $_SESSION['arm'];
-                                    $class = $_SESSION['class'];
-                                    $term = $_SESSION['term'];
-                                    $aSession = $_SESSION['aSession'];
 
                                     $select_sql = "SELECT * FROM form_teachers WHERE class ='$class' && arm= '$c_arm' ";
                                     $sql_result = $conn->query($select_sql);

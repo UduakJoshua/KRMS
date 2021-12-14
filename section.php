@@ -75,7 +75,7 @@ $class = $_SESSION['class'];
                                     <td><?php echo $row['surname'] . " " . $row['firstname'] ?></td>
                                     <td><?php echo $row['class_name'] . " " . $row['classArm'] ?></td>
                                     <td>
-                                        <?php if ($row['section'] != " "  && $row['section'] == 'High' || $row['section'] == 'Basic') : ?>
+                                        <?php if ($row['section'] != " "  && $row['section'] == 'High' || $row['section'] == 'Basic' || $row['section'] == 'Nursery') : ?>
 
                                             <button class="btn btn-primary btn-sm " disabled>Section Added</button>
 

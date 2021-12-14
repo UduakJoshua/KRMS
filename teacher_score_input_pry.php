@@ -2,7 +2,7 @@
 require "./controller/score_upload_init.php";
 require "./controller/student_logic.php";
 $title = "BCA | Score Input";
-include_once './model/inc/dashboard_header.php';
+include_once './model/inc/staff_dashboard_header.php';
 ?>
 
 <!-- main content-->
@@ -12,7 +12,7 @@ include_once './model/inc/dashboard_header.php';
         <div class=" mb-2 mb-md-0">
             <div class="mr-2">
 
-                <p>Welcome <?php echo $_SESSION['username']; ?></p>
+                <p><?php echo $_SESSION['staff-username']; ?></p>
             </div>
 
         </div>
@@ -24,9 +24,9 @@ include_once './model/inc/dashboard_header.php';
             <h5><strong>Attention!</strong></h5>
             <ul>
                 <li>Type in the scores for each column</li>
-                <li>For columns without scores type in <strong>ZERO</strong></li>
                 <li>Skip any student without score</li>
                 <li>Click the Save Scores Button to upload score</li>
+                <li>Click the Input Another Score Button below the return message to input another score</li>
             </ul>
         </div>
         <hr>
@@ -34,17 +34,11 @@ include_once './model/inc/dashboard_header.php';
         <?php
         include_once 'controller/score_upload_logic.php';
 
-        if (isset($_SESSION['upload'])) : ?>
-            <div class="alert alert-<?= $_SESSION['msg_type'] ?>">
-                <li><?php echo $_SESSION['upload'] ?></li>
-                <?php unset($_SESSION['upload']);
-                ?>
-            </div>
-        <?php endif; ?>
+        ?>
 
         <div class="row justify-content-center">
             <div class="col-md-12">
-                <form action="batch_score_input.php" method="POST">
+                <form action="teacher_score_input_pry.php" method="POST">
 
                     <div class="card">
                         <!--card header begins here-->
@@ -119,20 +113,20 @@ include_once './model/inc/dashboard_header.php';
                                                     <input type="number" name="T2[]" class="form-control" placeholder="0" aria-label="T2" aria-describedby="basic-addon1" maxlength="2" max="20">
                                                 </div>
                                             </div>
-                                            <div class="col-md-2">
+                                            <div class="col-md-2" hidden>
                                                 <div class="input-group mb-3">
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text" id="basic-addon1">Project</span>
                                                     </div>
-                                                    <input type="number" name="project[]" class="form-control" placeholder="0" aria-label="project" aria-describedby="basic-addon1" maxlength="2" max="10">
+                                                    <input type="number" name="project[]" class="form-control" value="0" aria-label="project" aria-describedby="basic-addon1" maxlength="2" max="10" hidden>
                                                 </div>
                                             </div>
-                                            <div class="col-md-2">
+                                            <div class="col-md-2" hidden>
                                                 <div class="input-group mb-3">
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text" id="basic-addon1">Ass</span>
                                                     </div>
-                                                    <input type="number" name="assign[]" class="form-control" placeholder="0" aria-label="assignment" aria-describedby="basic-addon1" maxlength="2" max="20">
+                                                    <input type="number" name="assign[]" class="form-control" value="0" aria-label="assignment" aria-describedby="basic-addon1" maxlength="2" max="20" hidden>
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
@@ -140,13 +134,14 @@ include_once './model/inc/dashboard_header.php';
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text" id="basic-addon1">Exam</span>
                                                     </div>
-                                                    <input type="number" name="exam[]" class="form-control" placeholder="0" aria-label="exam" aria-describedby="basic-addon1" maxlength="2" max="70">
+                                                    <input type="number" name="exam[]" class="form-control" placeholder="0" aria-label="exam" aria-describedby="basic-addon1" maxlength="2" max="60">
                                                 </div>
                                             </div>
 
                                         </div>
                                         <hr>
                                     <?php endwhile; ?>
+
                                 </div>
                             </div>
                         </div>
@@ -158,13 +153,11 @@ include_once './model/inc/dashboard_header.php';
                             </div>
                         </div>
 
-
                     </div>
                 </form>
             </div>
         </div>
 
-        <!--card footer begins here-->
 
     </section>
     <hr>

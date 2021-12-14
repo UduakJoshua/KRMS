@@ -51,6 +51,46 @@ if (isset($_POST['teacher_ex_init'])) {
     exit();
 }
 
+if (isset($_POST['teacher_ex_init_nur'])) {
+
+    $class = test_input($_POST['student_class']);
+    $arm =  test_input($_POST['arm']);
+    $subject = test_input($_POST['subject']);
+    $term =  test_input($_POST['term']);
+    $academic_session = test_input($_POST['aSession']);
+    // create a select query
+    $_SESSION['arm'] = $arm;
+    $_SESSION['class'] = $class;
+    $_SESSION['term'] = $term;
+    $_SESSION['subject'] = $subject;
+    $_SESSION['aSession'] = $academic_session;
+
+    echo $_SESSION['arm'];
+
+    header("location:teacher_score_input_nur.php");
+    exit();
+}
+
+if (isset($_POST['teacher_ex_init_pry'])) {
+
+    $class = test_input($_POST['student_class']);
+    $arm =  test_input($_POST['arm']);
+    $subject = test_input($_POST['subject']);
+    $term =  test_input($_POST['term']);
+    $academic_session = test_input($_POST['aSession']);
+    // create a select query
+    $_SESSION['arm'] = $arm;
+    $_SESSION['class'] = $class;
+    $_SESSION['term'] = $term;
+    $_SESSION['subject'] = $subject;
+    $_SESSION['aSession'] = $academic_session;
+
+    echo $_SESSION['arm'];
+
+    header("location:teacher_score_input_pry.php");
+    exit();
+}
+
 if (isset($_POST['mid_initialize'])) {
 
     $class = test_input($_POST['student_class']);

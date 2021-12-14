@@ -120,9 +120,9 @@ $aSession = $_SESSION['aSession'];
                             <thead class="thead-dark ">
                                 <tr>
                                     <th scope="col">Subject</th>
-                                    <th scope="col">T1<br> (20%)</th>
+                                    <th scope="col">T1<br> (10%)</th>
                                     <th scope="col">T2<br> (20%)</th>
-                                    <th scope="col">Exam<br> (60%)</th>
+                                    <th scope="col">Exam<br> (70%)</th>
                                     <th scope="col">Total<br> (100%)</th>
                                     <th scope="col">Grade</th>
                                     <th scope="col">Subject <br> Position</th>

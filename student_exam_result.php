@@ -81,7 +81,7 @@ $academic_session = "2021/2022";
                         <p><strong>Class:</strong> <?php echo $row['class_name'] . " " . $row['classArm']; ?> </p>
                         <p><strong>Academic Session: </strong> <?php echo $academic_session ?> <span> | </span> <span> <strong>Term:</strong> <?php echo $term ?> </span> </p>
                         <p><strong>Sex:</strong> <?php echo $row['gender']; ?> </p>
-                        <p>Next Term Begins: </p>
+                        <p><strong>Next Term Begins:</strong> 3<sup>rd</sup> January, 2022. </p>
                     </div>
 
                     <div>
@@ -100,17 +100,20 @@ $academic_session = "2021/2022";
                     <?php
 
                     $admin_no = $_SESSION['admin_no'];
+                    $student_class = $_SESSION['student_class'];
+                    $s_arm = $_SESSION['class_arm'];
 
                     $select_sql = "SELECT * FROM (SELECT *, rank() OVER ( partition by subject order by total desc ) 
-                AS 'rank'   FROM students_score WHERE  term= '$term') as temp WHERE admission_no= '$admin_no' ";
+                AS 'rank'   FROM students_score WHERE  term= '$term' && student_class = '$student_class' && class_arm = '$s_arm' && 
+                session = '$academic_session') as temp WHERE admission_no= '$admin_no'";
                     $sql_result = $conn->query($select_sql);
 
                     ?>
                     <div class="table-responsive">
                         <table class="table table-striped table-sm table-bordered display">
                             <thead class="thead-dark ">
-                                <tr>
-                                    <th scope="col">Subject</th>
+                                <tr class="td_center">
+                                    <th scope="col" class="text-left">Subject</th>
                                     <th scope="col">T1<br> (10%)</th>
                                     <th scope="col">T2<br> (20%)</th>
                                     <th scope="col">Project<br> (10%)</th>
@@ -337,7 +340,7 @@ $academic_session = "2021/2022";
                     $admin_no = $_SESSION['admin_no'];
                     $class = $_SESSION['student_class'];
                     $term = $_SESSION['term'];
-                    $select_sql = "SELECT COUNT(subject) AS no_subjects, SUM(T1+T2+exam) AS overall,  (SELECT no_of_subjects FROM no_of_subjects WHERE class_name = '$class') subject_total   FROM students_score WHERE admission_no='$admin_no' && term= '$term'";
+                    $select_sql = "SELECT COUNT(subject) AS no_subjects, SUM(T1+T2+exam) AS overall,  (SELECT no_of_subjects FROM no_of_subjects WHERE class_name = '$class') subject_total, student_name   FROM students_score WHERE admission_no='$admin_no' && term= '1st Term'";
                     $sql_result = $conn->query($select_sql);
 
                     ?>
@@ -357,9 +360,10 @@ $academic_session = "2021/2022";
                             while ($row = $sql_result->fetch_assoc()) :
                                 $overalTot = $row['overall'];
                                 $overasubject = $row['no_subjects'];
-                                $average_score = round(($overalTot / $overasubject), 2);
                                 $no_subject = $row['subject_total'];
+                                $average_score = round(($overalTot / $no_subject), 2);
                                 $total_mark = $no_subject * 100;
+                                $name = $row['student_name'];
 
                             ?>
                                 <tr>
@@ -372,7 +376,7 @@ $academic_session = "2021/2022";
                                     <td><?php echo $average_score; ?>%</td>
                                 </tr>
                                 <tr>
-                                    <td>Total Subjects Offered in Class</td>
+                                    <td style="width: 40%;">Total Subjects Offered in Class</td>
                                     <td><?php echo $no_subject; ?></td>
                                 </tr>
                                 <tr>
@@ -388,9 +392,9 @@ $academic_session = "2021/2022";
                                         } elseif ($average_score  >= 60) {
                                             echo "Great Performance, do not relent!";
                                         } elseif ($average_score >= 50) {
-                                            echo "An Average Performance. Work harder!";
+                                            echo "An Average Performance. Work harder next term!";
                                         } else {
-                                            echo "Poor Performance, put in more effort and don't quit!";
+                                            echo "Poor Performance, put in more effort next term and don't quit!";
                                         }
                                         ?>
                                     </td>
@@ -400,13 +404,13 @@ $academic_session = "2021/2022";
                                     <td>
                                         <?php
                                         if ($average_score  >= 80) {
-                                            echo "Excellent Performance, Keep the fire burning";
+                                            echo "Excellent Performance $name!, Keep the fire burning";
                                         } elseif ($average_score  >= 60) {
-                                            echo "Great Performance, do not relent!";
+                                            echo "Great Performance $name!, keep it up.";
                                         } elseif ($average_score >= 50) {
                                             echo "An Average Performance. Work harder!";
                                         } else {
-                                            echo "Poor Performance, put in more effort and don't quit!";
+                                            echo "This is a poor performance $name, but you can do better next term!";
                                         }
                                         ?>
                                     </td>
@@ -505,7 +509,7 @@ $academic_session = "2021/2022";
                         <tr>
                             <th colspan="3" style="padding: 10px;">
                                 <p style="font-size: 12px; text-align:left ; margin-bottom:2px;">CAT : Continuous Assessment Test</p>
-                                <p style="font-size: 12px; text-align:left; margin-bottom:2px;">Average Score : Total Score / No. of Subjects taken</p>
+                                <p style="font-size: 12px; text-align:left; margin-bottom:2px;">Average Score : <br>Total Score / Total Subjects Offered </p>
 
                             </th>
                         </tr>

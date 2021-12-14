@@ -43,7 +43,7 @@ include_once './model/inc/dashboard_header.php';
 
                 // create a select query
 
-                $sql = "SELECT * FROM students_score WHERE student_class = '$class' && class_arm = '$c_arm' 
+                $sql = "SELECT * FROM mid_term_scores WHERE student_class = '$class' && class_arm = '$c_arm' 
                     && subject = '$subject' && term ='$term'";
                 $result = mysqli_query($conn, $sql);
 
@@ -69,12 +69,7 @@ include_once './model/inc/dashboard_header.php';
                                                 <th scope="col">Admission No</th>
                                                 <th scope="col">Name</th>
                                                 <th scope="col">Subject</th>
-                                                <th scope="col">T1<br> (10% - 20%)</th>
                                                 <th scope="col">T2<br> (20%)</th>
-                                                <th scope="col">Project<br> (10%)</th>
-                                                <th scope="col">Assignment<br> (20%)</th>
-                                                <th scope="col">Exam<br> (40% - 70%)</th>
-                                                <th scope="col">Total<br> (100%)</th>
                                                 <th scope="col">Action</th>
 
                                             </tr>
@@ -86,13 +81,10 @@ include_once './model/inc/dashboard_header.php';
                                                 $s_name = $row['student_name'];
                                                 $subject = $row['subject'];
                                                 $class = $row['student_class'];
-                                                $class = $row['class_arm'];
-                                                $T1 = $row['T1'];
+                                                $class_arm = $row['class_arm'];
+
                                                 $T2 = $row['T2'];
-                                                $assignment = $row['assignment'];
-                                                $project = $row['project'];
-                                                $exam = $row['exam'];
-                                                $total = $row['total'];
+
                                                 $a_session = $row['session'];
                                                 $term = $row['term']; ?>
                                                 <tr>
@@ -100,12 +92,9 @@ include_once './model/inc/dashboard_header.php';
                                                     <td><?php echo $ad_no; ?></td>
                                                     <td><?php echo $s_name; ?></td>
                                                     <td><?php echo $subject; ?></td>
-                                                    <td class="td_align"><?php echo $T1 ?></td>
+
                                                     <td class="td_align"><?php echo $T2 ?></td>
-                                                    <td class="td_align"><?php echo $project ?></td>
-                                                    <td class="td_align"><?php echo $assignment ?></td>
-                                                    <td class="td_align"><?php echo  $exam ?></td>
-                                                    <td class="td_align"><?php echo  $total ?></td>
+
                                                     <td>
                                                         <a href="scores_edit.php?edit_ex_score=<?php echo $row['id']; ?>" class=" btn btn-info btn-sm"> Edit</a>
                                                         <a href="./controller/score_upload_logic.php?delete_ex_score=<?php echo $row['id']; ?>" class=" btn btn-danger btn-sm"><i>Delete</i></a>

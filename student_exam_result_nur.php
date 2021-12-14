@@ -5,15 +5,11 @@ use PhpOffice\PhpSpreadsheet\Calculation\MathTrig\Sum;
 require './controller/dbase_conn.php';
 require './controller/result_display_logic.php';
 require './controller/score_upload_logic.php';
-require './controller/student_result_list_init.php';
 require './controller/psychomotor_logic.php';
 $title = "BCA | Result View";
-include_once './model/inc/dashboard_header.php';
-
-$c_arm = $_SESSION['arm'];
-$class = $_SESSION['class'];
-$term = $_SESSION['term'];
-$aSession = $_SESSION['aSession'];
+include_once './model/inc/student_dash_header.php';
+$term = "1st Term";
+$academic_session = "2021/2022";
 ?>
 
 <main role="main" class="col-lg-10 ml-sm-auto col-lg-10.b.gb./b/vbV//b px-md-4">
@@ -22,7 +18,7 @@ $aSession = $_SESSION['aSession'];
         <div class=" mb-2 mb-md-0">
             <div class="mr-2">
 
-                <p>Welcome <?php echo $_SESSION['username']; ?></p>
+                <p>Welcome <?php echo $_SESSION['st-username']; ?></p>
             </div>
 
         </div>
@@ -64,13 +60,10 @@ $aSession = $_SESSION['aSession'];
 
 
                 <?php
-
-                if (isset($_GET['display'])) {
-                    $admission_no = $_GET['display'];
-
-                    $select_sql = "SELECT * FROM student WHERE admissionNo='$admission_no' ";
-                    $sql_result = $conn->query($select_sql);
-                }
+                // get student admission number from the session
+                $admin_no = $_SESSION['admin_no'];
+                $select_sql = "SELECT * FROM student WHERE admissionNo='$admin_no' ";
+                $sql_result = $conn->query($select_sql);
                 ?>
 
                 <div class="bg-danger text-white pt-3 " style="height: 80px;">
@@ -86,9 +79,9 @@ $aSession = $_SESSION['aSession'];
                         <p><strong>Admission Number:</strong> <?php echo $row['admissionNo'] ?></p>
                         <p><strong>Name:</strong> <?php echo $row['surname'] . " " . $row['firstname'] . " " . $row['middlename']; ?> </p>
                         <p><strong>Class:</strong> <?php echo $row['class_name'] . " " . $row['classArm']; ?> </p>
-                        <p><strong>Academic Session: </strong> <?php echo $aSession; ?> <span> | </span> <span> <strong>Term:</strong> <?php echo $term; ?></span> </p>
+                        <p><strong>Academic Session: </strong> <?php echo $academic_session ?> <span> | </span> <span> <strong>Term:</strong> <?php echo $term ?> </span> </p>
                         <p><strong>Sex:</strong> <?php echo $row['gender']; ?> </p>
-                        <p>Next Term Begins: 3<sup>rd</sup> January, 2022. </p>
+                        <p><strong>Next Term Begins:</strong> 3<sup>rd</sup> January, 2022. </p>
                     </div>
 
                     <div>
@@ -106,23 +99,24 @@ $aSession = $_SESSION['aSession'];
                 <div class="col-md-9">
                     <?php
 
-                    if (isset($_GET['display'])) {
-                        $admission_no = $_GET['display'];
+                    $admin_no = $_SESSION['admin_no'];
+                    $student_class = $_SESSION['student_class'];
+                    $s_arm = $_SESSION['class_arm'];
 
-                        $select_sql = "SELECT * FROM (SELECT *, rank() OVER ( partition by subject order by total desc ) 
-                AS 'rank'   FROM students_score WHERE  term= '$term' && student_class = '$class' && class_arm = '$c_arm' && 
-                session = '$aSession') as temp WHERE admission_no= '$admission_no'";
-                        $sql_result = $conn->query($select_sql);
-                    }
+                    $select_sql = "SELECT * FROM (SELECT *, rank() OVER ( partition by subject order by total desc ) 
+                AS 'rank'   FROM students_score WHERE  term = '$term' && student_class = '$student_class' && class_arm = '$s_arm' && 
+                session = '$academic_session') as temp WHERE admission_no= '$admin_no'";
+                    $sql_result = $conn->query($select_sql);
+
                     ?>
                     <div class="table-responsive">
                         <table class="table table-striped table-sm table-bordered display">
                             <thead class="thead-dark ">
-                                <tr>
-                                    <th scope="col">Subject</th>
-                                    <th scope="col">T1<br> (20%)</th>
+                                <tr class="td_center">
+                                    <th scope="col" class="text-left">Subject</th>
+                                    <th scope="col">T1<br> (10%)</th>
                                     <th scope="col">T2<br> (20%)</th>
-                                    <th scope="col">Exam<br> (60%)</th>
+                                    <th scope="col">Exam<br> (70%)</th>
                                     <th scope="col">Total<br> (100%)</th>
                                     <th scope="col">Grade</th>
                                     <th scope="col">Subject <br> Position</th>
@@ -153,6 +147,7 @@ $aSession = $_SESSION['aSession'];
                                         <td class="td_center"><?php echo $T2 ?></td>
                                         <td class="td_center"><?php echo $exam ?></td>
                                         <td class="td_center"><?php echo $total ?></td>
+
                                         <td class="td_center">
                                             <?php
                                             if ($total >= 80) {
@@ -189,7 +184,7 @@ $aSession = $_SESSION['aSession'];
                                                                 ?></td>
 
                                         <!--remarks-->
-                                        <td>
+                                        <td class="td_center">
                                             <?php
                                             if ($total >= 80) {
                                                 echo "Excellent";
@@ -215,119 +210,116 @@ $aSession = $_SESSION['aSession'];
                 </div>
                 <!-- score end here-->
                 <!-- Psychomotor section-->
-                <div class="col-md-3">
-                    <table class=" table table-stripped table-sm  tab">
-                        <?php
-
-                        if (isset($_GET['display'])) {
-                            $admission_no = $_GET['display'];
-
-                            $select_sql = "SELECT * FROM psychomotor WHERE admission_no= '$admission_no'";
-                            $sql_result = $conn->query($select_sql);
-                        }
-                        ?>
-
-                        <thead class="thead-dark ">
-
-                            <tr>
-                                <th colspan="2">
-                                    <h6>AFFECTIVE DOMAIN</h6>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody class="ml-2 table-bordered">
+                <div class="row">
+                    <div class="col-md-3">
+                        <table class=" table table-stripped table-sm  tab">
                             <?php
 
-                            while ($row = $sql_result->fetch_assoc()) :
+                            $admin_no = $_SESSION['admin_no'];
 
-
+                            $select_sql = "SELECT * FROM psychomotor WHERE admission_no= '$admin_no' && term = '$term'";
+                            $sql_result = $conn->query($select_sql);
 
                             ?>
-                                <tr class="p-2">
-                                    <td>Punctuality</td>
-                                    <td class="td_align"><?php echo $row['punctuality'] ?></td>
-                                </tr>
-                                <tr>
-                                    <td>Mental Alertness</td>
-                                    <td class="td_align"><?php echo $row['alertness'] ?></td>
-                                </tr>
-                                <tr>
-                                    <td>Attentiveness</td>
-                                    <td class="td_align"><?php echo $row['attentiveness'] ?></td>
-                                </tr>
-                                <tr>
-                                    <td>Respect</td>
-                                    <td class="td_align"><?php echo $row['respect'] ?></td>
-                                </tr>
-                                <tr>
-                                    <td>Neatness</td>
-                                    <td class="td_align"><?php echo $row['neatness'] ?></td>
-                                </tr>
-                                <tr>
-                                    <td>Politeness</td>
-                                    <td class="td_align"><?php echo $row['politeness'] ?></td>
-                                </tr>
-                                <tr>
-                                    <td>Honesty</td>
-                                    <td class="td_align"><?php echo $row['honesty'] ?></td>
-                                </tr>
-                                <tr>
-                                    <td>Relationship with Peers</td>
-                                    <td class="td_align"><?php echo $row['relationship'] ?></td>
-                                </tr>
-                                <tr>
-                                    <td>Attitude to School</td>
-                                    <td class="td_align"><?php echo $row['attitude'] ?></td>
-                                </tr>
-                                <tr>
-                                    <td>Spirit of Team Work</td>
-                                    <td class="td_align"><?php echo $row['team_work'] ?></td>
-                                </tr>
-                                <tr>
-                                    <td>Completes School Work Promptly</td>
-                                    <td class="td_align"><?php echo $row['school_work'] ?></td>
-                                </tr>
 
-
-
+                            <thead class="thead-dark ">
 
                                 <tr>
-                                    <th colspan="2" class="table-dark text-center">
-                                        <h6>PSYCHOMOTOR SKILLS</h6>
+                                    <th colspan="2" class="td_center">
+                                        <h6>AFFECTIVE DOMAIN</h6>
                                     </th>
                                 </tr>
+                            </thead>
+                            <tbody class="ml-2 table-bordered">
+                                <?php
 
-                                <tr>
-                                    <td>Reading</td>
-                                    <td class="td_align"><?php echo $row['reading'] ?></td>
-                                </tr>
-                                <tr>
-                                    <td>Verbal Fluency / Diction</td>
-                                    <td class="td_align"><?php echo $row['diction'] ?></td>
-                                </tr>
-                                <tr>
-                                    <td>Handwriting</td>
-                                    <td class="td_align"><?php echo $row['handwriting'] ?></td>
-                                </tr>
-                                <tr>
-                                    <td>Musical Skills</td>
-                                    <td class="td_align"><?php echo $row['music'] ?></td>
-                                </tr>
-                                <tr>
-                                    <td>Creative Art</td>
-                                    <td class="td_align"><?php echo $row['art'] ?></td>
-                                </tr>
-                                <tr>
-                                    <td>Physical Education</td>
-                                    <td class="td_align"><?php echo $row['phe'] ?></td>
-                                </tr>
-                                <tr>
-                                    <td>General Reasoning</td>
-                                    <td class="td_align"><?php echo $row['punctuality'] ?></td>
-                                </tr>
-                            <?php endwhile; ?>
-                        </tbody>
-                    </table>
+                                while ($row = $sql_result->fetch_assoc()) :
+
+
+
+                                ?>
+                                    <tr class="p-2">
+                                        <td>Punctuality</td>
+                                        <td class="td_align"><?php echo $row['punctuality'] ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mental Alertness</td>
+                                        <td class="td_align"><?php echo $row['alertness'] ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Attentiveness</td>
+                                        <td class="td_align"><?php echo $row['attentiveness'] ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Respect</td>
+                                        <td class="td_align"><?php echo $row['respect'] ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Neatness</td>
+                                        <td class="td_align"><?php echo $row['neatness'] ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Politeness</td>
+                                        <td class="td_align"><?php echo $row['politeness'] ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Honesty</td>
+                                        <td class="td_align"><?php echo $row['honesty'] ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Relationship with Peers</td>
+                                        <td class="td_align"><?php echo $row['relationship'] ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Attitude to School</td>
+                                        <td class="td_align"><?php echo $row['attitude'] ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Spirit of Team Work</td>
+                                        <td class="td_align"><?php echo $row['team_work'] ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Completes School Work Promptly</td>
+                                        <td class="td_align"><?php echo $row['school_work'] ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="2" class="table-dark text-center">
+                                            <h6>PSYCHOMOTOR SKILLS</h6>
+                                        </th>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Reading</td>
+                                        <td class="td_align"><?php echo $row['reading'] ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Verbal Fluency / Diction</td>
+                                        <td class="td_align"><?php echo $row['diction'] ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Handwriting</td>
+                                        <td class="td_align"><?php echo $row['handwriting'] ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Musical Skills</td>
+                                        <td class="td_align"><?php echo $row['music'] ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Creative Art</td>
+                                        <td class="td_align"><?php echo $row['art'] ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Physical Education</td>
+                                        <td class="td_align"><?php echo $row['phe'] ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>General Reasoning</td>
+                                        <td class="td_align"><?php echo $row['punctuality'] ?></td>
+                                    </tr>
+                                <?php endwhile; ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -337,10 +329,9 @@ $aSession = $_SESSION['aSession'];
 
 
                     <?php
-
-                    $class = $_SESSION['class'];
-
-                    $select_sql = "SELECT COUNT(subject) AS no_subjects, SUM(T1+T2+exam) AS overall,  (SELECT no_of_subjects FROM no_of_subjects WHERE class_name = '$class') subject_total , student_name   FROM students_score WHERE admission_no='$admission_no' && term= '1st Term'";
+                    $admin_no = $_SESSION['admin_no'];
+                    $class = $_SESSION['student_class'];
+                    $select_sql = "SELECT COUNT(subject) AS no_subjects, SUM(T1+T2+exam) AS overall,  (SELECT no_of_subjects FROM no_of_subjects WHERE class_name = '$class') subject_total, student_name   FROM students_score WHERE admission_no='$admin_no' && term= '1st Term'";
                     $sql_result = $conn->query($select_sql);
 
                     ?>
@@ -349,7 +340,7 @@ $aSession = $_SESSION['aSession'];
                         <thead class="thead-dark ">
 
                             <tr>
-                                <th colspan="2">
+                                <th colspan="2" class="td_center">
                                     <h6>Report Summary</h6>
                                 </th>
                             </tr>
@@ -358,16 +349,13 @@ $aSession = $_SESSION['aSession'];
                             <?php
 
                             while ($row = $sql_result->fetch_assoc()) :
+
+                                $name = $row['student_name'];
                                 $overalTot = $row['overall'];
                                 $overasubject = $row['no_subjects'];
                                 $no_subject = $row['subject_total'];
                                 $average_score = round(($overalTot / $no_subject), 2);
                                 $total_mark = $no_subject * 100;
-                                $name = $row['student_name'];
-
-
-
-
                             ?>
                                 <tr>
                                     <td>Overall Total Score</td>
@@ -429,10 +417,10 @@ $aSession = $_SESSION['aSession'];
                             <tr>
                                 <th colspan="3">
                                     <?php
-                                    $c_arm = $_SESSION['arm'];
-                                    $class = $_SESSION['class'];
-                                    $term = $_SESSION['term'];
-                                    $aSession = $_SESSION['aSession'];
+                                    $c_arm = $_SESSION['class_arm'];
+                                    $class = $_SESSION['student_class'];
+                                    $term = "1st Term";
+                                    $aSession = "2021/2022";
 
                                     $select_sql = "SELECT * FROM form_teachers WHERE class ='$class' && arm= '$c_arm' ";
                                     $sql_result = $conn->query($select_sql);
@@ -441,8 +429,6 @@ $aSession = $_SESSION['aSession'];
                                     <?php
 
                                     while ($row = $sql_result->fetch_assoc()) :
-
-
 
                                     ?>
                                         <p class=" text-center text-white h6 p-2"> Form Teacher: <br>
@@ -469,7 +455,7 @@ $aSession = $_SESSION['aSession'];
                     <thead class="thead-dark ">
 
                         <tr>
-                            <th colspan="3">
+                            <th colspan="3" class="td_center">
                                 <h6>Grading System</h6>
                             </th>
                         </tr>
@@ -516,7 +502,7 @@ $aSession = $_SESSION['aSession'];
                         <tr>
                             <th colspan="3" style="padding: 10px;">
                                 <p style="font-size: 12px; text-align:left ; margin-bottom:2px;">CAT : Continuous Assessment Test</p>
-                                <p style="font-size: 12px; text-align:left; margin-bottom:2px;">Average Score : <br>Total Score / Total Subjects Offered </p>
+                                <p style="font-size: 12px; text-align:left; margin-bottom:2px;">Average Score : Total Score / Total Subjects Offered</p>
 
                             </th>
                         </tr>

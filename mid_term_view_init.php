@@ -1,14 +1,13 @@
 <?php
-require "./controller/score_upload_init.php";
-require "./controller/student_logic.php";
-$title = "BCA | Score Input";
+require_once 'controller/score_upload_logic.php';
+$title = "BCA | Uploaded Scores";
 include_once './model/inc/staff_dashboard_header.php';
+
 ?>
 
-<!-- main content-->
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h6">Student's Scores Initialization</h1>
+        <h1 class="h4">View Uploaded Scores</h1>
         <div class=" mb-2 mb-md-0">
             <div class="mr-2">
 
@@ -19,27 +18,20 @@ include_once './model/inc/staff_dashboard_header.php';
     </div>
 
 
+
     <section>
 
-        <?php
 
-        if (isset($_SESSION['upload'])) : ?>
-            <div class="alert alert-<?= $_SESSION['msg_type'] ?>">
-                <?php echo $_SESSION['upload'];
-                unset($_SESSION['upload']);
-                ?>
-            </div>
-        <?php endif; ?>
 
         <div class="row justify-content-center">
             <div class="col-md-12">
-                <form action="teacher_exam_init.php" method="POST">
+                <form action="mid_term_view_init.php" method="POST">
                     <div class="card">
                         <!--card header begins here-->
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="card-header">
-                                    <h5>Select Parameters</h5>
+                                    <h5>Select Class to view Mid Term Scores</h5>
                                 </div>
                             </div>
                         </div>
@@ -53,7 +45,7 @@ include_once './model/inc/staff_dashboard_header.php';
 
                                             <?php
                                             require_once "controller/class_logic.php";
-                                            $select_sql = "SELECT * FROM classes ORDER BY className ASC";
+                                            $select_sql = "SELECT * FROM classes  ORDER BY className ASC";
                                             $sql_result = $conn->query($select_sql);
                                             ?>
                                             <select name="student_class" id="student_class" class="form-control ">
@@ -107,6 +99,7 @@ include_once './model/inc/staff_dashboard_header.php';
                                             </div>
                                         </div>
 
+
                                         <div class="col-md-2">
                                             <label for="term">Term</label>
 
@@ -121,13 +114,9 @@ include_once './model/inc/staff_dashboard_header.php';
 
                                         <div class="col-md-2">
                                             <label for="aSession">Session</label>
-
                                             <select name="aSession" id="aSession" class="form-control ">
-
-
                                                 <option value="2021/2022"> 2021/2022 </option>
                                                 <option value="2022/2023"> 2022/2023</option>
-
                                             </select>
                                         </div>
                                     </div>
@@ -139,20 +128,7 @@ include_once './model/inc/staff_dashboard_header.php';
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="card-footer">
-                                    <?php
-                                    $section = $_SESSION['section'];
-                                    if ($section == "Secondary" || $section == "General") :
-                                    ?>
-                                        <button type="submit" class="btn btn-secondary" name="teacher_ex_init">Initialize</button>
-                                    <?php
-                                    elseif ($section == "Primary") :
-                                    ?>
-                                        <button type="submit" class="btn btn-primary" name="teacher_ex_init_pry">Initialize</button>
-                                    <?php
-                                    else :
-                                    ?>
-                                        <button type="submit" class="btn btn-warning" name="teacher_ex_init_nur">Initialize</button>
-                                    <?php endif; ?>
+                                    <button type="submit" class="btn btn-primary" name="mid_term_view">Display Scores</button>
                                 </div>
                             </div>
                         </div>
@@ -161,8 +137,8 @@ include_once './model/inc/staff_dashboard_header.php';
                 </form>
 
             </div>
-
         </div>
+
     </section>
     <hr>
 

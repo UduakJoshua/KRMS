@@ -46,7 +46,7 @@ $academic_session = "2021/2022";
                 </div>
                 <div class="text-right pl-3 head2">
                     <h1 class="title-head">Blessed Children Academy</h1>
-                    <p class="head-text"><span class="fa fa-home"></span> 18 Amaehule Street, Eliogbolo, Rumuokoro | 1 kono Close Rumuodomaya, Port Harcourt</p>
+                    <p class="head-text"><span class="fa fa-home"></span> 18 Amaehule Street, Eliogbolo, Rumuokoro | 1 Kono Close Rumuodomaya, Port Harcourt</p>
                     <p class="head-text"><span class="fa fa-phone"></span> 07061666648 | 08180810162 | 08037808626 | <span class="fa fa-whatsapp text-gray"> 08179484262</span></p>
                     <p class="head-text"><span class="fa fa-envelope"></span> academyblessedhigh@gmail.com | https://www.blessedchildrenacademy.com</p>
 
@@ -81,7 +81,7 @@ $academic_session = "2021/2022";
                         <p><strong>Class:</strong> <?php echo $row['class_name'] . " " . $row['classArm']; ?> </p>
                         <p><strong>Academic Session: </strong> <?php echo $academic_session ?> <span> | </span> <span> <strong>Term:</strong> <?php echo $term ?> </span> </p>
                         <p><strong>Sex:</strong> <?php echo $row['gender']; ?> </p>
-                        <p>Next Term Begins: </p>
+                        <p><strong>Next Term Begins:</strong> 3<sup>rd</sup> January, 2022. </p>
                     </div>
 
                     <div>
@@ -100,17 +100,20 @@ $academic_session = "2021/2022";
                     <?php
 
                     $admin_no = $_SESSION['admin_no'];
+                    $student_class = $_SESSION['student_class'];
+                    $s_arm = $_SESSION['class_arm'];
 
                     $select_sql = "SELECT * FROM (SELECT *, rank() OVER ( partition by subject order by total desc ) 
-                AS 'rank'   FROM students_score WHERE  term= '$term') as temp WHERE admission_no= '$admin_no' ";
+                AS 'rank'   FROM students_score WHERE  term = '$term' && student_class = '$student_class' && class_arm = '$s_arm' && 
+                session = '$academic_session') as temp WHERE admission_no= '$admin_no'";
                     $sql_result = $conn->query($select_sql);
 
                     ?>
                     <div class="table-responsive">
                         <table class="table table-striped table-sm table-bordered display">
                             <thead class="thead-dark ">
-                                <tr>
-                                    <th scope="col">Subject</th>
+                                <tr class="td_center">
+                                    <th scope="col" class="text-left">Subject</th>
                                     <th scope="col">T1<br> (20%)</th>
                                     <th scope="col">T2<br> (20%)</th>
                                     <th scope="col">Exam<br> (60%)</th>
@@ -221,7 +224,7 @@ $academic_session = "2021/2022";
                         <thead class="thead-dark ">
 
                             <tr>
-                                <th colspan="2">
+                                <th colspan="2" class="td_center">
                                     <h6>AFFECTIVE DOMAIN</h6>
                                 </th>
                             </tr>
@@ -278,10 +281,6 @@ $academic_session = "2021/2022";
                                     <td>Completes School Work Promptly</td>
                                     <td class="td_align"><?php echo $row['school_work'] ?></td>
                                 </tr>
-
-
-
-
                                 <tr>
                                     <th colspan="2" class="table-dark text-center">
                                         <h6>PSYCHOMOTOR SKILLS</h6>
@@ -330,7 +329,7 @@ $academic_session = "2021/2022";
                     <?php
                     $admin_no = $_SESSION['admin_no'];
                     $class = $_SESSION['student_class'];
-                    $select_sql = "SELECT COUNT(subject) AS no_subjects, SUM(T1+T2+exam) AS overall,  (SELECT no_of_subjects FROM no_of_subjects WHERE class_name = '$class') subject_total   FROM students_score WHERE admission_no='$admin_no' && term= '1st Term'";
+                    $select_sql = "SELECT COUNT(subject) AS no_subjects, SUM(T1+T2+exam) AS overall,  (SELECT no_of_subjects FROM no_of_subjects WHERE class_name = '$class') subject_total, student_name   FROM students_score WHERE admission_no='$admin_no' && term= '1st Term'";
                     $sql_result = $conn->query($select_sql);
 
                     ?>
@@ -339,7 +338,7 @@ $academic_session = "2021/2022";
                         <thead class="thead-dark ">
 
                             <tr>
-                                <th colspan="2">
+                                <th colspan="2" class="td_center">
                                     <h6>Report Summary</h6>
                                 </th>
                             </tr>
@@ -348,13 +347,13 @@ $academic_session = "2021/2022";
                             <?php
 
                             while ($row = $sql_result->fetch_assoc()) :
+
+                                $name = $row['student_name'];
                                 $overalTot = $row['overall'];
                                 $overasubject = $row['no_subjects'];
                                 $no_subject = $row['subject_total'];
-                                $total_mark = $no_subject * 100;
                                 $average_score = round(($overalTot / $no_subject), 2);
-
-
+                                $total_mark = $no_subject * 100;
                             ?>
                                 <tr>
                                     <td>Overall Total Score</td>
@@ -366,7 +365,7 @@ $academic_session = "2021/2022";
                                     <td><?php echo $average_score; ?>%</td>
                                 </tr>
                                 <tr>
-                                    <td>Total Subjects Offered in Class</td>
+                                    <td style="width: 40%;">Total Subjects Offered in Class</td>
                                     <td><?php echo $no_subject; ?></td>
                                 </tr>
                                 <tr>
@@ -378,13 +377,15 @@ $academic_session = "2021/2022";
                                     <td>
                                         <?php
                                         if ($average_score  >= 80) {
-                                            echo "Excellent Performance, Keep the fire burning";
+                                            echo "Superlative Performance, Keep Soaring Higher!";
                                         } elseif ($average_score  >= 60) {
-                                            echo "Great Performance, do not relent!";
+                                            echo "Brilliant Output, Keep the Fire Burning!";
                                         } elseif ($average_score >= 50) {
-                                            echo "An Average Performance. Work harder!";
+                                            echo "Nice Result, Keep working hard!";
+                                        } elseif ($average_score >= 40) {
+                                            echo "Fairly average output, More effort is highly needed!";
                                         } else {
-                                            echo "Poor Performance, put in more effort and don't quit!";
+                                            echo "Fair Performance, put in more effort and don't quit!";
                                         }
                                         ?>
                                     </td>
@@ -394,13 +395,15 @@ $academic_session = "2021/2022";
                                     <td>
                                         <?php
                                         if ($average_score  >= 80) {
-                                            echo "Excellent Performance, Keep the fire burning";
+                                            echo "Bravo $name!, Keep the flag flying.";
                                         } elseif ($average_score  >= 60) {
-                                            echo "Great Performance, do not relent!";
+                                            echo "Beautiful performance $name!, Keep it up!";
                                         } elseif ($average_score >= 50) {
-                                            echo "An Average Performance. Work harder!";
+                                            echo "Good output $name, Keep pushing forward and strive to do better.";
+                                        } elseif ($average_score >= 40) {
+                                            echo "Don't relent $name, Keep pushing forward.";
                                         } else {
-                                            echo "Poor Performance, put in more effort and don't quit!";
+                                            echo "This is a weak performance $name, put in more effort next term, I believe in you!";
                                         }
                                         ?>
                                     </td>
@@ -424,8 +427,6 @@ $academic_session = "2021/2022";
                                     <?php
 
                                     while ($row = $sql_result->fetch_assoc()) :
-
-
 
                                     ?>
                                         <p class=" text-center text-white h6 p-2"> Form Teacher: <br>
@@ -452,7 +453,7 @@ $academic_session = "2021/2022";
                     <thead class="thead-dark ">
 
                         <tr>
-                            <th colspan="3">
+                            <th colspan="3" class="td_center">
                                 <h6>Grading System</h6>
                             </th>
                         </tr>

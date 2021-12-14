@@ -21,7 +21,7 @@ include_once './model/inc/dashboard_header.php';
     <section>
         <div class="row justify-content-center">
             <div class="col-md-9">
-                <form action="edit_student.php" method="POST">
+                <form action="add_section.php" method="POST">
                     <input type="hidden" class="form-control " name="id" value="<?php echo $id ?>">
                     <h5>Student's Biodata</h5>
                     <hr>
@@ -56,6 +56,7 @@ include_once './model/inc/dashboard_header.php';
 
                                     <option value="Basic">Basic</option>
                                     <option value="High">High</option>
+                                    <option value="Nursery">Nursery</option>
 
                                 </select>
                             </div>

@@ -103,7 +103,7 @@ include_once './model/inc/staff_dashboard_header.php';
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text" id="basic-addon1">T1</span>
                                                     </div>
-                                                    <input type="number" name="T1[]" class="form-control" placeholder="0" aria-label="T1" aria-describedby="basic-addon1" maxlength="2" max="20">
+                                                    <input type="number" name="T1[]" class="form-control" placeholder="0" aria-label="T1" aria-describedby="basic-addon1" maxlength="2" max="10">
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
@@ -135,7 +135,7 @@ include_once './model/inc/staff_dashboard_header.php';
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text" id="basic-addon1">Exam</span>
                                                     </div>
-                                                    <input type="number" name="exam[]" class="form-control" placeholder="0" aria-label="exam" aria-describedby="basic-addon1" maxlength="2" max="60">
+                                                    <input type="number" name="exam[]" class="form-control" placeholder="0" aria-label="exam" aria-describedby="basic-addon1" maxlength="2" max="40">
                                                 </div>
                                             </div>
 

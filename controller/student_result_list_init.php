@@ -129,3 +129,19 @@ if (isset($_POST['initializeR'])) {
     header("location:result_display_table.php");
     exit();
 }
+
+if (isset($_POST['init_spreadsheet'])) {
+
+    $class = test_input($_POST['student_class']);
+    $arm =  test_input($_POST['arm']);
+    $term =  test_input($_POST['term']);
+    $academic_session = test_input($_POST['aSession']);
+    // create a select query
+    $_SESSION['arm'] = $arm;
+    $_SESSION['class'] = $class;
+    $_SESSION['term'] = $term;
+    $_SESSION['aSession'] = $academic_session;
+
+    header("location:re_spreadsheet_basic.php");
+    exit();
+}

@@ -256,17 +256,12 @@ include_once './model/inc/dashboard_header.php';
                                                 </div>
                                             </div>
 
-
-
                                             <div class="col-md-2">
                                                 <div class="form-group ">
 
                                                     <input type=" text" name="term" class="form-control" readonly value="<?php echo $term ?>">
                                                 </div>
                                             </div>
-
-
-
 
                                             <div class="col-md-2">
                                                 <div class="form-group ">

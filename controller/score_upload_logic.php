@@ -64,9 +64,17 @@ if (isset($_POST['save_exam_scores'])) {
         echo "<a href = 'teacher_exam_init.php'><button class= 'btn btn-primary m-3 p-2' >";
         echo "Input Another Score";
         echo "</button></a> ";
+
+        echo "<a href = 'scores_input_view_teacher.php'><button class= 'btn btn-warning m-3 p-2' >";
+        echo "View Inputed Scores";
+        echo "</button></a> ";
     } else {
         echo "<a href = 'batch_result_input.php'><button class= 'btn btn-primary m-3 p-2' >";
         echo "Input Another Score";
+        echo "</button></a> ";
+
+        echo "<a href = 'scores_input_view.php'><button class= 'btn btn-warning m-3 p-2' >";
+        echo "View Inputed Scores";
         echo "</button></a> ";
     }
     exit();
@@ -181,6 +189,10 @@ if (isset($_POST['save_mock'])) {
     }
     echo "<a href = 'mock_init_teacher.php'><button class= 'btn btn-primary m-3 p-2' >";
     echo "Input Another Mock Score";
+    echo "</button></a> ";
+
+    echo "<a href = 'mock_view_teacher.php'><button class= 'btn btn-warning m-3 p-2' >";
+    echo "View Mock Scores";
     echo "</button></a> ";
     exit();
 }
@@ -484,5 +496,22 @@ if (isset($_POST['mock_scores_admin'])) {
     $_SESSION['aSession'] = $academic_session;
     $_SESSION['mock_no'] = $mock_no;
     header("location:mock_scores_display_admin.php");
+    exit();
+}
+
+
+if (isset($_POST['mid_term_view'])) {
+    $class = test_input($_POST['student_class']);
+    $arm =  test_input($_POST['arm']);
+    $subject = test_input($_POST['subject']);
+    $term =  test_input($_POST['term']);
+    $academic_session = test_input($_POST['aSession']);
+
+    $_SESSION['arm'] = $arm;
+    $_SESSION['class'] = $class;
+    $_SESSION['term'] = $term;
+    $_SESSION['subject'] = $subject;
+    $_SESSION['aSession'] = $academic_session;
+    header("location:mid_term_scores_display.php");
     exit();
 }

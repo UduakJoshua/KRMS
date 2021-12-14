@@ -2,14 +2,14 @@
 require './controller/dbase_conn.php';
 require './controller/student_result_list_init.php';
 
-$title = "BCA | Result View";
+$title = "BCA | Spreadsheet";
 include_once './model/inc/dashboard_header.php';
 
 ?>
 
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h4">Print/View Result</h1>
+        <h1 class="h4">Print/View Spreadsheet</h1>
         <div class=" mb-2 mb-md-0">
             <div class="mr-2">
 
@@ -42,7 +42,7 @@ include_once './model/inc/dashboard_header.php';
                     <div class="row">
                         <div class="col-md-12">
                             <div class="card-header">
-                                <h5>Display Result</h5>
+                                <h5>Display Spreadsheet</h5>
                             </div>
                         </div>
                     </div>
@@ -90,14 +90,10 @@ include_once './model/inc/dashboard_header.php';
                                                     <td>
                                                         <?php if ($row['section'] == "High") :
                                                         ?>
-                                                            <a href="result_display.php?display=<?php echo $row['admissionNo']; ?>"><button type="button" class="btn btn-primary" name="display_result">Display</button></a>
-                                                        <?php elseif ($row['section'] == "Basic") : ?>
-
-                                                            <a href="result_display_basic.php?display=<?php echo $row['admissionNo']; ?>"><button type="button" class="btn btn-warning" name="display_result">Display</button></a>
-
+                                                            <a href="re_spreadsheet_high.php?display=<?php echo $row['admissionNo']; ?>"><button type="button" class="btn btn-primary" name="get_spreadsheet">Spreadsheet</button></a>
                                                         <?php else : ?>
 
-                                                            <a href="result_display_nursery.php?display=<?php echo $row['admissionNo']; ?>"><button type="button" class="btn btn-secondary" name="display_result">Display</button></a>
+                                                            <a href="re_spreadsheet_basic.php?display=<?php echo $row['admissionNo']; ?>"><button type="button" class="btn btn-warning" name="get_spreadsheet">Spreadsheet</button></a>
                                                         <?php endif; ?>
 
 

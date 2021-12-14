@@ -109,12 +109,17 @@ if (!isset($_SESSION['st-user_id'])) {
         }
 
         .thd {
-            font-size: 11px;
+            font-size: 10px;
 
         }
 
         .thd th {
 
+            text-align: center;
+        }
+
+
+        .td_center {
             text-align: center;
         }
 
@@ -156,6 +161,19 @@ if (!isset($_SESSION['st-user_id'])) {
 
         .student-details p {
             font-size: 18px;
+        }
+
+        .tab {
+            padding: 0.3px !important;
+        }
+
+        .th h6 {
+            text-align: center;
+        }
+
+        .td_align {
+            width: 40px;
+            text-align: center;
         }
 
 
@@ -218,6 +236,13 @@ if (!isset($_SESSION['st-user_id'])) {
             tbody tr td {
                 font-size: 11px;
             }
+
+
+
+            .student-info h2 {
+                font-size: 20px;
+                height: 60px;
+            }
         }
 
 
@@ -265,10 +290,7 @@ if (!isset($_SESSION['st-user_id'])) {
                 margin: 0px;
                 display: none;
 
-
-
             }
-
 
         }
     </style>
@@ -332,12 +354,18 @@ if (!isset($_SESSION['st-user_id'])) {
 
                             <li class="nav-item">
 
-                                <?php if ($row['section'] == "High") :
-                                ?>
-                                    <a class="nav-link" href="student_exam_result.php" class="text-decoration-none"><span data-feather="file"></span> Examination Result</a>
+                                <?php if ($row['section'] == "High" && $row['approval'] == 1) : ?>
+                                    <a class="nav-link text-decoration-none" href="student_exam_result.php"><span data-feather="file"></span> Examination Result</a>
+
+                                <?php elseif ($row['section'] == "Basic" && $row['approval'] == 1) : ?>
+                                    <a class="nav-link text-decoration-none" href="student_exam_result_basic.php"><span data-feather="file"></span> Examination Result</a>
+
+                                <?php elseif ($row['section'] == "Nursery" && $row['approval'] == 1) : ?>
+                                    <a class="nav-link text-decoration-none" href="student_exam_result_nur.php"><span data-feather="file"></span> Examination Result</a>
+
                                 <?php else : ?>
 
-                                    <a class="nav-link" href="student_exam_result_basic.php" class="text-decoration-none"><span data-feather="file"></span>Examination Result</a>
+                                    <a class="nav-link" href="exam_notification.php" class="text-decoration-none"><span data-feather="file"></span>Examination Result</a>
                                 <?php endif; ?>
                             <?php endwhile ?>
                             </li>
