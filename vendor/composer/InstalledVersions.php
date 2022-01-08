@@ -30,7 +30,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '586792a0c80d5b766dcd22b1f2cdde9b74810175',
+    'reference' => '4eb8a73fb1e22a6fe6ab90438016eed2f5d49ad2',
     'name' => '__root__',
   ),
   'versions' => 
@@ -42,7 +42,16 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '586792a0c80d5b766dcd22b1f2cdde9b74810175',
+      'reference' => '4eb8a73fb1e22a6fe6ab90438016eed2f5d49ad2',
+    ),
+    'doctrine/lexer' => 
+    array (
+      'pretty_version' => '1.2.1',
+      'version' => '1.2.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'e864bbf5904cb8f5bb334f99209b48018522f042',
     ),
     'dompdf/dompdf' => 
     array (
@@ -52,6 +61,15 @@ private static $installed = array (
       array (
       ),
       'reference' => '8768448244967a46d6e67b891d30878e0e15d25c',
+    ),
+    'egulias/email-validator' => 
+    array (
+      'pretty_version' => '2.1.25',
+      'version' => '2.1.25.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '0dbf5d78455d4d6a41d186da50adc1122ec066f4',
     ),
     'ezyang/htmlpurifier' => 
     array (
@@ -170,6 +188,33 @@ private static $installed = array (
       ),
       'reference' => 'd217848e1396ef962fb1997cf3e2421acba7f796',
     ),
+    'swiftmailer/swiftmailer' => 
+    array (
+      'pretty_version' => 'v6.0.0',
+      'version' => '6.0.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '74e20ce4dad5011fb2c2cedefb76b2237f123c0e',
+    ),
+    'symfony/polyfill-intl-idn' => 
+    array (
+      'pretty_version' => 'v1.23.0',
+      'version' => '1.23.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '65bd267525e82759e7d8c4e8ceea44f398838e65',
+    ),
+    'symfony/polyfill-intl-normalizer' => 
+    array (
+      'pretty_version' => 'v1.23.0',
+      'version' => '1.23.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '8590a5f561694770bdcd3f9b5c69dde6945028e8',
+    ),
     'symfony/polyfill-mbstring' => 
     array (
       'pretty_version' => 'v1.23.0',
@@ -178,6 +223,15 @@ private static $installed = array (
       array (
       ),
       'reference' => '2df51500adbaebdc4c38dea4c89a2e131c45c8a1',
+    ),
+    'symfony/polyfill-php72' => 
+    array (
+      'pretty_version' => 'v1.23.0',
+      'version' => '1.23.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '9a142215a36a3888e30d0a9eeea9766764e96976',
     ),
   ),
 );

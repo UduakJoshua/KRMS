@@ -348,7 +348,7 @@ $aSession = $_SESSION['aSession'];
 
                     $class = $_SESSION['class'];
 
-                    $select_sql = "SELECT COUNT(subject) AS no_subjects, SUM(T1+T2+project+assignment+exam) AS overall,  (SELECT no_of_subjects FROM no_of_subjects WHERE class_name = '$class') subject_total   FROM students_score WHERE admission_no='$admission_no' && term= '1st Term'";
+                    $select_sql = "SELECT COUNT(subject) AS no_subjects, SUM(T1+T2+project+assignment+exam) AS overall,  (SELECT no_of_subjects FROM no_of_subjects WHERE class_name = '$class') subject_total, student_name   FROM students_score WHERE admission_no='$admission_no' && term= '1st Term'";
                     $sql_result = $conn->query($select_sql);
 
                     ?>
@@ -431,6 +431,10 @@ $aSession = $_SESSION['aSession'];
                             <tr>
                                 <th colspan="3">
                                     <?php
+                                    $c_arm = $_SESSION['arm'];
+                                    $class = $_SESSION['class'];
+                                    $term = $_SESSION['term'];
+                                    $aSession = $_SESSION['aSession'];
 
                                     $select_sql = "SELECT * FROM form_teachers WHERE class ='$class' && arm= '$c_arm' ";
                                     $sql_result = $conn->query($select_sql);
@@ -439,13 +443,9 @@ $aSession = $_SESSION['aSession'];
                                     <?php
 
                                     while ($row = $sql_result->fetch_assoc()) :
-
-
-
                                     ?>
                                         <p class=" text-center text-white h6 p-2"> Form Teacher: <br>
                                             <?php echo $row['teachers_name'] ?></p>
-
                                     <?php endwhile; ?>
 
 

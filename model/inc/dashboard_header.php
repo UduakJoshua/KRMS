@@ -415,7 +415,7 @@ if (!isset($_SESSION['ad-user_id'])) {
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="fees_billing.php">
+                            <a class="nav-link" href="fees_management.php">
                                 <span data-feather="dollar-sign"></span>
                                 Fees Management
                             </a>

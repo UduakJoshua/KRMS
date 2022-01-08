@@ -64,11 +64,14 @@ include_once './model/inc/dashboard_header.php';
                     $class = $_SESSION['class'];
                     $term = $_SESSION['term'];
                     $aSession = $_SESSION['aSession'];
-                    $select_sql = "SELECT * FROM (SELECT *, rank() OVER ( partition by subject order by total desc ) 
-                AS 'rank'    FROM students_score WHERE  term= '$term' && student_class = '$class' && class_arm = '$c_arm' && 
-                session = '$aSession') as temp  ";
+                    $select_sql = "SELECT *, count(admission_no)as ta FROM students_score Group by admission_no
+                    WHERE  term= '$term' && student_class = '$class' && class_arm = '$c_arm' && 
+                session = '$aSession'";
+
                     $sql_result = $conn->query($select_sql);
-                    print_r($sql_result);
+
+
+
                     ?>
 
                     <div>
@@ -101,242 +104,116 @@ include_once './model/inc/dashboard_header.php';
                                 </tr>
                             </thead>
                             <tbody class="ml-2">
-                                <tr>
-                                    <td><strong></strong></td>
-                                    <td style="width: 60%;"> </td>
-                                    <td class="td_center"></td>
-                                    <td class="td_center">T1</td>
-                                    <td class="td_center">T2</td>
-                                    <td class="td_center">Ex</td>
-                                    <td class="td_center">Tot</td>
-                                    <td class="td_center">SP</td>
-                                    <td class="td_center">T1</td>
-                                    <td class="td_center">T2</td>
-                                    <td class="td_center">Ex</td>
-                                    <td class="td_center">Tot</td>
-                                    <td class="td_center">SP</td>
+                                <?php while ($row = $sql_result->fetch_assoc()) : ?>
+                                    <tr>
 
-                                    <td class="td_center">T1</td>
-                                    <td class="td_center">T2</td>
-                                    <td class="td_center">Ex</td>
-                                    <td class="td_center">Tot</td>
-                                    <td class="td_center">SP</td>
-                                    <!-- next-->
-                                    <td class="td_center">T1</td>
-                                    <td class="td_center">T2</td>
-                                    <td class="td_center">Ex</td>
-                                    <td class="td_center">Tot</td>
-                                    <td class="td_center">SP</td>
-
-                                    <td class="td_center">T1</td>
-                                    <td class="td_center">T2</td>
-                                    <td class="td_center">Ex</td>
-                                    <td class="td_center">Tot</td>
-                                    <td class="td_center">SP</td>
-
-                                    <td class="td_center">T1</td>
-                                    <td class="td_center">T2</td>
-                                    <td class="td_center">Ex</td>
-                                    <td class="td_center">Tot</td>
-                                    <td class="td_center">SP</td>
-
-                                    <td class="td_center">T1</td>
-                                    <td class="td_center">T2</td>
-                                    <td class="td_center">Ex</td>
-                                    <td class="td_center">Tot</td>
-                                    <td class="td_center">SP</td>
-
-                                    <td class="td_center">T1</td>
-                                    <td class="td_center">T2</td>
-                                    <td class="td_center">Ex</td>
-                                    <td class="td_center">Tot</td>
-                                    <td class="td_center">SP</td>
-
-                                    <td class="td_center">T1</td>
-                                    <td class="td_center">T2</td>
-                                    <td class="td_center">Ex</td>
-                                    <td class="td_center">Tot</td>
-                                    <td class="td_center">SP</td>
-
-                                    <td class="td_center">T1</td>
-                                    <td class="td_center">T2</td>
-                                    <td class="td_center">Ex</td>
-                                    <td class="td_center">Tot</td>
-                                    <td class="td_center">SP</td>
-
-                                    <td class="td_center">T1</td>
-                                    <td class="td_center">T2</td>
-                                    <td class="td_center">Ex</td>
-                                    <td class="td_center">Tot</td>
-                                    <td class="td_center">SP</td>
-
-                                    <td class="td_center">T1</td>
-                                    <td class="td_center">T2</td>
-                                    <td class="td_center">Ex</td>
-                                    <td class="td_center">Tot</td>
-                                    <td class="td_center">SP</td>
-
-                                    <td class="td_center">T1</td>
-                                    <td class="td_center">T2</td>
-                                    <td class="td_center">Ex</td>
-                                    <td class="td_center">Tot</td>
-                                    <td class="td_center">SP</td>
-
-                                    <td class="td_center">T1</td>
-                                    <td class="td_center">T2</td>
-                                    <td class="td_center">Ex</td>
-                                    <td class="td_center">Tot</td>
-                                    <td class="td_center">SP</td>
-
-                                    <td class="td_center">T1</td>
-                                    <td class="td_center">T2</td>
-                                    <td class="td_center">Ex</td>
-                                    <td class="td_center">Tot</td>
-                                    <td class="td_center">SP</td>
-
-                                    <td class="td_center">T1</td>
-                                    <td class="td_center">T2</td>
-                                    <td class="td_center">Ex</td>
-                                    <td class="td_center">Tot</td>
-                                    <td class="td_center">SP</td>
-                                </tr>
-
-                                <tr>
-                                    <?php
-
-                                    while ($row = $sql_result->fetch_assoc()) :
-                                        echo '<pre>';
-                                        print_r($row);
-                                        echo '</pre>';
-                                        if ($row['subject'] == "Agricultural Science") {
-                                            $AgricT1 = $row['T1'];
-                                            $AgricT2 = $row['T2'];
-                                            $AgricEx = $row['exam'];
-                                            $AgricTot = $row['total'];
-                                        }
-                                        if ($row['subject'] == " Basic Science") {
-                                            $BsT1 = $row['T1'];
-                                            $BsT2 = $row['T2'];
-                                            $BsEx = $row['exam'];
-                                            $BsTot = $row['total'];
-                                        }
-                                    ?>
-                                        <td><strong></strong> 1</td>
-                                        <td style="width: 60%;"><?php echo $row['student_name'] ?> </td>
-                                        <td class="td_center"> <?php echo $row['admission_no'] ?></td>
-
-                                        <td class="td_center"><?php echo $AgricT1; ?></td>
-                                        <td class="td_center"><?php echo $AgricT2; ?></td>
-                                        <td class="td_center"><?php echo $AgricEx; ?></td>
-                                        <td class="td_center"><?php echo $AgricTot; ?></td>
-                                        <td class="td_center">1st</td>
-
-                                        <td class="td_center"><?php echo $BsT1; ?></td>
-                                        <td class="td_center"><?php echo $BsT1; ?></td>
-                                        <td class="td_center"><?php echo $BsT1; ?></td>
-                                        <td class="td_center"><?php echo $BsT1; ?></td>
-                                        <td class="td_center">1st</td>
-
-                                        <td class="td_center"><?php echo $row['T1']; ?></td>
-                                        <td class="td_center"><?php echo $row['T2']; ?></td>
-                                        <td class="td_center"><?php echo $row['exam']; ?></td>
-                                        <td class="td_center"><?php echo $row['total']; ?></td>
-                                        <td class="td_center">1st</td>
-
-                                        <td class="td_center"><?php echo $row['T1']; ?></td>
-                                        <td class="td_center"><?php echo $row['T2']; ?></td>
-                                        <td class="td_center"><?php echo $row['exam']; ?></td>
-                                        <td class="td_center"><?php echo $row['total']; ?></td>
-                                        <td class="td_center">1st</td>
-
-                                        <td class="td_center"><?php echo $row['T1']; ?></td>
-                                        <td class="td_center"><?php echo $row['T2']; ?></td>
-                                        <td class="td_center"><?php echo $row['exam']; ?></td>
-                                        <td class="td_center"><?php echo $row['total']; ?></td>
-                                        <td class="td_center">1st</td>
-
-                                        <td class="td_center"><?php echo $row['T1']; ?></td>
-                                        <td class="td_center"><?php echo $row['T2']; ?></td>
-                                        <td class="td_center"><?php echo $row['exam']; ?></td>
-                                        <td class="td_center"><?php echo $row['total']; ?></td>
-                                        <td class="td_center">1st</td>
-
-                                        <td class="td_center"><?php echo $row['T1']; ?></td>
-                                        <td class="td_center"><?php echo $row['T2']; ?></td>
-                                        <td class="td_center"><?php echo $row['exam']; ?></td>
-                                        <td class="td_center"><?php echo $row['total']; ?></td>
-                                        <td class="td_center">1st</td>
-
-                                        <td class="td_center"><?php echo $row['T1']; ?></td>
-                                        <td class="td_center"><?php echo $row['T2']; ?></td>
-                                        <td class="td_center"><?php echo $row['exam']; ?></td>
-                                        <td class="td_center"><?php echo $row['total']; ?></td>
-                                        <td class="td_center">1st</td>
-
-                                        <td class="td_center"><?php echo $row['T1']; ?></td>
-                                        <td class="td_center"><?php echo $row['T2']; ?></td>
-                                        <td class="td_center"><?php echo $row['exam']; ?></td>
-                                        <td class="td_center"><?php echo $row['total']; ?></td>
-                                        <td class="td_center">1st</td>
-
-                                        <td class="td_center"><?php echo $row['T1']; ?></td>
-                                        <td class="td_center"><?php echo $row['T2']; ?></td>
-                                        <td class="td_center"><?php echo $row['exam']; ?></td>
-                                        <td class="td_center"><?php echo $row['total']; ?></td>
-                                        <td class="td_center">1st</td>
-
-                                        <td class="td_center"><?php echo $row['T1']; ?></td>
-                                        <td class="td_center"><?php echo $row['T2']; ?></td>
-                                        <td class="td_center"><?php echo $row['exam']; ?></td>
-                                        <td class="td_center"><?php echo $row['total']; ?></td>
-                                        <td class="td_center">1st</td>
-
-                                        <td class="td_center"><?php echo $row['T1']; ?></td>
-                                        <td class="td_center"><?php echo $row['T2']; ?></td>
-                                        <td class="td_center"><?php echo $row['exam']; ?></td>
-                                        <td class="td_center"><?php echo $row['total']; ?></td>
-                                        <td class="td_center">1st</td>
-                                        <td class="td_center"><?php echo $row['T1']; ?></td>
-                                        <td class="td_center"><?php echo $row['T2']; ?></td>
-                                        <td class="td_center"><?php echo $row['exam']; ?></td>
-                                        <td class="td_center"><?php echo $row['total']; ?></td>
-                                        <td class="td_center">1st</td>
-
-                                        <td class="td_center"><?php echo $row['T1']; ?></td>
-                                        <td class="td_center"><?php echo $row['T2']; ?></td>
-                                        <td class="td_center"><?php echo $row['exam']; ?></td>
-                                        <td class="td_center"><?php echo $row['total']; ?></td>
-                                        <td class="td_center">1st</td>
+                                        <td><strong></strong></td>
+                                        <td style="width: 60%;"> <?php echo $row['student_name'] ?></td>
+                                        <td class="td_center"><?php echo $row['admission_no'] ?></td>
 
 
-                                        <td class="td_center"><?php echo $row['T1']; ?></td>
-                                        <td class="td_center"><?php echo $row['T2']; ?></td>
-                                        <td class="td_center"><?php echo $row['exam']; ?></td>
-                                        <td class="td_center"><?php echo $row['total']; ?></td>
-                                        <td class="td_center">1st</td>
+                                        <td class="td_center">T1</td>
+                                        <td class="td_center">T2</td>
+                                        <td class="td_center">Ex</td>
+                                        <td class="td_center">Tot</td>
+                                        <td class="td_center">SP</td>
+                                        <td class="td_center">T1</td>
+                                        <td class="td_center">T2</td>
+                                        <td class="td_center">Ex</td>
+                                        <td class="td_center">Tot</td>
+                                        <td class="td_center">SP</td>
 
+                                        <td class="td_center">T1</td>
+                                        <td class="td_center">T2</td>
+                                        <td class="td_center">Ex</td>
+                                        <td class="td_center">Tot</td>
+                                        <td class="td_center">SP</td>
+                                        <!-- next-->
+                                        <td class="td_center">T1</td>
+                                        <td class="td_center">T2</td>
+                                        <td class="td_center">Ex</td>
+                                        <td class="td_center">Tot</td>
+                                        <td class="td_center">SP</td>
 
-                                        <td class="td_center"><?php echo $row['T1']; ?></td>
-                                        <td class="td_center"><?php echo $row['T2']; ?></td>
-                                        <td class="td_center"><?php echo $row['exam']; ?></td>
-                                        <td class="td_center"><?php echo $row['total']; ?></td>
-                                        <td class="td_center">1st</td>
+                                        <td class="td_center">T1</td>
+                                        <td class="td_center">T2</td>
+                                        <td class="td_center">Ex</td>
+                                        <td class="td_center">Tot</td>
+                                        <td class="td_center">SP</td>
 
+                                        <td class="td_center">T1</td>
+                                        <td class="td_center">T2</td>
+                                        <td class="td_center">Ex</td>
+                                        <td class="td_center">Tot</td>
+                                        <td class="td_center">SP</td>
 
-                                </tr>
+                                        <td class="td_center">T1</td>
+                                        <td class="td_center">T2</td>
+                                        <td class="td_center">Ex</td>
+                                        <td class="td_center">Tot</td>
+                                        <td class="td_center">SP</td>
 
-                            <?php endwhile; ?>
+                                        <td class="td_center">T1</td>
+                                        <td class="td_center">T2</td>
+                                        <td class="td_center">Ex</td>
+                                        <td class="td_center">Tot</td>
+                                        <td class="td_center">SP</td>
 
+                                        <td class="td_center">T1</td>
+                                        <td class="td_center">T2</td>
+                                        <td class="td_center">Ex</td>
+                                        <td class="td_center">Tot</td>
+                                        <td class="td_center">SP</td>
 
+                                        <td class="td_center">T1</td>
+                                        <td class="td_center">T2</td>
+                                        <td class="td_center">Ex</td>
+                                        <td class="td_center">Tot</td>
+                                        <td class="td_center">SP</td>
 
+                                        <td class="td_center">T1</td>
+                                        <td class="td_center">T2</td>
+                                        <td class="td_center">Ex</td>
+                                        <td class="td_center">Tot</td>
+                                        <td class="td_center">SP</td>
 
+                                        <td class="td_center">T1</td>
+                                        <td class="td_center">T2</td>
+                                        <td class="td_center">Ex</td>
+                                        <td class="td_center">Tot</td>
+                                        <td class="td_center">SP</td>
+
+                                        <td class="td_center">T1</td>
+                                        <td class="td_center">T2</td>
+                                        <td class="td_center">Ex</td>
+                                        <td class="td_center">Tot</td>
+                                        <td class="td_center">SP</td>
+
+                                        <td class="td_center">T1</td>
+                                        <td class="td_center">T2</td>
+                                        <td class="td_center">Ex</td>
+                                        <td class="td_center">Tot</td>
+                                        <td class="td_center">SP</td>
+
+                                        <td class="td_center">T1</td>
+                                        <td class="td_center">T2</td>
+                                        <td class="td_center">Ex</td>
+                                        <td class="td_center">Tot</td>
+                                        <td class="td_center">SP</td>
+
+                                        <td class="td_center">T1</td>
+                                        <td class="td_center">T2</td>
+                                        <td class="td_center">Ex</td>
+                                        <td class="td_center">Tot</td>
+                                        <td class="td_center">SP</td>
+
+                                    </tr>
+                                <?php endwhile ?>
                             </tbody>
 
                         </table>
                     </div>
                 </div>
-
-
     </section>
     <div>
         <button class=" btn btn-primary " onclick="window.print()">Print Spreadsheet</button>

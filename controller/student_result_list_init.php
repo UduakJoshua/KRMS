@@ -97,7 +97,7 @@ if (isset($_POST['mock_disp_initialize'])) {
 
 // initialize student list to generate bill
 
-if (isset($_POST['fees_bill'])) {
+if (isset($_POST['fees_schedule'])) {
 
     $class = test_input($_POST['student_class']);
     $arm =  test_input($_POST['arm']);
@@ -113,6 +113,8 @@ if (isset($_POST['fees_bill'])) {
     header("location:fees_billing.php");
     exit();
 }
+
+
 
 if (isset($_POST['initializeR'])) {
 

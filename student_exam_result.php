@@ -340,7 +340,7 @@ $academic_session = "2021/2022";
                     $admin_no = $_SESSION['admin_no'];
                     $class = $_SESSION['student_class'];
                     $term = $_SESSION['term'];
-                    $select_sql = "SELECT COUNT(subject) AS no_subjects, SUM(T1+T2+exam) AS overall,  (SELECT no_of_subjects FROM no_of_subjects WHERE class_name = '$class') subject_total, student_name   FROM students_score WHERE admission_no='$admin_no' && term= '1st Term'";
+                    $select_sql = "SELECT COUNT(subject) AS no_subjects, SUM(T1+T2+ project + assignment + exam) AS overall,  (SELECT no_of_subjects FROM no_of_subjects WHERE class_name = '$class') subject_total, student_name   FROM students_score WHERE admission_no='$admin_no' && term= '1st Term'";
                     $sql_result = $conn->query($select_sql);
 
                     ?>

@@ -37,18 +37,15 @@ include_once './model/inc/student_dash_header.php';
     <div class="row">
       <div class="col-md-4">
         <a href="e_learning_students.php" class="text-decoration-none"><button class="btn btn-dark btn-block mt-4">E-Learning / Assignment</button></a>
-
       </div>
       <?php if ($row['class_name'] == "JSS Three" || $row['class_name'] == "SSS Three") :
       ?>
         <div class="col-md-4">
-          <a href="mock_result_display.php" class="text-decoration-none"><button class="btn btn-dark btn-block mt-4">Check Mock Result (JSS3 & SSS3)</button></a>
-
+          <a href="select_mock_no.php" class="text-decoration-none"><button class="btn btn-dark btn-block mt-4">Check Mock Result (JSS3 & SSS3)</button></a>
         </div>
       <?php endif; ?>
       <div class="col-md-4">
         <a href="student_result_display.php" class="text-decoration-none"><button class="btn btn-danger btn-block mt-4">Check Midterm Result</button></a>
-
       </div>
 
       <!--col 2  and logic to check student section-->
@@ -73,14 +70,9 @@ include_once './model/inc/student_dash_header.php';
 
     <div class="row">
 
-
-
-
-
       <!--col 2 -->
       <div class="col-md-4">
         <a href="cbt.php" class="text-decoration-none"><button class="btn btn-warning btn-block mt-4"> Test Yourself</button></a>
-
       </div>
     </div>
   <?php endwhile; ?>

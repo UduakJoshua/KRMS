@@ -184,7 +184,7 @@ $academic_session = "2021/2022";
                                                                 ?></td>
 
                                         <!--remarks-->
-                                        <td class="td_center">
+                                        <td>
                                             <?php
                                             if ($total >= 80) {
                                                 echo "Excellent";
@@ -210,116 +210,114 @@ $academic_session = "2021/2022";
                 </div>
                 <!-- score end here-->
                 <!-- Psychomotor section-->
-                <div class="row">
-                    <div class="col-md-3">
-                        <table class=" table table-stripped table-sm  tab">
+                <div class="col-md-3">
+                    <table class=" table table-stripped table-sm  tab">
+                        <?php
+
+                        $admin_no = $_SESSION['admin_no'];
+
+                        $select_sql = "SELECT * FROM psychomotor WHERE admission_no= '$admin_no' && term = '$term'";
+                        $sql_result = $conn->query($select_sql);
+
+                        ?>
+
+                        <thead class="thead-dark ">
+
+                            <tr>
+                                <th colspan="2" class="td_center">
+                                    <h6>AFFECTIVE DOMAIN</h6>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="ml-2 table-bordered">
                             <?php
 
-                            $admin_no = $_SESSION['admin_no'];
+                            while ($row = $sql_result->fetch_assoc()) :
 
-                            $select_sql = "SELECT * FROM psychomotor WHERE admission_no= '$admin_no' && term = '$term'";
-                            $sql_result = $conn->query($select_sql);
+
 
                             ?>
-
-                            <thead class="thead-dark ">
-
+                                <tr class="p-2">
+                                    <td>Punctuality</td>
+                                    <td class="td_align"><?php echo $row['punctuality'] ?></td>
+                                </tr>
                                 <tr>
-                                    <th colspan="2" class="td_center">
-                                        <h6>AFFECTIVE DOMAIN</h6>
+                                    <td>Mental Alertness</td>
+                                    <td class="td_align"><?php echo $row['alertness'] ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Attentiveness</td>
+                                    <td class="td_align"><?php echo $row['attentiveness'] ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Respect</td>
+                                    <td class="td_align"><?php echo $row['respect'] ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Neatness</td>
+                                    <td class="td_align"><?php echo $row['neatness'] ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Politeness</td>
+                                    <td class="td_align"><?php echo $row['politeness'] ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Honesty</td>
+                                    <td class="td_align"><?php echo $row['honesty'] ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Relationship with Peers</td>
+                                    <td class="td_align"><?php echo $row['relationship'] ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Attitude to School</td>
+                                    <td class="td_align"><?php echo $row['attitude'] ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Spirit of Team Work</td>
+                                    <td class="td_align"><?php echo $row['team_work'] ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Completes School Work Promptly</td>
+                                    <td class="td_align"><?php echo $row['school_work'] ?></td>
+                                </tr>
+                                <tr>
+                                    <th colspan="2" class="table-dark text-center">
+                                        <h6>PSYCHOMOTOR SKILLS</h6>
                                     </th>
                                 </tr>
-                            </thead>
-                            <tbody class="ml-2 table-bordered">
-                                <?php
 
-                                while ($row = $sql_result->fetch_assoc()) :
-
-
-
-                                ?>
-                                    <tr class="p-2">
-                                        <td>Punctuality</td>
-                                        <td class="td_align"><?php echo $row['punctuality'] ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Mental Alertness</td>
-                                        <td class="td_align"><?php echo $row['alertness'] ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Attentiveness</td>
-                                        <td class="td_align"><?php echo $row['attentiveness'] ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Respect</td>
-                                        <td class="td_align"><?php echo $row['respect'] ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Neatness</td>
-                                        <td class="td_align"><?php echo $row['neatness'] ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Politeness</td>
-                                        <td class="td_align"><?php echo $row['politeness'] ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Honesty</td>
-                                        <td class="td_align"><?php echo $row['honesty'] ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Relationship with Peers</td>
-                                        <td class="td_align"><?php echo $row['relationship'] ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Attitude to School</td>
-                                        <td class="td_align"><?php echo $row['attitude'] ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Spirit of Team Work</td>
-                                        <td class="td_align"><?php echo $row['team_work'] ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Completes School Work Promptly</td>
-                                        <td class="td_align"><?php echo $row['school_work'] ?></td>
-                                    </tr>
-                                    <tr>
-                                        <th colspan="2" class="table-dark text-center">
-                                            <h6>PSYCHOMOTOR SKILLS</h6>
-                                        </th>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Reading</td>
-                                        <td class="td_align"><?php echo $row['reading'] ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Verbal Fluency / Diction</td>
-                                        <td class="td_align"><?php echo $row['diction'] ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Handwriting</td>
-                                        <td class="td_align"><?php echo $row['handwriting'] ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Musical Skills</td>
-                                        <td class="td_align"><?php echo $row['music'] ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Creative Art</td>
-                                        <td class="td_align"><?php echo $row['art'] ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Physical Education</td>
-                                        <td class="td_align"><?php echo $row['phe'] ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td>General Reasoning</td>
-                                        <td class="td_align"><?php echo $row['punctuality'] ?></td>
-                                    </tr>
-                                <?php endwhile; ?>
-                            </tbody>
-                        </table>
-                    </div>
+                                <tr>
+                                    <td>Reading</td>
+                                    <td class="td_align"><?php echo $row['reading'] ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Verbal Fluency / Diction</td>
+                                    <td class="td_align"><?php echo $row['diction'] ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Handwriting</td>
+                                    <td class="td_align"><?php echo $row['handwriting'] ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Musical Skills</td>
+                                    <td class="td_align"><?php echo $row['music'] ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Creative Art</td>
+                                    <td class="td_align"><?php echo $row['art'] ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Physical Education</td>
+                                    <td class="td_align"><?php echo $row['phe'] ?></td>
+                                </tr>
+                                <tr>
+                                    <td>General Reasoning</td>
+                                    <td class="td_align"><?php echo $row['punctuality'] ?></td>
+                                </tr>
+                            <?php endwhile; ?>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

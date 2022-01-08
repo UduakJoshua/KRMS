@@ -2,163 +2,206 @@
 require_once 'dbase_conn.php';
 include_once 'function.php';
 
-$student_name = $admission_no = $term = $a_session = $student_class = $subject = $T1 = $T2
-    = $project = $assignment = $exam =   "";
+$school_fees = $discount = $bus = $books = $wears = $arrears =  $total = $amount_paid = $first_deposit
+    = $second_deposit = $third_deposit = 0;
+$update = false;
 
 
+if (isset($_POST['addTemplate'])) {
+    $term = test_input($_POST['term']);
+    $student_class = test_input($_POST['student_class']);
+    $fees_type = test_input($_POST['fees_type']);
+    $fees_amount = test_input($_POST['fees_amount']);
 
-if (isset($_POST['save_scores'])) {
-    // get the total number of student to populate
-    $total_t1 = count($_POST['T1']);
+    $sql = "INSERT INTO fees_schedule( student_class, fees, fees_type, term)
+            VALUES (?,?,?,?) ";
 
-    // Looping over all files
-    for ($i = 0; $i < $total_t1; $i++) {
-        $admission_no = test_input($_POST['admin_no'][$i]);
-        $term = test_input($_POST['term']);
-        $a_session = test_input($_POST['a_session']);
-        $student_class = test_input($_POST['student_class']);
-        $student_name = test_input($_POST['student_name'][$i]);
-        $T1 = test_input($_POST['T1'][$i]);
-        $T2 = test_input($_POST['T2'][$i]);
-        $project = test_input($_POST['project'][$i]);
-        $assignment = test_input($_POST['assign'][$i]);
-        $exam = test_input($_POST['exam'][$i]);
-        $subject = test_input($_POST['subject']);
-
-        $sql_sel = "SELECT * FROM students_score WHERE admission_no = ? LIMIT 1";
-        $stmt = $conn->prepare($sql_sel);
-
-        $stmt->bind_param('s', $admission_no);
-        $stmt->execute();
-
-        $result = $stmt->get_result();
-        $row = $result->fetch_assoc();
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('ssss',  $student_class, $fees_amount, $fees_type, $term);
 
 
-        if (!empty($row) && $row['admission_no'] = $admission_no && $row['term'] = $term && $row['session'] = $a_session && $row['subject'] == $subject) {
-            $errors = "Result already exist for " . $admission_no . ", please check your parameters and try again!  ";
-            echo "<div class= 'alert-warning' id='error'>";
-            echo $errors;
-            echo "</div> ";
-        } else {
-            $sql = "INSERT INTO students_score (id, student_name, admission_no, student_class, subject, T1, T2, 
-            project, assignment, exam, session, term) 
-            VALUES 
-            ('','$student_name' ,'$admission_no' , '$student_class' ,'$subject' , $T1 ,$T2
-    , '$project' , '$assignment' , '$exam ', '$a_session' , '$term')";
-
-            if ($conn->query($sql) === TRUE) {
-                $errors = " Scores for " . $student_name . " with " . $admission_no . " succesfully uploaded!";
-                echo "<div class= 'alert-success' id='error'>";
-                echo $errors;
-                echo "</div> ";
-            }
-        }
+    if ($stmt->execute()) {
+        $_SESSION['fees'] = $fees_amount;
+        $_SESSION['message'] = "You have succesfully created a fees template!";
+        $_SESSION['msg_type'] = "success";
+        header('Location:fees_template.php');
+    } else {
+        $_SESSION['message'] = "Failed to create a fees template!";
+        $_SESSION['msg_type'] = "danger";
     }
 
-    // echo $term . ' ' . $subject . ' ' . $T1 . ' ' . $T2 . ' ' . $admission_no . '' . $student_class . ' ' . $student_name . '<br>';
+    $stmt->close();
+    $conn->close();
 }
 
-// midterm scores upload
 
-
-if (isset($_POST['save_mid'])) {
+if (isset($_POST['bill_student'])) {
     // get the total number of student to populate
-    $total_t2 = count($_POST['T2']);
+    $total_fees = count($_POST['discount']);
 
     // Looping over all files
-    for ($i = 0; $i < $total_t2; $i++) {
+    for ($i = 0; $i < $total_fees; $i++) {
+        $student_name = test_input($_POST['student_name'][$i]);
         $admission_no = test_input($_POST['admin_no'][$i]);
+        $school_fees = test_input($_POST['school_fees']);
+        $discount = test_input($_POST['discount'][$i]);
+        $bus = test_input($_POST['bus'][$i]);
+        $books = test_input($_POST['books'][$i]);
+        $wears = test_input($_POST['wears'][$i]);
+        $arrears = test_input($_POST['arrears'][$i]);
         $term = test_input($_POST['term']);
         $a_session = test_input($_POST['a_session']);
         $student_class = test_input($_POST['student_class']);
-        $student_name = test_input($_POST['student_name'][$i]);
-        $T2 = test_input($_POST['T2'][$i]);
-        $subject = test_input($_POST['subject']);
+        $student_arm = test_input($_POST['student_arm']);
+        $total = (int)(($school_fees - $discount) + $bus + $books + $wears + $arrears);
+        $balance = (int)($total - 0);
+        $amount_paid = 0;
 
-        $sql = "SELECT * FROM mid_term_scores WHERE admission_no = ?  && subject = ? && term = ? && session = ?";
+        // run an insert query to store the data in a table
+        $sql = "INSERT INTO fees_total( admission_no, student_name, student_class, student_arm, 
+        total_fees, amount_paid, balance, term, a_session)
+            VALUES (?,?,?,?,?,?,?,?, ?) ";
+
         $stmt = $conn->prepare($sql);
+        $stmt->bind_param(
+            'sssssisss',
+            $admission_no,
+            $student_name,
+            $student_class,
+            $student_arm,
+            $total,
+            $amount_paid,
+            $balance,
+            $term,
+            $a_session
+        );
 
-        $stmt->bind_param('ssss', $admission_no, $subject, $term, $a_session);
-        $stmt->execute();
 
-        $result = $stmt->get_result();
-        $row = $result->fetch_assoc();
-
-
-        if (!empty($row) && $row['admission_no'] === $admission_no) {
-
-            $errors = "Scores already exist for " . $subject . " for " . $student_name . "  for " . $term . " - " . $a_session . ", please check your parameters and try again! ";
-            //$errors = "Score exist" . $student_name . " with" . $admission_no . ", please check your parameters and try again! ";
-            echo "<div class='alert-warning' id='error'>";
-            echo $errors;
-            echo "</div> ";
+        if ($stmt->execute()) {
+            //$_SESSION['message'] = "You have succesfully billed the class!";
+            //$_SESSION['msg_type'] = "success";
+            header('Location:fees_payment_init.php');
         } else {
-            $sql = "INSERT INTO mid_term_scores
-    (id, student_name, admission_no, student_class, subject, T2, session, term)
-    VALUES
-    ('','$student_name' ,'$admission_no' , '$student_class' ,'$subject' ,$T2, '$a_session' , '$term')";
-
-            if ($conn->query($sql) === TRUE) {
-                $errors = "Mid-Term Scores for " . $subject . " for " . $student_name . " with " . $admission_no . " for " . $term . " - " . $a_session . " succesfully uploaded!";
-                echo "<div class='alert-success' id='error'>";
-                echo $errors;
-                echo "</div> ";
-            }
+            $_SESSION['message'] = "Failed to bill students in this class!";
+            $_SESSION['msg_type'] = "danger";
+            header('Location:fees_payment_init.php');
         }
+
+        $stmt->close();
     }
-    exit();
-    // echo $term . ' ' . $subject . ' ' . $T1 . ' ' . $T2 . ' ' . $admission_no . '' . $student_class . ' ' . $student_name . '<br>';
 }
 
-// JSS3 and SS3 Mock logic
+if (isset($_POST['fees_payment_init'])) {
 
-if (isset($_POST['save_mock'])) {
-    // get the total number of student to populate
-    $total_score = count($_POST['score']);
+    $class = test_input($_POST['student_class']);
+    $arm =  test_input($_POST['arm']);
+    $term =  test_input($_POST['term']);
+    $academic_session = test_input($_POST['aSession']);
 
-    // Looping over all files
-    for ($i = 0; $i < $total_score; $i++) {
-        $admission_no = test_input($_POST['admin_no'][$i]);
-        $term = test_input($_POST['term']);
-        $a_session = test_input($_POST['a_session']);
-        $student_class = test_input($_POST['student_class']);
-        $student_name = test_input($_POST['student_name'][$i]);
-        $score = test_input($_POST['score'][$i]);
-        $subject = test_input($_POST['subject']);
-        $mock_no = test_input($_POST['mock_no']);
+    // create a select query
+    $_SESSION['arm'] = $arm;
+    $_SESSION['class'] = $class;
+    $_SESSION['term'] = $term;
+    $_SESSION['aSession'] = $academic_session;
 
-        $sql = "SELECT * FROM mock_scores WHERE admission_no = ?  && subject_title = ? && term = ? && session = ? && mock_no = ?";
-        $stmt = $conn->prepare($sql);
-
-        $stmt->bind_param('sssss', $admission_no, $subject, $term, $a_session, $mock_no);
-        $stmt->execute();
-
-        $result = $stmt->get_result();
-        $row = $result->fetch_assoc();
-
-
-        if (!empty($row) && $row['admission_no'] === $admission_no) {
-
-            $errors = "Scores already exist for " . $subject . " for " . $student_name . "  for " . $term . " - " . $a_session . ", please check your parameters and try again! ";
-            //$errors = "Score exist" . $student_name . " with" . $admission_no . ", please check your parameters and try again! ";
-            echo "<div class='alert-warning' id='error'>";
-            echo $errors;
-            echo "</div> ";
-        } else {
-            $sql = "INSERT INTO mock_scores
-    (id, admission_no, student_name,  student_class, subject_title, score, session, term, mock_no)
-    VALUES
-    ('','$admission_no','$student_name' , '$student_class' ,'$subject' ,$score, '$a_session' , '$term', '$mock_no')";
-
-            if ($conn->query($sql) === TRUE) {
-                $errors = "Mock Scores for " . $subject . " for " . $student_name . " with " . $admission_no . " for " . $term . " - " . $mock_no . " succesfully uploaded!";
-                echo "<div class='alert-success' id='error'>";
-                echo $errors;
-                echo "</div> ";
-            }
-        }
-    }
+    header("location:fees_payment.php");
     exit();
-    // echo $term . ' ' . $subject . ' ' . $T1 . ' ' . $T2 . ' ' . $admission_no . '' . $student_class . ' ' . $student_name . '<br>';
+}
+
+
+
+if (isset($_GET['pay'])) {
+    $id = $_GET['pay'];
+    $update = true;
+    $sql = "SELECT * FROM fees_total WHERE id=?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('i', $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    //$result = mysqli_query($conn, $sql);
+
+    if ($row = $result->num_rows > 0) {
+        //output data of each row
+        while ($row = $result->fetch_assoc()) {
+
+            $student_name = $row['student_name'];
+            $student_class = $row['student_class'];
+            $student_arm = $row['student_arm'];
+            $admission_no = $row['admission_no'];
+            $total_fees = $row['total_fees'];
+            $first_deposit = $row['first_deposit'];
+            $second_deposit = $row['second_deposit'];
+            $third_deposit = $row['third_deposit'];
+            $amount_paid = $row['amount_paid'];
+            $balance = $row['balance'];
+            $term = $row['term'];
+            $academic_session = $row['a_session'];
+            $date1 = $row['date_of_pay1'];
+            $date2 = $row['date_of_pay2'];
+            $date3 = $row['date_of_pay3'];
+            $date_issued = $row['date_issued'];
+        }
+    } else {
+        echo "No results found";
+    }
+
+
+    $conn->close();
+}
+
+if (isset($_POST['make_pay'])) {
+    $id = $_POST['id'];
+    $update = true;
+    $student_name = test_input($_POST['student_name']);
+    $admission_no = test_input($_POST['admission_no']);
+    $student_class = test_input($_POST['student_class']);
+    $date1 = test_input($_POST['date_paid1']);
+    $date2 = test_input($_POST['date_paid2']);
+    $date3 = test_input($_POST['date_paid3']);
+    $date_issued = test_input($_POST['date_issued']);
+    $student_arm =  test_input($_POST['student_arm']);
+    $total_fees =  test_input($_POST['total_fees']);
+    $first_deposit = test_input($_POST['1st_depo']);
+    $second_deposit = test_input($_POST['2nd_depo']);
+    $third_deposit = test_input($_POST['3rd_depo']);
+    $amount_paid = (int)($first_deposit + $second_deposit + $third_deposit);
+    $balance =   (int)($total_fees - $amount_paid);
+
+    $sql = "UPDATE fees_total SET    first_deposit = '$first_deposit',
+    second_deposit = '$second_deposit', third_deposit = '$third_deposit', 
+    amount_paid = '$amount_paid ', balance = '$balance' , date_of_pay1 = '$date1' , 
+    date_of_pay2 = '$date2', date_of_pay3 = '$date3', date_issued = '$date_issued' WHERE id=$id";
+
+    if ($conn->query($sql) === TRUE) {
+
+        $_SESSION['message'] = "Payment for  $student_name  successfully made!";
+        $_SESSION['msg_type'] = "success";
+        header("location:./fees_payment.php");
+        exit();
+    } elseif ($conn->error) {
+        $_SESSION['message'] = " $conn->error";
+        $_SESSION['msg_type'] = "danger";
+        header("location:./make_pay.php");
+        exit();
+    }
+
+
+
+    $conn->close();
+}
+
+
+
+if (isset($_POST['post_pay'])) {
+
+    $class = test_input($_POST['student_class']);
+    $arm =  test_input($_POST['arm']);
+
+    // create a select query
+    $_SESSION['arm'] = $arm;
+    $_SESSION['class'] = $class;
+
+    header("location:./section.php");
+    exit();
 }

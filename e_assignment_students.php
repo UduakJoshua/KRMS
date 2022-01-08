@@ -46,7 +46,7 @@ include_once './model/inc/student_dash_header.php';
             $student_class = $_SESSION['student_class'];
             //echo $student_class;
 
-            $select_sql = "SELECT * FROM student_assignments WHERE student_class =  '$student_class' ORDER BY time_posted DESC ";
+            $select_sql = "SELECT * FROM student_assignments WHERE student_class =  '$student_class' ORDER BY time_posted DESC LIMIT 6";
             $sql_result = $conn->query($select_sql);
             ?>
             <div class="table-responsive">
