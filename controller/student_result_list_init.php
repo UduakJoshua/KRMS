@@ -116,6 +116,7 @@ if (isset($_POST['fees_schedule'])) {
 
 
 
+
 if (isset($_POST['initializeR'])) {
 
     $class = test_input($_POST['student_class']);

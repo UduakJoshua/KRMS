@@ -1,14 +1,14 @@
 <?php
 require './controller/dbase_conn.php';
-require './controller/student_result_list_init.php';
-$title = "BCA | Bill Students";
+require './controller/bill_upload_logic.php';
+$title = "BCA | Class Payments";
 include_once './model/inc/dashboard_header.php';
 
 ?>
 
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h4">Bill Students </h1>
+        <h1 class="h4">View Class Payment </h1>
         <div class=" mb-2 mb-md-0">
             <div class="mr-2">
 
@@ -20,7 +20,18 @@ include_once './model/inc/dashboard_header.php';
 
 
     <section>
-
+        <div class="bg-info p-2 text-white">
+            <h5><strong>How to use!</strong></h5>
+            <p>To view the termly fees payment by class, simply follow the steps below</p>
+            <ul>
+                <li>Select the Desired Class </li>
+                <li>Select the Arm</li>
+                <li>Select the current Term</li>
+                <li>Select the current Academic Session</li>
+                <li>Click the Display Payments button</li>
+            </ul>
+        </div>
+        <hr>
 
         <?php
 
@@ -34,13 +45,13 @@ include_once './model/inc/dashboard_header.php';
 
         <div class="row justify-content-center">
             <div class="col-md-12">
-                <form action="fees_billing.php" method="POST">
+                <form action="fees_view_init.php" method="POST">
                     <div class="card">
                         <!--card header begins here-->
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="card-header">
-                                    <h5>Select Class to Bill</h5>
+                                    <h5>Select Class to view fees payment details</h5>
                                 </div>
                             </div>
                         </div>
@@ -54,7 +65,7 @@ include_once './model/inc/dashboard_header.php';
 
                                             <?php
                                             require_once "controller/class_logic.php";
-                                            $select_sql = "SELECT * FROM classes ";
+                                            $select_sql = "SELECT * FROM classes ORDER BY className ASC";
                                             $sql_result = $conn->query($select_sql);
                                             ?>
                                             <select name="student_class" id="student_class" class="form-control ">
@@ -67,7 +78,7 @@ include_once './model/inc/dashboard_header.php';
                                         </div>
 
                                         <div class="col-md-2 form-group">
-                                            <label for="class">Arm</label>
+                                            <label for="arm">Arm</label>
                                             <select name="arm" id="arm" class="form-control ">
 
                                                 <option value="Faithfulness"> Faithfulness</option>
@@ -107,9 +118,7 @@ include_once './model/inc/dashboard_header.php';
 
                                             <select name="aSession" id="aSession" class="form-control ">
 
-                                                <option value="2020/2021"> 2020/2021 </option>
-                                                <option value="2021/2022"> 2021/2022 </option>
-                                                <option value="2022/2023"> 2022/2023</option>
+                                                <option value="2021/2022">2021/2022</option>
 
                                             </select>
                                         </div>
@@ -123,11 +132,11 @@ include_once './model/inc/dashboard_header.php';
                             <div class="row">
                                 <div class="col-md-6">
 
-                                    <button type="submit" class="btn btn-primary" name="fees_schedule">Initialize</button>
+                                    <button type="submit" class="btn btn-primary" name="class_report">Display Payments</button>
                                 </div>
 
                                 <div class="col-md-6">
-                                    <a href="fees_management.php"><button type="button" class="btn btn-warning">Back </button></a>
+                                    <a href="fees_report.php"><button type="button" style="width:30%;" class="btn btn-warning">Back</button></a>
                                 </div>
                             </div>
                         </div>

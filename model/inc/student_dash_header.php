@@ -176,6 +176,13 @@ if (!isset($_SESSION['st-user_id'])) {
             text-align: center;
         }
 
+        .dashboard {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+        }
+
 
 
 
@@ -242,6 +249,10 @@ if (!isset($_SESSION['st-user_id'])) {
             .student-info h2 {
                 font-size: 20px;
                 height: 60px;
+            }
+
+            .dashboard {
+                flex-direction: column;
             }
         }
 

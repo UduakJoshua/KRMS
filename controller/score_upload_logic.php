@@ -60,6 +60,7 @@ if (isset($_POST['save_exam_scores'])) {
             }
         }
     }
+
     if (isset($_SESSION['staff-username'])) {
         echo "<a href = 'teacher_exam_init.php'><button class= 'btn btn-primary m-3 p-2' >";
         echo "Input Another Score";

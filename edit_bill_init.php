@@ -1,18 +1,18 @@
 <?php
 require './controller/dbase_conn.php';
-require './controller/student_result_list_init.php';
-$title = "BCA | Bill Students";
+require './controller/bill_upload_logic.php';
+$title = "BCA | Edit Student Bill";
 include_once './model/inc/dashboard_header.php';
 
 ?>
 
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h4">Bill Students </h1>
+        <h1 class="h4">Edit Bill </h1>
         <div class=" mb-2 mb-md-0">
             <div class="mr-2">
 
-                <p>Welcome <?php echo $_SESSION['username']; ?></p>
+                <p> <?php echo $_SESSION['username']; ?></p>
             </div>
 
         </div>
@@ -20,7 +20,19 @@ include_once './model/inc/dashboard_header.php';
 
 
     <section>
+        <div class="bg-info p-2 text-white">
+            <h5><strong>How to Edit Student Bill!</strong></h5>
 
+            <ul>
+                <li>Select a Class</li>
+                <li>Select the Arm </li>
+                <li>Select the Term and Academic Session</li>
+                <li>Click the Initialize button</li>
+                <li>Click the Edit Bill button Against each student</li>
+            </ul>
+            <p>Note: You can only edit a bill that has not been posted!</p>
+        </div>
+        <hr>
 
         <?php
 
@@ -34,13 +46,13 @@ include_once './model/inc/dashboard_header.php';
 
         <div class="row justify-content-center">
             <div class="col-md-12">
-                <form action="fees_billing.php" method="POST">
+                <form action="edit_bill_init.php" method="POST">
                     <div class="card">
                         <!--card header begins here-->
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="card-header">
-                                    <h5>Select Class to Bill</h5>
+                                    <h5>Select Class to Edit Bill</h5>
                                 </div>
                             </div>
                         </div>
@@ -94,11 +106,9 @@ include_once './model/inc/dashboard_header.php';
                                             <label for="term">Term</label>
 
                                             <select name="term" id="term" class="form-control ">
-
                                                 <option value="1st Term"> 1st Term </option>
                                                 <option value="2nd Term"> 2nd Term </option>
                                                 <option value="3rd Term"> 3rd Term </option>
-
                                             </select>
                                         </div>
 
@@ -106,11 +116,8 @@ include_once './model/inc/dashboard_header.php';
                                             <label for="aSession">Session</label>
 
                                             <select name="aSession" id="aSession" class="form-control ">
-
-                                                <option value="2020/2021"> 2020/2021 </option>
                                                 <option value="2021/2022"> 2021/2022 </option>
                                                 <option value="2022/2023"> 2022/2023</option>
-
                                             </select>
                                         </div>
                                     </div>
@@ -123,7 +130,7 @@ include_once './model/inc/dashboard_header.php';
                             <div class="row">
                                 <div class="col-md-6">
 
-                                    <button type="submit" class="btn btn-primary" name="fees_schedule">Initialize</button>
+                                    <button type="submit" class="btn btn-primary" name="edit_bill_init">Initialize</button>
                                 </div>
 
                                 <div class="col-md-6">

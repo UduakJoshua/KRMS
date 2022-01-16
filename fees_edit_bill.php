@@ -76,7 +76,7 @@ $aSession = $_SESSION['aSession'];
                                         <th scope="col">Books</th>
                                         <th scope="col">Wears</th>
                                         <th scope="col">Arrears</th>
-
+                                        <th scope="col">Action</th>
 
                                     </tr>
                                 </thead>
@@ -84,9 +84,9 @@ $aSession = $_SESSION['aSession'];
                                     <?php
 
                                     //query
-                                    $sql = "SELECT surname, firstname, admissionNo, fatherMail, motherMail,
-                                     (SELECT fees FROM fees_schedule WHERE student_class = '$class' && term='$term' ) AS fees 
-                                     FROM student WHERE classArm =  '$c_arm' && class_name = '$class' ORDER BY surname ASC";
+                                    $sql = "SELECT * FROM fees_total 
+                                    WHERE term ='$term' && student_arm =  '$c_arm' && student_class = '$class'
+                                    ORDER BY student_name ASC";
                                     $result = $conn->query($sql);
                                     ?>
                                     <?php
@@ -96,18 +96,16 @@ $aSession = $_SESSION['aSession'];
                                             <input type="hidden" name="student_arm" value="<?php echo $c_arm ?>" class="form-control">
                                             <input type="hidden" name="a_session" value="<?php echo $aSession ?>" class="form-control">
                                             <input type="hidden" name="term" value="<?php echo $term ?>" class="form-control">
-                                            <input type="hidden" name="email_dad" value="<?php echo $row['fatherMail'] ?>" class="form-control">
-                                            <input type="hidden" name="email_mom" value="<?php echo $row['motherMail'] ?>" class="form-control">
-                                            <td style="width:20%;"><input type="text" name="student_name[]" value="<?php echo $row['surname'] . " " . $row['firstname'] ?>" readonly class="form-control" size="50"></td>
-                                            <input type="hidden" name="admin_no[]" value="<?php echo $row['admissionNo']  ?>" readonly class="form-control" size="30">
-                                            <td><input type="text" name="school_fees" value="<?php echo $row['fees'] ?>" class="form-control" size="50"></td>
-                                            <td><input type="text" name="discount[]" class="form-control" size="50" placeholder="discount"></td>
-                                            <td><input type="text" name="boarding[]" class="form-control" size="50" placeholder="boarding"></td>
-                                            <td><input type="text" name="bus[]" class="form-control" size="50" placeholder="bus"></td>
-                                            <td><input type="text" name="books[]" class="form-control" size="50" placeholder="books"></td>
-                                            <td><input type="text" name="wears[]" class="form-control" size="50" placeholder="wears"></td>
-                                            <td><input type="text" name="arrears[]" class="form-control" size="50" placeholder="arrears"></td>
-
+                                            <td style="width:20%;"><input type="text" name="student_name[]" value="<?php echo $row['student_name'] ?>" readonly class="form-control" size="50"></td>
+                                            <input type="hidden" name="admin_no[]" value="<?php echo $row['admission_no']  ?>" readonly class="form-control" size="30">
+                                            <td><input type="text" name="school_fees" value="<?php echo $row['school_fees'] ?>" class="form-control" size="50"></td>
+                                            <td><input type="text" name="discount[]" value="<?php echo $row['discount'] ?>" class="form-control" size="50" placeholder="discount"></td>
+                                            <td><input type="text" name="boarding[]" value="<?php echo $row['boarding_fees'] ?>" class="form-control" size="50" placeholder="boarding"></td>
+                                            <td><input type="text" name="bus[]" value="<?php echo $row['bus_fees'] ?>" class="form-control" size="50" placeholder="bus"></td>
+                                            <td><input type="text" name="books[]" value="<?php echo $row['books_fees'] ?>" class="form-control" size="50" placeholder="books"></td>
+                                            <td><input type="text" name="wears[]" value="<?php echo $row['wears_fees'] ?>" class="form-control" size="50" placeholder="wears"></td>
+                                            <td><input type="text" name="arrears[]" value="<?php echo $row['arrears'] ?>" class="form-control" size="50" placeholder="arrears"></td>
+                                            <td> <a href="edit_bill.php?edit-bill=<?php echo $row['id']; ?>" class=" btn btn-warning btn-sm">Edit</a></td>
                                         </tr>
                                     <?php endwhile; ?>
                                 </tbody>
@@ -117,11 +115,7 @@ $aSession = $_SESSION['aSession'];
 
                     </div>
                     <!--card footer begins here-->
-                    <div class="row">
-                        <div class="col-md-12">
-                            <td><button type="submit" class="btn btn-primary" name="bill_student">Bill Students</button></td>
-                        </div>
-                    </div>
+
 
                 </form>
             </div>

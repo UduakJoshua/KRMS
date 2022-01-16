@@ -20,7 +20,17 @@ include_once './model/inc/dashboard_header.php';
 
 
     <section>
+        <div class="bg-info p-2 text-white">
+            <h5><strong>How to Initialize Payment!</strong></h5>
 
+            <ul>
+                <li>Select a Class</li>
+                <li>Select the Arm </li>
+                <li>Select the Term and Academic Session</li>
+                <li>Click the Initialize button</li>
+            </ul>
+        </div>
+        <hr>
 
         <?php
 
@@ -114,10 +124,15 @@ include_once './model/inc/dashboard_header.php';
 
                         </div>
                         <!--card footer begins here-->
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="card-footer">
+                        <div class="card-footer">
+                            <div class="row">
+                                <div class="col-md-6">
+
                                     <button type="submit" class="btn btn-primary" name="fees_payment_init">Initialize</button>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <a href="fees_management.php"><button type="button" class="btn btn-warning">Back </button></a>
                                 </div>
                             </div>
                         </div>

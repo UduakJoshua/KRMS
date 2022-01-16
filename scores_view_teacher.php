@@ -44,7 +44,7 @@ include_once './model/inc/staff_dashboard_header.php';
                 // create a select query
 
                 $sql = "SELECT * FROM students_score WHERE student_class = '$class' && class_arm = '$c_arm' 
-                    && subject = '$subject' && term ='$term' ORDER BY student_name ASC";
+                    && subject = '$subject' && term ='$term'  ORDER BY student_name ASC";
                 $result = mysqli_query($conn, $sql);
 
                 if (mysqli_num_rows($result) > 0) : ?>

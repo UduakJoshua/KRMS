@@ -1,5 +1,5 @@
 <footer class="portal_footer">
-    <p>This is a product of Blessed Children Academy. All right reserved &copy;2021 | <a href="#">Designed by KodeNet Solutions</a></p>
+    <p>This is a product of Blessed Children Academy. All right reserved &copy;2022 | <a href="#">Managed by KodeNet Solutions</a></p>
 </footer>
 </div>
 

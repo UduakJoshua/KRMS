@@ -26,6 +26,17 @@ $aSession = $_SESSION['aSession'];
 
 
     <section>
+        <div class="bg-info p-2 text-white">
+            <h5><strong>How to Post Payment!</strong></h5>
+
+            <ul>
+                <li>Click the Pay Now button against the student you want to post pay</li>
+                <li>Enter the amount paid and the date</li>
+                <li>Select the Mode of Payment</li>
+                <li>Click the Make Payment button</li>
+            </ul>
+        </div>
+        <hr>
 
         <?php
 
@@ -114,8 +125,12 @@ $aSession = $_SESSION['aSession'];
 
                     </div>
                     <!--card footer begins here-->
+                    <div class="card-footer">
 
-
+                        <div class="col-md-6">
+                            <a href="fees_payment_init.php"><button style="width:30%;" type="button" class="btn btn-warning">Back </button></a>
+                        </div>
+                    </div>
                 </form>
             </div>
 

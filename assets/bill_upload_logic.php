@@ -78,39 +78,17 @@ if (isset($_POST['bill_student'])) {
         } else {
 
             // run an insert query to store the data in a table
-            $sql = "INSERT INTO fees_total( 
-                admission_no, 
-                student_name, 
-                student_class, 
-                student_arm, 
-                school_fees, 
-                boarding_fees, 
-                bus_fees, 
-                books_fees,
-                wears_fees, 
-                arrears, 
-                total_fees,  
-                discount, 
-                amount_paid, 
-                balance, 
-                term, 
-                a_session)
-
-            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ";
+            $sql = "INSERT INTO fees_total( admission_no, student_name, student_class, student_arm, 
+        total_fees, discount, amount_paid, balance, term, a_session)
+            VALUES (?,?,?,?,?,?,?,?,?, ?) ";
 
             $stmt = $conn->prepare($sql);
             $stmt->bind_param(
-                'ssssiiiiiiiiiiss',
+                'ssssiiiiss',
                 $admission_no,
                 $student_name,
                 $student_class,
                 $student_arm,
-                $school_fees,
-                $boarding,
-                $bus,
-                $books,
-                $wears,
-                $arrears,
                 $total,
                 $discount,
                 $amount_paid,
@@ -155,24 +133,6 @@ if (isset($_POST['fees_payment_init'])) {
     $_SESSION['aSession'] = $academic_session;
 
     header("location:fees_payment.php");
-    exit();
-}
-
-// initializing the class to edit bill
-if (isset($_POST['edit_bill_init'])) {
-
-    $class = test_input($_POST['student_class']);
-    $arm =  test_input($_POST['arm']);
-    $term =  test_input($_POST['term']);
-    $academic_session = test_input($_POST['aSession']);
-
-    // create a session and redirect to fees payment
-    $_SESSION['arm'] = $arm;
-    $_SESSION['class'] = $class;
-    $_SESSION['term'] = $term;
-    $_SESSION['aSession'] = $academic_session;
-
-    header("location:fees_edit_bill.php");
     exit();
 }
 
@@ -239,22 +199,6 @@ if (isset($_POST['make_pay'])) {
     $balance =   (int)($total_fees - $amount_paid);
     $mode_of_payment = test_input($_POST['mode_pay']);
 
-    // select query
-    $sql = "SELECT * FROM fees_total WHERE id=?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param('i', $id);
-    $stmt->execute();
-
-    $result = $stmt->get_result();
-    $row = $result->fetch_assoc();
-
-
-    //if (($row['first_deposit'] != 0)) {
-    //   $_SESSION['message'] = " Payment for selected column already exist, please check your input!";
-    //  $_SESSION['msg_type'] = "danger";
-    //    header("location:./make_pay.php?pay=$id");
-    // } else {
-
     $sql = "UPDATE fees_total SET    first_deposit = '$first_deposit',
     second_deposit = '$second_deposit', third_deposit = '$third_deposit', 
     amount_paid = '$amount_paid ', balance = '$balance' , date_of_pay1 = '$date1' , 
@@ -272,7 +216,7 @@ if (isset($_POST['make_pay'])) {
         header("location:./make_pay.php");
         exit();
     }
-    //  }
+
     $conn->close();
 }
 
@@ -305,97 +249,4 @@ if (isset($_POST['school_report'])) {
     $_SESSION['a_session'] = $a_session;
 
     header("location:fees_report_school.php");
-}
-
-
-//
-
-// getting fees detail of each students
-if (isset($_GET['edit-bill'])) {
-    $id = $_GET['edit-bill'];
-    $update = true;
-    $sql = "SELECT * FROM fees_total WHERE id=?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param('i', $id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    //$result = mysqli_query($conn, $sql);
-
-    if ($row = $result->num_rows > 0) {
-        //output data of each row
-        while ($row = $result->fetch_assoc()) {
-
-            $student_name = $row['student_name'];
-            $student_class = $row['student_class'];
-            $student_arm = $row['student_arm'];
-            $admission_no = $row['admission_no'];
-            $discount = $row['discount'];
-            $school_fees = $row['school_fees'];
-            $boarding_fees = $row['boarding_fees'];
-            $bus_fees = $row['bus_fees'];
-            $books_fees = $row['books_fees'];
-            $wears_fees = $row['wears_fees'];
-            $arrears = $row['arrears'];
-            $term = $row['term'];
-            $academic_session = $row['a_session'];
-        }
-    } else {
-        echo "No results found";
-    }
-
-
-    $conn->close();
-}
-
-// posting fees payment
-if (isset($_POST['edit_bill'])) {
-    $id = $_POST['id'];
-    $update = true;
-    $student_name = test_input($_POST['student_name']);
-    $admission_no = test_input($_POST['admission_no']);
-    $student_class = test_input($_POST['student_class']);
-    $discount = test_input($_POST['discount']);
-    $school_fees = test_input($_POST['school_fees']);
-    $boarding_fees = test_input($_POST['boarding_fees']);
-    $bus_fees = test_input($_POST['bus_fees']);
-    $books_fees = test_input($_POST['books_fees']);
-    $wears_fees =  test_input($_POST['wears_fees']);
-    $arrears = test_input($_POST['arrears']);
-    $total = (int)(($school_fees - $discount) +  $boarding_fees + $bus_fees + $books_fees + $wears_fees + $arrears);
-    $balance = (int)($total - 0);
-    $term = test_input($_POST['term']);
-    $a_session = test_input($_POST['aSession']);
-    // select query
-    $sql = "SELECT * FROM fees_total WHERE id=? && term=? && a_session=?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param('iss', $id, $term, $a_session);
-    $stmt->execute();
-
-    $result = $stmt->get_result();
-    $row = $result->fetch_assoc();
-
-
-
-    $sql = "UPDATE fees_total SET discount = '$discount',
-           school_fees = '$school_fees',
-            boarding_fees = '$boarding_fees',
-           bus_fees = '$bus_fees',
-           books_fees = '$books_fees', wears_fees='$wears_fees', total_fees = '$total',
-           balance = '$balance', arrears = '$arrears' WHERE id=$id";
-
-    if ($conn->query($sql) === TRUE) {
-
-        $_SESSION['message'] = "Billing  for  $student_name  successfully Edited!";
-        $_SESSION['msg_type'] = "success";
-        header("location:./fees_payment.php");
-        exit();
-    } elseif ($conn->error) {
-        $_SESSION['message'] = " Something Went Wrong, Student bill could not be edited! Contact your admin!";
-        $_SESSION['msg_type'] = "danger";
-        header("location:./fees_edit_bill.php");
-        exit();
-    }
-    //  }
-    $conn->close();
 }

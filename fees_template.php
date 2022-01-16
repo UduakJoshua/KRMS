@@ -1,6 +1,6 @@
 <?php
-require_once './controller/dbase_conn.php';
-require_once 'controller/bill_upload_logic.php';
+
+require_once './controller/bill_upload_logic.php';
 $title = "BCA | Bill Students";
 include_once './model/inc/dashboard_header.php';
 ?>
@@ -89,12 +89,17 @@ include_once './model/inc/dashboard_header.php';
                                     <button type="submit" class="btn btn-primary " name="addTemplate">Create Fees Template</button>
                                 <?php endif; ?>
                             </div>
+
+                            <div class="col-md-3">
+                                <a href="fees_management.php"><button type="button" style="width:30%;" class="btn btn-warning">Back </button></a>
+                            </div>
                         </div>
                     </div>
                 </form>
             </div>
 
     </section>
+
 
     <hr>
 
