@@ -75,7 +75,7 @@ include_once './model/inc/dashboard_header.php';
                                 <label for="student_class">Class</label>
                                 <?php
                                 require_once './controller/class_logic.php';
-                                $select_sql = "SELECT * FROM classes ";
+                                $select_sql =   "SELECT * FROM classes ORDER BY className ASC ";
                                 $sql_result = $conn->query($select_sql);
                                 ?>
                                 <select name="student_class" id="student_class" class="form-control " value>
@@ -114,16 +114,12 @@ include_once './model/inc/dashboard_header.php';
                         <div class="col-md-4">
 
                             <div class="form-group">
-                                <label for="assignment_no">Exercise No:</label>
+                                <label for="assignment_no">Assignment Type:</label>
                                 <select name="assignment_no" id="assignment_no" class="form-control " value>
-                                    <option value="Ex 1"> Ex-1 </option>
-                                    <option value="Ex 2"> Ex-2 </option>
-                                    <option value="Ex 3"> Ex-3 </option>
-                                    <option value="Ex 4"> Ex-4 </option>
-                                    <option value="Ex 5"> Ex-5 </option>
-                                    <option value="Ex 6"> Ex-6 </option>
-                                    <option value="Ex 7"> Ex-7 </option>
-                                    <option value="Ex 8"> Ex-8 </option>2
+                                    <option value="weekend"> Weekend Assignment </option>
+                                    <option value="midterm"> Mid-Term Assignment </option>
+                                    <option value="holiday"> Holiday Project </option>
+
                                 </select>
                             </div>
                         </div>

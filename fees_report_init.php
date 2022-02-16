@@ -27,7 +27,8 @@ include_once './model/inc/dashboard_header.php';
             <ul>
                 <li>Select the current Term</li>
                 <li>Select the current Academic Session</li>
-                <li>Click the Display Report by school button</li>
+                <li>Click the Display Report by school button to view Fees Report</li>
+                <li>Click the Expenditure Report button to view Termly Expenditures</li>
             </ul>
         </div>
         <hr>
@@ -85,6 +86,7 @@ include_once './model/inc/dashboard_header.php';
 
                                                 <select name="a_session" id="a_session" class="form-control ">
                                                     <option value="2021/2022"> 2021/2022 </option>
+                                                    <option value="2021/2022"> 2021/2022 </option>
                                                     <option value="2022/2023"> 2022/2023</option>
                                                 </select>
                                             </div>
@@ -97,11 +99,15 @@ include_once './model/inc/dashboard_header.php';
 
                             <div class="card-footer">
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <button type="submit" class="btn btn-primary" name="school_report">Display Report by School</button>
                                     </div>
 
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
+                                        <button type="submit" class="btn btn-secondary" name="expenditure_report">Expenditures Report </button>
+                                    </div>
+
+                                    <div class="col-md-4">
                                         <a href="fees_report.php"><button type="button" style="width:30%;" class="btn btn-warning">Back</button></a>
                                     </div>
 

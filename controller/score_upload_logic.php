@@ -95,7 +95,7 @@ if (isset($_POST['save_mid'])) {
         $term = test_input($_POST['term']);
         $a_session = test_input($_POST['a_session']);
         $student_class = test_input($_POST['student_class']);
-        // $class_arm = test_input($_POST['class_arm']);
+        $class_arm = test_input($_POST['class_arm']);
         $student_name = test_input($_POST['student_name'][$i]);
         $T2 = test_input($_POST['T2'][$i]);
         $subject = test_input($_POST['subject']);
@@ -121,9 +121,9 @@ if (isset($_POST['save_mid'])) {
             echo "</div> ";
         } else {
             $sql = "INSERT INTO mid_term_scores
-    (id, student_name, admission_no, student_class, class_arm, subject, T2, session, term)
+    (id, student_name, admission_no, student_class, student_arm, subject, T2, session, term)
     VALUES
-    ('','$student_name' ,'$admission_no' , '$student_class', , '$subject' ,$T2, '$a_session' , '$term')";
+    ('','$student_name' ,'$admission_no' , '$student_class',  '$class_arm', '$subject' ,$T2, '$a_session' , '$term')";
 
             if ($conn->query($sql) === TRUE) {
 
@@ -135,8 +135,16 @@ if (isset($_POST['save_mid'])) {
             }
         }
     }
+    if (!isset($_SESSION['username'])) {
+        echo "<a href = 'staff_mid_term_score_init.php'><button class= 'btn btn-primary m-3 p-2' >";
+        echo "Input Another Score";
+        echo "</button></a> ";
+    } else {
+        echo "<a href = 'mid_term_score_init.php'><button class= 'btn btn-primary m-3 p-2' >";
+        echo "Input Another Score";
+        echo "</button></a> ";
+    }
     exit();
-    // echo $term . ' ' . $subject . ' ' . $T1 . ' ' . $T2 . ' ' . $admission_no . '' . $student_class . ' ' . $student_name . '<br>';
 }
 
 // JSS3 and SS3 Mock logic
@@ -199,8 +207,8 @@ if (isset($_POST['save_mock'])) {
 }
 
 // logic to edit mid term scoress
-if (isset($_GET['edit_score'])) {
-    $id = $_GET['edit_score'];
+if (isset($_GET['edit_mt_score'])) {
+    $id = $_GET['edit_mt_score'];
     $update = true;
     $sql = "SELECT * FROM mid_term_scores WHERE id=$id";
     $result = mysqli_query($conn, $sql);
@@ -210,6 +218,7 @@ if (isset($_GET['edit_score'])) {
         while ($row = mysqli_fetch_assoc($result)) {
             $subject = $row['subject'];
             $class = $row['student_class'];
+            $arm = $row['student_arm'];
             $T2 = $row['T2'];
             $admission_no = $row['admission_no'];
             $name = $row['student_name'];
@@ -217,30 +226,25 @@ if (isset($_GET['edit_score'])) {
             $term = $row['term'];
         }
     } else {
-        $_SESSION['message'] = "No Result found for the Selected Subject! Kindly Input scores";
+        $_SESSION['message'] = "No Scores found for the Selected Subject! Kindly Input scores";
         $_SESSION['msg_type'] = "danger";
-        header("location:scores_edit.php?no-scores");
+        header("location:midterm_edit.php?no-scores");
         exit();
     }
-
-
     $conn->close();
 }
 
 
-// update logic
+// update logic for mid term scores
 if (isset($_POST['update_midterm'])) {
-
     $id = $_POST['id'];
     $T2 = $_POST['T2'];
 
-
     $sql = "UPDATE mid_term_scores SET T2 = '$T2' WHERE id=$id";
-
     if (mysqli_query($conn, $sql)) {
         $_SESSION['message'] = "Mid-Term Score Updated Successfully!";
         $_SESSION['msg_type'] = "success";
-        header("location:scores_display.php");
+        header("location:mid_term_scores_view.php");
     } else {
         echo "Error updating record: " . mysqli_error($conn);
     }
@@ -250,25 +254,19 @@ if (isset($_POST['update_midterm'])) {
 
 
 
-// delete button logic
+// delete button logic for mid term scores
 
-if (isset($_POST['delete_score'])) {
-    if ((isset($_POST['chk']))) {
-        foreach ($_POST['chk'] as $check) {
-            // $id = $_POST['delete_score'];
+if (isset($_GET['delete_mt_score'])) {
+    $id = $_GET['delete_mt_score'];
+    $sql = "DELETE FROM  mid_term_scores WHERE id=$id";
+    if ($conn->query($sql) === TRUE) {
 
-            $sql = "DELETE FROM mid_term_scores WHERE id=$check";
-
-            if ($conn->query($sql) === TRUE) {
-
-                $errors = "Account Activated Successfully!";
-                echo "<div class= 'alert-danger mt-1' id='error'>";
-                echo $errors;
-                echo "</div> ";
-            } else {
-                echo "Error deleting record: " . $conn->error;
-            }
-        }
+        $_SESSION['message'] = "Scores for selected students deleted successfully!";
+        $_SESSION['msg_type'] = "danger";
+        header("location:../mid_term_scores_view.php");
+        exit();
+    } else {
+        echo "Error deleting record: " . $conn->error;
     }
 }
 
@@ -462,6 +460,23 @@ if (isset($_POST['scores_view_teacher'])) {
     exit();
 }
 
+
+if (isset($_POST['mt_score_view_t'])) {
+    $class = test_input($_POST['student_class']);
+    $arm =  test_input($_POST['arm']);
+    $subject = test_input($_POST['subject']);
+    $term =  test_input($_POST['term']);
+    $academic_session = test_input($_POST['aSession']);
+
+    $_SESSION['arm'] = $arm;
+    $_SESSION['class'] = $class;
+    $_SESSION['term'] = $term;
+    $_SESSION['subject'] = $subject;
+    $_SESSION['aSession'] = $academic_session;
+    header("location:mt_scores_view_teacher.php");
+    exit();
+}
+
 //mock view
 
 if (isset($_POST['mock_scores_teacher'])) {
@@ -500,7 +515,7 @@ if (isset($_POST['mock_scores_admin'])) {
     exit();
 }
 
-
+// logic to view midterm scores by admin and supervisors
 if (isset($_POST['mid_term_view'])) {
     $class = test_input($_POST['student_class']);
     $arm =  test_input($_POST['arm']);
@@ -513,6 +528,6 @@ if (isset($_POST['mid_term_view'])) {
     $_SESSION['term'] = $term;
     $_SESSION['subject'] = $subject;
     $_SESSION['aSession'] = $academic_session;
-    header("location:mid_term_scores_display.php");
+    header("location:mid_term_scores_view.php");
     exit();
 }

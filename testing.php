@@ -31,3 +31,42 @@ if (isset($_POST['encrypt'])) {
             </div>
         </form>
     </div>
+
+    <div class="col-md-4">
+
+        <?php if ($row['class_name'] == "JSS One" || $row['class_name'] == "JSS Two") : ?>
+            <a href="tb_jss1_2.php" class="text-decoration-none"><button class="btn btn-secondary btn-block mt-4"> Mid-Term Time table</button></a>
+
+        <?php elseif ($row['class_name'] == "SSS One" || $row['class_name'] == "SSS Two") : ?>
+
+            <a href="tb_sss1_2.php" class="text-decoration-none"><button class="btn btn-primary btn-block mt-4"> Mid-Term Time table</button></a>
+
+        <?php elseif ($row['class_name'] == "JSS Three") : ?>
+
+            <a href="tb_jss3.php" class="text-decoration-none"><button class="btn btn-primary btn-block mt-4"> Mid-Term Time table</button></a>
+
+        <?php elseif ($row['class_name'] == "SSS Three") : ?>
+
+            <a href="tb_sss3.php" class="text-decoration-none"><button class="btn btn-primary btn-block mt-4"> Mid-Term Time table</button></a>
+
+            <!-- time table basic -->
+        <?php elseif ($row['section'] == "Basic") : ?>
+
+            <a href="basic_tb.php" class="text-decoration-none"><button class="btn btn-primary btn-block mt-4"> Mid-Term Time table</button></a>
+            <!-- time table bloomers-->
+        <?php elseif ($row['class_name'] == "Bloomers") : ?>
+
+            <a href="pre_nursery_tb.php" class="text-decoration-none"><button class="btn btn-success btn-block mt-4"> Mid-Term Time table</button></a>
+            <!-- time table  progressive-->
+        <?php elseif ($row['class_name'] == "Progressive") : ?>
+
+            <a href="progressive_tb.php" class="text-decoration-none"><button class="btn btn-success btn-block mt-4"> Mid-Term Time table</button></a>
+            <!-- time table step up -->
+        <?php elseif ($row['class_name'] == "Step Up") : ?>
+
+            <a href="step_up_tb.php" class="text-decoration-none"><button class="btn btn-success btn-block mt-4"> Mid-Term Time table</button></a>
+
+        <?php else : ?>
+            <a href="#" class="text-decoration-none"><button class="btn btn-dark btn-block mt-4"> </button></a>
+        <?php endif; ?>
+    </div>

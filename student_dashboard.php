@@ -32,7 +32,7 @@ include_once './model/inc/student_dash_header.php';
 
     <div class=" mb-2 mb-md-0">
       <h3 class="h5">Fees Status:
-        <?php if ($row['balance'] == "0") : ?>
+        <?php if ($row['balance'] <= "0") : ?>
 
           <button class="btn btn-primary btn-sm  disabled">Cleared</button>
 
@@ -52,9 +52,11 @@ include_once './model/inc/student_dash_header.php';
 
 
     <div class="row">
+      <!-- time table -->
       <div class="col-md-4">
         <a href="e_learning_students.php" class="text-decoration-none"><button class="btn btn-dark btn-block mt-4">E-Learning / Assignment</button></a>
       </div>
+
       <?php if ($row['class_name'] == "JSS Three" || $row['class_name'] == "SSS Three") :
       ?>
         <div class="col-md-4">
@@ -62,26 +64,18 @@ include_once './model/inc/student_dash_header.php';
         </div>
       <?php else : ?>
         <div class="col-md-4">
-          <a href="student_result_display.php" class="text-decoration-none"><button class="btn btn-danger btn-block mt-4">Check Midterm Result</button></a>
+          <a href="select_term.php" class="text-decoration-none"><button class="btn btn-danger btn-block mt-4">Check Midterm Result</button></a>
         </div>
       <?php endif; ?>
       <!--col 2  and logic to check student section-->
       <div class="col-md-4">
-
-        <?php if ($row['section'] == "High" && $row['approval'] == 1) : ?>
-          <a href="student_exam_result.php" class="text-decoration-none"><button class="btn btn-secondary btn-block mt-4"> Check Examination Result</button></a>
-
-        <?php elseif ($row['section'] == "Basic" && $row['approval'] == 1) : ?>
-
-          <a href="student_exam_result_basic.php" class="text-decoration-none"><button class="btn btn-primary btn-block mt-4"> Check Examination Result</button></a>
-
-        <?php elseif ($row['section'] == "Nursery" && $row['approval'] == 1) : ?>
-
-          <a href="student_exam_result_nur.php" class="text-decoration-none"><button class="btn btn-success btn-block mt-4"> Check Examination Result</button></a>
-
+        <?php if ($row['class_name'] == "JSS Three" || $row['class_name'] == "SSS Three") : ?>
+          <a href="#" class="text-decoration-none"><button class="btn btn-secondary btn-block mt-4 d-none"> </button></a>
         <?php else : ?>
-          <a href="exam_notification.php" class="text-decoration-none"><button class="btn btn-dark btn-block mt-4"> Check Examination Result</button></a>
+          <a href="select_ex_term.php" class="text-decoration-none"><button class="btn btn-secondary btn-block mt-4"> Check Examination Result</button></a>
         <?php endif; ?>
+
+
       </div>
     </div>
 
@@ -94,6 +88,8 @@ include_once './model/inc/student_dash_header.php';
       <div class="col-md-4">
         <a href="cbt.php" class="text-decoration-none"><button class="btn btn-warning btn-block mt-4"> Test Yourself</button></a>
       </div>
+
+
     </div>
   <?php endwhile; ?>
 

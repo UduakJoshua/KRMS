@@ -50,6 +50,7 @@ if (isset($_POST['st_login'])) {
                 $_SESSION['student_class'] = $user['class_name'];
                 $_SESSION['class_arm'] = $user['classArm'];
                 $_SESSION['section'] = $user['section'];
+                $_SESSION['approval'] = $user['approval'];
 
                 header('Location:student_dashboard.php?success');
             }

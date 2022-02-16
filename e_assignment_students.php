@@ -46,16 +46,16 @@ include_once './model/inc/student_dash_header.php';
             $student_class = $_SESSION['student_class'];
             //echo $student_class;
 
-            $select_sql = "SELECT * FROM student_assignments WHERE student_class =  '$student_class' ORDER BY time_posted DESC LIMIT 6";
+            $select_sql = "SELECT * FROM student_assignments WHERE student_class =  '$student_class' ORDER BY date_posted DESC ";
             $sql_result = $conn->query($select_sql);
             ?>
             <div class="table-responsive">
-                <table class="table table-striped table-sm display" id="example" style="width:100%">
+                <table class="table table-striped table-sm display" id="" style="width:100%">
                     <thead class="thead-dark ">
                         <tr>
 
                             <th scope="col">Subject</th>
-                            <th scope="col">Exercise</th>
+                            <th scope="col">Assignment Type</th>
                             <th scope="col">Target Class</th>
                             <th scope="col">Date</th>
                             <th scope="col">Instruction</th>
@@ -70,9 +70,9 @@ include_once './model/inc/student_dash_header.php';
                             <tr>
 
                                 <td><?php echo $row['subject'] ?></td>
-                                <td><?php echo $row['assignment_no'] ?></td>
+                                <td style="width: 20%;"><?php echo $row['assignment_no'] ?></td>
                                 <td><?php echo $row['student_class'] ?></td>
-                                <td><?php echo $row['date_posted'] ?></td>
+                                <td style=" width: 10%;"><?php echo $row['date_posted'] ?></td>
                                 <td><?php echo $row['instructions'] ?></td>
                                 <td>
                                     <button class="btn btn-sm btn-primary" id="hideButton">

@@ -31,7 +31,7 @@ include_once './model/inc/staff_dashboard_header.php';
           <span class="fa fa-pencil-square-o icon" aria-hidden="true"></span>
         </div>
         <div>
-          <a href="staff_mid_term_score.php" class="text-decoration-none icon-a">
+          <a href="staff_mid_term_score_init.php" class="text-decoration-none icon-a">
             <p class="text-center text-white">Input Mid-Term Scores</p>
           </a>
         </div>
@@ -42,7 +42,7 @@ include_once './model/inc/staff_dashboard_header.php';
           <span class="fa fa-eye icon" aria-hidden="true"></span>
         </div>
         <div>
-          <a href="#" class="text-decoration-none icon-a">
+          <a href="midterm_scores_teacher_init.php" class="text-decoration-none icon-a">
             <p class="text-center text-white">View Mid Term Scores</p>
           </a>
         </div>

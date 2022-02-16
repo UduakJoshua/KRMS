@@ -181,15 +181,13 @@ include_once './model/inc/dashboard_header.php';
                                         <tbody class="ml-1 pt-2" style="font-size: 10px;">
                                             <?php
 
-
-
                                             $c_arm = $_SESSION['arm'];
                                             $class = $_SESSION['class'];
                                             $term = $_SESSION['term'];
                                             $aSession = $_SESSION['aSession'];
 
                                             //query
-                                            $sql = "SELECT * FROM student WHERE classArm =  '$c_arm' && class_name = '$class'";
+                                            $sql = "SELECT * FROM student WHERE classArm =  '$c_arm' && class_name = '$class' ORDER BY surname ASC";
                                             $result = $conn->query($sql);
                                             ?>
                                             <?php

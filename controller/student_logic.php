@@ -164,31 +164,31 @@ if (isset($_POST['update'])) {
     $image = $_FILES['image']['name'];
     $target = "assets/img/" . basename($image);
 
-    $surname = $_POST['surname'];
-    $firstname = $_POST['firstname'];
-    $middlename = $_POST['middlename'];
-    $dob = $_POST['dob'];
-    $gender = $_POST['gender'];
-    $religion = $_POST['religion'];
-    $admin_no = $_POST['admin_no'];
+    $surname = test_input($_POST['surname']);
+    $firstname = test_input($_POST['firstname']);
+    $middlename = test_input($_POST['middlename']);
+    $dob = test_input($_POST['dob']);
+    $gender = test_input($_POST['gender']);
+    $religion = test_input($_POST['religion']);
+    $admin_no = test_input($_POST['admin_no']);
     $password = test_input($_POST['st_password']);
     $st_password = password_hash($password, PASSWORD_DEFAULT);
-    $class = $_POST['student_class'];
-    $class_arm = $_POST['class_arm'];
-    $section = $_POST['section'];
-    $admin_year = $_POST['admin_year'];
-    $address = $_POST['home_address'];
-    $nationality = $_POST['nationality'];
-    $state = $_POST['origin'];
-    $lga = $_POST['lga'];
-    $father = $_POST['dad_name'];
-    $father_no = $_POST['dad_no'];
-    $father_mail = $_POST['email_d'];
-    $mother = $_POST['mom_name'];
-    $mother_no = $_POST['mom_no'];
-    $mother_mail = $_POST['email_m'];
-    $fatherJob = $_POST['dadJob'];
-    $motherJob = $_POST['momJob'];
+    $class = test_input($_POST['student_class']);
+    $class_arm = test_input($_POST['class_arm']);
+    $section = test_input($_POST['section']);
+    $admin_year = test_input($_POST['admin_year']);
+    $address = test_input($_POST['home_address']);
+    $nationality = test_input($_POST['nationality']);
+    $state = test_input($_POST['origin']);
+    $lga = test_input($_POST['lga']);
+    $father = test_input($_POST['dad_name']);
+    $father_no = test_input($_POST['dad_no']);
+    $father_mail = test_input($_POST['email_d']);
+    $mother = test_input($_POST['mom_name']);
+    $mother_no = test_input($_POST['mom_no']);
+    $mother_mail = test_input($_POST['email_m']);
+    $fatherJob = test_input($_POST['dadJob']);
+    $motherJob = test_input($_POST['momJob']);
 
     $sql = "UPDATE student SET  image='$image', admissionNo = '$admin_no', surname = '$surname',
     firstname = '$firstname', middlename = '$middlename', dob = '$dob', gender = '$gender', religion = '$religion', 

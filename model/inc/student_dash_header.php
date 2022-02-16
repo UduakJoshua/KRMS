@@ -254,6 +254,8 @@ if (!isset($_SESSION['st-user_id'])) {
             .dashboard {
                 flex-direction: column;
             }
+
+
         }
 
 
@@ -294,6 +296,7 @@ if (!isset($_SESSION['st-user_id'])) {
             #sidebarMenu,
             nav,
             .print_button,
+            .page-head,
 
             hr,
             footer {
@@ -350,35 +353,35 @@ if (!isset($_SESSION['st-user_id'])) {
                             <li class="nav-item">
                                 <?php if ($row['class_name'] == "JSS Three" || $row['class_name'] == "SSS Three") :
                                 ?>
-                                    <a class="nav-link" href="mock_result_display.php">
+                                    <a class="nav-link" href="select_mock_no.php">
                                         <span data-feather="file"></span>
                                         Mock Result
                                     </a>
                                 <?php endif; ?>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="student_result_display.php">
-                                    <span data-feather="file"></span>
-                                    Midterm Result
-                                </a>
+                                <?php if ($row['class_name'] == "JSS Three" || $row['class_name'] == "SSS Three") :
+                                ?>
+                                    <a class="nav-link d-none" href="#">
+                                        <span data-feather="file"></span>
+                                        Midterm Result
+                                    </a>
+                                <?php else :  ?>
+                                    <a class="nav-link text-decoration-none" href="select_term.php"><span data-feather="file"></span> Midterm Result</a>
+                                <?php endif; ?>
                             </li>
 
                             <li class="nav-item">
 
-                                <?php if ($row['section'] == "High" && $row['approval'] == 1) : ?>
-                                    <a class="nav-link text-decoration-none" href="student_exam_result.php"><span data-feather="file"></span> Examination Result</a>
-
-                                <?php elseif ($row['section'] == "Basic" && $row['approval'] == 1) : ?>
-                                    <a class="nav-link text-decoration-none" href="student_exam_result_basic.php"><span data-feather="file"></span> Examination Result</a>
-
-                                <?php elseif ($row['section'] == "Nursery" && $row['approval'] == 1) : ?>
-                                    <a class="nav-link text-decoration-none" href="student_exam_result_nur.php"><span data-feather="file"></span> Examination Result</a>
-
+                                <?php if ($row['class_name'] == "JSS Three" || $row['class_name'] == "SSS Three") : ?>
+                                    <a class="nav-link d-none" href="#">
+                                        <span data-feather="file"></span>
+                                    </a>
                                 <?php else : ?>
-
-                                    <a class="nav-link" href="exam_notification.php" class="text-decoration-none"><span data-feather="file"></span>Examination Result</a>
+                                    <a class="nav-link text-decoration-none" href="select_ex_term.php"><span data-feather="file"></span> Examination Result</a>
                                 <?php endif; ?>
                             <?php endwhile ?>
+
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="e_learning_students.php">

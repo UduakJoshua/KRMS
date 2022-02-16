@@ -37,7 +37,7 @@ include_once './model/inc/dashboard_header.php';
         <div class="card bg-warning text-white mt-4 shadow" style="width: 16rem; height:6rem; ">
           <div class="card-body">
             <h5 class="card-title">Input Result</h5>
-            <a href="result.php" class="card-link text-white">Manage Results</a>
+            <a href="result_management.php" class="card-link text-white">Manage Results</a>
           </div>
         </div>
       </div>
@@ -47,22 +47,24 @@ include_once './model/inc/dashboard_header.php';
 
         <div class="card bg-info text-white mt-4 shadow" style="width: 16rem; height:6rem; ">
           <div class="card-body">
-            <h5 class="card-title">Upload Results</h5>
-            <a href="score_upload.php" class="card-link text-white">Results</a>
+            <h5 class="card-title">Push Notification</h5>
+            <a href="notification.php" class="card-link text-white">Notification</a>
           </div>
         </div>
       </div>
 
       <!--col 3-->
-      <div class="col-md-4">
+      <?php if ($_SESSION['username'] != "supervisor") : ?>
+        <div class="col-md-4">
 
-        <div class="card bg-primary text-white mt-4 shadow" style="width: 16rem; height:6rem; ">
-          <div class="card-body">
-            <h5 class="card-title">Fees Payment</h5>
-            <a href="manage_fees.php" class="card-link text-white">Manage Fees</a>
+          <div class="card bg-primary text-white mt-4 shadow" style="width: 16rem; height:6rem; ">
+            <div class="card-body">
+              <h5 class="card-title">Fees Payment</h5>
+              <a href="fees_management.php" class="card-link text-white">Manage Fees</a>
+            </div>
           </div>
         </div>
-      </div>
+      <?php endif; ?>
     </div>
   </section>
   <hr>

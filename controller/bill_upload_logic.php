@@ -238,6 +238,8 @@ if (isset($_POST['make_pay'])) {
     $amount_paid = (int)($first_deposit + $second_deposit + $third_deposit);
     $balance =   (int)($total_fees - $amount_paid);
     $mode_of_payment = test_input($_POST['mode_pay']);
+    $pay_processed_by = test_input($_POST['bursar']);
+
 
     // select query
     $sql = "SELECT * FROM fees_total WHERE id=?";
@@ -258,7 +260,8 @@ if (isset($_POST['make_pay'])) {
     $sql = "UPDATE fees_total SET    first_deposit = '$first_deposit',
     second_deposit = '$second_deposit', third_deposit = '$third_deposit', 
     amount_paid = '$amount_paid ', balance = '$balance' , date_of_pay1 = '$date1' , 
-    date_of_pay2 = '$date2', date_of_pay3 = '$date3', date_issued = '$date_issued' , mode_of_pay = '$mode_of_payment' WHERE id=$id";
+    date_of_pay2 = '$date2', date_of_pay3 = '$date3', date_issued = '$date_issued' , mode_of_pay = '$mode_of_payment' , 
+    processed_by = '$pay_processed_by' WHERE id=$id";
 
     if ($conn->query($sql) === TRUE) {
 
@@ -285,26 +288,47 @@ if (isset($_POST['class_report'])) {
     $student_class = test_input($_POST['student_class']);
     $student_arm = test_input($_POST['arm']);
 
-
-
     $_SESSION['student_arm'] = $student_arm;
     $_SESSION['student_class'] = $student_class;
     $_SESSION['term'] = $term;
     $_SESSION['aSession'] = $a_session;
     header("location:fees_payment_view.php");
     exit();
+} else if (isset($_POST['class_fees_report'])) {
+    $term = test_input($_POST['term']);
+    $a_session = test_input($_POST['aSession']);
+    $student_class = test_input($_POST['student_class']);
+    $student_arm = test_input($_POST['arm']);
+
+    $_SESSION['student_arm'] = $student_arm;
+    $_SESSION['student_class'] = $student_class;
+    $_SESSION['term'] = $term;
+    $_SESSION['aSession'] = $a_session;
+    header("location:class_payment_view.php");
+    exit();
 }
-
+// section to generate school report
 if (isset($_POST['school_report'])) {
-
 
     $term = test_input($_POST['termRe']);
     $a_session = test_input($_POST['a_session']);
-
     $_SESSION['term'] = $term;
     $_SESSION['a_session'] = $a_session;
 
     header("location:fees_report_school.php");
+}
+
+
+
+//logic for viwing expenditure
+
+if (isset($_POST['expenditure_report'])) {
+    $term = test_input($_POST['termRe']);
+    $a_session = test_input($_POST['a_session']);
+    $_SESSION['term'] = $term;
+    $_SESSION['a_session'] = $a_session;
+
+    header("location:expenditure_display.php");
 }
 
 
@@ -359,8 +383,8 @@ if (isset($_POST['edit_bill'])) {
     $school_fees = test_input($_POST['school_fees']);
     $boarding_fees = test_input($_POST['boarding_fees']);
     $bus_fees = test_input($_POST['bus_fees']);
-    $books_fees = test_input($_POST['books_fees']);
-    $wears_fees =  test_input($_POST['wears_fees']);
+    $books_fees = test_input($_POST['books']);
+    $wears_fees =  test_input($_POST['wears']);
     $arrears = test_input($_POST['arrears']);
     $total = (int)(($school_fees - $discount) +  $boarding_fees + $bus_fees + $books_fees + $wears_fees + $arrears);
     $balance = (int)($total - 0);

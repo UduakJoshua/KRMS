@@ -134,7 +134,7 @@ include_once './model/inc/staff_dashboard_header.php';
                             <a href="teacher_exam_init.php"><button type="button" class="btn btn-primary m-4">Input Score</button></a>
                         </div>
                     <?php endif ?>
-                    <?php $conn->close(); ?>
+
 
                     </div>
             </div>

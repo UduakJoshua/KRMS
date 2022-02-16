@@ -30,14 +30,16 @@ include_once './model/inc/dashboard_header.php';
                             <div class="form-group">
 
                                 <label for="image">Student's Image</label>
-                                <input type="file" name=" image" accept="image/*" onchange="loadFile(event)">
+                                <input type="file" name=" image" accept="image/*" onchange="loadFile(event)" value="<?php echo $image; ?>">
 
                             </div>
 
                         </div>
 
                         <div class="col-md-4 img_preview">
-                            <img id="output" />
+                            <?php
+                            echo "<img  id = 'output' src='assets/img/" . $image . "' >";
+                            ?>
 
                         </div>
                     </div>
@@ -49,21 +51,21 @@ include_once './model/inc/dashboard_header.php';
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="surname">Surname <span class="required">*</span></label>
-                                <input type="text" class="form-control " required value=" <?php echo $surname; ?>" name="surname" id="surname" aria-describedby="surname" placeholder="Enter Surname">
+                                <input type="text" class="form-control " required value="<?php echo $surname; ?>" name="surname" id="surname" aria-describedby="surname" placeholder="Enter Surname">
                             </div>
                         </div>
 
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="firstname">Firstname <span class="required">*</span></label>
-                                <input type="text" class="form-control " required value=" <?php echo $firstname; ?>" name="firstname" id="firstname" aria-describedby="firstname" placeholder="Enter Firstname">
+                                <input type="text" class="form-control " required value="<?php echo $firstname; ?>" name="firstname" id="firstname" aria-describedby="firstname" placeholder="Enter Firstname">
                             </div>
                         </div>
 
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="middlename">Middlename</label>
-                                <input type="text" class="form-control " value=" <?php echo $middlename; ?>" name="middlename" id=middlename" aria-describedby="lastname" placeholder="Enter Lastname">
+                                <input type="text" class="form-control " value="<?php echo $middlename; ?>" name="middlename" id=middlename" aria-describedby="lastname" placeholder="Enter Lastname">
                             </div>
                         </div>
                     </div>
@@ -101,7 +103,7 @@ include_once './model/inc/dashboard_header.php';
 
                         <div class="col-md-4">
                             <label for="admin_no">Admission Number <span class="required">*</span></label>
-                            <input type="text" class="form-control " value=" <?php echo $admin_no; ?>" required name="admin_no" id="admin_no" aria-describedby="admission number" placeholder="Enter Admission number">
+                            <input type="text" class="form-control " value="<?php echo $admin_no; ?>" required name="admin_no" id="admin_no" aria-describedby="admission number" placeholder="Enter Admission number">
 
                         </div>
 
@@ -118,10 +120,23 @@ include_once './model/inc/dashboard_header.php';
                                 <input type="text" class="form-control " value=" <?php echo $class_arm; ?>" name="class_arm" id="class_arm" placeholder="Enter Arm" required>
                             </div>
                         </div>
+
                     </div>
 
 
                     <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="section">Section <span class="required">*</span></label>
+                                <select name="section" id="section" class="form-control " value>
+
+                                    <option value="Basic">Basic</option>
+                                    <option value="High">High</option>
+                                    <option value="High">Nursery</option>
+
+                                </select>
+                            </div>
+                        </div>
 
                         <div class="col-md-4">
                             <div class="form-group">
@@ -133,7 +148,7 @@ include_once './model/inc/dashboard_header.php';
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="st_password">Password <span class="required">*</span></label>
-                                <input type="password" class="form-control " value="<?php echo $password; ?>" name="st_password" id="st_password" aria-describedby="create a password" placeholder="Enter password">
+                                <input type="password" class="form-control " name="st_password" id="st_password" aria-describedby="create a password" placeholder="Enter password">
                             </div>
                         </div>
 

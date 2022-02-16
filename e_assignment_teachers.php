@@ -114,22 +114,19 @@ include_once './model/inc/staff_dashboard_header.php';
                         <div class="col-md-2">
 
                             <div class="form-group">
-                                <label for="assignment_no">Exercise No:</label>
+                                <label for="assignment_no">Assignment Type:</label>
                                 <select name="assignment_no" id="assignment_no" class="form-control " value>
-                                    <option value="Ex 1"> Ex-1 </option>
-                                    <option value="Ex 2"> Ex-2 </option>
-                                    <option value="Ex 3"> Ex-3 </option>
-                                    <option value="Ex 4"> Ex-4 </option>
-                                    <option value="Ex 5"> Ex-5 </option>
-                                    <option value="Ex 6"> Ex-6 </option>
-                                    <option value="Ex 7"> Ex-7 </option>
-                                    <option value="Ex 8"> Ex-8 </option>2
+                                    <option value="Weekend Assignment"> Weekend Assignment </option>
+                                    <option value="Weekly Assignment"> Weekly Assignment </option>
+                                    <option value="MidTerm Assignment"> Mid-Term Assignment </option>
+                                    <option value="Holiday Project"> Holiday Project </option>
+
                                 </select>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="assignment_no">Date Posted:</label>
+                                <label for="date">Date Posted:</label>
                                 <input type="date" name="ass_date" class="form-control">
                             </div>
                         </div>

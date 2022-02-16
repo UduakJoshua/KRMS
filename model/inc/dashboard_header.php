@@ -327,12 +327,12 @@ if (!isset($_SESSION['ad-user_id'])) {
                 padding: 2px !important;
                 margin: 0 !important;
 
+
             }
 
             #sidebarMenu,
             nav,
             .print_button,
-
             hr,
             footer {
                 visibility: hidden;
@@ -407,24 +407,32 @@ if (!isset($_SESSION['ad-user_id'])) {
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="e_learning_admin.php">
-                                <span data-feather="dollar-sign"></span>
+                                <span data-feather="monitor"></span>
                                 E-Learning
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="accounts.php">
-                                <span data-feather="user-plus"></span>
-                                Account Management
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="fees_management.php">
-                                <span data-feather="dollar-sign"></span>
-                                Fees Management
-                            </a>
-                        </li>
+                        <?php if ($_SESSION['username'] != "supervisor") : ?>
+                            <li class="nav-item">
+                                <a class="nav-link" href="accounts.php">
+                                    <span data-feather="user-plus"></span>
+                                    Account Management
+                                </a>
+                            </li>
 
+                            <li class="nav-item">
+                                <a class="nav-link" href="fees_management.php">
+                                    <span data-feather="dollar-sign"></span>
+                                    Finance Management
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="fees_report.php">
+                                    <span data-feather="bar-chart-2"></span>
+                                    Termly Reports
+                                </a>
+                            </li>
 
+                        <?php endif; ?>
 
                     </ul>
 

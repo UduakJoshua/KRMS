@@ -37,20 +37,21 @@ include_once './model/inc/dashboard_header.php';
         </div>
       </div>
       <!--col 3 -->
-      <?php if (($_SESSION['username'] == "director") || ($_SESSION['username'] == "administrator") || ($_SESSION['username'] == "proprietress")) : ?>
+      <?php if (($_SESSION['username'] == "director") || ($_SESSION['username'] == "administrator") || ($_SESSION['username'] == "Proprietress")) : ?>
         <div class="col-md-2 icon_div" style="background-color: #79aaaa;">
           <div>
             <span class="fa fa-line-chart icon" aria-hidden="true"></span>
           </div>
           <div>
             <a href="fees_report_init.php" class="text-decoration-none icon-a">
-              <p class="text-center text-white">Fees Report</p>
+              <p class="text-center text-white">Fees & Expenditures Report</p>
             </a>
           </div>
         <?php endif; ?>
         </div>
 
-        <!--col 4 -->
+        <!-- end col 3 -->
+
 
     </div>
     <hr>

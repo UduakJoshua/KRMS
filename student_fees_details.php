@@ -54,7 +54,7 @@ include_once './model/inc/student_dash_header.php';
           </h5>
 
         <?php endwhile; ?>
-        <button class="mb-3 btn btn-primary">View Payment Receipt</button>
+        <a href="fees_receipt_st.php"><button class="mb-3 btn btn-primary">View Payment Receipt</button></a>
         </div>
 
 

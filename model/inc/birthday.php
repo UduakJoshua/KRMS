@@ -1,8 +1,21 @@
 <div style=" padding:2px; background-color: #FEFF99;">
 
     <div>
+        <img src="https://portal.blessedchildrenacademy.com/assets/img/birthday_message.png" alt="">
 
-        <img src="https://portal.blessedchildrenacademy.com/assets/img/bca_new_year.JPG" alt="">
+        <h4> Dear Mrs. Uche Awazie,</h4>
+        <p>
+
+            We realize how important today is for you because it's your birthday,
+            and it will not pass by without wishing you the best.
+
+            Thank you for being a part of Blessed Children Academy Family.
+
+            We wish you the very best of life and living.
+
+
+        </p>
+        <h3>Happy Birthday Ma.</h3>
 
     </div>
     <p> Best Regards,<br>

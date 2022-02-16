@@ -506,10 +506,6 @@ $aSession = $_SESSION['aSession'];
                             <td>Fail</td>
                         </tr>
 
-
-
-
-
                     </tbody>
                     <tfoot class="thead-dark ">
 

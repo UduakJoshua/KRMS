@@ -5,6 +5,15 @@ require './controller/score_upload_logic.php';
 $title = "BCA |Mock Result View";
 include_once './model/inc/dashboard_header.php';
 
+$term = $_SESSION['term'];
+$academic_session = $_SESSION['aSession'];
+$admission_no = $_GET['displayMT'];
+$mock_no = $_SESSION['mock_no'];
+$arm = $_SESSION['arm'];
+$class = $_SESSION['class'];
+
+
+
 ?>
 
 <main role="main" class="col-lg-10 ml-sm-auto col-lg-10 px-md-4">
@@ -55,10 +64,7 @@ include_once './model/inc/dashboard_header.php';
 
 
                 <?php
-                $term = $_SESSION['term'];
-                $academic_session = $_SESSION['aSession'];
-                $admission_no = $_GET['displayMT'];
-                $mock_no = $_SESSION['mock_no'];
+
 
                 $select_sql = "SELECT * FROM student WHERE admissionNo='$admission_no' ";
                 $sql_result = $conn->query($select_sql);
@@ -80,7 +86,16 @@ include_once './model/inc/dashboard_header.php';
                         <p><strong>Class:</strong> <?php echo $row['class_name'] . " " . $row['classArm']; ?> </p>
 
                         <p><strong>Term:</strong> <?php echo $term ?></p>
-                        <p><strong>Academic Session: </strong><?php echo $academic_session ?><span> | </span> <span> <strong>Date: </strong> 12<sup>th</sup> - Dec - 2021</span> </p>
+                        <p><strong>Academic Session:</strong> <?php echo $academic_session; ?>
+                            <span>
+                                <strong>Date: <?php if ($mock_no == "2nd Mock") {
+                                                    echo "12<sup>th</sup> - December - 2021 ";
+                                                } elseif ($mock_no == "3rd Mock") {
+                                                    echo "21<sup>st</sup> - February - 2022 ";
+                                                } ?>
+                                </strong>
+                            </span>
+                        </p>
 
                         <p><strong>Sex:</strong> <?php echo $row['gender']; ?> </p>
 
@@ -99,10 +114,7 @@ include_once './model/inc/dashboard_header.php';
             </div>
 
             <?php
-            $term = $_SESSION['term'];
-            $academic_session = $_SESSION['aSession'];
-            $admission_no = $_GET['displayMT'];
-            $mock_no = $_SESSION['mock_no'];
+
 
             $select_sql = "SELECT * FROM mock_scores WHERE admission_no='$admission_no' && term= '$term' && session = '$academic_session' && mock_no = '$mock_no'";
             $sql_result = $conn->query($select_sql);
@@ -172,14 +184,7 @@ include_once './model/inc/dashboard_header.php';
                 </tbody>
             </table>
             <div class="school-header">
-                <?php
 
-                $admission_no = $_GET['displayMT'];
-
-                $select_sql = "SELECT * FROM mock_scores WHERE admission_no='$admission_no' && term= '$term' && session = '$academic_session' && score <= '30'";
-                $sql_result = $conn->query($select_sql);
-
-                ?>
                 <div class="grading-system">
                     <table class="table table-sm table-condensed  table-striped">
                         <thead class=" thead-dark ">
@@ -227,40 +232,10 @@ include_once './model/inc/dashboard_header.php';
                 </div>
                 <!--comments-->
                 <div class="griding">
-                    <table class="table table-sm table-condensed  table-striped">
-                        <thead class=" thead-dark text-center ">
-                            <tr>
-                                <th scope=" col" colspan="2">Subjects to improve on</th>
-                            </tr>
-                        </thead>
-                        <tbody class="ml-2 table-bordered">
-                            <tr>
-                                <td>You need to put in more effort in the subject(s) listed below before the next mock!</td>
-                            </tr>
-                            <?php
 
-                            while ($row = $sql_result->fetch_assoc()) :
-
-                                $T2 = $row['score'];
-                                $subject = $row['subject_title'];
-                            ?>
-
-                                <td>
-                                    <?php
-                                    if ($T2 = $T2) {
-                                        echo " $subject ";
-                                    }  ?>
-                                </td>
-
-
-                        </tbody>
-                    <?php endwhile; ?>
-
-                    </table>
                     <div class="mt-2 bg-danger">
                         <?php
-                        $arm = $_SESSION['arm'];
-                        $class = $_SESSION['class'];
+
                         $select_sql = "SELECT * FROM form_teachers WHERE class ='$class' && arm= '$arm' ";
                         $sql_result = $conn->query($select_sql);
 
@@ -320,22 +295,5 @@ include_once './model/inc/dashboard_header.php';
 <script>
     $(document).ready(function() {
         $('#example').DataTable();
-    });
-</script>
-<script type="text/javascript">
-    var doc = new jsPDF();
-    var specialElementHandlers = {
-        '#editor': function(element, renderer) {
-            return true;
-        }
-    };
-
-
-    $('#generatePDF').click(function() {
-        doc.fromHTML($('#print-container').html(), 15, 15, {
-            'width': 700,
-            'elementHandlers': specialElementHandlers
-        });
-        doc.save('sample_file.pdf');
     });
 </script>

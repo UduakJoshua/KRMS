@@ -1,5 +1,6 @@
 <?php
-require_once 'controller/bill_upload_logic.php';
+
+require_once './controller/bill_upload_logic.php';
 $title = "BCA | Fees Payment";
 include_once './model/inc/dashboard_header.php';
 
@@ -63,6 +64,7 @@ $a_session = $_SESSION['a_session'];
                                     <th scope="col">Total Actual Bill</th>
                                     <th scope="col">Total Payment Made</th>
                                     <th scope="col">Total Balance</th>
+                                    <th scope="col">Expenditures</th>
 
 
                                 </tr>
@@ -76,8 +78,7 @@ $a_session = $_SESSION['a_session'];
                                         sum(total_fees )as  actual_bill,
                                         sum(amount_paid)as  total_paid, 
                                         sum(discount)as  total_discount,
-                                        sum(balance) as total_balance, term, 
-                                        a_session 
+                                        sum(balance) as total_balance, term, a_session 
                                         FROM fees_total WHERE term ='$term'  && a_session ='$a_session'";
                                 $result = $conn->query($sql);
 
@@ -87,6 +88,7 @@ $a_session = $_SESSION['a_session'];
                                     $actual_bill = $row['actual_bill'];
                                     $total_paid = $row['total_paid'];
                                     $balance = $row['total_balance'];
+                                    $expense = $_SESSION['expense'];
                                     // formatting the number to thousand separators
                                     $formatted_total = number_format($total, 2);
                                     $formatted_discount = number_format($total_discount, 2);
@@ -102,6 +104,21 @@ $a_session = $_SESSION['a_session'];
                                         <td> &#8358; <?php echo $formatted_paid ?> </td>
                                         <td> &#8358; <?php echo $formatted_balance ?> </td>
 
+
+                                        <?php
+                                        //query to get total expenditures for the term
+                                        $sql = "SELECT SUM(amount_spent)AS total_expenditures 
+                                FROM expenditures WHERE term ='$term' && academic_session ='$a_session'";
+                                        $result = $conn->query($sql);
+                                        while ($row = mysqli_fetch_assoc($result)) :
+                                            $total_expense = $row['total_expenditures'];
+                                            $formated_total_expense = number_format($total_expense, 2);
+
+                                        ?>
+                                            <td> &#8358; <?php echo $formated_total_expense; ?></td>
+
+                                        <?php endwhile; ?>
+
                                     </tr>
                                 <?php endwhile; ?>
                             </tbody>
@@ -111,6 +128,7 @@ $a_session = $_SESSION['a_session'];
 
                 </div>
                 <!--card footer begins here-->
+
                 <div class=" row">
                     <div class="col-md-12">
                         <a href="fees_report_init.php"><button type="button" style="width:30%;" class="btn btn-primary">Back</button></a>
@@ -131,6 +149,7 @@ $a_session = $_SESSION['a_session'];
 
 
     </section>
+
     <hr>
 
     <?php

@@ -157,18 +157,36 @@ $aSession = $_SESSION['aSession'];
                         <div class="col-md-3">
                             <label for="mode_pay">Mode of Payment</label>
                             <select name="mode_pay" id="mode_pay" class="form-control ">
-                                <option value="cash"> Cash </option>
-                                <option value="pos"> POS </option>
-                                <option value="deposit"> Bank Deposit </option>
-                                <option value="transfer"> Transfer </option>
+                                <option value="Cash"> Cash Deposit </option>
+                                <option value="Heritage POS"> Heritage POS </option>
+                                <option value="Ecobank POS"> Ecobank POS </option>
+                                <option value="FBN Deposit"> FBN Deposit </option>
+                                <option value="FCMB Deposit"> FCMB Deposit </option>
+                                <option value="GTB Deposit"> GTB Deposit </option>
+                                <option value="FBN Transfer"> FBN Transfer </option>
+                                <option value="FCMB Transfer"> FCMB Transfer </option>
+                                <option value="GTB Transfer"> GTB Transfer </option>
+                                <option value="Ecobank Transfer"> Ecobank Transfer</option>
                             </select>
                         </div>
+
 
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="date_issued">Date Issued</span></label>
-                                <input type="date" class="form-control " value="<?php echo date('Y-m-d', strtotime($date_issued)) ?>" name="date_issued" id="date_issued">
+                                <input type="date" class="form-control " name="date_issued" id="date_issued">
                             </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label for="bursar">Processed By:</label>
+                            <select name="bursar" id="bursar" class="form-control ">
+                                <option value="Mrs. Bare"> Mrs. Bare</option>
+                                <option value="Mr. James"> Mr. James Alawa </option>
+                                <option value="Mr. Joshua"> Mr. Joshua </option>
+                                <option value="Mrs. Nwosu"> Mrs. Nwosu </option>
+                                <option value="Mrs. Olabisi"> Mrs. Olabisi </option>
+                            </select>
                         </div>
                     </div>
 

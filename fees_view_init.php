@@ -130,12 +130,17 @@ include_once './model/inc/dashboard_header.php';
                         <!--card footer begins here-->
                         <div class="card-footer">
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-4">
 
                                     <button type="submit" class="btn btn-primary" name="class_report">Display Payments</button>
                                 </div>
+                                <?php if ($_SESSION['username'] == "administrator") : ?>
+                                    <div class="col-md-4">
 
-                                <div class="col-md-6">
+                                        <button type="submit" class="btn btn-primary" name="class_fees_report">Class Payments Report</button>
+                                    </div>
+                                <?php endif ?>
+                                <div class="col-md-4">
                                     <a href="fees_report.php"><button type="button" style="width:30%;" class="btn btn-warning">Back</button></a>
                                 </div>
                             </div>

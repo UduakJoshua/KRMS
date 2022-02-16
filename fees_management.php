@@ -48,7 +48,7 @@ include_once './model/inc/dashboard_header.php';
       </div>
       <!--col 2 -->
 
-      <div class="col-md-2 icon_div" style="background-color: #f3dd34;">
+      <!--div class="col-md-2 icon_div" style="background-color: #f3dd34;">
         <div>
           <span class="fa fa-pencil icon" aria-hidden="true"></span>
         </div>
@@ -57,7 +57,7 @@ include_once './model/inc/dashboard_header.php';
             <p class="text-center text-white">Edit Bill</p>
           </a>
         </div>
-      </div>
+      </div-->
       <!--col 2 -->
       <div class="col-md-2 icon_div" style="background-color: #e3dd34;">
         <div>
@@ -75,8 +75,8 @@ include_once './model/inc/dashboard_header.php';
           <span class="fa fa-line-chart icon" aria-hidden="true"></span>
         </div>
         <div>
-          <a href="fees_report.php" class="text-decoration-none icon-a">
-            <p class="text-center text-white">Fees Report</p>
+          <a href="expenditures.php" class="text-decoration-none icon-a">
+            <p class="text-center text-white">Expenditures</p>
           </a>
         </div>
       </div>

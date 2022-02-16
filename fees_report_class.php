@@ -66,6 +66,8 @@ $a_session = $_SESSION['aSession'];
                                     <th scope="col">Total Actual Bill</th>
                                     <th scope="col">Total Payment Made</th>
                                     <th scope="col">Total Balance</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Action</th>
 
 
                                 </tr>
@@ -88,11 +90,14 @@ $a_session = $_SESSION['aSession'];
                                 <?php
                                 while ($row = mysqli_fetch_assoc($result)) : ?>
                                     <tr style="text-align: center;">
+                                        <input type="hidden" name="admin_no[]" value="<?php echo $row['admission_np']  ?>" readonly class="form-control" size="30">
                                         <td id="data">&#8358; <?php echo $row['total_bill']  ?> </td>
                                         <td>&#8358; <?php echo $row['total_discount'] ?> </td>
                                         <td>&#8358; <?php echo $row['actual_bill'] ?> </td>
                                         <td>&#8358; <?php echo $row['total_paid']  ?> </td>
                                         <td>&#8358; <?php echo $row['total_balance']  ?> </td>
+                                        <td>&#8358; <?php echo $row['total_paid']  ?> </td>
+                                        <td> <a href="fees_receipt.php?receipt=<?php echo $row['admission_no']; ?>"><button type="button" class="btn btn-secondary" name="display_result">Display</button></a> </td>
 
                                     </tr>
                                 <?php endwhile; ?>

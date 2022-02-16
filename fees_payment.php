@@ -80,7 +80,7 @@ $aSession = $_SESSION['aSession'];
                                         <th scope="col">2nd Deposit</th>
                                         <th scope="col">3rd Deposit</th>
                                         <th scope="col">Balance</th>
-                                        <th scope="col">Action</th>
+                                        <th scope="col" colspan="2">Action</th>
                                         <th scope="col">Status</th>
 
                                     </tr>
@@ -106,9 +106,12 @@ $aSession = $_SESSION['aSession'];
                                             <td><input type="text" name="2nd_depo" value="<?php echo $row['second_deposit'] ?>" readonly class="form-control"></td>
                                             <td><input type="text" name="3rd_depo" value="<?php echo $row['third_deposit'] ?>" readonly class="form-control"></td>
                                             <td><input type="text" name="balance" value="<?php echo $row['balance'] ?>" readonly class="form-control"></td>
-                                            <td> <a href="make_pay.php?pay=<?php echo $row['id']; ?>" class=" btn btn-info btn-sm">PayNow</a></td>
+                                            <td colspan="2">
+                                                <a href="make_pay.php?pay=<?php echo $row['id']; ?>" class=" btn btn-info btn-sm mb-1" style="font-size: 11px; width:100%">Pay Now</a>
+                                                <a href="edit_bill.php?edit-bill=<?php echo $row['id']; ?>" class=" btn btn-warning btn-sm" style="font-size: 11px; width:100%"> Edit Bill </a>
+                                            </td>
                                             <td>
-                                                <?php if ($row['balance'] == 0) : ?>
+                                                <?php if ($row['balance'] <= 0) : ?>
 
                                                     <button class="btn btn-success btn-sm " disabled>Cleared</button>
 

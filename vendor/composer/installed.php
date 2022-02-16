@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '4eb8a73fb1e22a6fe6ab90438016eed2f5d49ad2',
+    'reference' => '937220d3fb5f8074de57ad9c3aa7c724ef61ed98',
     'name' => '__root__',
   ),
   'versions' => 
@@ -18,7 +18,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '4eb8a73fb1e22a6fe6ab90438016eed2f5d49ad2',
+      'reference' => '937220d3fb5f8074de57ad9c3aa7c724ef61ed98',
     ),
     'doctrine/lexer' => 
     array (
@@ -109,6 +109,15 @@
       array (
       ),
       'reference' => '5fa61b65e612ce1ae15f69b3d223cb14ecc60e32',
+    ),
+    'phpmailer/phpmailer' => 
+    array (
+      'pretty_version' => 'v6.5.3',
+      'version' => '6.5.3.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'baeb7cde6b60b1286912690ab0693c7789a31e71',
     ),
     'phpoffice/phpspreadsheet' => 
     array (

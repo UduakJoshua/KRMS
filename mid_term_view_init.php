@@ -1,7 +1,7 @@
 <?php
 require_once 'controller/score_upload_logic.php';
 $title = "BCA | Uploaded Scores";
-include_once './model/inc/staff_dashboard_header.php';
+include_once './model/inc/dashboard_header.php';
 
 ?>
 
@@ -11,7 +11,7 @@ include_once './model/inc/staff_dashboard_header.php';
         <div class=" mb-2 mb-md-0">
             <div class="mr-2">
 
-                <p><?php echo $_SESSION['staff-username']; ?></p>
+                <p><?php echo $_SESSION['username']; ?></p>
             </div>
 
         </div>

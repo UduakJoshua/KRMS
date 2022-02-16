@@ -1,12 +1,14 @@
 <?php
-
-
-
 require './controller/dbase_conn.php';
-require './controller/result_display_logic.php';
 require './controller/score_upload_logic.php';
 $title = "BCA | Mid-Term Result View";
 include_once './model/inc/dashboard_header.php';
+
+
+$c_arm = $_SESSION['arm'];
+$class = $_SESSION['class'];
+$term = $_SESSION['term'];
+$aSession = $_SESSION['aSession'];
 
 ?>
 
@@ -44,7 +46,7 @@ include_once './model/inc/dashboard_header.php';
                 </div>
                 <div class="text-right pl-3 ">
                     <h1 class="title-head">Blessed Children Academy</h1>
-                    <p class="head-text"><span class="fa fa-home"></span> 18 Amaehule Street, Eliogbolo, Rumuokoro | 1 kono Close Rumuodomaya, Port Harcourt</p>
+                    <p class="head-text"><span class="fa fa-home"></span> 18 Amaehule Street, Eliogbolo, Rumuokoro | 1 Kono Close Rumuodomaya, Port Harcourt</p>
                     <p class="head-text"><span class="fa fa-phone"></span> 07061666648 | 08180810162 | 08037808626 | <span class="fa fa-whatsapp text-gray"> 08179484262</span></p>
                     <p class="head-text"><span class="fa fa-envelope"></span> academyblessedhigh@gmail.com | https://www.blessedchildrenacademy.com</p>
 
@@ -61,6 +63,7 @@ include_once './model/inc/dashboard_header.php';
 
                 if (isset($_GET['displayMT'])) {
                     $admission_no = $_GET['displayMT'];
+
 
                     $select_sql = "SELECT * FROM student WHERE admissionNo='$admission_no' ";
                     $sql_result = $conn->query($select_sql);
@@ -80,8 +83,17 @@ include_once './model/inc/dashboard_header.php';
                         <p><strong>Admission Number:</strong> <?php echo $row['admissionNo'] ?></p>
                         <p><strong>Name:</strong> <?php echo $row['surname'] . " " . $row['firstname'] . " " . $row['middlename']; ?> </p>
                         <p><strong>Class:</strong> <?php echo $row['class_name'] . " " . $row['classArm']; ?> </p>
-                        <p><strong>Term: </strong><?php echo $_SESSION['term']; ?></p>
-                        <p><strong>Academic Session:</strong> <?php echo $_SESSION['aSession']; ?><span> <strong>Date: 30<sup>th</sup> - October - 2021</strong></span> </p>
+                        <p><strong>Term: </strong><?php echo $term; ?></p>
+                        <p><strong>Academic Session:</strong> <?php echo $aSession; ?>
+                            <span>
+                                <strong>Date: <?php if ($term == "1st Term") {
+                                                    echo "30<sup>th</sup> - October - 2021 ";
+                                                } else {
+                                                    echo "21<sup>st</sup> - February - 2022 ";
+                                                } ?>
+                                </strong>
+                            </span>
+                        </p>
                         <p><strong>Sex:</strong> <?php echo $row['gender']; ?> </p>
 
                     </div>
@@ -103,7 +115,7 @@ include_once './model/inc/dashboard_header.php';
             if (isset($_GET['displayMT'])) {
                 $admission_no = $_GET['displayMT'];
 
-                $select_sql = "SELECT * FROM mid_term_scores WHERE admission_no='$admission_no' && term= '1st Term' ORDER BY subject ASC";
+                $select_sql = "SELECT * FROM mid_term_scores WHERE admission_no='$admission_no' && term= '$term' ORDER BY subject ASC";
                 $sql_result = $conn->query($select_sql);
             }
             ?>
@@ -217,61 +229,30 @@ include_once './model/inc/dashboard_header.php';
 
                 </div>
                 <!--comments-->
-                <div>
-                    <table class=" table table-sm table-condensed table-striped">
-                        <thead class=" thead-dark text-center ">
-                            <tr>
-                                <th scope=" col" colspan="2">Subjects to improve on</th>
-                            </tr>
-                        </thead>
-                        <tbody class="ml-2 table-bordered">
-                            <tr>
-                                <td>You need to put in more effort in the subject(s) listed below before the examination!</td>
-                            </tr>
-                            <?php
-
-                            while ($row = $sql_result->fetch_assoc()) :
-
-                                $T2 = $row['T2'];
-                                $subject = $row['subject'];
-                            ?>
-
-                                <td>
-                                    <?php
-                                    if ($T2 = $T2) {
-                                        echo " $subject ";
-                                    } elseif ($T2 > $row['T2']) {
-                                        echo "This is a beautiful performance";
-                                    } ?>
-                                </td>
 
 
-                        </tbody>
+                <div class="mt-2 bg-danger">
+                    <?php
+                    $arm = $_SESSION['arm'];
+                    $class = $_SESSION['class'];
+                    $select_sql = "SELECT * FROM form_teachers WHERE class ='$class' && arm= '$arm' ";
+                    $sql_result = $conn->query($select_sql);
+
+                    ?>
+                    <?php
+
+                    while ($row = $sql_result->fetch_assoc()) :
+
+
+                    ?>
+                        <p class="bg-danger text-center text-white h6 p-2"> Form Teacher: <br>
+                            <?php echo $row['teachers_name'] ?></p>
                     <?php endwhile; ?>
 
-                    </table>
-                    <div class="mt-2 bg-danger">
-                        <?php
-                        $arm = $_SESSION['arm'];
-                        $class = $_SESSION['class'];
-                        $select_sql = "SELECT * FROM form_teachers WHERE class ='$class' && arm= '$arm' ";
-                        $sql_result = $conn->query($select_sql);
-
-                        ?>
-                        <?php
-
-                        while ($row = $sql_result->fetch_assoc()) :
-
-
-                        ?>
-                            <p class="bg-danger text-center text-white h6 p-2"> Form Teacher: <br>
-                                <?php echo $row['teachers_name'] ?></p>
-                        <?php endwhile; ?>
-
-
-                    </div>
 
                 </div>
+
+
                 <!-- stamp-->
                 <div class=" school-header school-header2">
                     <img src="assets/img/bca-stamp.png" alt="" style="width: 65%;">
@@ -287,7 +268,7 @@ include_once './model/inc/dashboard_header.php';
     <div id="editor"></div>
     <div class="print_button">
         <button class=" btn btn-primary mr-2" onclick="window.print()">Print Result</button>
-        <button class=" btn btn-primary ml-2" id="generatePDF">Download</button>
+
     </div>
     <hr>
 </main>
@@ -313,22 +294,5 @@ include_once './model/inc/dashboard_header.php';
 <script>
     $(document).ready(function() {
         $('#example').DataTable();
-    });
-</script>
-<script type="text/javascript">
-    var doc = new jsPDF();
-    var specialElementHandlers = {
-        '#editor': function(element, renderer) {
-            return true;
-        }
-    };
-
-
-    $('#generatePDF').click(function() {
-        doc.fromHTML($('#print-container').html(), 15, 15, {
-            'width': 700,
-            'elementHandlers': specialElementHandlers
-        });
-        doc.save('sample_file.pdf');
     });
 </script>

@@ -52,3 +52,49 @@ if (isset($_POST['suspend'])) {
     header("location:./accounts.php");
     exit();
 }*/
+if (isset($_POST['postEx'])) {
+
+
+    $item = test_input($_POST['expenditure_item']);
+    $amount_spent = (int)(test_input($_POST['amount_spent']));
+    $date_ex = test_input($_POST['date_ex']);
+    $month_ex = test_input($_POST['month_ex']);
+    $remark = test_input($_POST['remark']);
+    $term = test_input($_POST['term']);
+    $a_session = test_input($_POST['aSession']);
+
+    echo $amount_spent;
+
+
+
+    // run an insert query to store the data in a table
+    $sql = "INSERT INTO expenditures( expenditure_item, amount_spent, expenditure_date, expenditure_month, 
+        remark,  term, academic_session)
+            VALUES (?,?,?,?,?,?,?) ";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param(
+        'sisssss',
+        $item,
+        $amount_spent,
+        $date_ex,
+        $month_ex,
+        $remark,
+        $term,
+        $a_session
+    );
+
+    if ($stmt->execute()) {
+        //$billed = true;
+        $_SESSION['message'] = "Expenditure successfully saved!";
+        $_SESSION['msg_type'] = "success";
+        header('Location:expenditures.php');
+    } else {
+        $_SESSION['message'] = "Failed to capture selected expenditure!";
+        $_SESSION['msg_type'] = "danger";
+        header('Location:expenditures.php');
+    }
+
+    $stmt->close();
+    exit();
+}

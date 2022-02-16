@@ -61,7 +61,7 @@ include_once './model/inc/dashboard_header.php';
                                 <div class="col-md-2">
                                     <div class="form-group">
 
-                                        <input type="number" name="T2" value="<?php echo $T2; ?>" placeholder=" Enter T2 " class=" form-control">
+                                        <input type="number" name="T2" value="<?php echo $T2; ?>" placeholder=" Enter T2 " class=" form-control" max="20">
                                     </div>
                                 </div>
 

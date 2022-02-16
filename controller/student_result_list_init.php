@@ -148,3 +148,59 @@ if (isset($_POST['init_spreadsheet'])) {
     header("location:re_spreadsheet_basic.php");
     exit();
 }
+
+// logic to view midterm result
+
+
+if (isset($_POST['midTermResult'])) {
+
+    $term =  test_input($_POST['termRe']);
+    $academic_session = test_input($_POST['a_session']);
+
+    // create a select query
+    $_SESSION['term'] = $term;
+    $_SESSION['a_session'] = $academic_session;
+
+    if ($term == "2nd Term") {
+        header("location:exam_notification.php");
+    } else {
+        header("location:midterm_result.php");
+    }
+    exit();
+}
+
+// logic to view examination result by students
+if (isset($_POST['examBasic'])) {
+
+    $term =  test_input($_POST['termRe']);
+    $academic_session = test_input($_POST['a_session']);
+
+    // create a select query
+    $_SESSION['term'] = $term;
+    $_SESSION['a_session'] = $academic_session;
+
+    header("location:student_exam_result_basic.php");
+    exit();
+} elseif (isset($_POST['examNur'])) {
+
+    $term =  test_input($_POST['termRe']);
+    $academic_session = test_input($_POST['a_session']);
+
+    // create a select query
+    $_SESSION['term'] = $term;
+    $_SESSION['a_session'] = $academic_session;
+
+    header("location:student_exam_result_nur.php");
+    exit();
+} elseif (isset($_POST['examHigh'])) {
+
+    $term =  test_input($_POST['termRe']);
+    $academic_session = test_input($_POST['a_session']);
+
+    // create a select query
+    $_SESSION['term'] = $term;
+    $_SESSION['a_session'] = $academic_session;
+
+    header("location:student_exam_result_high.php");
+    exit();
+}

@@ -67,6 +67,7 @@ $a_session = $_SESSION['aSession'];
                                     <th scope="col">Amount Paid</th>
                                     <th scope="col">Balance</th>
                                     <th scope="col">Status</th>
+                                    <th scope="col">Action</th>
 
 
                                 </tr>
@@ -76,10 +77,13 @@ $a_session = $_SESSION['aSession'];
 
                                 //query
                                 $sql = "SELECT * FROM fees_total WHERE term ='$term' && student_arm =  '$student_arm' && student_class = '$student_class'";
+
                                 $result = $conn->query($sql);
                                 ?>
                                 <?php
-                                while ($row = mysqli_fetch_assoc($result)) : ?>
+                                while ($row = mysqli_fetch_assoc($result)) :
+
+                                ?>
                                     <tr>
                                         <input type="hidden" name="a_session" value="<?php echo $aSession ?>" class="form-control">
                                         <input type="hidden" name="term" value="<?php echo $term ?>" class="form-control">
@@ -101,6 +105,7 @@ $a_session = $_SESSION['aSession'];
                                                 <button class="btn btn-danger btn-sm " disabled>Indebted</button>
                                             <?php endif; ?>
                                         </td>
+                                        <td> <a href="fees_receipt.php?receipt=<?php echo $row['admission_no']; ?>"><button type="button" class="btn btn-secondary">ViewReceipt</button></a> </td>
                                     </tr>
                                 <?php endwhile; ?>
                             </tbody>
