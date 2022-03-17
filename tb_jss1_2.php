@@ -7,7 +7,7 @@ include_once './model/inc/student_dash_header.php';
 ?>
 <main role="main" class="col-lg-10 ml-sm-auto col-lg-10 px-md-4">
     <div class=" page-head d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h6">Mid Term Time Table</h1>
+        <h1 class="h6">Second Term Time Table</h1>
         <div class=" mb-2 mb-md-0">
             <div class="mr-2">
                 <p>Welcome <?php echo $_SESSION['st-username']; ?></p>
@@ -31,67 +31,89 @@ include_once './model/inc/student_dash_header.php';
                         <tr style="font-size: 20px;">
                             <th scope="col">Day</th>
                             <th scope="col">Date</th>
-                            <th scope="col">8:30 - 10:00</th>
-                            <th scope="col">10:00 - 11:30</th>
-                            <th scope="col">11:30 - 11:45</th>
-                            <th scope="col">11:45 - 1:00</th>
+                            <th scope="col">08:30 - 10:30</th>
+                            <th scope="col">10:30 - 11:00</th>
+                            <th scope="col">11:00 - 1:00</th>
+
 
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Wednesday</td>
-                            <td>02/02/2022</td>
-                            <td>English Language</td>
-                            <td>Biology</td>
-                            <td rowspan="7" class="pt-4 text-center"> BREAK </td>
-                            <td>Fine Art</td>
-                        </tr>
-                        <tr>
-                            <td>Thursday</td>
-                            <td>03/02/2022</td>
-                            <td>Physics</td>
-                            <td>Literature</td>
-                            <td>Music</td>
-                        </tr>
-                        <tr>
-                            <td>Friday</td>
-                            <td>04/02/2022</td>
-                            <td>Chemistry</td>
-                            <td>Business Studies</td>
-                            <td>P.H.E</td>
-                        </tr>
-                        <tr>
-                            <td>Monday</td>
-                            <td>07/02/2022</td>
-                            <td>Mathematics</td>
-                            <td>Homec</td>
-
-                            <td>French</td>
-                        </tr>
-                        <tr>
                             <td>Tuesday</td>
-                            <td>08/02/2022</td>
-                            <td>I.C.T</td>
-                            <td>Civic Education</td>
-
+                            <td>15/03/2022</td>
+                            <td>Agricultural Sc.</td>
+                            <td rowspan="11" class="pt-4 text-center align-item-center" style="font-size: 30px;"> B <br>R<br>E<br>A<br>K </td>
                             <td>C.R.S</td>
                         </tr>
                         <tr>
                             <td>Wednesday</td>
-                            <td>09/02/2022</td>
-                            <td>Agricultural Science</td>
-                            <td>Igbo</td>
-
-                            <td>Social Studies</td>
+                            <td>16/03/2022</td>
+                            <td>English Language</td>
+                            <td>Fine Art</td>
                         </tr>
                         <tr>
                             <td>Thursday</td>
-                            <td>10/02/2022</td>
-                            <td>B/Tech</td>
-                            <td> History</td>
+                            <td>17/03/2022</td>
+                            <td>Chemistry</td>
+                            <td>Music</td>
 
-                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Friday</td>
+                            <td>18/03/2022</td>
+                            <td>Physics</td>
+                            <td>Home Economics</td>
+
+                        </tr>
+                        <tr>
+                            <td>Monday</td>
+                            <td>21/03/2022</td>
+                            <td>Mathematics</td>
+                            <td>French</td>
+
+
+                        </tr>
+                        <tr>
+                            <td>Tuesday</td>
+                            <td>22/03/2022</td>
+                            <td>Business St.</td>
+                            <td>P.H.E</td>
+                        </tr>
+
+                        <tr>
+                            <td>Wednesday</td>
+                            <td>23/03/2022</td>
+                            <td>Basic Tech. </td>
+                            <td>Social Studies</td>
+                        </tr>
+
+                        <tr>
+                            <td>Thursday</td>
+                            <td>24/03/2022</td>
+                            <td>Biology</td>
+                            <td> Igbo</td>
+                        </tr>
+
+                        <tr>
+                            <td>Friday</td>
+                            <td>25/03/2022</td>
+                            <td>Civic Education</td>
+                            <td>Literature</td>
+                        </tr>
+
+                        <tr>
+                            <td>Monday</td>
+                            <td>28/03/2022</td>
+                            <td>History</td>
+                            <td>I.C.T</td>
+                        </tr>
+
+                        <tr>
+                            <td>Tuesday</td>
+                            <td>29/03/2022</td>
+                            <td>Clothing & Textile</td>
+                            <td> </td>
                         </tr>
                     </tbody>
 

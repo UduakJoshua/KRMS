@@ -59,6 +59,9 @@ if (!isset($_SESSION['staff-user_id'])) {
             color: goldenrod;
         }
 
+        .input-group-text {
+            font-size: 0.7rem;
+        }
 
         .bd-placeholder-img {
             font-size: 1.125rem;

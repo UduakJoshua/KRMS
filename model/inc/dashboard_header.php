@@ -156,6 +156,17 @@ if (!isset($_SESSION['ad-user_id'])) {
             font-size: 16px;
         }
 
+        .table_fees tr td {
+            height: 8px;
+            line-height: 3px;
+            padding: 10px;
+            margin-top: 2px;
+            vertical-align: middle;
+
+        }
+
+
+
 
         .thd th {
             text-align: center;
@@ -219,6 +230,10 @@ if (!isset($_SESSION['ad-user_id'])) {
         .td_align {
             width: 40px;
             text-align: center;
+        }
+
+        .input-group-text {
+            font-size: 0.7rem;
         }
 
 

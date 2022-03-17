@@ -122,14 +122,13 @@ $aSession = $_SESSION['aSession'];
                                     <th scope="col">Subject</th>
                                     <th scope="col">T1<br> (20%)</th>
                                     <th scope="col">T2<br> (20%)</th>
-                                    <th scope="col">Exam<br> (60%)</th>
+                                    <th scope="col">Project<br> (10%)</th>
+                                    <th scope="col">Assignment<br> (10%)</th>
+                                    <th scope="col">Exam<br> (40%)</th>
                                     <th scope="col">Total<br> (100%)</th>
                                     <th scope="col">Grade</th>
                                     <th scope="col">Subject <br> Position</th>
                                     <th scope="col">Remarks</th>
-
-
-
                                 </tr>
                             </thead>
                             <tbody class="ml-2">
@@ -140,10 +139,11 @@ $aSession = $_SESSION['aSession'];
 
                                     $T1 = $row['T1'];
                                     $T2 = $row['T2'];
+                                    $pro = $row['project'];
+                                    $ass = $row['assignment'];
                                     $exam = $row['exam'];
                                     $total = $row['total'];
                                     $sp = $row['rank'];
-                                    //$subject_position = $row['subject_position'];
 
                                 ?>
 
@@ -151,6 +151,8 @@ $aSession = $_SESSION['aSession'];
                                         <td><strong><?php echo $row['subject'] ?></strong></td>
                                         <td class="td_center"><?php echo $T1 ?></td>
                                         <td class="td_center"><?php echo $T2 ?></td>
+                                        <td class="td_center"><?php echo $pro ?></td>
+                                        <td class="td_center"><?php echo $ass ?></td>
                                         <td class="td_center"><?php echo $exam ?></td>
                                         <td class="td_center"><?php echo $total ?></td>
                                         <td class="td_center">
@@ -167,26 +169,28 @@ $aSession = $_SESSION['aSession'];
                                                 echo "F";
                                             } ?>
                                         </td>
-                                        <td class="td_center"><?php
-                                                                $ordinals = ['th', 'st', 'nd', 'rd'];
-                                                                $sp_split = str_split($sp);
-                                                                $num_digits = strlen($sp);
-                                                                if ($num_digits == 1 && $sp_split[0] == 1) {
-                                                                    echo $sp . "<sup>" . $ordinals[1] . "</sup>";
-                                                                } else if ($num_digits == 1 && $sp_split[0] == 2) {
-                                                                    echo $sp . "<sup>" . $ordinals[2] . "</sup>";
-                                                                } else if ($num_digits == 1 && $sp_split[0] == 3) {
-                                                                    echo $sp . "<sup>" . $ordinals[3] . "</sup>";
-                                                                } else if ($num_digits == 2 && $sp_split[0] != 1 && $sp_split[1] == 3) {
-                                                                    echo $sp . "<sup>" . $ordinals[3] . "</sup>";
-                                                                } else if ($num_digits == 2 && $sp_split[0] != 1 && $sp_split[1] == 2) {
-                                                                    echo $sp . "<sup>" . $ordinals[2] . "</sup>";
-                                                                } else if ($num_digits == 2 && $sp_split[0] != 1 && $sp_split[1] == 1) {
-                                                                    echo $sp . "<sup>" . $ordinals[1] . "</sup>";
-                                                                } else {
-                                                                    echo $sp . "<sup>" . $ordinals[0] . "</sup>";
-                                                                }
-                                                                ?></td>
+                                        <td class="td_center">
+                                            <?php
+                                            $ordinals = ['th', 'st', 'nd', 'rd'];
+                                            $sp_split = str_split($sp);
+                                            $num_digits = strlen($sp);
+                                            if ($num_digits == 1 && $sp_split[0] == 1) {
+                                                echo $sp . "<sup>" . $ordinals[1] . "</sup>";
+                                            } else if ($num_digits == 1 && $sp_split[0] == 2) {
+                                                echo $sp . "<sup>" . $ordinals[2] . "</sup>";
+                                            } else if ($num_digits == 1 && $sp_split[0] == 3) {
+                                                echo $sp . "<sup>" . $ordinals[3] . "</sup>";
+                                            } else if ($num_digits == 2 && $sp_split[0] != 1 && $sp_split[1] == 3) {
+                                                echo $sp . "<sup>" . $ordinals[3] . "</sup>";
+                                            } else if ($num_digits == 2 && $sp_split[0] != 1 && $sp_split[1] == 2) {
+                                                echo $sp . "<sup>" . $ordinals[2] . "</sup>";
+                                            } else if ($num_digits == 2 && $sp_split[0] != 1 && $sp_split[1] == 1) {
+                                                echo $sp . "<sup>" . $ordinals[1] . "</sup>";
+                                            } else {
+                                                echo $sp . "<sup>" . $ordinals[0] . "</sup>";
+                                            }
+                                            ?>
+                                        </td>
 
                                         <!--remarks-->
                                         <td>
@@ -203,12 +207,9 @@ $aSession = $_SESSION['aSession'];
                                                 echo "Fail";
                                             } ?>
                                         </td>
-
-
                                     </tr>
 
                                 <?php endwhile; ?>
-
                             </tbody>
                         </table>
                     </div>
@@ -222,7 +223,7 @@ $aSession = $_SESSION['aSession'];
                         if (isset($_GET['display'])) {
                             $admission_no = $_GET['display'];
 
-                            $select_sql = "SELECT * FROM psychomotor WHERE admission_no= '$admission_no'";
+                            $select_sql = "SELECT * FROM psychomotor WHERE admission_no= '$admission_no' && term = '$term'";
                             $sql_result = $conn->query($select_sql);
                         }
                         ?>

@@ -26,7 +26,7 @@ include_once './model/inc/dashboard_header.php';
         <div class="card bg-success text-white mt-4 shadow" style="width: 16rem; height:6rem; ">
           <div class="card-body">
             <h5 class="card-title">Staff Management</h5>
-            <a href="#" class="card-link text-white">Manage Staff</a>
+            <a href="staff_display.php" class="card-link text-white">Manage Staff</a>
           </div>
         </div>
       </div>

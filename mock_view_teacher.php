@@ -106,7 +106,6 @@ include_once './model/inc/staff_dashboard_header.php';
                                                 <option value="2022/2023"> 2022/2023</option>
                                             </select>
                                         </div>
-
                                         <div class="col-md-2">
                                             <label for="mock_no">Mock</label>
 
@@ -115,9 +114,9 @@ include_once './model/inc/staff_dashboard_header.php';
                                                 <option value="1st Mock"> Mock I </option>
                                                 <option value="2nd Mock"> Mock II </option>
                                                 <option value="3rd Mock"> Mock III </option>
-                                                <option value="1st Mock"> Mock IV </option>
-                                                <option value="2nd Mock"> Mock V </option>
-                                                <option value="3rd Mock"> Mock VI </option>
+                                                <option value="4th Mock"> Mock IV </option>
+                                                <option value="5th Mock"> Mock V </option>
+                                                <option value="6th Mock"> Mock VI </option>
 
                                             </select>
                                         </div>

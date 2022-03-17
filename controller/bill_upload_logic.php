@@ -250,13 +250,6 @@ if (isset($_POST['make_pay'])) {
     $result = $stmt->get_result();
     $row = $result->fetch_assoc();
 
-
-    //if (($row['first_deposit'] != 0)) {
-    //   $_SESSION['message'] = " Payment for selected column already exist, please check your input!";
-    //  $_SESSION['msg_type'] = "danger";
-    //    header("location:./make_pay.php?pay=$id");
-    // } else {
-
     $sql = "UPDATE fees_total SET    first_deposit = '$first_deposit',
     second_deposit = '$second_deposit', third_deposit = '$third_deposit', 
     amount_paid = '$amount_paid ', balance = '$balance' , date_of_pay1 = '$date1' , 
@@ -264,7 +257,6 @@ if (isset($_POST['make_pay'])) {
     processed_by = '$pay_processed_by' WHERE id=$id";
 
     if ($conn->query($sql) === TRUE) {
-
         $_SESSION['message'] = "Payment for  $student_name  successfully made!";
         $_SESSION['msg_type'] = "success";
         header("location:./fees_payment.php");
@@ -305,6 +297,18 @@ if (isset($_POST['class_report'])) {
     $_SESSION['term'] = $term;
     $_SESSION['aSession'] = $a_session;
     header("location:class_payment_view.php");
+    exit();
+} else if (isset($_POST['class_debtors'])) {
+    $term = test_input($_POST['term']);
+    $a_session = test_input($_POST['aSession']);
+    $student_class = test_input($_POST['student_class']);
+    $student_arm = test_input($_POST['arm']);
+
+    $_SESSION['student_arm'] = $student_arm;
+    $_SESSION['student_class'] = $student_class;
+    $_SESSION['term'] = $term;
+    $_SESSION['aSession'] = $a_session;
+    header("location:class_debtors.php");
     exit();
 }
 // section to generate school report

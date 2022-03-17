@@ -5,15 +5,15 @@ use PhpOffice\PhpSpreadsheet\Calculation\MathTrig\Sum;
 require './controller/dbase_conn.php';
 require './controller/result_display_logic.php';
 require './controller/score_upload_logic.php';
+require './controller/student_result_list_init.php';
 require './controller/psychomotor_logic.php';
 $title = "BCA | Result View";
 include_once './model/inc/dashboard_header.php';
+
 $c_arm = $_SESSION['arm'];
 $class = $_SESSION['class'];
 $term = $_SESSION['term'];
 $aSession = $_SESSION['aSession'];
-
-
 ?>
 
 <main role="main" class="col-lg-10 ml-sm-auto col-lg-10.b.gb./b/vbV//b px-md-4">
@@ -86,9 +86,9 @@ $aSession = $_SESSION['aSession'];
                         <p><strong>Admission Number:</strong> <?php echo $row['admissionNo'] ?></p>
                         <p><strong>Name:</strong> <?php echo $row['surname'] . " " . $row['firstname'] . " " . $row['middlename']; ?> </p>
                         <p><strong>Class:</strong> <?php echo $row['class_name'] . " " . $row['classArm']; ?> </p>
-                        <p><strong>Academic Session: </strong> 2021/2022 <span> | </span> <span> <strong>Term:</strong> 1st Term</span> </p>
+                        <p><strong>Academic Session: </strong> <?php echo $aSession; ?> <span> | </span> <span> <strong>Term:</strong> <?php echo $term; ?></span> </p>
                         <p><strong>Sex:</strong> <?php echo $row['gender']; ?> </p>
-                        <p><strong>Next Term Begins:</strong> 3<sup>rd</sup> January, 2022. </p>
+                        <p>Next Term Begins: 3<sup>rd</sup> January, 2022. </p>
                     </div>
 
                     <div>
@@ -109,7 +109,6 @@ $aSession = $_SESSION['aSession'];
                     if (isset($_GET['display'])) {
                         $admission_no = $_GET['display'];
 
-
                         $select_sql = "SELECT * FROM (SELECT *, rank() OVER ( partition by subject order by total desc ) 
                 AS 'rank'   FROM students_score WHERE  term= '$term' && student_class = '$class' && class_arm = '$c_arm' && 
                 session = '$aSession') as temp WHERE admission_no= '$admission_no'";
@@ -121,11 +120,9 @@ $aSession = $_SESSION['aSession'];
                             <thead class="thead-dark ">
                                 <tr>
                                     <th scope="col">Subject</th>
-                                    <th scope="col">T1<br> (10%)</th>
+                                    <th scope="col">T1<br> (20%)</th>
                                     <th scope="col">T2<br> (20%)</th>
-                                    <th scope="col">Project<br> (10%)</th>
-                                    <th scope="col">Assignment<br> (20%)</th>
-                                    <th scope="col">Exam<br> (40%)</th>
+                                    <th scope="col">Exam<br> (60%)</th>
                                     <th scope="col">Total<br> (100%)</th>
                                     <th scope="col">Grade</th>
                                     <th scope="col">Subject <br> Position</th>
@@ -143,8 +140,6 @@ $aSession = $_SESSION['aSession'];
 
                                     $T1 = $row['T1'];
                                     $T2 = $row['T2'];
-                                    $project = $row['project'];
-                                    $assignment = $row['assignment'];
                                     $exam = $row['exam'];
                                     $total = $row['total'];
                                     $sp = $row['rank'];
@@ -156,11 +151,8 @@ $aSession = $_SESSION['aSession'];
                                         <td><strong><?php echo $row['subject'] ?></strong></td>
                                         <td class="td_center"><?php echo $T1 ?></td>
                                         <td class="td_center"><?php echo $T2 ?></td>
-                                        <td class="td_center"><?php echo $project ?></td>
-                                        <td class="td_center"><?php echo $assignment ?></td>
                                         <td class="td_center"><?php echo $exam ?></td>
                                         <td class="td_center"><?php echo $total ?></td>
-
                                         <td class="td_center">
                                             <?php
                                             if ($total >= 80) {
@@ -230,7 +222,7 @@ $aSession = $_SESSION['aSession'];
                         if (isset($_GET['display'])) {
                             $admission_no = $_GET['display'];
 
-                            $select_sql = "SELECT * FROM psychomotor WHERE admission_no= '$admission_no'";
+                            $select_sql = "SELECT * FROM psychomotor WHERE admission_no= '$admission_no' && term = '$term'";
                             $sql_result = $conn->query($select_sql);
                         }
                         ?>
@@ -348,7 +340,7 @@ $aSession = $_SESSION['aSession'];
 
                     $class = $_SESSION['class'];
 
-                    $select_sql = "SELECT COUNT(subject) AS no_subjects, SUM(T1+T2+project+assignment+exam) AS overall,  (SELECT no_of_subjects FROM no_of_subjects WHERE class_name = '$class') subject_total, student_name   FROM students_score WHERE admission_no='$admission_no' && term= '1st Term'";
+                    $select_sql = "SELECT COUNT(subject) AS no_subjects, SUM(T1+T2+exam) AS overall,  (SELECT no_of_subjects FROM no_of_subjects WHERE class_name = '$class') subject_total , student_name   FROM students_score WHERE admission_no='$admission_no' && term= '1st Term'";
                     $sql_result = $conn->query($select_sql);
 
                     ?>
@@ -366,13 +358,15 @@ $aSession = $_SESSION['aSession'];
                             <?php
 
                             while ($row = $sql_result->fetch_assoc()) :
-
                                 $overalTot = $row['overall'];
                                 $overasubject = $row['no_subjects'];
                                 $no_subject = $row['subject_total'];
                                 $average_score = round(($overalTot / $no_subject), 2);
                                 $total_mark = $no_subject * 100;
                                 $name = $row['student_name'];
+
+
+
 
                             ?>
                                 <tr>
@@ -397,29 +391,33 @@ $aSession = $_SESSION['aSession'];
                                     <td>
                                         <?php
                                         if ($average_score  >= 80) {
-                                            echo "Excellent Performance, Keep the fire burning";
+                                            echo "Superlative Performance, Keep Soaring Higher!";
                                         } elseif ($average_score  >= 60) {
-                                            echo "Great Performance, do not relent!";
+                                            echo "Brilliant Output, Keep the Fire Burning!";
                                         } elseif ($average_score >= 50) {
-                                            echo "An Average Performance. Work harder next term!";
+                                            echo "Nice Result, Keep working hard!";
+                                        } elseif ($average_score >= 40) {
+                                            echo "Fairly average output, More effort is highly needed!";
                                         } else {
-                                            echo "Poor Performance, put in more effort next term and don't quit!";
+                                            echo "Fair Performance, put in more effort and don't quit!";
                                         }
                                         ?>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Principal's Comment</td>
+                                    <td>Head Teacher's Comment</td>
                                     <td>
                                         <?php
                                         if ($average_score  >= 80) {
-                                            echo "Excellent Performance $name!, Keep the fire burning";
+                                            echo "Bravo $name!, Keep the flag flying.";
                                         } elseif ($average_score  >= 60) {
-                                            echo "Great Performance $name!, keep it up.";
+                                            echo "Beautiful performance $name!, Keep it up!";
                                         } elseif ($average_score >= 50) {
-                                            echo "An Average Performance. Work harder!";
+                                            echo "Good output $name, Keep pushing forward and strive to do better.";
+                                        } elseif ($average_score >= 40) {
+                                            echo "Don't relent $name, Keep pushing forward.";
                                         } else {
-                                            echo "This is a poor performance $name, but you can do better next term!";
+                                            echo "This is a weak performance $name, put in more effort next term, I believe in you!";
                                         }
                                         ?>
                                     </td>
@@ -436,16 +434,20 @@ $aSession = $_SESSION['aSession'];
                                     $term = $_SESSION['term'];
                                     $aSession = $_SESSION['aSession'];
 
-                                    $select_sql = "SELECT * FROM form_teachers WHERE class ='$class' && arm= '$c_arm' && term = '$term' && a_session = '$aSession' ";
+                                    $select_sql = "SELECT * FROM form_teachers WHERE class ='$class' && arm= '$c_arm' ";
                                     $sql_result = $conn->query($select_sql);
 
                                     ?>
                                     <?php
 
                                     while ($row = $sql_result->fetch_assoc()) :
+
+
+
                                     ?>
                                         <p class=" text-center text-white h6 p-2"> Form Teacher: <br>
                                             <?php echo $row['teachers_name'] ?></p>
+
                                     <?php endwhile; ?>
 
 
@@ -510,6 +512,7 @@ $aSession = $_SESSION['aSession'];
 
                     </tbody>
                     <tfoot class="thead-dark ">
+
                         <tr>
                             <th colspan="3" style="padding: 10px;">
                                 <p style="font-size: 12px; text-align:left ; margin-bottom:2px;">CAT : Continuous Assessment Test</p>

@@ -140,7 +140,8 @@ include_once './model/inc/dashboard_header.php';
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary" name="mid_initialize">Initialize</button>
+                                    <!--button type="submit" class="btn btn-primary" name="mid_initialize">Initialize</button-->
+                                    <a href="portal_closed_admin.php"> <button type="button" class="btn btn-primary">Initialize</button></a>
 
                                 </div>
                             </div>

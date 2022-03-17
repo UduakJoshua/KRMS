@@ -60,27 +60,31 @@ $ad_no = $_SESSION['admin_no'];
                 $sql_result = $conn->query($select_sql);
                 ?>
 
-                <div class="bg-danger text-white pt-2 " style="height: 50px;">
+                <div class="bg-danger text-white pt-2 mt-4" style="height: 60px;">
                     <?php
                     while ($row = $sql_result->fetch_assoc()) : ?>
 
                         <h4 class="text-center head3">Mid-Term Result Sheet For <i><?php echo $row['surname'] . " " . $row['firstname'] . " " . $row['middlename']; ?></i>
                         </h4>
                 </div>
-                <div class="d-flex justify-content-between mt-3">
+                <div class="d-flex justify-content-between mt-2">
                     <div class=" student-details">
-
                         <p><strong>Admission Number:</strong> <?php echo $row['admissionNo'] ?></p>
                         <p><strong>Name:</strong> <?php echo $row['surname'] . " " . $row['firstname'] . " " . $row['middlename']; ?> </p>
                         <p><strong>Class:</strong> <?php echo $row['class_name'] . " " . $row['classArm']; ?> </p>
+                        <p><strong>Term: </strong><?php echo $term; ?> | <span><strong>Academic Session: </strong> <?php echo $academic_session; ?></span></p>
+                        <p>
+                            <strong>Date:</strong> <?php if ($term == "1st Term") {
+                                                        echo "5<sup>th</sup> - November - 2021 ";
+                                                    } else {
+                                                        echo "21<sup>st</sup> - February - 2022 ";
+                                                    } ?>
+                            |
+                            <span><strong>Sex:</strong> <?php echo $row['gender']; ?> </span>
 
-                        <p><strong>Term:</strong> <?= $term; ?></p>
-                        <p><strong>Academic Session: </strong><?= $academic_session ?><span> | </span> <span> <strong>Date: </strong> 5<sup>th</sup> - November - 2021</span> </p>
-
-                        <p><strong>Sex:</strong> <?php echo $row['gender']; ?> </p>
+                        </p>
 
                     </div>
-
                     <div>
                         <?php
                         echo "<div class = 'img_div_2'>";
@@ -121,8 +125,8 @@ $ad_no = $_SESSION['admin_no'];
 
                         ?>
 
-                            <tr style="font-size: 18px; text-align:center;">
-                                <td style=" text-align:left;"><?php echo $row['subject'] ?></td>
+                            <tr style="font-size: 17px; text-align:center;">
+                                <td style=" text-align:left; width:30%"><?php echo $row['subject'] ?></td>
 
                                 <td><?php echo $T2 ?></td>
 
@@ -230,7 +234,7 @@ $ad_no = $_SESSION['admin_no'];
                     <?php
                     $arm = $_SESSION['class_arm'];
                     $class = $_SESSION['student_class'];
-                    $select_sql = "SELECT * FROM form_teachers WHERE class ='$class' && arm= '$arm' ";
+                    $select_sql = "SELECT * FROM form_teachers WHERE class ='$class' && arm= '$arm'  && term = '$term' && a_session = '$academic_session'";
                     $sql_result = $conn->query($select_sql);
 
                     ?>

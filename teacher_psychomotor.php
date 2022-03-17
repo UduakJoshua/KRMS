@@ -1,9 +1,11 @@
 <?php
-require "./controller/score_upload_init.php";
-require "./controller/student_logic.php";
+require_once "./controller/score_upload_init.php";
+require_once "./controller/student_logic.php";
 require "./controller/psychomotor_logic.php";
 $title = "BCA | Psychomotor Input";
 include_once './model/inc/staff_dashboard_header.php';
+
+
 ?>
 
 <!-- main content-->
@@ -82,7 +84,7 @@ include_once './model/inc/staff_dashboard_header.php';
 
                                             <div class="col-md-2 mt-1">
                                                 <!-- this can be wrapped up based on the term, for any new term the approval button should show-->
-                                                <?php if ($row['approval'] != " "  && $row['approval'] != 1) : ?>
+                                                <?php if ($row['approval'] != " "  && $row['approval'] != 2) : ?>
                                                     <a href="psychomotor_teacher.php?display=<?php echo $row['admissionNo']; ?>"><button type="button" class="btn btn-sm btn-warning" name="display_result">Approve Now</button></a>
                                                 <?php else : ?>
                                                     <button type="button" disabled class="btn btn-sm btn-success">Approved</button>

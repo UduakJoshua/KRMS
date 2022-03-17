@@ -1,6 +1,5 @@
 <?php
-require_once './controller/student_result_list_init.php';
-require './controller/student_result_list_init.php';
+require './controller/bill_upload_logic.php';
 $title = "BCA | Class Payment Summary";
 include_once './model/inc/dashboard_header.php';
 
@@ -11,16 +10,16 @@ $a_session = $_SESSION['aSession'];
 
 ?>
 
-<main role="main" class="col-lg-10 ml-sm-auto col-lg-10.b.gb./b/vbV//b px-md-4"">
+<main role="main" class="col-lg-10 ml-sm-auto col-lg-10.b.gb./b/vbV//b px-md-4">
     <div class=" d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h4">Class Payment Summary</h1>
-    <div class=" mb-2 mb-md-0">
-        <div class="mr-2">
+        <h1 class="h4">Class Payment Summary</h1>
+        <div class=" mb-2 mb-md-0">
+            <div class="mr-2">
 
-            <p><?php echo $_SESSION['username']; ?></p>
+                <p><?php echo $_SESSION['username']; ?></p>
+            </div>
+
         </div>
-
-    </div>
     </div>
 
 
@@ -54,7 +53,7 @@ $a_session = $_SESSION['aSession'];
                 <div class="row">
                     <div class="col-md-12 text-center">
 
-                        <h5>Fees Payment Report for
+                        <h5>Fees Indebtedness for
                             <?php
                             echo $student_class . " " . $student_arm . " " . $term . " " . $a_session;
 
@@ -66,9 +65,9 @@ $a_session = $_SESSION['aSession'];
                 <div class="row">
                     <div class="col-md-12 justify-content-center">
 
-                        <table class="table  table-bordered table-receipt table_fees" id="example">
-                            <thead class="thead-dark ">
-                                <tr style="font-size: 14px;">
+                        <table class="table  table-bordered table-receipt table_fees">
+                            <thead class=" thead-dark ">
+                                <tr style=" font-size: 14px;">
 
                                     <th scope="col">Name</th>
                                     <th scope="col">Admission No</th>
@@ -77,13 +76,14 @@ $a_session = $_SESSION['aSession'];
                                     <th scope="col">Balance</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Processed By</th>
+
                                 </tr>
                             </thead>
                             <tbody class="ml-1 pt-1">
                                 <?php
 
                                 //query
-                                $sql = "SELECT * FROM fees_total WHERE term =? && student_arm = ? && student_class = ? && a_session =?";
+                                $sql = "SELECT * FROM fees_total WHERE term =? && student_arm = ? && student_class = ? && a_session =? ";
                                 $stmt = $conn->prepare($sql);
                                 $stmt->bind_param('ssss', $term, $student_arm, $student_class, $a_session);
                                 $stmt->execute();
@@ -93,25 +93,27 @@ $a_session = $_SESSION['aSession'];
 
                                 <?php
                             while ($row = mysqli_fetch_assoc($result)) :
-
                                 ?>
-                                    <tr style="font-size: 18px;">
+                                    <?php if ($row['balance'] > 0) : ?>
+                                        <tr style="font-size: 18px; height: 1px" class="p-0">
 
-                                        <td><?php echo $row['student_name']; ?></td>
-                                        <td><?php echo $row['admission_no'];  ?></td>
-                                        <td><?php echo number_format(($row['total_fees']), 2) ?></td>
-                                        <td><?php echo number_format(($row['amount_paid']), 2) ?></td>
-                                        <td><?php echo number_format(($row['balance']), 2) ?></td>
-                                        <td>
-                                            <?php if ($row['balance'] <= 0) : ?>
-                                                <p> Cleared</p>
-                                            <?php else : ?>
-                                                <p> Indebted</p>
-                                            <?php endif; ?>
-                                        </td>
-                                        <td><?php echo $row['processed_by'] ?></td>
-                                    </tr>
+                                            <td><?php echo $row['student_name']; ?></td>
+                                            <td><?php echo $row['admission_no'];  ?></td>
+                                            <td>&#8358; <?php echo number_format(($row['total_fees']), 2) ?></td>
+                                            <td>&#8358; <?php echo number_format(($row['amount_paid']), 2) ?></td>
+                                            <td>&#8358; <?php echo number_format(($row['balance']), 2) ?></td>
+                                            <td>
+                                                <?php if ($row['balance'] <= 0) : ?>
+                                                    <p> Cleared</p>
+                                                <?php else : ?>
+                                                    <p> Indebted</p>
+                                                <?php endif; ?>
+                                            </td>
+                                            <td> <?php echo $row['processed_by'];  ?></td>
+                                        </tr>
+                                    <?php endif; ?>
                                 <?php endwhile; ?>
+
 
                                 <tr style="font-size: 19px; font-weight:500;">
 
@@ -128,22 +130,15 @@ $a_session = $_SESSION['aSession'];
                                     if ($row = $result->num_rows > 0);
 
                                     while ($row = mysqli_fetch_assoc($result)) :
-                                        $total = $row['actual_bill'];
-                                        $total_paid = $row['total_paid'];
                                         $balance = $row['total_balance'];
 
                                         // formatting the number to thousand separators
-                                        $formatted_total = number_format($total, 2);
-                                        $formatted_paid = number_format($total_paid, 2);
                                         $formatted_balance = number_format($balance, 2);
 
                                     ?>
 
-                                        <td>Total Fees for this class</td>
-                                        <td>&#8358; <?php echo $formatted_total; ?></td>
-                                        <td>Total Paid</td>
-                                        <td>&#8358; <?php echo $formatted_paid; ?></td>
-                                        <td>Total Balance</td>
+                                        <td colspan="4" class="text-center">Total Fees Indebtedness For this Class</td>
+
                                         <td>&#8358; <?php echo $formatted_balance; ?></td>
                                     <?php endwhile; ?>
                                 </tr>

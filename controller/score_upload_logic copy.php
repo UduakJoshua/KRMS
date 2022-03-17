@@ -45,13 +45,30 @@ if (isset($_POST['save_exam_scores'])) {
             echo $errors;
             echo "</div> ";
         } else {
-            $sql = "INSERT INTO students_score (id, student_name, admission_no, student_class, class_arm, subject, T1, T2, 
+            $sql = "INSERT INTO students_score 
+            (student_name, admission_no, student_class, class_arm, subject, T1, T2, 
             project, assignment, exam , total, session, term) 
-            VALUES 
-            ('','$student_name' ,'$admission_no' , '$student_class' , '$class_arm' ,'$subject' , $T1 , $T2
-    , $project , $assignment , $exam, $total,'$a_session' , '$term')";
+            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param(
+                'sssssiiiiiiss',
+                $student_name,
+                $admission_no,
+                $student_class,
+                $class_arm,
+                $subject,
+                $T1,
+                $T2,
+                $project,
+                $assignment,
+                $exam,
+                $total,
+                $a_session,
+                $term
+            );
+            $stmt->execute();
 
-            if ($conn->query($sql) === TRUE) {
+            if ($stmt->execute()) {
 
                 $errors = " Scores for " . $student_name . " with " . $admission_no . " succesfully compiled!";
                 echo "<div class= 'alert-success' id='error'>";

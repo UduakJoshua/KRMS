@@ -101,8 +101,8 @@ if (!isset($_SESSION['st-user_id'])) {
         }
 
         .img_div_2 img {
-            height: 110px;
-            width: 100px;
+            height: 140px;
+            width: 130px;
             border-radius: 4px;
             border: 3px solid maroon;
             margin-top: 20px;
@@ -154,13 +154,14 @@ if (!isset($_SESSION['st-user_id'])) {
         }
 
         .report_background {
-            background-color: #ffffd3;
+            background-color: #fffef2;
             background-repeat: repeat;
             background-size: contain;
         }
 
         .student-details p {
-            font-size: 18px;
+            font-size: 16px;
+            line-height: 1.3rem;
         }
 
         .tab {
@@ -262,7 +263,7 @@ if (!isset($_SESSION['st-user_id'])) {
 
         @media print {
             body {
-                background-color: #ffffd3;
+                background-color: #fffef2;
             }
 
 

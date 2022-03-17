@@ -99,15 +99,16 @@ include_once './model/inc/dashboard_header.php';
 
                             <div class="card-footer">
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <button type="submit" class="btn btn-primary" name="school_report">Display Report by School</button>
                                     </div>
+                                    
 
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <button type="submit" class="btn btn-secondary" name="expenditure_report">Expenditures Report </button>
                                     </div>
 
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <a href="fees_report.php"><button type="button" style="width:30%;" class="btn btn-warning">Back</button></a>
                                     </div>
 

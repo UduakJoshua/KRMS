@@ -26,65 +26,100 @@ include_once './model/inc/student_dash_header.php';
             <br />
 
             <div class="table-responsive">
-                <table id="example" class="table table-striped table-bordered">
+                <table class="table table-striped table-bordered">
                     <thead class="dark">
                         <tr style="font-size: 20px;">
-                            <th scope="col">Days</th>
+                            <th scope="col">Day</th>
                             <th scope="col">Date</th>
-                            <th scope="col" colspan="3">Subjects</th>
+                            <th scope="col">Paper 1</th>
+                            <th scope="col">Paper 2</th>
+
+
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Thursday</td>
-                            <td>03/02/2022</td>
-                            <td>Verbal Reasoning</td>
-                            <td>Agric. Sc</td>
-                            <td>Vocational St</td>
-                        </tr>
-                        <tr>
-                            <td>Friday</td>
-                            <td>04/02/2022</td>
-                            <td>Quantitative Reasoning</td>
-                            <td>Social Studies</td>
-                            <td>Computer Studies</td>
-                        </tr>
-                        <tr>
-                            <td>Monday</td>
-                            <td>07/02/2022</td>
-                            <td>Mathematics</td>
-                            <td>-</td>
-                            <td>Basic Science</td>
-                        </tr>
-                        <tr>
-                            <td>Tuesday</td>
-                            <td>08/02/2022</td>
-                            <td>English Language</td>
-                            <td>French Language</td>
-                            <td>Literature</td>
-                        </tr>
+
                         <tr>
                             <td>Wednesday</td>
-                            <td>09/02/2022</td>
-                            <td>General Knowledge</td>
-                            <td>Health Education</td>
+                            <td>16/03/2022</td>
+                            <td>Verbal Reasoning</td>
                             <td>Fine Art</td>
                         </tr>
                         <tr>
                             <td>Thursday</td>
-                            <td>10/02/2022</td>
-                            <td>Civic Education</td>
+                            <td>17/03/2022</td>
+                            <td>Literature</td>
+                            <td>Vocational Studies</td>
+
+                        </tr>
+                        <tr>
+                            <td>Friday</td>
+                            <td>18/03/2022</td>
+                            <td>Health Education</td>
                             <td> Home Economics</td>
+
+                        </tr>
+                        <tr>
+                            <td>Monday</td>
+                            <td>21/03/2022</td>
+                            <td>Mathematics</td>
+                            <td>-</td>
+
+
+                        </tr>
+                        <tr>
+                            <td>Tuesday</td>
+                            <td>22/03/2022</td>
+                            <td>English Language</td>
+                            <td>-</td>
+                        </tr>
+
+                        <tr>
+                            <td>Wednesday</td>
+                            <td>23/03/2022</td>
+                            <td>General Knowledge</td>
+                            <td>Music</td>
+                        </tr>
+
+                        <tr>
+                            <td>Thursday</td>
+                            <td>24/03/2022</td>
+                            <td>French</td>
+                            <td>Social Studies</td>
+                        </tr>
+
+                        <tr>
+                            <td>Friday</td>
+                            <td>25/03/2022</td>
+                            <td>Quantitative Reasoning</td>
+                            <td>Computer Studies</td>
+                        </tr>
+
+                        <tr>
+                            <td>Monday</td>
+                            <td>28/03/2022</td>
+                            <td>Basic Science</td>
+                            <td>Agricultural Science</td>
+                        </tr>
+
+                        <tr>
+                            <td>Tuesday</td>
+                            <td>29/03/2022</td>
+                            <td>Civic Education</td>
+                            <td> - </td>
+                        </tr>
+
+                        <tr>
+                            <td>Wednesday</td>
+                            <td>30/03/2022</td>
                             <td>C.R.K</td>
+                            <td> - </td>
                         </tr>
                     </tbody>
 
                 </table>
             </div>
-
-
-        </div>
-        <?php include_once './model/inc/print.php'; ?>
+            <?php include_once './model/inc/print.php'; ?>
     </section>
     <hr>
 

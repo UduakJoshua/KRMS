@@ -50,9 +50,54 @@ include_once './model/inc/student_dash_header.php';
     <p style="font-weight:500; font-size:20px; text-align:center"> Welcome <span class="text-primary"><?php echo $_SESSION['st-username']; ?></span></p>
     <h5>How would you like to get started?</h5>
 
+    <div class="row">
+
+      <!-- col 3-->
+      <?php if ($row['class_name'] == "JSS Three") : ?>
+        <div class="col-md-4">
+          <a href="tb_jss3.php" class="text-decoration-none"><button class="btn btn-dark btn-block mt-4">Exam Time Table</button></a>
+        </div>
+      <?php elseif ($row['class_name'] == "SSS Three") : ?>
+        <div class="col-md-4">
+          <a href="tb_sss3.php" class="text-decoration-none"><button class="btn btn-danger btn-block mt-4">Exam Time Table</button></a>
+        </div>
+      <?php elseif ($row['class_name'] == "JSS One" || $row['class_name'] == "JSS Two") : ?>
+        <div class="col-md-4">
+          <a href="tb_jss1_2.php" class="text-decoration-none"><button class="btn btn-danger btn-block mt-4">Exam Time Table</button></a>
+        </div>
+      <?php elseif ($row['class_name'] == "SSS One" || $row['class_name'] == "SSS Two") : ?>
+        <div class="col-md-4">
+          <a href="tb_sss1_2.php" class="text-decoration-none"><button class="btn btn-danger btn-block mt-4">Exam Time Table</button></a>
+        </div>
+      <?php elseif ($row['class_name'] == "Step Up") : ?>
+        <div class="col-md-4">
+          <a href="step_up_tb.php" class="text-decoration-none"><button class="btn btn-danger btn-block mt-4">Exam Time Table</button></a>
+        </div>
+      <?php elseif ($row['class_name'] == "Progressive") : ?>
+        <div class="col-md-4">
+          <a href="progressive_tb.php" class="text-decoration-none"><button class="btn btn-danger btn-block mt-4">Exam Time Table</button></a>
+        </div>
+      <?php elseif ($row['class_name'] == "Bloomers") : ?>
+        <div class="col-md-4">
+          <a href="pre_nursery_tb.php" class="text-decoration-none"><button class="btn btn-danger btn-block mt-4">Exam Time Table</button></a>
+        </div>
+
+      <?php else : ?>
+        <div class="col-md-4">
+          <a href="basic_tb.php" class="text-decoration-none"><button class="btn btn-secondary btn-block mt-4"> Exam Time Table</button></a>
+        </div>
+      <?php endif; ?>
+      <div class="col-md-4">
+        <a href="student_fees_details.php" class="text-decoration-none"><button class="btn btn-primary btn-block mt-4"> Fees Details</button></a>
+      </div>
+      <!--col 2 -->
+      <div class="col-md-4">
+        <a href="cbt.php" class="text-decoration-none"><button class="btn btn-warning btn-block mt-4"> Test Yourself</button></a>
+      </div>
+    </div>
+
 
     <div class="row">
-      <!-- time table -->
       <div class="col-md-4">
         <a href="e_learning_students.php" class="text-decoration-none"><button class="btn btn-dark btn-block mt-4">E-Learning / Assignment</button></a>
       </div>
@@ -75,22 +120,10 @@ include_once './model/inc/student_dash_header.php';
           <a href="select_ex_term.php" class="text-decoration-none"><button class="btn btn-secondary btn-block mt-4"> Check Examination Result</button></a>
         <?php endif; ?>
 
-
       </div>
     </div>
 
-    <div class="row">
-      <div class="col-md-4">
-        <a href="student_fees_details.php" class="text-decoration-none"><button class="btn btn-primary btn-block mt-4"> Fees Details</button></a>
-      </div>
 
-      <!--col 2 -->
-      <div class="col-md-4">
-        <a href="cbt.php" class="text-decoration-none"><button class="btn btn-warning btn-block mt-4"> Test Yourself</button></a>
-      </div>
-
-
-    </div>
   <?php endwhile; ?>
 
 

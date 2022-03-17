@@ -139,6 +139,7 @@ include_once './model/inc/staff_dashboard_header.php';
                             <div class="col-md-12">
                                 <div class="card-footer">
                                     <button type="submit" class="btn btn-primary" name="staff_mid_initialize">Initialize</button>
+                                    <!--a href="portal_closed.php"> <button type="button" class="btn btn-primary">Initialize</button></a-->
                                 </div>
                             </div>
                         </div>

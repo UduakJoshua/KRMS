@@ -7,7 +7,7 @@ include_once './model/inc/student_dash_header.php';
 ?>
 <main role="main" class="col-lg-10 ml-sm-auto col-lg-10 px-md-4">
     <div class=" page-head d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h6">Mid Term Time Table</h1>
+        <h1 class="h6">Second Term Examination Time Table</h1>
         <div class=" mb-2 mb-md-0">
             <div class="mr-2">
                 <p>Welcome <?php echo $_SESSION['st-username']; ?></p>
@@ -31,75 +31,99 @@ include_once './model/inc/student_dash_header.php';
                 <table id="example" class="table table-striped table-bordered">
                     <thead class="dark">
                         <tr style="font-size: 20px;">
-                            <th scope="col">Days</th>
+                            <th scope="col">Day</th>
                             <th scope="col">Date</th>
-                            <th scope="col">10:00 - 11:00</th>
-                            <th scope="col">11:00 - 11:30</th>
-                            <th scope="col">11:30 - 12:30</th>
+                            <th scope="col">08:30 - 10:30</th>
+                            <th scope="col">10:30 - 11:00</th>
+                            <th scope="col">11:00 - 1:00</th>
+
 
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
+                            <td>Tuesday</td>
+                            <td>15/03/2022</td>
+                            <td>English Language</td>
+                            <td rowspan="11" class="pt-4 text-center align-item-center" style="font-size: 30px;"> B <br>R<br>E<br>A<br>K </td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
                             <td>Wednesday</td>
-                            <td>02/02/2022</td>
-                            <td>G/Mathematics</td>
-                            <td rowspan="7" class="pt-4 text-center"> BREAK </td>
+                            <td>16/03/2022</td>
+                            <td>Chemistry / Literature</td>
                             <td>Computer</td>
                         </tr>
                         <tr>
                             <td>Thursday</td>
-                            <td>03/02/2022</td>
-                            <td>Economics</td>
-                            <td>MKT/CCP</td>
+                            <td>17/03/2022</td>
+                            <td>Biology</td>
+                            <td>-</td>
 
                         </tr>
                         <tr>
                             <td>Friday</td>
-                            <td>04/02/2022</td>
-                            <td>English Language</td>
-                            <td>Lit/Chemistry</td>
+                            <td>18/03/2022</td>
+                            <td>History</td>
+                            <td>-</td>
 
                         </tr>
                         <tr>
                             <td>Monday</td>
-                            <td>07/02/2022</td>
-                            <td>Civic Education</td>
-                            <td>Agric/ CRS/TD/GEO/ACC</td>
+                            <td>21/03/2022</td>
+                            <td>G/Mathematics</td>
+                            <td>-</td>
 
 
                         </tr>
                         <tr>
                             <td>Tuesday</td>
-                            <td>08/02/2022</td>
-                            <td>F/Mathematics</td>
-                            <td>history</td>
-
-
+                            <td>22/03/2022</td>
+                            <td>Civic Education</td>
+                            <td>-</td>
                         </tr>
+
                         <tr>
                             <td>Wednesday</td>
-                            <td>09/02/2022</td>
-                            <td>Biology</td>
-                            <td> - </td>
-
-
+                            <td>23/03/2022</td>
+                            <td>Economics </td>
+                            <td>-</td>
                         </tr>
+
                         <tr>
                             <td>Thursday</td>
-                            <td>10/02/2022</td>
-                            <td>Govt/Physics</td>
+                            <td>24/03/2022</td>
+                            <td>GOVT./ Physics</td>
+                            <td> -</td>
+                        </tr>
+
+                        <tr>
+                            <td>Friday</td>
+                            <td>25/03/2022</td>
+                            <td>Agric/CRS/TD/GEO/ACC</td>
                             <td>-</td>
+                        </tr>
 
+                        <tr>
+                            <td>Monday</td>
+                            <td>28/03/2022</td>
+                            <td>F/Mathematics</td>
+                            <td>-</td>
+                        </tr>
 
+                        <tr>
+                            <td>Tuesday</td>
+                            <td>29/03/2022</td>
+                            <td>Marketting / CCP</td>
+                            <td> </td>
                         </tr>
                     </tbody>
 
                 </table>
             </div>
-
-
             <?php include_once './model/inc/print.php'; ?>
+
+
 
         </div>
 

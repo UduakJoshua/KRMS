@@ -33,7 +33,7 @@ include_once './model/inc/staff_dashboard_header.php';
         <hr>
 
         <?php
-        include_once 'controller/score_upload_logic.php';
+        include_once './controller/score_upload_logic.php';
 
         ?>
 
@@ -56,7 +56,7 @@ include_once './model/inc/staff_dashboard_header.php';
                                 <div class="card-body">
 
                                     <?php
-                                    include_once 'controller/score_upload_init.php';
+                                    // include_once 'controller/score_upload_init.php';
 
 
                                     $c_arm = $_SESSION['arm'];

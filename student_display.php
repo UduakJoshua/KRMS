@@ -51,7 +51,11 @@ $result = $conn->query($query);
                     <tbody>
                         <?php
 
-                        while ($row = mysqli_fetch_assoc($result)) : ?>
+                        while ($row = mysqli_fetch_assoc($result)) :
+
+                        ?>
+
+
                             <tr>
                                 <td style="width:auto;">
                                     <div id="content">
@@ -73,6 +77,7 @@ $result = $conn->query($query);
                                 </td>
                             </tr>
                         <?php endwhile; ?>
+
                     </tbody>
                 </table>
             </div>

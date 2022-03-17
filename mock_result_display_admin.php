@@ -206,7 +206,7 @@ $class = $_SESSION['class'];
                             <tr>
                                 <td>60 - 79</td>
                                 <td>B</td>
-                                <td>Very Goood</td>
+                                <td>Very Good</td>
                             </tr>
                             <tr>
                                 <td>50 - 59</td>
@@ -236,7 +236,8 @@ $class = $_SESSION['class'];
                     <div class="mt-2 bg-danger">
                         <?php
 
-                        $select_sql = "SELECT * FROM form_teachers WHERE class ='$class' && arm= '$arm' ";
+                        $select_sql = "SELECT * FROM form_teachers WHERE class ='$class' && arm= '$arm'
+                        && term = '$term' && a_session = '$academic_session' ";
                         $sql_result = $conn->query($select_sql);
 
                         ?>

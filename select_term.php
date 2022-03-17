@@ -1,7 +1,7 @@
 <?php
 include_once './controller/student_logic.php';
 require_once './controller/student_result_list_init.php';
-$title = "BCA | Mock Result";
+$title = "BCA | Select Term";
 include_once './model/inc/student_dash_header.php';
 $admin_no = $_SESSION['st-user_id'];
 $section = $_SESSION['section'];

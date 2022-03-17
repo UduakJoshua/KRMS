@@ -24,6 +24,7 @@ include_once './model/inc/staff_dashboard_header.php';
             <h5><strong>Attention!</strong></h5>
             <ul>
                 <li>Type in the scores for each column</li>
+                <li>For columns without scores type in <strong>ZERO</strong></li>
                 <li>Skip any student without score</li>
                 <li>Click the Save Scores Button to upload score</li>
                 <li>Click the Input Another Score Button below the return message to input another score</li>
@@ -113,20 +114,20 @@ include_once './model/inc/staff_dashboard_header.php';
                                                     <input type="number" name="T2[]" class="form-control" placeholder="0" aria-label="T2" aria-describedby="basic-addon1" maxlength="2" max="20">
                                                 </div>
                                             </div>
-                                            <div class="col-md-2" hidden>
+                                            <div class="col-md-2">
                                                 <div class="input-group mb-3">
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text" id="basic-addon1">Project</span>
                                                     </div>
-                                                    <input type="number" name="project[]" class="form-control" value="0" aria-label="project" aria-describedby="basic-addon1" maxlength="2" max="10" hidden>
+                                                    <input type="number" name="project[]" class="form-control" placeholder="0" aria-label="project" aria-describedby="basic-addon1" maxlength="2" max="10">
                                                 </div>
                                             </div>
-                                            <div class="col-md-2" hidden>
+                                            <div class="col-md-2">
                                                 <div class="input-group mb-3">
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text" id="basic-addon1">Ass</span>
                                                     </div>
-                                                    <input type="number" name="assign[]" class="form-control" value="0" aria-label="assignment" aria-describedby="basic-addon1" maxlength="2" max="20" hidden>
+                                                    <input type="number" name="assign[]" class="form-control" placeholder="0" aria-label="assignment" aria-describedby="basic-addon1" maxlength="2" max="10">
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
@@ -134,7 +135,7 @@ include_once './model/inc/staff_dashboard_header.php';
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text" id="basic-addon1">Exam</span>
                                                     </div>
-                                                    <input type="number" name="exam[]" class="form-control" placeholder="0" aria-label="exam" aria-describedby="basic-addon1" maxlength="2" max="60">
+                                                    <input type="number" name="exam[]" class="form-control" placeholder="0" aria-label="exam" aria-describedby="basic-addon1" maxlength="2" max="40">
                                                 </div>
                                             </div>
 

@@ -21,7 +21,7 @@ include_once './model/inc/dashboard_header.php';
     <section>
 
         <div class="row justify-content-center">
-            <div class="col-md-9">
+            <div class="col-md-12">
                 <form action="form_teacher.php" method="POST">
                     <input type="hidden" class="form-control " name="id" value="<?php echo $id ?>">
 
@@ -30,7 +30,7 @@ include_once './model/inc/dashboard_header.php';
                             <div class="form-group">
                                 <?php
                                 require_once './controller/staff_logic.php';
-                                $select_sql = "SELECT * FROM staff ";
+                                $select_sql = "SELECT * FROM staff ORDER BY surname ASC";
                                 $sql_result = $conn->query($select_sql);
 
                                 ?>
@@ -64,7 +64,7 @@ include_once './model/inc/dashboard_header.php';
                             </div>
                         </div>
 
-                        <div class="col-nd-4">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <div class="form-group">
 
@@ -89,7 +89,26 @@ include_once './model/inc/dashboard_header.php';
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="term">Term</label>
+                            <select name="term" id="term" class="form-control ">
+                                <option value="1st Term"> 1st Term </option>
+                                <option value="2nd Term"> 2nd Term </option>
+                                <option value="3rd Term"> 3rd Term </option>
+                            </select>
+                        </div>
 
+                        <div class="col-md-4">
+                            <label for="aSession">Session</label>
+                            <select name="aSession" id="aSession" class="form-control ">
+                                <option value="2021/2022">2021/2022</option>
+                                <option value="2022/2023">2022/2023</option>
+                                <option value="2023/2024">2023/2024</option>
+                            </select>
+                        </div>
+                    </div>
+                    <hr>
                     <div class="form-group ">
                         <?php if ($update == true) :
                         ?>

@@ -64,7 +64,7 @@ if (isset($_POST['psychomotor'])) {
                               1)";
 
         if ($conn->query($sql) === TRUE) {
-            $sql = "UPDATE student SET  approval = '1' WHERE admissionNo = '$admission_no'";
+            $sql = "UPDATE student SET  approval = '2' WHERE admissionNo = '$admission_no'";
             if ($conn->query($sql) === TRUE) {
                 $_SESSION['message'] = "Student Psychomotor Rating Successfully Posted!";
                 $_SESSION['msg_type'] = "success";
@@ -81,7 +81,6 @@ if (isset($_POST['psychomotor'])) {
 }
 
 // psychomotor from teachers input
-
 
 if (isset($_POST['teacher_psychomotor'])) {
     $admission_no = test_input($_POST['admin_no']);
@@ -121,7 +120,7 @@ if (isset($_POST['teacher_psychomotor'])) {
 
         $_SESSION['message'] = "Student Psychomotor Rating already exist for $student_name";
         $_SESSION['msg_type'] = "danger";
-        header("location:students_psychomotor.php");
+        header("location:teacher_psychomotor.php");
         exit();
     } else {
         $sql = "INSERT INTO psychomotor
@@ -137,7 +136,7 @@ if (isset($_POST['teacher_psychomotor'])) {
                               1)";
 
         if ($conn->query($sql) === TRUE) {
-            $sql = "UPDATE student SET  approval = '1' WHERE admissionNo = '$admission_no'";
+            $sql = "UPDATE student SET  approval = '2' WHERE admissionNo = '$admission_no'";
             if ($conn->query($sql) === TRUE) {
                 $_SESSION['message'] = "Student Psychomotor Rating Successfully Posted!";
                 $_SESSION['msg_type'] = "success";

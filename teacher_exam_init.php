@@ -1,6 +1,5 @@
 <?php
 require "./controller/score_upload_init.php";
-require "./controller/student_logic.php";
 $title = "BCA | Score Input";
 include_once './model/inc/staff_dashboard_header.php';
 ?>

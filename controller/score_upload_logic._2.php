@@ -20,13 +20,14 @@ if (isset($_POST['save_exam_scores'])) {
         $class_arm = test_input($_POST['class_arm']);
         $student_name = test_input($_POST['student_name'][$i]);
         $T1 = test_input($_POST['T1'][$i]);
+        $T1 = test_input($_POST['T1'][$i]);
         $T2 = test_input($_POST['T2'][$i]);
         $project = test_input($_POST['project'][$i]);
         $assignment = test_input($_POST['assign'][$i]);
         $exam = test_input($_POST['exam'][$i]);
         //$total_score = test_input($_POST['total'][$i]);
         $subject = test_input($_POST['subject']);
-        $total = (int)($T1 + $T2 + $project + $assignment + $exam);
+        $total = ($T1 + $T2 + $project + $assignment + $exam);
 
         $sql = "SELECT * FROM students_score WHERE admission_no = ?  && subject = ? && term = ? && session = ?";
 
@@ -44,12 +45,12 @@ if (isset($_POST['save_exam_scores'])) {
             echo "<div class= 'alert-warning' id='error'>";
             echo $errors;
             echo "</div> ";
-        } else {
+        } else if (($T1 = $T2 != "")) {
             $sql = "INSERT INTO students_score (id, student_name, admission_no, student_class, class_arm, subject, T1, T2, 
             project, assignment, exam , total, session, term) 
             VALUES 
-            ('','$student_name' ,'$admission_no' , '$student_class' , '$class_arm' ,'$subject' , $T1 , $T2
-    , $project , $assignment , $exam, $total,'$a_session' , '$term')";
+            ('','$student_name' ,'$admission_no' , '$student_class' , '$class_arm' ,'$subject' , $T1 ,$T2
+    , $project , $assignment , $exam , $total,'$a_session' , '$term')";
 
             if ($conn->query($sql) === TRUE) {
 

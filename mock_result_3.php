@@ -5,6 +5,10 @@ require './controller/score_upload_logic.php';
 require './controller/student_logic.php';
 $title = "BCA |Mock Result View";
 include_once './model/inc/student_dash_header.php';
+$term = "2nd Term";
+$academic_session = "2021/2022";
+$ad_no = $_SESSION['admin_no'];
+$mock_no = "3rd Mock";
 
 ?>
 
@@ -57,11 +61,6 @@ include_once './model/inc/student_dash_header.php';
 
                 <?php
 
-                $term = "1st Term";
-                $academic_session = "2021/2022";
-                $ad_no = $_SESSION['admin_no'];
-                $mock_no = "Mock I";
-
                 $select_sql = "SELECT * FROM student WHERE admissionNo='$ad_no' ";
                 $sql_result = $conn->query($select_sql);
 
@@ -80,11 +79,8 @@ include_once './model/inc/student_dash_header.php';
                         <p><strong>Admission Number:</strong> <?php echo $row['admissionNo'] ?></p>
                         <p><strong>Name:</strong> <?php echo $row['surname'] . " " . $row['firstname'] . " " . $row['middlename']; ?> </p>
                         <p><strong>Class:</strong> <?php echo $row['class_name'] . " " . $row['classArm']; ?> </p>
-
-                        <p><strong>Term:</strong> <?php echo $term ?></p>
-                        <p><strong>Academic Session: </strong><?php echo $academic_session ?><span> | </span> <span> <strong>Date: </strong> 5<sup>th</sup> - November - 2021</span> </p>
-
-                        <p><strong>Sex:</strong> <?php echo $row['gender']; ?> </p>
+                        <p><strong>Term:</strong> <?php echo $term ?> | <span><strong>Academic Session: </strong><?php echo $academic_session ?></span></p>
+                        <p><strong>Date: </strong> 21<sup>st</sup> - February - 2022</span> | <span><strong>Sex:</strong> <?php echo $row['gender']; ?></span></p>
 
                     </div>
 
@@ -101,10 +97,6 @@ include_once './model/inc/student_dash_header.php';
             </div>
 
             <?php
-            $term = "1st Term";
-            $academic_session = "2021/2022";
-            $ad_no = $_SESSION['admin_no'];
-            $mock_no = "1st Mock";
 
             $select_sql = "SELECT * FROM mock_scores WHERE admission_no='$ad_no' && term= '$term' && session = '$academic_session' && mock_no = '$mock_no' ORDER BY subject_title ASC";
             $sql_result = $conn->query($select_sql);
@@ -230,7 +222,8 @@ include_once './model/inc/student_dash_header.php';
                         <?php
                         $arm = $_SESSION['class_arm'];
                         $class = $_SESSION['student_class'];
-                        $select_sql = "SELECT * FROM form_teachers WHERE class ='$class' && arm= '$arm' ";
+                        $select_sql = "SELECT * FROM form_teachers WHERE class ='$class' && arm= '$arm'
+                        && term = '$term' && a_session = '$academic_session' ";
                         $sql_result = $conn->query($select_sql);
 
                         ?>

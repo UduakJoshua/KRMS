@@ -14,13 +14,15 @@ if (isset($_POST['addTeacher'])) {
     $class_assigned = test_input($_POST['student_class']);
     $arm_assigned = test_input($_POST['arm']);
     $staff_id = test_input($_POST['staff_id']);
+    $term = test_input($_POST['term']);
+    $aSession = test_input($_POST['aSession']);
 
-    $sql = "INSERT INTO form_teachers ( teachers_name, class, arm) VALUES (?,?,?)";
+    $sql = "INSERT INTO form_teachers ( teachers_name, class, arm, term, a_session) VALUES (?,?,?,?,?)";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param('sss',  $teachers_name, $class_assigned, $arm_assigned);
+    $stmt->bind_param('sssss',  $teachers_name, $class_assigned, $arm_assigned, $term, $aSession);
 
     if ($stmt->execute()) {
-        $_SESSION['message'] = "Form Teacher Successfully Assigned!";
+        $_SESSION['message'] = "Form Teacher Successfully Assigned For $term . ' '.$aSession!";
         $_SESSION['msg_type'] = "success";
         header('Location:./form_teacher_display.php');
         exit();

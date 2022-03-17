@@ -75,7 +75,7 @@ include_once './model/inc/dashboard_header.php';
                                 </div>
                                 <div class="col-md-3">
 
-                                    <input type=" text" name="term" class="form-control" readonly value="1st Term" hidden>
+                                    <input type=" text" name="term" class="form-control" readonly value="2nd Term" hidden>
 
                                 </div>
 

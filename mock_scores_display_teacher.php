@@ -56,7 +56,7 @@ include_once './model/inc/staff_dashboard_header.php';
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="card-header">
-                                    <h5>Display Scores for <?php echo $class . " " . $c_arm ?></h5>
+                                    <h5>Display Scores for <?php echo $class . " " . $c_arm ?> for <?php echo $mock_no ?> <?php echo $term ?></h5>
                                 </div>
                             </div>
                         </div>

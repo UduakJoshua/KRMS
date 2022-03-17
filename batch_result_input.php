@@ -1,12 +1,12 @@
 <?php
 require "./controller/score_upload_init.php";
 require "./controller/student_logic.php";
-$title = "BCA | Score Input";
+$title = "BCA | Exam Score Input";
 include_once './model/inc/dashboard_header.php';
 ?>
 
 <!-- main content-->
-<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+<main role="main" class="col-lg-10 ml-sm-auto col-lg-10 px-md-4">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h6">Student's Score Input</h1>
         <div class=" mb-2 mb-md-0">

@@ -83,18 +83,17 @@ $aSession = $_SESSION['aSession'];
                         <p><strong>Admission Number:</strong> <?php echo $row['admissionNo'] ?></p>
                         <p><strong>Name:</strong> <?php echo $row['surname'] . " " . $row['firstname'] . " " . $row['middlename']; ?> </p>
                         <p><strong>Class:</strong> <?php echo $row['class_name'] . " " . $row['classArm']; ?> </p>
-                        <p><strong>Term: </strong><?php echo $term; ?></p>
-                        <p><strong>Academic Session:</strong> <?php echo $aSession; ?>
-                            <span>
-                                <strong>Date: <?php if ($term == "1st Term") {
-                                                    echo "30<sup>th</sup> - October - 2021 ";
-                                                } else {
-                                                    echo "21<sup>st</sup> - February - 2022 ";
-                                                } ?>
-                                </strong>
-                            </span>
+                        <p><strong>Term: </strong><?php echo $term; ?> | <span><strong>Academic Session: </strong> <?php echo $aSession; ?></span></p>
+                        <p>
+                            <strong>Date:</strong> <?php if ($term == "1st Term") {
+                                                        echo "30<sup>th</sup> - October - 2021 ";
+                                                    } else {
+                                                        echo "21<sup>st</sup> - February - 2022 ";
+                                                    } ?>
+                            |
+                            <span><strong>Sex:</strong> <?php echo $row['gender']; ?> </span>
+
                         </p>
-                        <p><strong>Sex:</strong> <?php echo $row['gender']; ?> </p>
 
                     </div>
 
@@ -122,7 +121,7 @@ $aSession = $_SESSION['aSession'];
 
             <table class="table table-striped table-sm display table-bordered">
                 <thead class="thead-dark ">
-                    <tr style="font-size: 16px; text-align:center;">
+                    <tr style="font-size: 17px; text-align:center;">
                         <th scope="col " style="font-size: 16px; text-align:left;">Subject</th>
                         <th scope="col">T2 (20)</th>
                         <th scope="col">Grade</th>
@@ -140,7 +139,7 @@ $aSession = $_SESSION['aSession'];
 
                     ?>
 
-                        <tr style="font-size: 14px; text-align:center;">
+                        <tr style="font-size: 18px; text-align:center;">
                             <td style=" text-align:left;"><?php echo $row['subject'] ?></td>
 
                             <td><?php echo $T2 ?></td>
@@ -235,7 +234,7 @@ $aSession = $_SESSION['aSession'];
                     <?php
                     $arm = $_SESSION['arm'];
                     $class = $_SESSION['class'];
-                    $select_sql = "SELECT * FROM form_teachers WHERE class ='$class' && arm= '$arm' ";
+                    $select_sql = "SELECT * FROM form_teachers WHERE class ='$class' && arm= '$arm' && term = '$term' && a_session = '$aSession'";
                     $sql_result = $conn->query($select_sql);
 
                     ?>

@@ -102,7 +102,7 @@ $s_arm = $_SESSION['class_arm'];
                 <div class="col-md-9">
                     <?php
                     $select_sql = "SELECT * FROM (SELECT *, rank() OVER ( partition by subject order by total desc ) 
-                AS 'rank'   FROM students_score WHERE  term= '$term' && student_class = '$student_class' && class_arm = '$s_arm' && 
+                AS 'rank'   FROM students_score WHERE  term= '$term' && student_class = '$student_class' && admission_no= '$ad_no' && 
                 session = '$academic_session') as temp WHERE admission_no= '$ad_no'";
                     $sql_result = $conn->query($select_sql);
                     if (mysqli_num_rows($sql_result) > 0) : ?>
@@ -347,7 +347,7 @@ $s_arm = $_SESSION['class_arm'];
 
 
                     <?php
-                    $select_sql = "SELECT COUNT(subject) AS no_subjects, SUM(T1+T2+ project + assignment + exam) AS overall,  (SELECT no_of_subjects FROM no_of_subjects WHERE class_name = '$class') subject_total, student_name   FROM students_score WHERE admission_no='$admin_no' && term= '1st Term'";
+                    $select_sql = "SELECT COUNT(subject) AS no_subjects, SUM(T1+T2+ project + assignment + exam) AS overall,  (SELECT no_of_subjects FROM no_of_subjects WHERE class_name = '$student_class') subject_total, student_name   FROM students_score WHERE admission_no='$ad_no' && term= '$term' && session = '$academic_session'";
                     $sql_result = $conn->query($select_sql);
 
                     ?>
@@ -431,7 +431,7 @@ $s_arm = $_SESSION['class_arm'];
                                     <?php
 
 
-                                    $select_sql = "SELECT * FROM form_teachers WHERE class ='$student_class' && arm= '$s_arm' ";
+                                    $select_sql = "SELECT * FROM form_teachers WHERE class ='$student_class' && arm= '$s_arm' && term = '$term' && a_session = '$academic_session ' ";
                                     $sql_result = $conn->query($select_sql);
 
                                     ?>
@@ -555,8 +555,3 @@ $s_arm = $_SESSION['class_arm'];
 </body>
 
 </html>
-<script>
-    $(document).ready(function() {
-        $('#example').DataTable();
-    });
-</script>

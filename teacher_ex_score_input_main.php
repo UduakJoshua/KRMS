@@ -2,22 +2,17 @@
 require "./controller/score_upload_init.php";
 require "./controller/student_logic.php";
 $title = "BCA | Score Input";
-include_once './model/inc/dashboard_header.php';
-$c_arm = $_SESSION['arm'];
-$class = $_SESSION['class'];
-$term = $_SESSION['term'];
-$aSession = $_SESSION['aSession'];
-$subject = $_SESSION['subject'];
+include_once './model/inc/staff_dashboard_header.php';
 ?>
 
 <!-- main content-->
-<main role="main" class="col-lg-10 ml-sm-auto col-lg-10 px-md-4">
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h6">Student's Score Input</h1>
         <div class=" mb-2 mb-md-0">
             <div class="mr-2">
 
-                <p>Welcome <?php echo $_SESSION['username']; ?></p>
+                <p><?php echo $_SESSION['staff-username']; ?></p>
             </div>
 
         </div>
@@ -32,24 +27,19 @@ $subject = $_SESSION['subject'];
                 <li>For columns without scores type in <strong>ZERO</strong></li>
                 <li>Skip any student without score</li>
                 <li>Click the Save Scores Button to upload score</li>
+                <li>Click the Input Another Score Button below the return message to input another score</li>
             </ul>
         </div>
         <hr>
 
         <?php
-        include_once './controller/score_upload_logic.php';
+        include_once 'controller/score_upload_logic.php';
 
-        if (isset($_SESSION['upload'])) : ?>
-            <div class="alert alert-<?= $_SESSION['msg_type'] ?>">
-                <li><?php echo $_SESSION['upload'] ?></li>
-                <?php unset($_SESSION['upload']);
-                ?>
-            </div>
-        <?php endif; ?>
+        ?>
 
         <div class="row justify-content-center">
             <div class="col-md-12">
-                <form action="batch_score_input.php" method="POST">
+                <form action="teacher_ex_score_input.php" method="POST">
 
                     <div class="card">
                         <!--card header begins here-->
@@ -66,14 +56,14 @@ $subject = $_SESSION['subject'];
                                 <div class="card-body">
 
                                     <?php
+                                    include_once 'controller/score_upload_init.php';
+
 
                                     $c_arm = $_SESSION['arm'];
                                     $class = $_SESSION['class'];
                                     $term = $_SESSION['term'];
                                     $aSession = $_SESSION['aSession'];
                                     $subject = $_SESSION['subject'];
-
-
                                     //query
                                     $sql = "SELECT * FROM student WHERE classArm =  '$c_arm' && class_name = '$class' ORDER BY surname ASC";
                                     $result = $conn->query($sql);
@@ -113,7 +103,7 @@ $subject = $_SESSION['subject'];
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text" id="basic-addon1">T1</span>
                                                     </div>
-                                                    <input type="number" name="T1[]" class="form-control" placeholder="0" aria-label="T1" aria-describedby="basic-addon1" maxlength="2" max="20">
+                                                    <input type="number" name="T1[]" class="form-control" placeholder="0" aria-label="T1" aria-describedby="basic-addon1" maxlength="2" max="10">
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
@@ -145,13 +135,14 @@ $subject = $_SESSION['subject'];
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text" id="basic-addon1">Exam</span>
                                                     </div>
-                                                    <input type="number" name="exam[]" class="form-control" placeholder="0" aria-label="exam" aria-describedby="basic-addon1" maxlength="2" max="70">
+                                                    <input type="number" name="exam[]" class="form-control" placeholder="0" aria-label="exam" aria-describedby="basic-addon1" maxlength="2" max="40">
                                                 </div>
                                             </div>
 
                                         </div>
                                         <hr>
                                     <?php endwhile; ?>
+
                                 </div>
                             </div>
                         </div>
@@ -163,13 +154,11 @@ $subject = $_SESSION['subject'];
                             </div>
                         </div>
 
-
                     </div>
                 </form>
             </div>
         </div>
 
-        <!--card footer begins here-->
 
     </section>
     <hr>

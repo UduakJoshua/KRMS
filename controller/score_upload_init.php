@@ -3,7 +3,7 @@ require_once 'dbase_conn.php';
 include_once 'function.php';
 $class = "";
 $arm =  "";
-//$subject = "";
+$subject = "";
 $term =  "";
 $academic_session = "";
 
@@ -23,7 +23,7 @@ if (isset($_POST['initialize'])) {
     $_SESSION['subject'] = $subject;
     $_SESSION['aSession'] = $academic_session;
 
-    echo $_SESSION['arm'];
+
 
     header("location:batch_score_input.php");
     exit();

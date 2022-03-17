@@ -5,6 +5,10 @@ require './controller/score_upload_logic.php';
 require './controller/student_logic.php';
 $title = "BCA |Mock Result View";
 include_once './model/inc/student_dash_header.php';
+$term = "1st Term";
+$academic_session = "2021/2022";
+$ad_no = $_SESSION['admin_no'];
+$mock_no = "Mock I";
 
 ?>
 
@@ -57,10 +61,7 @@ include_once './model/inc/student_dash_header.php';
 
                 <?php
 
-                $term = "1st Term";
-                $academic_session = "2021/2022";
-                $ad_no = $_SESSION['admin_no'];
-                $mock_no = "Mock I";
+
 
                 $select_sql = "SELECT * FROM student WHERE admissionNo='$ad_no' ";
                 $sql_result = $conn->query($select_sql);
@@ -230,7 +231,8 @@ include_once './model/inc/student_dash_header.php';
                         <?php
                         $arm = $_SESSION['class_arm'];
                         $class = $_SESSION['student_class'];
-                        $select_sql = "SELECT * FROM form_teachers WHERE class ='$class' && arm= '$arm' ";
+                        $select_sql = "SELECT * FROM form_teachers WHERE class ='$class' && arm= '$arm'
+                        && term = '$term' && a_session = '$academic_session' ";
                         $sql_result = $conn->query($select_sql);
 
                         ?>

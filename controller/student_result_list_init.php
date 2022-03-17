@@ -160,12 +160,7 @@ if (isset($_POST['midTermResult'])) {
     // create a select query
     $_SESSION['term'] = $term;
     $_SESSION['a_session'] = $academic_session;
-
-    if ($term == "2nd Term") {
-        header("location:exam_notification.php");
-    } else {
-        header("location:midterm_result.php");
-    }
+    header("location:midterm_result.php");
     exit();
 }
 

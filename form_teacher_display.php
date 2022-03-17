@@ -42,21 +42,26 @@ include_once './model/inc/dashboard_header.php';
                         <th scope="col">Name</th>
                         <th scope="col">Class</th>
                         <th scope="col">Arm</th>
-                        <th colspan="2" scope="col">Action</th>
+                        <th scope="col">Term</th>
+                        <th scope="col">Session</th>
+                        <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody class="ml-2">
                     <?php
                     while ($row = $sql_result->fetch_assoc()) : ?>
 
-                        <tr>
+                        <tr style="font-size: 18px;">
                             <td><?php echo $row['teachers_name'] ?></td>
-                            <td><?php echo $row['class'] ?></td>
-                            <td><?php echo $row['arm'] ?></td>
-                            <td>
-                                <a href="form_teacher.php?edit=<?php echo $row['id']; ?>" class=" btn btn-info btn-sm"> Edit</a>
+                            <td class="text-center"><?php echo $row['class'] ?></td>
+                            <td class="text-center"><?php echo $row['arm'] ?></td>
+                            <td class="text-center"><?php echo $row['term'] ?></td>
+                            <td class="text-center"><?php echo $row['a_session'] ?></td>
+                            <td class="text-center">
+                                <a href="#" class=" btn btn-info btn-sm"> Edit</a>
                                 <a href="./controller/form_teacher_logic.php?delete=<?php echo $row['id']; ?>" class=" btn btn-danger btn-sm">Delete</i></a>
                             </td>
+
                         </tr>
 
                     <?php endwhile; ?>

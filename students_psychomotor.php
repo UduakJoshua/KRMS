@@ -81,7 +81,7 @@ include_once './model/inc/dashboard_header.php';
                                             </div>
 
                                             <div class="col-md-2 mt-1">
-                                                <?php if ($row['approval'] != " "  && $row['approval'] != 1) : ?>
+                                                <?php if ($row['approval'] != " "  && $row['approval'] != 2) : ?>
                                                     <a href="psychomotor.php?display=<?php echo $row['admissionNo']; ?>"><button type="button" class="btn btn-sm btn-warning" name="display_result">Approve Now</button></a>
                                                 <?php else : ?>
                                                     <button type="button" disabled class="btn btn-sm btn-success">Approved</button>

@@ -159,6 +159,7 @@ $aSession = $_SESSION['aSession'];
                             <select name="mode_pay" id="mode_pay" class="form-control ">
                                 <option value="Cash"> Cash Deposit </option>
                                 <option value="Heritage POS"> Heritage POS </option>
+                                <option value="Heritage POS"> FBN POS </option>
                                 <option value="Ecobank POS"> Ecobank POS </option>
                                 <option value="FBN Deposit"> FBN Deposit </option>
                                 <option value="FCMB Deposit"> FCMB Deposit </option>
