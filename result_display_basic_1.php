@@ -51,7 +51,7 @@ $aSession = $_SESSION['aSession'];
                 <div class="text-right pl-3 head2">
                     <h1 class="title-head">Blessed Children Academy</h1>
                     <p class="head-text"><span class="fa fa-home"></span> 18 Amaehule Street, Eliogbolo, Rumuokoro | 1 Kono Close Rumuodomaya, Port Harcourt</p>
-                    <p class="head-text"><span class="fa fa-phone"></span> 07061666648 | 08180810162 | 08037808626 </span></p>
+                    <p class="head-text"><span class="fa fa-phone"></span> 07061666648 | 08180810162 | 08037808626 | <span class="fa fa-whatsapp text-gray"> 08179484262</span></p>
                     <p class="head-text"><span class="fa fa-envelope"></span> academyblessedhigh@gmail.com | https://www.blessedchildrenacademy.com</p>
 
                 </div>
@@ -93,7 +93,7 @@ $aSession = $_SESSION['aSession'];
                             <?php if ($term == "1st Term") {
                                 echo "5<sup>th</sup> - November - 2021 ";
                             } else if ($term == "2nd Term") {
-                                echo "2<sup>nd</sup> - May - 2022 ";
+                                echo "3<sup>rd</sup> - May - 2022 ";
                             } ?>
                         </p>
                     </div>
@@ -138,9 +138,6 @@ $aSession = $_SESSION['aSession'];
                                             <th scope="col">Grade</th>
                                             <th scope="col">Subject <br> Position</th>
                                             <th scope="col">Remarks</th>
-
-
-
                                         </tr>
                                     </thead>
                                     <tbody class="ml-2">
@@ -151,8 +148,6 @@ $aSession = $_SESSION['aSession'];
 
                                             $T1 = $row['T1'];
                                             $T2 = $row['T2'];
-                                            //$project = $row['project'];
-                                            // $assignment = $row['assignment'];
                                             $exam = $row['exam'];
                                             $total = $row['total'];
                                             $sp = $row['rank'];
@@ -164,7 +159,6 @@ $aSession = $_SESSION['aSession'];
                                                 <td><strong><?php echo $row['subject'] ?></strong></td>
                                                 <td class="td_center"><?php echo $T1 ?></td>
                                                 <td class="td_center"><?php echo $T2 ?></td>
-
                                                 <td class="td_center"><?php echo $exam ?></td>
                                                 <td class="td_center"><?php echo $total ?></td>
 
@@ -238,7 +232,7 @@ $aSession = $_SESSION['aSession'];
 
                                 $class = $_SESSION['class'];
 
-                                $select_sql = "SELECT COUNT(subject) AS no_subjects, SUM(T1+T2+ exam) AS overall,  (SELECT no_of_subjects FROM no_of_subjects WHERE class_name = '$class') subject_total , student_name   FROM students_score WHERE admission_no='$admission_no' && term= '$term' && session = '$aSession'";
+                                $select_sql = "SELECT COUNT(subject) AS no_subjects, SUM(T1+T2+exam) AS overall,  (SELECT no_of_subjects FROM no_of_subjects WHERE class_name = '$class') subject_total , student_name   FROM students_score WHERE admission_no='$admission_no' && term= '$term'";
                                 $sql_result = $conn->query($select_sql);
 
                                 ?>

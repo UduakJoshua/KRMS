@@ -118,6 +118,13 @@ if (!isset($_SESSION['st-user_id'])) {
             text-align: center;
         }
 
+        .table .thead-dark th {
+            text-align: center !important;
+            border: 1.2px solid white;
+            padding: 6px;
+            font-size: 16px;
+        }
+
 
         .td_center {
             text-align: center;
@@ -184,7 +191,10 @@ if (!isset($_SESSION['st-user_id'])) {
 
         }
 
-
+        .head-text {
+            font-size: 18px;
+            font-weight: bold;
+        }
 
 
         @media (min-width: 768px) {

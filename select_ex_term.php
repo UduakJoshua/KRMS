@@ -1,7 +1,7 @@
 <?php
 include_once './controller/student_logic.php';
 require_once './controller/student_result_list_init.php';
-$title = "BCA | Mock Result";
+$title = "BCA | Exam Result";
 include_once './model/inc/student_dash_header.php';
 $admin_no = $_SESSION['st-user_id'];
 $section = $_SESSION['section'];
@@ -106,21 +106,19 @@ $approval = $_SESSION['approval'];
               <div class="row">
                 <div class="col-md-4">
                   <!-- php code to decide the section the student is for proper redirection-->
-                  <?php if ($section == "Basic" && $approval == 1) : ?>
+                  <?php if ($section == "Basic" && $approval == 2) : ?>
                     <button class="btn btn-success btn-block mt-2" name="examBasic">Display Result</button>
 
-                  <?php elseif ($section == "Nursery" && $approval == 1) : ?>
+                  <?php elseif ($section == "Nursery" && $approval == 2) : ?>
                     <button class="btn btn-primary btn-block mt-2" name="examNur">Display Result</button>
 
-                  <?php elseif ($section == "High" && $approval == 1) : ?>
+                  <?php elseif ($section == "High" && $approval == 2) : ?>
                     <button class="btn btn-dark btn-block mt-2" name="examHigh">Display Result</button>
                   <?php else : ?>
                     <!-- php code for result that is not ready or approved-->
                     <a class="nav-link" href="exam_notification.php" class="text-decoration-none"><button class="btn btn-danger btn-block mt-4">Display Result</button></a>
                   <?php endif; ?>
-
                 </div>
-
               </div>
             </div>
           </div>

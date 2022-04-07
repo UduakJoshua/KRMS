@@ -73,7 +73,7 @@ $aSession = $_SESSION['aSession'];
                 }
                 ?>
 
-                <div class="bg-danger text-white pt-3 " style="height: 80px;">
+                <div class="bg-danger text-white pt-2 " style="height: 70px;">
                     <?php
                     while ($row = $sql_result->fetch_assoc()) :
                     ?>
@@ -86,9 +86,16 @@ $aSession = $_SESSION['aSession'];
                         <p><strong>Admission Number:</strong> <?php echo $row['admissionNo'] ?></p>
                         <p><strong>Name:</strong> <?php echo $row['surname'] . " " . $row['firstname'] . " " . $row['middlename']; ?> </p>
                         <p><strong>Class:</strong> <?php echo $row['class_name'] . " " . $row['classArm']; ?> </p>
-                        <p><strong>Academic Session: </strong> 2021/2022 <span> | </span> <span> <strong>Term:</strong> 1st Term</span> </p>
+                        <p><strong>Term: </strong> <?php echo $term; ?> <span> | </span> <span> <strong>Academic Session:</strong> <?php echo $aSession; ?></span> </p>
                         <p><strong>Sex:</strong> <?php echo $row['gender']; ?> </p>
-                        <p><strong>Next Term Begins:</strong> 3<sup>rd</sup> January, 2022. </p>
+                        <p>
+                            <strong>Next Term Begins:</strong>
+                            <?php if ($term == "1st Term") {
+                                echo "5<sup>th</sup> - November - 2021 ";
+                            } else if ($term == "2nd Term") {
+                                echo "3<sup>rd</sup> - May - 2022 ";
+                            } ?>
+                        </p>
                     </div>
 
                     <div>
@@ -102,127 +109,324 @@ $aSession = $_SESSION['aSession'];
                     </div>
                 </div>
             </div>
+            <!--second row for score display-->
             <div class="row">
                 <div class="col-md-9">
-                    <?php
+                    <div class="row">
+                        <div class="col-md-12">
+                            <?php
 
-                    if (isset($_GET['display'])) {
-                        $admission_no = $_GET['display'];
-
-
-                        $select_sql = "SELECT * FROM (SELECT *, rank() OVER ( partition by subject order by total desc ) 
-                AS 'rank'   FROM students_score WHERE  term= '$term' && student_class = '$class' && class_arm = '$c_arm' && 
-                session = '$aSession') as temp WHERE admission_no= '$admission_no'";
-                        $sql_result = $conn->query($select_sql);
-                    }
-                    ?>
-                    <div class="table-responsive">
-                        <table class="table table-striped table-sm table-bordered display">
-                            <thead class="thead-dark ">
-                                <tr>
-                                    <th scope="col">Subject</th>
-                                    <th scope="col">T1<br> (10%)</th>
-                                    <th scope="col">T2<br> (20%)</th>
-                                    <th scope="col">Project<br> (10%)</th>
-                                    <th scope="col">Assignment<br> (20%)</th>
-                                    <th scope="col">Exam<br> (40%)</th>
-                                    <th scope="col">Total<br> (100%)</th>
-                                    <th scope="col">Grade</th>
-                                    <th scope="col">Subject <br> Position</th>
-                                    <th scope="col">Remarks</th>
+                            if (isset($_GET['display'])) {
+                                $admission_no = $_GET['display'];
 
 
+                                $select_sql = "SELECT * FROM (SELECT *, rank() OVER ( partition by subject order by total desc ) 
+                            AS 'rank'   FROM students_score WHERE  term= '$term' && student_class = '$class' && class_arm = '$c_arm' && 
+                            session = '$aSession') as temp WHERE admission_no= '$admission_no'";
+                                $sql_result = $conn->query($select_sql);
+                            }
+                            ?>
+                            <div class="table-responsive">
+                                <table class="table table-striped table-sm table-bordered display">
+                                    <thead class="thead-dark ">
+                                        <tr>
+                                            <th scope="col">Subject</th>
+                                            <th scope="col">T1<br> (10%)</th>
+                                            <th scope="col">T2<br> (20%)</th>
+                                            <th scope="col">Project<br> (10%)</th>
+                                            <th scope="col">Assignment<br> (20%)</th>
+                                            <th scope="col">Exam<br> (40%)</th>
+                                            <th scope="col">Total<br> (100%)</th>
+                                            <th scope="col">Grade</th>
+                                            <th scope="col">Subject <br> Position</th>
+                                            <th scope="col">Remarks</th>
 
-                                </tr>
-                            </thead>
-                            <tbody class="ml-2">
+
+
+                                        </tr>
+                                    </thead>
+                                    <tbody class="ml-2">
+                                        <?php
+
+                                        while ($row = $sql_result->fetch_assoc()) :
+
+
+                                            $T1 = $row['T1'];
+                                            $T2 = $row['T2'];
+                                            $project = $row['project'];
+                                            $assignment = $row['assignment'];
+                                            $exam = $row['exam'];
+                                            $total = $row['total'];
+                                            $sp = $row['rank'];
+                                            //$subject_position = $row['subject_position'];
+
+                                        ?>
+
+                                            <tr>
+                                                <td><strong><?php echo $row['subject'] ?></strong></td>
+                                                <td class="td_center"><?php echo $T1 ?></td>
+                                                <td class="td_center"><?php echo $T2 ?></td>
+                                                <td class="td_center"><?php echo $project ?></td>
+                                                <td class="td_center"><?php echo $assignment ?></td>
+                                                <td class="td_center"><?php echo $exam ?></td>
+                                                <td class="td_center"><?php echo $total ?></td>
+
+                                                <td class="td_center">
+                                                    <?php
+                                                    if ($total >= 80) {
+                                                        echo "A";
+                                                    } elseif ($total >= 60) {
+                                                        echo "B";
+                                                    } elseif ($total >= 50) {
+                                                        echo "C";
+                                                    } elseif ($total >= 40) {
+                                                        echo "P";
+                                                    } else {
+                                                        echo "F";
+                                                    } ?>
+                                                </td>
+                                                <td class="td_center"><?php
+                                                                        $ordinals = ['th', 'st', 'nd', 'rd'];
+                                                                        $sp_split = str_split($sp);
+                                                                        $num_digits = strlen($sp);
+                                                                        if ($num_digits == 1 && $sp_split[0] == 1) {
+                                                                            echo $sp . "<sup>" . $ordinals[1] . "</sup>";
+                                                                        } else if ($num_digits == 1 && $sp_split[0] == 2) {
+                                                                            echo $sp . "<sup>" . $ordinals[2] . "</sup>";
+                                                                        } else if ($num_digits == 1 && $sp_split[0] == 3) {
+                                                                            echo $sp . "<sup>" . $ordinals[3] . "</sup>";
+                                                                        } else if ($num_digits == 2 && $sp_split[0] != 1 && $sp_split[1] == 3) {
+                                                                            echo $sp . "<sup>" . $ordinals[3] . "</sup>";
+                                                                        } else if ($num_digits == 2 && $sp_split[0] != 1 && $sp_split[1] == 2) {
+                                                                            echo $sp . "<sup>" . $ordinals[2] . "</sup>";
+                                                                        } else if ($num_digits == 2 && $sp_split[0] != 1 && $sp_split[1] == 1) {
+                                                                            echo $sp . "<sup>" . $ordinals[1] . "</sup>";
+                                                                        } else {
+                                                                            echo $sp . "<sup>" . $ordinals[0] . "</sup>";
+                                                                        }
+                                                                        ?></td>
+
+                                                <!--remarks-->
+                                                <td>
+                                                    <?php
+                                                    if ($total >= 80) {
+                                                        echo "Excellent";
+                                                    } elseif ($total >= 60) {
+                                                        echo "Very Good";
+                                                    } elseif ($total >= 50) {
+                                                        echo "Credit";
+                                                    } elseif ($total >= 40) {
+                                                        echo "Pass";
+                                                    } else {
+                                                        echo "Fail";
+                                                    } ?>
+                                                </td>
+
+
+                                            </tr>
+
+                                        <?php endwhile; ?>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- score analysis begins here-->
+                    <div class="row mt-1">
+                        <div class="col-md-8">
+                            <div>
+
                                 <?php
 
-                                while ($row = $sql_result->fetch_assoc()) :
+                                $class = $_SESSION['class'];
 
-
-                                    $T1 = $row['T1'];
-                                    $T2 = $row['T2'];
-                                    $project = $row['project'];
-                                    $assignment = $row['assignment'];
-                                    $exam = $row['exam'];
-                                    $total = $row['total'];
-                                    $sp = $row['rank'];
-                                    //$subject_position = $row['subject_position'];
+                                $select_sql = "SELECT COUNT(subject) AS no_subjects, SUM(T1+T2+ project + assignment + exam) AS overall,  (SELECT no_of_subjects FROM no_of_subjects WHERE class_name = '$class') subject_total , student_name   FROM students_score WHERE admission_no='$admission_no' && term= '$term' && session = '$aSession'";
+                                $sql_result = $conn->query($select_sql);
 
                                 ?>
+                                <table class=" table table-stripped table-sm ">
+
+                                    <thead class="thead-dark ">
+
+                                        <tr>
+                                            <th colspan="2">
+                                                <h6>Report Summary</h6>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="table-bordered">
+                                        <?php
+
+                                        while ($row = $sql_result->fetch_assoc()) :
+                                            $overalTot = $row['overall'];
+                                            $overasubject = $row['no_subjects'];
+                                            $no_subject = $row['subject_total'];
+                                            $average_score = round(($overalTot / $no_subject), 2);
+                                            $total_mark = $no_subject * 100;
+                                            $name = $row['student_name'];
+
+
+
+
+                                        ?>
+                                            <tr>
+                                                <td>Overall Total Score</td>
+                                                <td><?php echo $overalTot; ?> out of <?php echo $total_mark; ?> </td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>Average Score</td>
+                                                <td><?php echo $average_score; ?>%</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 40%;">Total Subjects Offered in Class</td>
+                                                <td><?php echo $no_subject; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Total Subjects Taken</td>
+                                                <td><?php echo $overasubject; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Teacher's Comment</td>
+                                                <td>
+                                                    <?php
+                                                    if ($average_score  >= 80) {
+                                                        echo "Superlative Performance, Keep Soaring Higher!";
+                                                    } elseif ($average_score  >= 60) {
+                                                        echo "Brilliant Output, Keep the Fire Burning!";
+                                                    } elseif ($average_score >= 50) {
+                                                        echo "Nice Result, Keep working hard!";
+                                                    } elseif ($average_score >= 40) {
+                                                        echo "Fairly average output, More effort is highly needed!";
+                                                    } else {
+                                                        echo "Fair Performance, put in more effort and don't quit!";
+                                                    }
+                                                    ?>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Principal's Comment</td>
+                                                <td>
+                                                    <?php
+                                                    if ($average_score  >= 80) {
+                                                        echo "Bravo $name!, Keep the flag flying.";
+                                                    } elseif ($average_score  >= 60) {
+                                                        echo "Beautiful performance $name!, Keep it up!";
+                                                    } elseif ($average_score >= 50) {
+                                                        echo "Good output $name, Keep pushing forward and strive to do better.";
+                                                    } elseif ($average_score >= 40) {
+                                                        echo "Don't relent $name, Keep pushing forward.";
+                                                    } else {
+                                                        echo "This is a weak performance $name, put in more effort next term, I believe in you!";
+                                                    }
+                                                    ?>
+                                                </td>
+                                            </tr>
+                                        <?php endwhile; ?>
+                                    </tbody>
+                                    <tfoot class="thead-dark ">
+
+                                        <tr>
+                                            <th colspan="3">
+                                                <?php
+                                                $c_arm = $_SESSION['arm'];
+                                                $class = $_SESSION['class'];
+                                                $term = $_SESSION['term'];
+                                                $aSession = $_SESSION['aSession'];
+
+                                                $select_sql = "SELECT * FROM form_teachers WHERE class ='$class' && arm= '$c_arm'  && term= '$term'";
+                                                $sql_result = $conn->query($select_sql);
+
+                                                ?>
+                                                <?php
+
+                                                while ($row = $sql_result->fetch_assoc()) :
+
+
+
+                                                ?>
+                                                    <p class=" text-center text-white h6 p-1"> Form Teacher: <br>
+                                                        <?php echo $row['teachers_name'] ?></p>
+
+                                                <?php endwhile; ?>
+
+
+                                            </th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                            <div class="mb-2 bg-danger ">
+
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+
+                            <table class=" table table-stripped table-sm ">
+
+                                <thead class="thead-dark ">
 
                                     <tr>
-                                        <td><strong><?php echo $row['subject'] ?></strong></td>
-                                        <td class="td_center"><?php echo $T1 ?></td>
-                                        <td class="td_center"><?php echo $T2 ?></td>
-                                        <td class="td_center"><?php echo $project ?></td>
-                                        <td class="td_center"><?php echo $assignment ?></td>
-                                        <td class="td_center"><?php echo $exam ?></td>
-                                        <td class="td_center"><?php echo $total ?></td>
-
-                                        <td class="td_center">
-                                            <?php
-                                            if ($total >= 80) {
-                                                echo "A";
-                                            } elseif ($total >= 60) {
-                                                echo "B";
-                                            } elseif ($total >= 50) {
-                                                echo "C";
-                                            } elseif ($total >= 40) {
-                                                echo "P";
-                                            } else {
-                                                echo "F";
-                                            } ?>
-                                        </td>
-                                        <td class="td_center"><?php
-                                                                $ordinals = ['th', 'st', 'nd', 'rd'];
-                                                                $sp_split = str_split($sp);
-                                                                $num_digits = strlen($sp);
-                                                                if ($num_digits == 1 && $sp_split[0] == 1) {
-                                                                    echo $sp . "<sup>" . $ordinals[1] . "</sup>";
-                                                                } else if ($num_digits == 1 && $sp_split[0] == 2) {
-                                                                    echo $sp . "<sup>" . $ordinals[2] . "</sup>";
-                                                                } else if ($num_digits == 1 && $sp_split[0] == 3) {
-                                                                    echo $sp . "<sup>" . $ordinals[3] . "</sup>";
-                                                                } else if ($num_digits == 2 && $sp_split[0] != 1 && $sp_split[1] == 3) {
-                                                                    echo $sp . "<sup>" . $ordinals[3] . "</sup>";
-                                                                } else if ($num_digits == 2 && $sp_split[0] != 1 && $sp_split[1] == 2) {
-                                                                    echo $sp . "<sup>" . $ordinals[2] . "</sup>";
-                                                                } else if ($num_digits == 2 && $sp_split[0] != 1 && $sp_split[1] == 1) {
-                                                                    echo $sp . "<sup>" . $ordinals[1] . "</sup>";
-                                                                } else {
-                                                                    echo $sp . "<sup>" . $ordinals[0] . "</sup>";
-                                                                }
-                                                                ?></td>
-
-                                        <!--remarks-->
-                                        <td>
-                                            <?php
-                                            if ($total >= 80) {
-                                                echo "Excellent";
-                                            } elseif ($total >= 60) {
-                                                echo "Very Good";
-                                            } elseif ($total >= 50) {
-                                                echo "Credit";
-                                            } elseif ($total >= 40) {
-                                                echo "Pass";
-                                            } else {
-                                                echo "Fail";
-                                            } ?>
-                                        </td>
-
-
+                                        <th colspan="3">
+                                            <h6>Grading System</h6>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="ml-2 table-bordered">
+                                    <tr>
+                                        <td>Key</td>
+                                        <td class="td_center">Grade</td>
+                                        <td>Remark</td>
+                                    </tr>
+                                    <tr>
+                                        <td>80 - 100</td>
+                                        <td class="td_center">A</td>
+                                        <td>Excellent</td>
+                                    </tr>
+                                    <tr>
+                                        <td>60 - 79</td>
+                                        <td class="td_center">B</td>
+                                        <td>Very Good</td>
+                                    </tr>
+                                    <tr>
+                                        <td>50 - 59</td>
+                                        <td class="td_center">C</td>
+                                        <td>Credit</td>
+                                    </tr>
+                                    <tr>
+                                        <td>40 - 49</td>
+                                        <td class="td_center">P</td>
+                                        <td>Pass</td>
+                                    </tr>
+                                    <tr>
+                                        <td>0 - 39</td>
+                                        <td class="td_center">F</td>
+                                        <td>Fail</td>
                                     </tr>
 
-                                <?php endwhile; ?>
+                                </tbody>
+                                <tfoot class="thead-dark ">
 
-                            </tbody>
-                        </table>
+                                    <tr>
+                                        <th colspan="3" style="padding: 15px;">
+                                            <p style="font-size: 12px; text-align:left ; margin-bottom:2px;">CAT : Continuous Assessment Test</p>
+                                            <p style="font-size: 12px; text-align:left; margin-bottom:2px;">Average Score : <br>Total Score / Total Subjects Offered </p>
+
+                                        </th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+
+                        </div>
+
+
                     </div>
+                    <!-- analysis ends here-->
+
                 </div>
                 <!-- score end here-->
-                <!-- Psychomotor section-->
+                <!-- psychomotor colum-->
                 <div class="col-md-3">
                     <table class=" table table-stripped table-sm  tab">
                         <?php
@@ -230,7 +434,7 @@ $aSession = $_SESSION['aSession'];
                         if (isset($_GET['display'])) {
                             $admission_no = $_GET['display'];
 
-                            $select_sql = "SELECT * FROM psychomotor WHERE admission_no= '$admission_no'";
+                            $select_sql = "SELECT * FROM psychomotor WHERE admission_no= '$admission_no' && term = '$term' ";
                             $sql_result = $conn->query($select_sql);
                         }
                         ?>
@@ -336,198 +540,20 @@ $aSession = $_SESSION['aSession'];
                             <?php endwhile; ?>
                         </tbody>
                     </table>
+
+                    <div>
+                        <div class=" school-header school-header2">
+                            <img src="assets/img/bca-stamp.png" alt="" style="width: 70%;">
+                            <h6 class="bg-danger text-center text-white mt-2 p-3">BCA Exams & Records</h6>
+                        </div>
+                    </div>
                 </div>
+
+                <!-- psychomotor colum ends here-->
+
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-6">
-                <div>
 
-
-                    <?php
-
-                    $class = $_SESSION['class'];
-
-                    $select_sql = "SELECT COUNT(subject) AS no_subjects, SUM(T1+T2+project+assignment+exam) AS overall,  (SELECT no_of_subjects FROM no_of_subjects WHERE class_name = '$class') subject_total, student_name   FROM students_score WHERE admission_no='$admission_no' && term= '1st Term'";
-                    $sql_result = $conn->query($select_sql);
-
-                    ?>
-                    <table class=" table table-stripped table-sm ">
-
-                        <thead class="thead-dark ">
-
-                            <tr>
-                                <th colspan="2">
-                                    <h6>Report Summary</h6>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody class="ml-2 table-bordered">
-                            <?php
-
-                            while ($row = $sql_result->fetch_assoc()) :
-
-                                $overalTot = $row['overall'];
-                                $overasubject = $row['no_subjects'];
-                                $no_subject = $row['subject_total'];
-                                $average_score = round(($overalTot / $no_subject), 2);
-                                $total_mark = $no_subject * 100;
-                                $name = $row['student_name'];
-
-                            ?>
-                                <tr>
-                                    <td>Overall Total Score</td>
-                                    <td><?php echo $overalTot; ?> out of <?php echo $total_mark; ?> </td>
-
-                                </tr>
-                                <tr>
-                                    <td>Average Score</td>
-                                    <td><?php echo $average_score; ?>%</td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 40%;">Total Subjects Offered in Class</td>
-                                    <td><?php echo $no_subject; ?></td>
-                                </tr>
-                                <tr>
-                                    <td>Total Subjects Taken</td>
-                                    <td><?php echo $overasubject; ?></td>
-                                </tr>
-                                <tr>
-                                    <td>Teacher's Comment</td>
-                                    <td>
-                                        <?php
-                                        if ($average_score  >= 80) {
-                                            echo "Excellent Performance, Keep the fire burning";
-                                        } elseif ($average_score  >= 60) {
-                                            echo "Great Performance, do not relent!";
-                                        } elseif ($average_score >= 50) {
-                                            echo "An Average Performance. Work harder next term!";
-                                        } else {
-                                            echo "Poor Performance, put in more effort next term and don't quit!";
-                                        }
-                                        ?>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Principal's Comment</td>
-                                    <td>
-                                        <?php
-                                        if ($average_score  >= 80) {
-                                            echo "Excellent Performance $name!, Keep the fire burning";
-                                        } elseif ($average_score  >= 60) {
-                                            echo "Great Performance $name!, keep it up.";
-                                        } elseif ($average_score >= 50) {
-                                            echo "An Average Performance. Work harder!";
-                                        } else {
-                                            echo "This is a poor performance $name, but you can do better next term!";
-                                        }
-                                        ?>
-                                    </td>
-                                </tr>
-                            <?php endwhile; ?>
-                        </tbody>
-                        <tfoot class="thead-dark ">
-
-                            <tr>
-                                <th colspan="3">
-                                    <?php
-                                    $c_arm = $_SESSION['arm'];
-                                    $class = $_SESSION['class'];
-                                    $term = $_SESSION['term'];
-                                    $aSession = $_SESSION['aSession'];
-
-                                    $select_sql = "SELECT * FROM form_teachers WHERE class ='$class' && arm= '$c_arm' && term = '$term' && a_session = '$aSession' ";
-                                    $sql_result = $conn->query($select_sql);
-
-                                    ?>
-                                    <?php
-
-                                    while ($row = $sql_result->fetch_assoc()) :
-                                    ?>
-                                        <p class=" text-center text-white h6 p-2"> Form Teacher: <br>
-                                            <?php echo $row['teachers_name'] ?></p>
-                                    <?php endwhile; ?>
-
-
-                                </th>
-                            </tr>
-                        </tfoot>
-                    </table>
-                </div>
-                <div class="mb-2 bg-danger ">
-
-                </div>
-            </div>
-            <div class="col-md-3">
-
-
-
-                <table class=" table table-stripped table-sm ">
-
-                    <thead class="thead-dark ">
-
-                        <tr>
-                            <th colspan="3">
-                                <h6>Grading System</h6>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody class="ml-2 table-bordered">
-                        <tr>
-                            <td>Key</td>
-                            <td class="td_center">Grade</td>
-                            <td>Remark</td>
-                        </tr>
-                        <tr>
-                            <td>80 - 100</td>
-                            <td class="td_center">A</td>
-                            <td>Excellent</td>
-                        </tr>
-                        <tr>
-                            <td>60 - 79</td>
-                            <td class="td_center">B</td>
-                            <td>Very Good</td>
-                        </tr>
-                        <tr>
-                            <td>50 - 59</td>
-                            <td class="td_center">C</td>
-                            <td>Credit</td>
-                        </tr>
-                        <tr>
-                            <td>40 - 49</td>
-                            <td class="td_center">P</td>
-                            <td>Pass</td>
-                        </tr>
-                        <tr>
-                            <td>0 - 39</td>
-                            <td class="td_center">F</td>
-                            <td>Fail</td>
-                        </tr>
-
-
-
-
-
-                    </tbody>
-                    <tfoot class="thead-dark ">
-                        <tr>
-                            <th colspan="3" style="padding: 10px;">
-                                <p style="font-size: 12px; text-align:left ; margin-bottom:2px;">CAT : Continuous Assessment Test</p>
-                                <p style="font-size: 12px; text-align:left; margin-bottom:2px;">Average Score : <br>Total Score / Total Subjects Offered </p>
-
-                            </th>
-                        </tr>
-                    </tfoot>
-                </table>
-
-            </div>
-            <div class="col-md-3">
-                <div class=" school-header school-header2">
-                    <img src="assets/img/bca-stamp.png" alt="" style="width: 80%;">
-                    <h6 class="bg-danger text-center text-white mt-2 p-3">BCA Exams & Records</h6>
-                </div>
-            </div>
-        </div>
 
     </section>
     <div>
@@ -535,28 +561,8 @@ $aSession = $_SESSION['aSession'];
     </div>
 
     <hr>
-</main>
-</div>
-</div>
-<footer>
-    <p class="text-center">Powered by Blessed Children Academy | Designed by KodeNet Solutions</p>
-</footer>
+    <?php
 
+    include_once './model/inc/dashboard_footer.php';
 
-
-
-
-<script src="assets/dist/js/bootstrap.bundle.min.js"></script>
-<script src="assets/dist/js/img_preview.js"></script>
-<script src="assets/dist/js/hide_show.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
-<script src="dashboard.js"></script>
-</body>
-
-</html>
-<script>
-    $(document).ready(function() {
-        $('#example').DataTable();
-    });
-</script>
+    ?>

@@ -6,6 +6,7 @@ $arm =  "";
 $term =  "";
 $academic_session = "";
 
+
 if (isset($_POST['initialize'])) {
 
     $class = test_input($_POST['student_class']);
@@ -129,7 +130,11 @@ if (isset($_POST['initializeR'])) {
     $_SESSION['term'] = $term;
     $_SESSION['aSession'] = $academic_session;
 
-    header("location:result_display_table.php");
+    if ($term == '1st Term') {
+        header("location:result_display_table.php");
+    } else {
+        header("location:result_display_table2.php");
+    }
     exit();
 }
 
@@ -164,17 +169,21 @@ if (isset($_POST['midTermResult'])) {
     exit();
 }
 
+
+
 // logic to view examination result by students
 if (isset($_POST['examBasic'])) {
-
     $term =  test_input($_POST['termRe']);
     $academic_session = test_input($_POST['a_session']);
-
     // create a select query
     $_SESSION['term'] = $term;
     $_SESSION['a_session'] = $academic_session;
 
-    header("location:student_exam_result_basic.php");
+    if ($term == '1st Term') {
+        header("location:student_exam_result_basic.php");
+    } else {
+        header("location:exam_notification.php");
+    }
     exit();
 } elseif (isset($_POST['examNur'])) {
 
@@ -185,7 +194,11 @@ if (isset($_POST['examBasic'])) {
     $_SESSION['term'] = $term;
     $_SESSION['a_session'] = $academic_session;
 
-    header("location:student_exam_result_nur.php");
+    if ($term == '1st Term') {
+        header("location:student_exam_result_nur.php");
+    } else {
+        header("location:exam_notification.php");
+    }
     exit();
 } elseif (isset($_POST['examHigh'])) {
 
@@ -195,7 +208,10 @@ if (isset($_POST['examBasic'])) {
     // create a select query
     $_SESSION['term'] = $term;
     $_SESSION['a_session'] = $academic_session;
-
-    header("location:student_exam_result_high.php");
+    if ($term == '1st Term') {
+        header("location:student_exam_result.php");
+    } else {
+        header("location:exam_notification.php");
+    }
     exit();
 }

@@ -86,8 +86,9 @@ include_once './model/inc/staff_dashboard_header.php';
                                                 <!-- this can be wrapped up based on the term, for any new term the approval button should show-->
                                                 <?php if ($row['approval'] != " "  && $row['approval'] != 2) : ?>
                                                     <a href="psychomotor_teacher.php?display=<?php echo $row['admissionNo']; ?>"><button type="button" class="btn btn-sm btn-warning" name="display_result">Approve Now</button></a>
-                                                <?php else : ?>
+                                                <?php elseif ($row['approval'] == 2) : ?>
                                                     <button type="button" disabled class="btn btn-sm btn-success">Approved</button>
+
                                                 <?php endif; ?>
                                             </div>
                                         </div>

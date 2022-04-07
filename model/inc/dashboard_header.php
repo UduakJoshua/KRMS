@@ -236,6 +236,11 @@ if (!isset($_SESSION['ad-user_id'])) {
             font-size: 0.7rem;
         }
 
+        .head-text {
+            font-size: 18px;
+            font-weight: bold;
+
+        }
 
 
 

@@ -93,11 +93,11 @@ include_once './model/inc/dashboard_header.php';
                                                             <a href="result_display.php?display=<?php echo $row['admissionNo']; ?>"><button type="button" class="btn btn-primary" name="display_result">Display</button></a>
                                                         <?php elseif ($row['section'] == "Basic") : ?>
 
-                                                            <a href="result_display_basic_1.php?display=<?php echo $row['admissionNo']; ?>"><button type="button" class="btn btn-warning" name="display_result">Display</button></a>
+                                                            <a href="result_display_basic.php?display=<?php echo $row['admissionNo']; ?>"><button type="button" class="btn btn-warning" name="display_result">Display</button></a>
 
                                                         <?php else : ?>
 
-                                                            <a href="result_display_nursery_1.php?display=<?php echo $row['admissionNo']; ?>"><button type="button" class="btn btn-secondary" name="display_result">Display</button></a>
+                                                            <a href="result_display_nursery.php?display=<?php echo $row['admissionNo']; ?>"><button type="button" class="btn btn-secondary" name="display_result">Display</button></a>
                                                         <?php endif; ?>
 
 

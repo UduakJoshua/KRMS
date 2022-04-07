@@ -71,7 +71,7 @@ include_once './model/inc/staff_dashboard_header.php';
                                                 <th scope="col">Admission No</th>
                                                 <th scope="col">Name</th>
                                                 <th scope="col">Subject</th>
-                                                <th scope="col">Scores</th>
+                                                <th scope="col">Scores </th>
 
 
 

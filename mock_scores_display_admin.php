@@ -84,7 +84,6 @@ include_once './model/inc/dashboard_header.php';
                                                 $s_name = $row['student_name'];
                                                 $subject = $row['subject_title'];
                                                 $class = $row['student_class'];
-
                                                 $score = $row['score'];
                                                 $a_session = $row['session'];
                                                 $term = $row['term']; ?>
@@ -93,7 +92,7 @@ include_once './model/inc/dashboard_header.php';
                                                     <td><?php echo $ad_no; ?></td>
                                                     <td><?php echo $s_name; ?></td>
                                                     <td><?php echo $subject; ?></td>
-                                                    <td class="td_align"><?php echo $score ?></td>
+                                                    <td class="td_align"><?php echo $score; ?></td>
                                                     <td>
                                                         <a href="mock_scores_edit.php?edit_mock=<?php echo $row['id']; ?>" class=" btn btn-info btn-sm"> Edit</a>
                                                         <a href="./controller/score_upload_logic.php?delete_mock=<?php echo $row['id']; ?>" class=" btn btn-danger btn-sm"><i>Delete</i></a>

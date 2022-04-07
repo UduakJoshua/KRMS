@@ -2,22 +2,26 @@
 
 use PhpOffice\PhpSpreadsheet\Calculation\MathTrig\Sum;
 
+require './controller/dbase_conn.php';
+require './controller/result_display_logic.php';
 require './controller/score_upload_logic.php';
 require './controller/psychomotor_logic.php';
 $title = "BCA | Result View";
 include_once './model/inc/student_dash_header.php';
 $term =    $_SESSION['term'];
 $academic_session =    $_SESSION['a_session'];
-$admin_no = $_SESSION['admin_no'];
+$ad_no = $_SESSION['admin_no'];
 $student_class = $_SESSION['student_class'];
 $s_arm = $_SESSION['class_arm'];
 ?>
+
 
 <main role="main" class="col-lg-10 ml-sm-auto col-lg-10.b.gb./b/vbV//b px-md-4">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h4">Print/View Result</h1>
         <div class=" mb-2 mb-md-0">
             <div class="mr-2">
+
                 <p>Welcome <?php echo $_SESSION['st-username']; ?></p>
             </div>
 
@@ -47,15 +51,21 @@ $s_arm = $_SESSION['class_arm'];
                 <div class="text-right pl-3 head2">
                     <h1 class="title-head">Blessed Children Academy</h1>
                     <p class="head-text"><span class="fa fa-home"></span> 18 Amaehule Street, Eliogbolo, Rumuokoro | 1 Kono Close Rumuodomaya, Port Harcourt</p>
-                    <p class="head-text"><span class="fa fa-phone"></span> 07061666648 | 08180810162 | 08037808626 </p>
+                    <p class="head-text"><span class="fa fa-phone"></span> 07061666648 | 08180810162 | 08037808626 | <span class="fa fa-whatsapp text-gray"> 08179484262</span></p>
                     <p class="head-text"><span class="fa fa-envelope"></span> academyblessedhigh@gmail.com | https://www.blessedchildrenacademy.com</p>
+
                 </div>
+
+
+
             </div>
 
-
             <div class="student-info">
+
+
                 <?php
-                $select_sql = "SELECT * FROM student WHERE admissionNo='$admin_no' ";
+
+                $select_sql = "SELECT * FROM student WHERE admissionNo='$ad_no' ";
                 $sql_result = $conn->query($select_sql);
 
                 ?>
@@ -103,21 +113,24 @@ $s_arm = $_SESSION['class_arm'];
                         <div class="col-md-12">
                             <?php
 
-
                             $select_sql = "SELECT * FROM (SELECT *, rank() OVER ( partition by subject order by total desc ) 
-                AS 'rank'   FROM students_score WHERE  term = '$term' && student_class = '$student_class' && class_arm = '$s_arm' && 
-                session = '$academic_session') as temp WHERE admission_no= '$admin_no'";
+                            AS 'rank'   FROM students_score WHERE  term= '$term' && student_class = '$student_class' && class_arm = '$s_arm' && 
+                            session = '$academic_session') as temp WHERE admission_no= '$ad_no'";
                             $sql_result = $conn->query($select_sql);
-                            if (mysqli_num_rows($sql_result) > 0) : ?>
+                            if (mysqli_num_rows($sql_result) > 0) :
+
+                            ?>
 
                                 <div class="table-responsive">
                                     <table class="table table-striped table-sm table-bordered display">
-                                        <thead class="thead-dark  td_center">
+                                        <thead class="thead-dark ">
                                             <tr>
                                                 <th scope="col">Subject</th>
-                                                <th scope="col">T1<br> (20%)</th>
+                                                <th scope="col">T1<br> (10%)</th>
                                                 <th scope="col">T2<br> (20%)</th>
-                                                <th scope="col">Exam<br> (60%)</th>
+                                                <th scope="col">Project<br> (10%)</th>
+                                                <th scope="col">Assignment<br> (20%)</th>
+                                                <th scope="col">Exam<br> (40%)</th>
                                                 <th scope="col">Total<br> (100%)</th>
                                                 <th scope="col">Grade</th>
                                                 <th scope="col">Subject <br> Position</th>
@@ -131,12 +144,12 @@ $s_arm = $_SESSION['class_arm'];
                                             <?php
 
                                             while ($row = $sql_result->fetch_assoc()) :
-
+                                                //  print_r($row);
 
                                                 $T1 = $row['T1'];
                                                 $T2 = $row['T2'];
-                                                //$project = $row['project'];
-                                                // $assignment = $row['assignment'];
+                                                $project = $row['project'];
+                                                $assignment = $row['assignment'];
                                                 $exam = $row['exam'];
                                                 $total = $row['total'];
                                                 $sp = $row['rank'];
@@ -148,7 +161,8 @@ $s_arm = $_SESSION['class_arm'];
                                                     <td><strong><?php echo $row['subject'] ?></strong></td>
                                                     <td class="td_center"><?php echo $T1 ?></td>
                                                     <td class="td_center"><?php echo $T2 ?></td>
-
+                                                    <td class="td_center"><?php echo $project ?></td>
+                                                    <td class="td_center"><?php echo $assignment ?></td>
                                                     <td class="td_center"><?php echo $exam ?></td>
                                                     <td class="td_center"><?php echo $total ?></td>
 
@@ -223,7 +237,6 @@ $s_arm = $_SESSION['class_arm'];
                                 exit();
                             endif;
                 ?>
-                <!-- score end here-->
                 <!-- score analysis begins here-->
                 <div class="row mt-3">
                     <div class="col-md-8">
@@ -231,9 +244,9 @@ $s_arm = $_SESSION['class_arm'];
 
                             <?php
 
-                            $select_sql = "SELECT COUNT(subject) AS no_subjects, SUM(T1+T2+exam) AS overall,  
-                    (SELECT no_of_subjects FROM no_of_subjects WHERE class_name = '$student_class') subject_total, student_name  
-                     FROM students_score WHERE admission_no='$admin_no' && term= '$term' && session = '$academic_session'";
+                            // $class = $_SESSION['class'];
+
+                            $select_sql = "SELECT COUNT(subject) AS no_subjects, SUM(T1+T2+ project + assignment + exam) AS overall,  (SELECT no_of_subjects FROM no_of_subjects WHERE class_name = '$student_class') subject_total , student_name   FROM students_score WHERE admission_no='$ad_no' && term= '$term' && session = '$academic_session'";
                             $sql_result = $conn->query($select_sql);
 
                             ?>
@@ -322,23 +335,33 @@ $s_arm = $_SESSION['class_arm'];
                                     <tr>
                                         <th colspan="3">
                                             <?php
-                                            $select_sql = "SELECT * FROM form_teachers WHERE class ='$student_class' && arm= '$s_arm' && term='$term'";
-                                            $sql_result = $conn->query($select_sql);
-                                            ?>
 
+                                            $select_sql = "SELECT * FROM form_teachers WHERE class ='$student_class' && arm= '$s_arm' 
+                                             && term= '$term'";
+                                            $sql_result = $conn->query($select_sql);
+
+                                            ?>
                                             <?php
+
                                             while ($row = $sql_result->fetch_assoc()) :
+
+
+
                                             ?>
                                                 <p class=" text-center text-white h6 p-1"> Form Teacher: <br>
                                                     <?php echo $row['teachers_name'] ?></p>
 
                                             <?php endwhile; ?>
+
+
                                         </th>
                                     </tr>
                                 </tfoot>
                             </table>
                         </div>
+                        <div class="mb-2 bg-danger ">
 
+                        </div>
                     </div>
                     <div class="col-md-4">
 
@@ -410,8 +433,7 @@ $s_arm = $_SESSION['class_arm'];
                     <table class=" table table-stripped table-sm  tab">
                         <?php
 
-                        $select_sql = "SELECT * FROM psychomotor 
-                    WHERE admission_no= '$admin_no' && term = '$term' && a_session = '$academic_session'";
+                        $select_sql = "SELECT * FROM psychomotor WHERE admission_no= '$ad_no' && term = '$term' ";
                         $sql_result = $conn->query($select_sql);
 
                         ?>
