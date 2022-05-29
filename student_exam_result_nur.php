@@ -74,15 +74,13 @@ $s_arm = $_SESSION['class_arm'];
                         <p><strong>Name:</strong> <?php echo $row['surname'] . " " . $row['firstname'] . " " . $row['middlename']; ?> </p>
                         <p><strong>Class:</strong> <?php echo $row['class_name'] . " " . $row['classArm']; ?> </p>
                         <p><strong>Term: </strong> <?php echo $term; ?> <span> | </span> <span> <strong>Academic Session:</strong> <?php echo $academic_session; ?></span> </p>
-                        <p><strong>Sex:</strong> <?php echo $row['gender']; ?> </p>
-                        <p>
-                            <strong>Next Term Begins:</strong>
-                            <?php if ($term == "1st Term") {
-                                echo "5<sup>th</sup> - November - 2021 ";
-                            } else if ($term == "2nd Term") {
-                                echo "2<sup>nd</sup> - May - 2022 ";
-                            } ?>
-                        </p>
+                        <p><strong>Sex:</strong> <?php echo $row['gender']; ?> | <span><strong>Next Term Begins:</strong>
+                                <?php if ($term == "1st Term") {
+                                    echo "5<sup>th</sup> - November - 2021 ";
+                                } else if ($term == "2nd Term") {
+                                    echo "2<sup>nd</sup> - May - 2022 ";
+                                } ?></span></p>
+
                     </div>
 
                     <div>

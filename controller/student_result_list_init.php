@@ -170,6 +170,19 @@ if (isset($_POST['midTermResult'])) {
 }
 
 
+// logic to view the payment receipt
+if (isset($_POST['view_receipt'])) {
+
+    $term =  test_input($_POST['termRe']);
+    $academic_session = test_input($_POST['a_session']);
+
+    // create a select query
+    $_SESSION['term'] = $term;
+    $_SESSION['a_session'] = $academic_session;
+    header("location:fees_receipt_st.php");
+    exit();
+}
+
 
 // logic to view examination result by students
 if (isset($_POST['examBasic'])) {
@@ -182,7 +195,7 @@ if (isset($_POST['examBasic'])) {
     if ($term == '1st Term') {
         header("location:student_exam_result_basic.php");
     } else {
-        header("location:exam_notification.php");
+        header("location:student_exam_result_basic2.php");
     }
     exit();
 } elseif (isset($_POST['examNur'])) {
@@ -197,7 +210,7 @@ if (isset($_POST['examBasic'])) {
     if ($term == '1st Term') {
         header("location:student_exam_result_nur.php");
     } else {
-        header("location:exam_notification.php");
+        header("location:student_exam_result_nur.php");
     }
     exit();
 } elseif (isset($_POST['examHigh'])) {
@@ -211,7 +224,7 @@ if (isset($_POST['examBasic'])) {
     if ($term == '1st Term') {
         header("location:student_exam_result.php");
     } else {
-        header("location:exam_notification.php");
+        header("location:student_exam_result.php");
     }
     exit();
 }

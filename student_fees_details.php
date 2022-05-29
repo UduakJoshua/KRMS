@@ -32,14 +32,21 @@ include_once './model/inc/student_dash_header.php';
 
   <section>
     <h4 class="ml-4 text-capitalize text-decoration-underline">Basic Fees Info</h4>
+    <hr>
     <div class="row ml-4">
+    <div class="col-md-6">
       <?php
       $admin_no = $_SESSION['admin_no'];
       $sql = "SELECT * FROM fees_total WHERE admission_no = '$admin_no' ";
       $result = $conn->query($sql);
-      while ($row = mysqli_fetch_assoc($result)) : ?>
-        <div>
-          <h5 class="mt-2">School Fees: &#8358; <?php echo (number_format($row['total_fees'])); ?> </h5>
+      while ($row = mysqli_fetch_assoc($result)) : 
+      
+      ?>
+        
+          <h4>Term: <?php echo $row['term']?></h4>
+          <h5 class="mt-2">Arrears Brougth Forward: &#8358; <?php echo (number_format($row['arrears'])); ?> </h5>
+          <h5 class="mt-2">Current Fees: &#8358; <?php echo (number_format($row['total_fees'] - $row['arrears'])); ?> </h5>
+          <h5 class="mt-2">Total Fees: &#8358; <?php echo (number_format($row['total_fees'])); ?> </h5>
           <h5 class="mt-3">Amount Paid: &#8358; <?php echo (number_format($row['amount_paid'])); ?> </h5>
           <h5 class="mt-3">Balance: &#8358; <?php echo (number_format($row['balance'])); ?> </h5>
           <h5 class="mb-3">Status:
@@ -52,10 +59,23 @@ include_once './model/inc/student_dash_header.php';
               <button class="btn btn-danger btn-sm  disabled">Owing</button>
             <?php endif; ?>
           </h5>
-
+          <hr>
         <?php endwhile; ?>
-        <a href="fees_receipt_st.php"><button class="mb-3 btn btn-primary">View Payment Receipt</button></a>
+        <a href="select_receipt_term.php"><button class="mb-3 btn btn-primary">View Payment Receipt</button></a>
         </div>
+
+        <div class="col-md-6 ">
+          <h5>Payment(s) can be made into the following School Accounts:</h5>
+          <h6>Account Name: Blessed Children Academy</h6>
+          <h6>Account Number:
+          <ul>
+            <li>GTB:  0130242560</li>
+            <li>FBN:  3041252939</li>
+            <li>FCMB: 2218564027</li>
+          </ul>
+          </h6>
+        </div>
+    </div>
 
 
 

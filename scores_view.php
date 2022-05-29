@@ -42,10 +42,11 @@ include_once './model/inc/dashboard_header.php';
                 $subject = $_SESSION['subject'];
 
                 // create a select query
-
+                $count = 1;
                 $sql = "SELECT * FROM students_score WHERE student_class = '$class' && class_arm = '$c_arm' 
                     && subject = '$subject' && term ='$term'";
                 $result = mysqli_query($conn, $sql);
+
 
                 if (mysqli_num_rows($result) > 0) : ?>
 
@@ -66,6 +67,7 @@ include_once './model/inc/dashboard_header.php';
                                         <thead class="thead-dark ">
                                             <tr style="font-size: 10px;">
                                                 <th scope="col">Select</th>
+                                                <th scope="col">S/N</th>
                                                 <th scope="col">Admission No</th>
                                                 <th scope="col">Name</th>
                                                 <th scope="col">Subject</th>
@@ -82,6 +84,7 @@ include_once './model/inc/dashboard_header.php';
                                         <tbody class="ml-1 pt-2" style="font-size: 11px;">
 
                                             <?php while ($row = mysqli_fetch_assoc($result)) :
+                                                $id = $row['id'];
                                                 $ad_no = $row['admission_no'];
                                                 $s_name = $row['student_name'];
                                                 $subject = $row['subject'];
@@ -97,6 +100,7 @@ include_once './model/inc/dashboard_header.php';
                                                 $term = $row['term']; ?>
                                                 <tr>
                                                     <td><input type="checkbox" name="chk[]" value="<?php echo $row['id'] ?>" /></td>
+                                                    <td><?php echo $count; ?></td>
                                                     <td><?php echo $ad_no; ?></td>
                                                     <td><?php echo $s_name; ?></td>
                                                     <td><?php echo $subject; ?></td>
@@ -108,10 +112,13 @@ include_once './model/inc/dashboard_header.php';
                                                     <td class="td_align"><?php echo  $total ?></td>
                                                     <td>
                                                         <a href="scores_edit.php?edit_ex_score=<?php echo $row['id']; ?>" class=" btn btn-info btn-sm"> Edit</a>
-                                                        <a href="./controller/score_upload_logic.php?delete_ex_score=<?php echo $row['id']; ?>" class=" btn btn-danger btn-sm"><i>Delete</i></a>
+                                                        <button class="delete-score btn btn-sm btn-danger" id="del_<?php echo $id ?>" data-id="<?php echo $id ?>">Del</button>
                                                     </td>
                                                 </tr>
-                                            <?php endwhile ?>
+
+                                            <?php
+                                                $count++;
+                                            endwhile ?>
 
                                         </tbody>
                                     </table>

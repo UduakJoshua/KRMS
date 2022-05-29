@@ -7,10 +7,6 @@ $section = "";
 $messages = array();
 
 
-
-
-
-
 if (isset($_POST['addSubject'])) {
     $subject = test_input($_POST['subject']);
     $section = test_input($_POST['section']);

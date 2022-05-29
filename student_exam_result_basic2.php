@@ -70,7 +70,7 @@ $s_arm = $_SESSION['class_arm'];
 
                 ?>
 
-                <div class="bg-danger text-white pt-3 " style="height: 80px;">
+                <div class="bg-danger text-white pt-2 " style="height: 70px;">
                     <?php
                     while ($row = $sql_result->fetch_assoc()) :
                     ?>
@@ -238,20 +238,16 @@ $s_arm = $_SESSION['class_arm'];
                             endif;
                 ?>
                 <!-- score analysis begins here-->
-                <div class="row mt-3">
+                <div class="row mt-1">
                     <div class="col-md-8">
                         <div>
-
                             <?php
-
                             // $class = $_SESSION['class'];
-
                             $select_sql = "SELECT COUNT(subject) AS no_subjects, SUM(T1+T2+ project + assignment + exam) AS overall,  (SELECT no_of_subjects FROM no_of_subjects WHERE class_name = '$student_class') subject_total , student_name   FROM students_score WHERE admission_no='$ad_no' && term= '$term' && session = '$academic_session'";
                             $sql_result = $conn->query($select_sql);
 
                             ?>
                             <table class=" table table-stripped table-sm ">
-
                                 <thead class="thead-dark ">
 
                                     <tr>
@@ -270,9 +266,6 @@ $s_arm = $_SESSION['class_arm'];
                                         $average_score = round(($overalTot / $no_subject), 2);
                                         $total_mark = $no_subject * 100;
                                         $name = $row['student_name'];
-
-
-
 
                                     ?>
                                         <tr>
@@ -411,7 +404,7 @@ $s_arm = $_SESSION['class_arm'];
                             <tfoot class="thead-dark ">
 
                                 <tr>
-                                    <th colspan="3" style="padding: 15px;">
+                                    <th colspan="3" style="padding: 10px;">
                                         <p style="font-size: 12px; text-align:left ; margin-bottom:2px;">CAT : Continuous Assessment Test</p>
                                         <p style="font-size: 12px; text-align:left; margin-bottom:2px;">Average Score : <br>Total Score / Total Subjects Offered </p>
 

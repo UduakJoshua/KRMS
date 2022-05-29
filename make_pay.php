@@ -1,7 +1,7 @@
 <?php
 require_once './controller/dbase_conn.php';
 require_once './controller/student_result_list_init.php';
-require_once 'controller/bill_upload_logic.php';
+require_once './controller/bill_upload_logic.php';
 $title = "BCA | Fees Payment";
 include_once './model/inc/dashboard_header.php';
 $c_arm = $_SESSION['arm'];

@@ -67,6 +67,7 @@ if (!isset($_SESSION['st-user_id'])) {
             display: flex;
             justify-content: space-between !important;
             align-items: center;
+            line-height: 1.0rem;
 
         }
 
@@ -168,7 +169,7 @@ if (!isset($_SESSION['st-user_id'])) {
 
         .student-details p {
             font-size: 16px;
-            line-height: 1.3rem;
+            line-height: 1.0rem;
         }
 
         .tab {
@@ -195,7 +196,25 @@ if (!isset($_SESSION['st-user_id'])) {
             font-size: 18px;
             font-weight: bold;
         }
+/* CBT CSS begins here*/
+        .current{
+            padding: 10px;
+            background-color: #DC3545;
+            border: #fffef2 dotted 2px;
+            margin: 20px 0 10px 0;
+        }
 
+        .choices li{
+           list-style: none;
+           padding: 10px 4px;
+           
+        }
+
+        .quest_size{
+            font-size: 18px;
+        }
+       
+/* end here*/
 
         @media (min-width: 768px) {
             .bd-placeholder-img-lg {

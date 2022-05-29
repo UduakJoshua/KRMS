@@ -40,11 +40,22 @@ include_once './model/inc/dashboard_header.php';
                                 <div class="col-md-12">
                                     <div class="card-body">
                                         <div class="row">
-                                            <?php if ($_SESSION['username'] == 'Mrs. Ognonna') :
-                                            $section = "Secondary";
+                                            <?php if ($_SESSION['username'] == 'H.O.D') :
                                             ?>
                                                 <div class="col-md-2">
-                                               <?php include_once './controller/class_selection.php';?>
+                                                    <?php
+                                                    require_once "controller/class_logic.php";
+                                                    $select_sql = "SELECT * FROM classes WHERE section = 'Secondary' ORDER BY className ASC";
+                                                    $sql_result = $conn->query($select_sql);
+                                                    ?>
+                                                    <label for="class">Class:</label>
+                                                    <select name="student_class" id="student_class" class="form-control ">
+                                                        // using a while loop to iterate the class table
+                                                        <?php
+                                                        while ($row = $sql_result->fetch_assoc()) : ?>
+                                                            <option value="<?php echo $row['className']; ?>"><?php echo $row['className']; ?></option>
+                                                        <?php endwhile; ?>
+                                                    </select>
                                                 </div>
 
                                                 <div class="col-md-2 form-group">
@@ -56,13 +67,21 @@ include_once './model/inc/dashboard_header.php';
                                                         <option value="Art"> Art</option>
                                                     </select>
                                                 </div>
-
-                                                <!--class selection for Primary-->
-                                                <?php elseif ($_SESSION['username'] == 'Mrs. Uduak') : 
-                                                             $section = "Primary";
-                                                   ?>
+                                            <?php elseif ($_SESSION['username'] == 'Mrs. Uduak') :  ?>
                                                 <div class="col-md-2">
-                                                <?php include_once './controller/class_selection.php';?>
+                                                    <?php
+                                                    require_once "controller/class_logic.php";
+                                                    $select_sql = "SELECT * FROM classes WHERE section ='Primary' ORDER BY className ASC";
+                                                    $sql_result = $conn->query($select_sql);
+                                                    ?>
+                                                    <label for="class">Class:</label>
+                                                    <select name="student_class" id="student_class" class="form-control ">
+                                                        // using a while loop to iterate the class table
+                                                        <?php
+                                                        while ($row = $sql_result->fetch_assoc()) : ?>
+                                                            <option value="<?php echo $row['className']; ?>"><?php echo $row['className']; ?></option>
+                                                        <?php endwhile; ?>
+                                                    </select>
                                                 </div>
 
                                                 <div class="col-md-2 form-group">
@@ -81,12 +100,22 @@ include_once './model/inc/dashboard_header.php';
 
                                                     </select>
                                                 </div>
-
-                                                <!--class selection for Nursery-->
-                                            <?php elseif ($_SESSION['username'] == 'Mrs. Brown') :  
-                                                  $section = "Nursery";?>
+                                                <!-- Nursery score view logic begins here -->
+                                            <?php elseif ($_SESSION['username'] == 'Mrs. Brown') :  ?>
                                                 <div class="col-md-2">
-                                                <?php include_once './controller/class_selection.php';?>
+                                                    <?php
+                                                    require_once "controller/class_logic.php";
+                                                    $select_sql = "SELECT * FROM classes WHERE section ='Nursery' ORDER BY className ASC";
+                                                    $sql_result = $conn->query($select_sql);
+                                                    ?>
+                                                    <label for="class">Class:</label>
+                                                    <select name="student_class" id="student_class" class="form-control ">
+                                                        // using a while loop to iterate the class table
+                                                        <?php
+                                                        while ($row = $sql_result->fetch_assoc()) : ?>
+                                                            <option value="<?php echo $row['className']; ?>"><?php echo $row['className']; ?></option>
+                                                        <?php endwhile; ?>
+                                                    </select>
                                                 </div>
 
                                                 <div class="col-md-2 form-group">

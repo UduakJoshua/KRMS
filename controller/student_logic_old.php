@@ -91,21 +91,19 @@ if (isset($_POST['save'])) {
 
 // delete button logic
 
-if (isset($_POST['id'])) {
-    $id = $_POST['id'];
+if (isset($_GET['delete'])) {
+    $id = $_GET['delete'];
 
     $sql = "DELETE FROM student WHERE id=$id";
 
     if ($conn->query($sql) === TRUE) {
-        echo 1;
 
-        // $_SESSION['message'] = "Student Record deleted Successfully";
-        // $_SESSION['msg_type'] = "danger";
-        // header("location:../student_display.php");
+        $_SESSION['message'] = "Student Record deleted Successfully";
+        $_SESSION['msg_type'] = "danger";
+        header("location:../student_display.php");
         exit();
     } else {
-        echo 0;
-        exit();
+        echo "Error deleting record: " . $conn->error;
     }
 
     $conn->close();

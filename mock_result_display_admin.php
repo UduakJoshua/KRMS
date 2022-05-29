@@ -84,21 +84,18 @@ $class = $_SESSION['class'];
                         <p><strong>Admission Number:</strong> <?php echo $row['admissionNo'] ?></p>
                         <p><strong>Name:</strong> <?php echo $row['surname'] . " " . $row['firstname'] . " " . $row['middlename']; ?> </p>
                         <p><strong>Class:</strong> <?php echo $row['class_name'] . " " . $row['classArm']; ?> </p>
+                        <p><strong>Term: </strong> <?php echo $term; ?> <span> | </span> <span> <strong>Academic Session:</strong> <?php echo $academic_session; ?></span> </p>
+                        <p><strong>Sex:</strong> <?php echo $row['gender']; ?> | <span>
+                            </span>
 
-                        <p><strong>Term:</strong> <?php echo $term ?></p>
-                        <p><strong>Academic Session:</strong> <?php echo $academic_session; ?>
-                            <span>
-                                <strong>Date: <?php if ($mock_no == "2nd Mock") {
-                                                    echo "12<sup>th</sup> - December - 2021 ";
-                                                } elseif ($mock_no == "3rd Mock") {
-                                                    echo "21<sup>st</sup> - February - 2022 ";
-                                                } ?>
-                                </strong>
+                            <strong>Next Term Begins:</strong>
+                            <?php if ($term == "1st Term") {
+                                echo "5<sup>th</sup> - November - 2021 ";
+                            } else if ($term == "2nd Term") {
+                                echo "2<sup>nd</sup> - May - 2022 ";
+                            } ?>
                             </span>
                         </p>
-
-                        <p><strong>Sex:</strong> <?php echo $row['gender']; ?> </p>
-
                     </div>
 
                     <div>
@@ -112,7 +109,7 @@ $class = $_SESSION['class'];
                     </div>
                 </div>
             </div>
-
+            <br>
             <?php
 
 
@@ -121,7 +118,7 @@ $class = $_SESSION['class'];
 
             ?>
 
-            <table class="table table-striped table-sm display">
+            <table class="table table-striped table-sm display ">
                 <thead class="thead-dark ">
                     <tr style="font-size: 18px; text-align:center;">
                         <th scope="col " style="font-size: 18px; text-align:left;">Subject</th>

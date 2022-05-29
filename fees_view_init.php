@@ -60,45 +60,112 @@ include_once './model/inc/dashboard_header.php';
                             <div class="col-md-12">
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-md-2">
-                                            <label for="student_class">Student's Class</label>
-
-                                            <?php
-                                            require_once "controller/class_logic.php";
-                                            $select_sql = "SELECT * FROM classes ORDER BY className ASC";
-                                            $sql_result = $conn->query($select_sql);
+                                        
+                                        <?php if ($_SESSION['username'] == 'H.O.D') :
                                             ?>
-                                            <select name="student_class" id="student_class" class="form-control ">
-                                                // using a while loop to iterate the class table
-                                                <?php
-                                                while ($row = $sql_result->fetch_assoc()) : ?>
-                                                    <option value="<?php echo $row['className']; ?>"><?php echo $row['className']; ?></option>
-                                                <?php endwhile; ?>
-                                            </select>
-                                        </div>
+                                                <div class="col-md-2">
+                                                    <?php
+                                                    require_once "controller/class_logic.php";
+                                                    $select_sql = "SELECT * FROM classes WHERE section = 'Secondary' ORDER BY className ASC";
+                                                    $sql_result = $conn->query($select_sql);
+                                                    ?>
+                                                    <label for="class">Class:</label>
+                                                    <select name="student_class" id="student_class" class="form-control ">
+                                                        // using a while loop to iterate the class table
+                                                        <?php
+                                                        while ($row = $sql_result->fetch_assoc()) : ?>
+                                                            <option value="<?php echo $row['className']; ?>"><?php echo $row['className']; ?></option>
+                                                        <?php endwhile; ?>
+                                                    </select>
+                                                </div>
 
-                                        <div class="col-md-2 form-group">
-                                            <label for="arm">Arm</label>
-                                            <select name="arm" id="arm" class="form-control ">
+                                                <div class="col-md-2 form-group">
+                                                    <label for="class">Arm</label>
+                                                    <select name="arm" id="arm" class="form-control ">
+                                                        <option value="Goodness"> Goodness</option>
+                                                        <option value="Holiness"> Holiness</option>
+                                                        <option value="Science"> Science</option>
+                                                        <option value="Art"> Art</option>
+                                                    </select>
+                                                </div>
+                                            <?php elseif ($_SESSION['username'] == 'admin.bare') :  ?>
+                                                <div class="col-md-2">
+                                                    <?php
+                                                    require_once "controller/class_logic.php";
+                                                    $select_sql = "SELECT * FROM classes WHERE section !='Secondary'  ORDER BY className ASC";
+                                                    $sql_result = $conn->query($select_sql);
+                                                    ?>
+                                                    <label for="class">Class:</label>
+                                                    <select name="student_class" id="student_class" class="form-control ">
+                                                        // using a while loop to iterate the class table
+                                                        <?php
+                                                        while ($row = $sql_result->fetch_assoc()) : ?>
+                                                            <option value="<?php echo $row['className']; ?>"><?php echo $row['className']; ?></option>
+                                                        <?php endwhile; ?>
+                                                    </select>
+                                                </div>
 
-                                                <option value="Faithfulness"> Faithfulness</option>
-                                                <option value="Gracefulness"> Gracefulness</option>
-                                                <option value="Goodness"> Goodness</option>
-                                                <option value="Holiness"> Holiness</option>
-                                                <option value="Humility"> Humility</option>
-                                                <option value="Joyfulness"> Joyfulness</option>
-                                                <option value="Kindness"> Kindness</option>
-                                                <option value="Love"> Love</option>
-                                                <option value="Meekness"> Meekness</option>
-                                                <option value="Peace"> Peace</option>
-                                                <option value="Purity"> Purity</option>
-                                                <option value="Virtue"> Virtue</option>
-                                                <option value="Science"> Science</option>
-                                                <option value="Art"> Art</option>
+                                                <div class="col-md-2 form-group">
+                                                    <label for="class">Arm</label>
+                                                    <select name="arm" id="arm" class="form-control ">
+                                                    <option value="Faithfulness"> Faithfulness</option>
+                                                        <option value="Gracefulness"> Gracefulness</option>
+                                                        <option value="Goodness"> Goodness</option>
+                                                        <option value="Holiness"> Holiness</option>
+                                                        <option value="Humility"> Humility</option>
+                                                        <option value="Joyfulness"> Joyfulness</option>
+                                                        <option value="Kindness"> Kindness</option>
+                                                        <option value="Love"> Love</option>
+                                                        <option value="Meekness"> Meekness</option>
+                                                        <option value="Peace"> Peace</option>
+                                                        <option value="Purity"> Purity</option>
+                                                        <option value="Virtue"> Virtue</option>
+                                                       
+                                                    </select>
+                                                </div>
+
+                                                <?php else :  ?>
+                                                <div class="col-md-2">
+                                                    <?php
+                                                    require_once "controller/class_logic.php";
+                                                    $select_sql = "SELECT * FROM classes  ORDER BY className ASC";
+                                                    $sql_result = $conn->query($select_sql);
+                                                    ?>
+                                                    <label for="class">Class:</label>
+                                                    <select name="student_class" id="student_class" class="form-control ">
+                                                        // using a while loop to iterate the class table
+                                                        <?php
+                                                        while ($row = $sql_result->fetch_assoc()) : ?>
+                                                            <option value="<?php echo $row['className']; ?>"><?php echo $row['className']; ?></option>
+                                                        <?php endwhile; ?>
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-md-2 form-group">
+                                                    <label for="class">Arm</label>
+                                                    <select name="arm" id="arm" class="form-control ">
+
+                                                        <option value="Faithfulness"> Faithfulness</option>
+                                                        <option value="Gracefulness"> Gracefulness</option>
+                                                        <option value="Goodness"> Goodness</option>
+                                                        <option value="Holiness"> Holiness</option>
+                                                        <option value="Humility"> Humility</option>
+                                                        <option value="Joyfulness"> Joyfulness</option>
+                                                        <option value="Kindness"> Kindness</option>
+                                                        <option value="Love"> Love</option>
+                                                        <option value="Meekness"> Meekness</option>
+                                                        <option value="Peace"> Peace</option>
+                                                        <option value="Purity"> Purity</option>
+                                                        <option value="Virtue"> Virtue</option>
+                                                        <option value="Science"> Science</option>
+                                                        <option value="Art"> Art</option>
 
 
-                                            </select>
-                                        </div>
+                                                    </select>
+                                                </div>
+                                          
+                                                <?php endif; ?>
+                                        
 
 
                                         <div class="col-md-2">
@@ -148,13 +215,13 @@ include_once './model/inc/dashboard_header.php';
                                     </div>
 
                                 <?php endif ?>
+                                    <br>
+                                <div class="col-md-3 mt-4">
+                                    <a href="fees_report.php"><button type="button"  class=" btn btn-warning">Back</button></a>
+                                </div>
 
                             </div>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <a href="fees_report.php"><button type="button" class=" btn btn-warning">Back</button></a>
-                                </div>
-                            </div>
+                            
                         </div>
                     </div>
 

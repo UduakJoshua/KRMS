@@ -39,14 +39,31 @@ if (isset($_POST['login'])) {
             $_SESSION['username'] = $user['username'];
             $_SESSION['verified'] = $user['verify'];
 
+             //query the database
+$term = "3rd Term";
+$a_session = "2021/2022";
+             $sql = "SELECT 
+             sum(total_fees + discount)as  total_bill,
+             sum(amount_paid)as  total_paid, 
+             sum(balance) as total_balance, term, a_session 
+              FROM fees_total WHERE term = ?  && a_session = ? ";
+     
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('ss', $term, $a_session);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+        $report = $result->fetch_assoc();
+        $_SESSION[''] = $report['total_bill'];
+
             header('Location:dashboard.php?login-succesful ');
             exit();
+        } else {
+            $_SESSION['fees'] = "Access Denied: Your Username or Password is Incorrect! ";
+            $_SESSION['msg_type'] = "danger";
+            header('Location:portal_login.php?wrong-credentials');
+            exit();
         }
-    } else {
-        $_SESSION['fees'] = "Username or Password Incorrect! ";
-        $_SESSION['msg_type'] = "danger";
-        header('Location:portal_login.php?wrong-credentials');
-        exit();
     }
 }
 

@@ -11,6 +11,140 @@ $term = $_SESSION['term'];
 $aSession = $_SESSION['aSession'];
 
 ?>
+  <!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="editBill" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+    <form>
+
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Student Billing</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- form content begins here-->
+
+        <input type="hidden" class="form-control " name="id" id="id">
+                    <h5>Billing Details</h5>
+                    <hr>
+                    <!-- student's contact information begins here -->
+                    <div class="row">
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="student_name">Name:</label>
+                                <input type="text" class="form-control "   name="student_name" id="student_name" aria-describedby="student_name">
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="admission_no">Admission No: </span></label>
+                                <input type="text" class="form-control " readonly  name="admission_no" id="admission_no" aria-describedby="admission_no">
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="student_class">Class:</span></label>
+                                <input type="text" class="form-control " readonly  name="student_class" id="student_class" aria-describedby="student_class">
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="student_arm">Arm: </span></label>
+                                <input type="text" class="form-control " readonly  name="student_arm" id="student_arm" aria-describedby="student_arm">
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+                    <!--row 2-->
+                    <!-- payment details -->
+                    <div class=" row">
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="school_fees">School Fees (N)</label>
+                                <input type="text" class="form-control "  name="school_fees" id="school_fees">
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="discount">Discount</span></label>
+                                <input type="text" class="form-control "  name="discount" id="discount">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="boarding_fees">Boarding Fees</span></label>
+                                <input type="text" class="form-control "  name="boarding_fees" id="boarding_fees">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="bus_fees">Bus Fare</span></label>
+                                <input type="text" class="form-control "  name="bus_fees" id="bus_fees">
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                    <hr>
+                    <!--row 3-->
+                    <!-- payment details -->
+                    <div class=" row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="books">Books</span></label>
+                                <input type="text" class="form-control "  name="books" id="books">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="wears">Wears</span></label>
+                                <input type="text" class="form-control "  name="wears" id="wears" aria-describedby="amount_paid">
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="arrears">Arrears</span></label>
+                                <input type="text" class="form-control "  name="arrears" id="arrears" aria-describedby="amount_paid">
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+                    <hr>
+
+                   
+
+                       
+                   
+         <!-- form content ends here-->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary " name="edit_bill">Update Student Bill</button>
+
+      </div>
+    <form >
+
+    </div>
+  </div>
+</div>
+<!--modal ends-->
 
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -93,7 +227,9 @@ $aSession = $_SESSION['aSession'];
                                     $result = $conn->query($sql);
                                     ?>
                                     <?php
-                                    while ($row = mysqli_fetch_assoc($result)) : ?>
+                                    while ($row = mysqli_fetch_assoc($result)) :
+                                        $id = $row['id'];
+                                    ?>
                                         <tr>
                                             <input type="hidden" name="a_session" value="<?php echo $aSession ?>" class="form-control">
                                             <input type="hidden" name="term" value="<?php echo $term ?>" class="form-control">
@@ -108,17 +244,27 @@ $aSession = $_SESSION['aSession'];
                                             <td><input type="text" name="balance" value="<?php echo $row['balance'] ?>" readonly class="form-control"></td>
                                             <td colspan="2">
                                                 <a href="make_pay.php?pay=<?php echo $row['id']; ?>" class=" btn btn-info btn-sm mb-1" style="font-size: 11px; width:100%">Pay Now</a>
+                                                <!--button  type="button"  data-toggle="modal" data-target="#editBill"   style="font-size: 11px; width:100%" class="btn btn-primary btn-sm edit-bill" name="edit" value="Edit" id="<?php echo $row['id']?>"> Edit Bill </button-->
                                                 <a href="edit_bill.php?edit-bill=<?php echo $row['id']; ?>" class=" btn btn-warning btn-sm" style="font-size: 11px; width:100%"> Edit Bill </a>
                                             </td>
                                             <td>
-                                                <?php if ($row['balance'] <= 0) : ?>
+                                            <?php if (($row['school_fees'] == ($row['discount'])) && ($row['balance'] == 0)) : ?>
 
-                                                    <button class="btn btn-success btn-sm " disabled>Cleared</button>
+                                                <button class="btn btn-success btn-sm " disabled>MGT</button>
+                                           
+                                            <?php elseif($row['balance'] == 0)  : ?>
 
-                                                <?php else : ?>
-                                                    <button class="btn btn-danger btn-sm " disabled>Indebted</button>
-                                                <?php endif; ?>
-                                            </td>
+                                                <button class="btn btn-success btn-sm " disabled>Cleared</button>
+                                            
+                                            <?php elseif ($row['balance'] < 0) : ?>
+
+                                                <button class="btn btn-success btn-sm " disabled>Cl/Excess </button>
+
+                                            <?php else : ?>
+                                                <button class="btn btn-danger btn-sm " disabled>Indebted</button>
+                                                
+                                            <?php endif; ?>
+                                        </td>
                                         </tr>
                                     <?php endwhile; ?>
                                 </tbody>
@@ -139,16 +285,33 @@ $aSession = $_SESSION['aSession'];
 
 
         </div>
-
-
-
-
-
     </section>
     <hr>
-
     <?php
-
     include_once './model/inc/dashboard_footer.php';
-
     ?>
+
+  
+
+
+<script>
+   /* $(document).on('click','.edit-bill', function(){
+              console.log("Hello Joshua");
+        var billing_id = $(this).attr('id');
+
+        $.ajax({
+                url:"./controller/bill_upload_logic.php",
+                type:"POST",
+                data: {billing_id:billing_id},
+                dataType: "json",
+                succes: function(data){
+                    $('#student_name').val(data.student_name);
+                    $('#editBill').modal('show');
+                   
+
+                }
+        });
+       
+
+})*/
+</script>

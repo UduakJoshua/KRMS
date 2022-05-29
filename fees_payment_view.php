@@ -97,12 +97,21 @@ $a_session = $_SESSION['aSession'];
                                         <td><input type="text" name="balance" value="<?php echo $row['balance'] ?>" readonly class="form-control"></td>
 
                                         <td>
-                                            <?php if ($row['balance'] == 0) : ?>
+                                            <?php if (($row['school_fees'] == ($row['discount'])) && ($row['balance'] == 0)) : ?>
+
+                                                <button class="btn btn-success btn-sm " disabled>MGT</button>
+                                           
+                                            <?php elseif($row['balance'] == 0)  : ?>
 
                                                 <button class="btn btn-success btn-sm " disabled>Cleared</button>
+                                            
+                                            <?php elseif ($row['balance'] < 0) : ?>
+
+                                                <button class="btn btn-success btn-sm " disabled>Cl/Excess </button>
 
                                             <?php else : ?>
                                                 <button class="btn btn-danger btn-sm " disabled>Indebted</button>
+                                                
                                             <?php endif; ?>
                                         </td>
                                         <td> <a href="fees_receipt.php?receipt=<?php echo $row['admission_no']; ?>"><button type="button" class="btn btn-secondary">ViewReceipt</button></a> </td>

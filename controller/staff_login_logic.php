@@ -52,7 +52,8 @@ if (isset($_POST['login'])) {
                 header('Location:staff_dashboard.php?success');
             }
         } else {
-            $errors['credentials'] = "Wrong Username and Password Combination!";
+            $_SESSION['fees'] = "Access Denied : You have entered a wrong Staff ID or Password! ";
+            $_SESSION['msg_type'] = "danger";
             header('Location:staff_login.php?Access-Denied!');
         }
         exit();

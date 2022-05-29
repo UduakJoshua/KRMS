@@ -412,7 +412,27 @@ if (isset($_POST['update_mock'])) {
 
 // delete button logic
 
-if (isset($_GET['delete_ex_score'])) {
+if (isset($_POST['id'])) {
+    $id = $_POST['id'];
+
+    $sql = "DELETE FROM students_score WHERE id=$id";
+
+    if ($conn->query($sql) === TRUE) {
+        echo 1;
+
+        //$_SESSION['message'] = "Student Score deleted Successfully";
+        // $_SESSION['msg_type'] = "danger";
+        // header("location:../student_display.php");
+        exit();
+    } else {
+        echo 0;
+        exit();
+    }
+
+    $conn->close();
+}
+
+/*if (isset($_GET['delete_ex_score'])) {
     $id = $_GET['delete_ex_score'];
     $sql = "DELETE FROM students_score WHERE id=$id";
     if ($conn->query($sql) === TRUE) {
@@ -424,7 +444,7 @@ if (isset($_GET['delete_ex_score'])) {
     } else {
         echo "Error deleting record: " . $conn->error;
     }
-}
+}*/
 
 
 if (isset($_GET['delete_mock'])) {

@@ -55,8 +55,9 @@ if (isset($_POST['st_login'])) {
                 header('Location:student_dashboard.php?success');
             }
         } else {
-            $errors['credentials'] = "Wrong Username and Password Combination!";
-            header('Location:student_login.php?cant login');
+
+            header('Location:student_login.php?accessdenied');
+            exit();
         }
         exit();
     }

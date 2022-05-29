@@ -53,7 +53,7 @@ include_once './model/inc/student_dash_header.php';
       <!--end mock 3-->
       <!--mock 4-->
       <div class="col-md-3">
-        <a href="mock_notification.php" class="text-decoration-none"><button class="btn btn-success btn-block mt-4">Mock 4</button></a>
+        <a href="mock_result_4.php" class="text-decoration-none"><button class="btn btn-success btn-block mt-4">Mock 4</button></a>
       </div>
       <!--end mock 4-->
     </div>

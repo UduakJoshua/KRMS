@@ -4,8 +4,8 @@ require './controller/bill_upload_logic.php';
 $title = "BCA | Fees Receipt";
 include_once './model/inc/student_dash_header.php';
 
-$term = "2nd Term";
-$academic_session = "2021/2022";
+$term = $_SESSION['term'];
+$academic_session = $_SESSION['a_session'];
 $admin_no = $_SESSION['admin_no'];
 $student_class = $_SESSION['student_class'];
 $s_arm = $_SESSION['class_arm'];

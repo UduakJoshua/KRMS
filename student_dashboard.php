@@ -9,7 +9,7 @@ include_once './model/inc/student_dash_header.php';
     <div class="mr-2">
       <?php
       $admin_no = $_SESSION['admin_no'];
-      $term = "2nd Term";
+      $term = "3rd Term";
       $a_session = "2021/2022";
       $sql = "SELECT surname, firstname, middlename, image, class_name, section, approval,
       (SELECT balance FROM fees_total WHERE admission_no ='$admin_no' && term ='$term' && a_session = '$a_session'  )as balance FROM student WHERE admissionNo = '$admin_no' ";

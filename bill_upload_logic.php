@@ -257,7 +257,7 @@ if (isset($_POST['make_pay'])) {
     processed_by = '$pay_processed_by' WHERE id=$id";
 
     if ($conn->query($sql) === TRUE) {
-        $_SESSION['message'] = "Payment for  $student_name for $term  successfully made!";
+        $_SESSION['message'] = "Payment for  $student_name  successfully made!";
         $_SESSION['msg_type'] = "success";
         header("location:./fees_payment.php");
         exit();
@@ -376,7 +376,7 @@ if (isset($_GET['edit-bill'])) {
     $conn->close();
 }
 
-// editing student billing details
+// posting fees payment
 if (isset($_POST['edit_bill'])) {
     $id = $_POST['id'];
     $update = true;
@@ -427,50 +427,3 @@ if (isset($_POST['edit_bill'])) {
     //  }
     $conn->close();
 }
-
-// new update logic
-
-/* posting fees payment
-if (isset($_POST['billing_id'])) {
-    $id = $_POST['billing_id'];
-    $term = "3rd Term";
-    $a_session = "2021/2022";
-    $sql = "SELECT * FROM fees_total WHERE id=? && term=? && a_session=?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param('iss', $id, $term, $a_session);
-    $stmt->execute();
-
-    $result = $stmt->get_result();
-    $row = $result->fetch_assoc();
-
-    print_r($row);
-
-    echo json_encode($row);
-    
-}*/
-
-
-
-
-
-
-
-    //$student_name = test_input($_POST['student_name']);
-   // $admission_no = test_input($_POST['admission_no']);
-    //$student_class = test_input($_POST['student_class']);
-    //$discount = test_input($_POST['discount']);
-    //$school_fees = test_input($_POST['school_fees']);
-    //$boarding_fees = test_input($_POST['boarding_fees']);
-    //$bus_fees = test_input($_POST['bus_fees']);
-   // $books_fees = test_input($_POST['books']);
-    //$wears_fees =  test_input($_POST['wears']);
-    //$arrears = test_input($_POST['arrears']);
-    //$total = (int)(($school_fees - $discount) +  $boarding_fees + $bus_fees + $books_fees + $wears_fees + $arrears);
-    //$balance = (int)($total - 0);
-    //$term = test_input($_POST['term']);
-    //$a_session = test_input($_POST['aSession']);
-    // select query
-    
-    //  }
-    //$conn->close();
-

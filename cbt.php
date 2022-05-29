@@ -1,5 +1,6 @@
 <?php
-include_once './controller/student_logic.php';
+include_once './controller/subject_logic.php';
+require_once './controller/cbt_init.php';
 $title = "BCA | CBT ";
 include_once './model/inc/student_dash_header.php';
 ?>
@@ -31,10 +32,46 @@ include_once './model/inc/student_dash_header.php';
   </div>
 
   <section>
-    <h4 class="ml-4 text-capitalize text-decoration-underline">NOTICE</h4>
-    <div class="row ml-4">
-      <p>This service is Coming Soon!. </p>
-      <p>The CBT corner is currently undergoing construction and upgrading. </p>
+    <div class=" container-fluid  text-center mb-4">
+            <div>
+                <h4><strong>Welcome to the CBT Corner.</strong></h4>
+                <h5>Please select a subject and click Start to begin the Test.</h5>
+                
+            </div>
+      </div>
+            <hr>
+    <div class=" container col-md-4 mt-4 ">
+          
+                <form action="cbt.php" method="POST" >
+                     
+                        <div class=" mt-4">
+                            <div class="form-group">
+                                <label for="subject">Subject:</label>
+                                <?php
+                               
+                                $select_sql = "SELECT * FROM subject ORDER BY subject_title ASC";
+                                $sql_result = $conn->query($select_sql);
+                                ?>
+                                <select name="subject" id="subject" class="form-control " value="<?php echo $row['subject_title'] ?>">
+                                    // using a while loop to iterate the class table
+                                    <?php
+                                    while ($row = $sql_result->fetch_assoc()) : ?>
+                                        <option value="<?php echo $row['subject_title'] ?>"><?php echo $row['subject_title']; ?></option>
+                                    <?php endwhile; ?>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="">
+                            <div class="form-group">
+                                <input type="submit" name = "cbt_int" class="btn btn-primary btn-block" value="Start">                            
+                              
+                            </div>
+                        </div>
+                     
+                      
+                </form>
+         
     </div>
 
 

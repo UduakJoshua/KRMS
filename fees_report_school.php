@@ -78,9 +78,14 @@ $a_session = $_SESSION['a_session'];
                                         sum(total_fees )as  actual_bill,
                                         sum(amount_paid)as  total_paid, 
                                         sum(discount)as  total_discount,
+                                        sum(bus_fees)as bus_fees,
+                                        sum(school_fees)as school_fees,
+                                        sum(arrears)as arrears,
+                                        sum(boarding_fees)as boarding_fees,
                                         sum(balance) as total_balance, term, a_session 
                                         FROM fees_total WHERE term ='$term'  && a_session ='$a_session'";
                                 $result = $conn->query($sql);
+                                $count = 1;
 
                                 while ($row = mysqli_fetch_assoc($result)) :
                                     $total = $row['total_bill'];
@@ -89,12 +94,20 @@ $a_session = $_SESSION['a_session'];
                                     $total_paid = $row['total_paid'];
                                     $balance = $row['total_balance'];
                                     $expense = $_SESSION['expense'];
+                                    $bus = $row['bus_fees'];
+                                    $school_fees = $row['school_fees'];
+                                    $arrears = $row['arrears'];
+                                    $boarding_fees = $row['boarding_fees'];
                                     // formatting the number to thousand separators
                                     $formatted_total = number_format($total, 2);
                                     $formatted_discount = number_format($total_discount, 2);
                                     $formatted_bill = number_format($actual_bill, 2);
                                     $formatted_paid = number_format($total_paid, 2);
                                     $formatted_balance = number_format($balance, 2);
+                                    $formatted_bus = number_format($bus, 2);
+                                    $formatted_arrears = number_format($arrears, 2);
+                                    $formatted_school_fees = number_format($school_fees, 2);
+                                    $formatted_boarding_fees = number_format($boarding_fees, 2);
 
                                 ?>
                                     <tr style="text-align: center;">
@@ -115,18 +128,60 @@ $a_session = $_SESSION['a_session'];
                                             $formated_total_expense = number_format($total_expense, 2);
 
                                         ?>
-                                            <td> &#8358; <?php echo $formated_total_expense; ?></td>
+                                        <td> &#8358; <?php echo $formated_total_expense; ?></td>
 
                                         <?php endwhile; ?>
 
                                     </tr>
-                                <?php endwhile; ?>
+
+                               
                             </tbody>
                         </table>
 
                     </div>
 
                 </div>
+<h3> Payment Break Down</h3>
+                <div class="row">
+                 <div class="col-md-8 ">
+                <table class="table  table-bordered ">
+                <thead class="thead-dark ">
+                    <tr style="font-size: 14px;">
+                        <th scope="col">S/N</th>
+                        <th scope="col">Items</th>
+                        <th scope="col">Total Amount</th>
+                    </tr>
+
+                </thead>
+                <tbody class="ml-1 pt-2" style="font-size: 20px;">
+                    <tr >
+                        <td>  1 </td>
+                        <td> School Fees </td>
+                        <td> &#8358; <?php echo $formatted_school_fees ?> </td>
+                    </tr>
+                    <tr >
+                        <td>  2 </td>
+                        <td> Boarding Fees </td>
+                        <td> &#8358; <?php echo $formatted_boarding_fees ?> </td>
+                    </tr>
+                    <tr >
+                        <td>  3 </td>
+                        <td> Bus Fees </td>
+                        <td> &#8358; <?php echo  $formatted_bus; ?> </td>
+                    </tr>
+                    <tr >
+                    <td>  4 </td>
+                    <td> Arrears </td>
+                    <td> &#8358; <?php echo  $formatted_arrears; ?> </td>
+                </tr>
+                   
+                   
+                </tbody>
+                </table>
+                </div>
+                </div>
+                <?php         
+         endwhile; ?>
                 <!--card footer begins here-->
 
                 <div class=" row">

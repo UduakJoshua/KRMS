@@ -38,6 +38,7 @@ $result = $conn->query($query);
                 <table id="example" class="table table-striped table-bordered">
                     <thead class="dark">
                         <tr style="font-size: 12px;">
+                        <th scope="col">S/N</th>
                             <th scope="col">Image</th>
                             <th scope="col">Admission No</th>
                             <th scope="col">Name</th>
@@ -50,13 +51,12 @@ $result = $conn->query($query);
                     </thead>
                     <tbody>
                         <?php
+                        $count = 1;
 
-                        while ($row = mysqli_fetch_assoc($result)) :
-
-                        ?>
-
-
+                        while ($row = mysqli_fetch_assoc($result)) : 
+                            $id = $row['id'];?>
                             <tr>
+                            <td><?php echo $count; ?></td>
                                 <td style="width:auto;">
                                     <div id="content">
                                         <?php
@@ -73,11 +73,11 @@ $result = $conn->query($query);
                                 <td><?php echo $row['section'] ?></td>
                                 <td>
                                     <a href="edit_student.php?edit=<?php echo $row['id']; ?>" class=" btn btn-info btn-sm"> Edit</a>
-                                    <a href="./controller/student_logic.php?delete=<?php echo $row['id']; ?>" class=" btn btn-danger btn-sm">Del</a>
+                                    <button class="delete btn btn-sm btn-danger" id="del_<?php echo $id ?>" data-id="<?php echo $id ?>">Del</button>
                                 </td>
                             </tr>
-                        <?php endwhile; ?>
-
+                        <?php $count++;
+                                            endwhile ?>
                     </tbody>
                 </table>
             </div>
