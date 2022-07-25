@@ -142,7 +142,18 @@ include_once './model/inc/dashboard_header.php';
             <p class="text-center text-white">Add Psychomotor Rating</p>
           </a>
         </div>
+
+        
       </div>
+      <div class="col-md-2 icon_div" style="background-color: #48C9B0;">
+        <div>
+          <span class="fa fa-user-circle-o icon" aria-hidden="true"></span>
+        </div>
+        <div>
+          <a href="result_spreadsheet_init.php" class="text-decoration-none icon-a">
+            <p class="text-center text-white">Generate Spreadsheet</p>
+          </a>
+        </div>
     </div>
 
     </div>

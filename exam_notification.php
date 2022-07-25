@@ -22,8 +22,10 @@ include_once './model/inc/student_dash_header.php';
 
     <section class="text-danger text-center bg-warning  " style="padding: 70px 5px">
         <h3 class="text-white">Hello <?php echo $_SESSION['st-username']; ?>,</h3>
-        <h5>The Selected Result is yet to be compiled or is still being processed. <br>
-            Check Back again in few days or call the School Administrator</h5>
+        <h5>The Selected Mid-Term Result is still being processed. <br>
+            Check Back again in few days or call the School Administrator.<br>
+        Meanwhile you can check previous terms is you haven't do so. <br>
+    Thank You</h5>
     </section>
     <hr>
 

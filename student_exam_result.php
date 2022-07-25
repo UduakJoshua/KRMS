@@ -143,7 +143,6 @@ $s_arm = $_SESSION['class_arm'];
 
                                             while ($row = $sql_result->fetch_assoc()) :
                                                 //  print_r($row);
-
                                                 $T1 = $row['T1'];
                                                 $T2 = $row['T2'];
                                                 $project = $row['project'];
@@ -197,7 +196,8 @@ $s_arm = $_SESSION['class_arm'];
                                                                             } else {
                                                                                 echo $sp . "<sup>" . $ordinals[0] . "</sup>";
                                                                             }
-                                                                            ?></td>
+                                                                            ?>
+                                                    </td>
 
                                                     <!--remarks-->
                                                     <td>

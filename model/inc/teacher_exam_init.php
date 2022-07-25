@@ -1,7 +1,5 @@
 <?php
 require "./controller/score_upload_init.php";
-$title = "BCA | Score Input";
-include_once './model/inc/staff_dashboard_header.php';
 ?>
 
 <!-- main content-->
@@ -32,6 +30,7 @@ include_once './model/inc/staff_dashboard_header.php';
 
         <div class="row justify-content-center">
             <div class="col-md-12">
+                 <!--begin if check to see the section and display the class accordingly-->
                 <form action="teacher_exam_init.php" method="POST">
                     <div class="card">
                         <!--card header begins here-->
@@ -47,11 +46,64 @@ include_once './model/inc/staff_dashboard_header.php';
                             <div class="col-md-12">
                                 <div class="card-body">
                                     <div class="row">
-                                   <?php include_once './model/inc/select_class.php';?>
+                                        <div class="col-md-2">
+                                            <label for="student_class">Student's Class</label>
 
-                                                <!-- subject select-->
-                                   <?php include_once './model/inc/select_subject.php';?>
-                                       
+                                            <?php
+                                            require_once "controller/class_logic.php";
+                                            $select_sql = "SELECT * FROM classes ORDER BY className ASC";
+                                            $sql_result = $conn->query($select_sql);
+                                            ?>
+                                            <select name="student_class" id="student_class" class="form-control ">
+                                                // using a while loop to iterate the class table
+                                                <?php
+                                                while ($row = $sql_result->fetch_assoc()) : ?>
+                                                    <option value="<?php echo $row['className']; ?>"><?php echo $row['className']; ?></option>
+                                                <?php endwhile; ?>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-md-2 form-group">
+                                            <label for="class">Arm</label>
+                                            <select name="arm" id="arm" class="form-control ">
+
+                                                <option value="Faithfulness"> Faithfulness</option>
+                                                <option value="Gracefulness"> Gracefulness</option>
+                                                <option value="Goodness"> Goodness</option>
+                                                <option value="Holiness"> Holiness</option>
+                                                <option value="Humility"> Humility</option>
+                                                <option value="Joyfulness"> Joyfulness</option>
+                                                <option value="Kindness"> Kindness</option>
+                                                <option value="Love"> Love</option>
+                                                <option value="Meekness"> Meekness</option>
+                                                <option value="Peace"> Peace</option>
+                                                <option value="Purity"> Purity</option>
+                                                <option value="Virtue"> Virtue</option>
+                                                <option value="Science"> Science</option>
+                                                <option value="Art"> Art</option>
+
+
+                                            </select>
+                                        </div>
+                                        <!-- subject select-->
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="subject">Subject</label>
+
+                                                <?php
+                                                require_once "controller/subject_logic.php";
+                                                $select_sql = "SELECT * FROM subject ORDER BY subject_title ASC";
+                                                $sql_result = $conn->query($select_sql);
+                                                ?>
+                                                <select name="subject" id="subject" class="form-control ">
+                                                    // using a while loop to iterate the subject table
+                                                    <?php
+                                                    while ($row = $sql_result->fetch_assoc()) : ?>
+                                                        <option value="<?php echo $row['subject_title']; ?>"><?php echo $row['subject_title']; ?></option>
+                                                    <?php endwhile; ?>
+                                                </select>
+                                            </div>
+                                        </div>
 
                                         <div class="col-md-2">
                                             <label for="term">Term</label>

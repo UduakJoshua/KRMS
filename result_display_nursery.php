@@ -124,6 +124,7 @@ $aSession = $_SESSION['aSession'];
                             AS 'rank'   FROM students_score WHERE  term= '$term' && student_class = '$class' && class_arm = '$c_arm' && 
                             session = '$aSession') as temp WHERE admission_no= '$admission_no'";
                                 $sql_result = $conn->query($select_sql);
+
                             }
                             ?>
                             <div class="table-responsive">
@@ -139,14 +140,15 @@ $aSession = $_SESSION['aSession'];
                                             <th scope="col">Subject <br> Position</th>
                                             <th scope="col">Remarks</th>
 
-
-
                                         </tr>
                                     </thead>
                                     <tbody class="ml-2">
                                         <?php
 
                                         while ($row = $sql_result->fetch_assoc()) :
+                                           // echo '<pre>';
+                                           // print_r($row);
+                                           // echo '</pre>';
 
 
                                             $T1 = $row['T1'];

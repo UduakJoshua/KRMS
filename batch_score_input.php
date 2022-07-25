@@ -77,10 +77,21 @@ $subject = $_SESSION['subject'];
                                     //query
                                     $sql = "SELECT * FROM student WHERE classArm =  '$c_arm' && class_name = '$class' ORDER BY surname ASC";
                                     $result = $conn->query($sql);
+                                 
+
+                                   
                                     ?>
 
                                     <?php
-                                    while ($row = mysqli_fetch_assoc($result)) : ?>
+                                    while ($row = mysqli_fetch_assoc($result)) : 
+                                        $ad_no = $row['admissionNo'];
+                                        
+                                        $mtsql = "SELECT * FROM mid_term_scores WHERE student_arm =  '$c_arm' && student_class = '$class' && admission_no = '$ad_no' 
+                                        && subject = '$subject' && term = '$term' && session = '$aSession' ";
+                                        $mtresult = $conn->query($mtsql);
+                                        $mtrow = mysqli_fetch_assoc($mtresult);
+                                        ?>
+
                                         <div class="row mt-1 ml-auto mr-2">
                                             <div class="col-md-2">
                                                 <input type="text" name="student_name[]" value="<?php echo $row['surname'] . " " . $row['firstname'] ?>" readonly class="form-control" size="50">
@@ -121,7 +132,7 @@ $subject = $_SESSION['subject'];
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text" id="basic-addon1">T2</span>
                                                     </div>
-                                                    <input type="number" name="T2[]" class="form-control" placeholder="0" aria-label="T2" aria-describedby="basic-addon1" maxlength="2" max="20">
+                                                    <input type="number" name="T2[]"   value="<?php echo $mtrow['T2']  ?>" class="form-control" placeholder="0" aria-label="T2" aria-describedby="basic-addon1" maxlength="2" max="20">
                                                 </div>
                                             </div>
                                             <div class="col-md-2">

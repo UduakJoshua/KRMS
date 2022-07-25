@@ -64,15 +64,19 @@ include_once './model/inc/dashboard_header.php';
                     $class = $_SESSION['class'];
                     $term = $_SESSION['term'];
                     $aSession = $_SESSION['aSession'];
-                    $select_sql = "SELECT *, count(admission_no)as ta FROM students_score Group by admission_no
-                    WHERE  term= '$term' && student_class = '$class' && class_arm = '$c_arm' && 
-                session = '$aSession'";
-
+                   
+                    $select_sql = "SELECT student_name, T1, T2, exam, total, project, assignment, subject, admission_no  FROM students_score 
+                    WHERE student_class = '$class' && class_arm = '$c_arm' && term= '$term'  && session= '$aSession' group by admission_no order by student_name ASC";
                     $sql_result = $conn->query($select_sql);
 
-
-
+                   /* $select_sql = "SELECT * FROM (SELECT *,  OVER ( partition by subject order by total desc ) 
+                    AS 'rank'   FROM students_score WHERE  term= '$term' && student_class = '$class' && class_arm = '$c_arm' && 
+                    session = '$aSession') as temp WHERE term= '$term' && student_class = '$class' && class_arm = '$c_arm' && 
+                    session = '$aSession' ";
+                        $sql_result = $conn->query($select_sql);*/
+                      
                     ?>
+                    
 
                     <div>
                         <table class="table table-striped table-sm table-bordered ">
@@ -104,12 +108,12 @@ include_once './model/inc/dashboard_header.php';
                                 </tr>
                             </thead>
                             <tbody class="ml-2">
-                                <?php while ($row = $sql_result->fetch_assoc()) : ?>
+                               
                                     <tr>
 
                                         <td><strong></strong></td>
-                                        <td style="width: 60%;"> <?php echo $row['student_name'] ?></td>
-                                        <td class="td_center"><?php echo $row['admission_no'] ?></td>
+                                        <td style="width: 60%;"> </td>
+                                        <td class="td_center"></td>
 
 
                                         <td class="td_center">T1</td>
@@ -128,7 +132,7 @@ include_once './model/inc/dashboard_header.php';
                                         <td class="td_center">Ex</td>
                                         <td class="td_center">Tot</td>
                                         <td class="td_center">SP</td>
-                                        <!-- next-->
+                                      
                                         <td class="td_center">T1</td>
                                         <td class="td_center">T2</td>
                                         <td class="td_center">Ex</td>
@@ -208,11 +212,146 @@ include_once './model/inc/dashboard_header.php';
                                         <td class="td_center">SP</td>
 
                                     </tr>
-                                <?php endwhile ?>
+                                    <?php
+
+while ($row = $sql_result->fetch_assoc()) :
+    
+
+   $T1 = $row['T1'];
+   $T2 = $row['T2'];
+   $exam = $row['exam'];
+   $total = $row['total'];
+   $subject = $row['subject'];
+   $admission_no = $row['admission_no'];
+   $name = $row['student_name'];
+
+   echo '<pre>';
+    print_r($row);
+    echo '</pre>';
+
+   
+
+   
+
+   
+    //$subject_position = $row['subject_position'];
+
+?>
+
+                                    <tr>
+                       
+                                    
+
+
+<td><strong></strong></td>
+<td style="width: 60%;"><?php echo $name;?> </td>
+<td class="td_center"><?php echo $admission_no;?></td>
+
+<?php if ($subject == "Agricultural Science"):?>
+<td class="td_center"><?php  echo $T1?></td>
+<td class="td_center">T2</td>
+<td class="td_center">Ex</td>
+<td class="td_center">Tot</td>
+<td class="td_center">SP</td>
+<?php endif;?>
+
+<td class="td_center">T1</td>
+<td class="td_center">T2</td>
+<td class="td_center">Ex</td>
+<td class="td_center">Tot</td>
+<td class="td_center">SP</td>
+
+<td class="td_center">T1</td>
+<td class="td_center">T2</td>
+<td class="td_center">Ex</td>
+<td class="td_center">Tot</td>
+<td class="td_center">SP</td>
+
+<td class="td_center">T1</td>
+<td class="td_center">T2</td>
+<td class="td_center">Ex</td>
+<td class="td_center">Tot</td>
+<td class="td_center">SP</td>
+
+<td class="td_center">T1</td>
+<td class="td_center">T2</td>
+<td class="td_center">Ex</td>
+<td class="td_center">Tot</td>
+<td class="td_center">SP</td>
+
+<td class="td_center">T1</td>
+<td class="td_center">T2</td>
+<td class="td_center">Ex</td>
+<td class="td_center">Tot</td>
+<td class="td_center">SP</td>
+
+<td class="td_center">T1</td>
+<td class="td_center">T2</td>
+<td class="td_center">Ex</td>
+<td class="td_center">Tot</td>
+<td class="td_center">SP</td>
+
+<td class="td_center">T1</td>
+<td class="td_center">T2</td>
+<td class="td_center">Ex</td>
+<td class="td_center">Tot</td>
+<td class="td_center">SP</td>
+
+<td class="td_center">T1</td>
+<td class="td_center">T2</td>
+<td class="td_center">Ex</td>
+<td class="td_center">Tot</td>
+<td class="td_center">SP</td>
+
+<td class="td_center">T1</td>
+<td class="td_center">T2</td>
+<td class="td_center">Ex</td>
+<td class="td_center">Tot</td>
+<td class="td_center">SP</td>
+
+<td class="td_center">T1</td>
+<td class="td_center">T2</td>
+<td class="td_center">Ex</td>
+<td class="td_center">Tot</td>
+<td class="td_center">SP</td>
+
+<td class="td_center">T1</td>
+<td class="td_center">T2</td>
+<td class="td_center">Ex</td>
+<td class="td_center">Tot</td>
+<td class="td_center">SP</td>
+
+<td class="td_center">T1</td>
+<td class="td_center">T2</td>
+<td class="td_center">Ex</td>
+<td class="td_center">Tot</td>
+<td class="td_center">SP</td>
+
+<td class="td_center">T1</td>
+<td class="td_center">T2</td>
+<td class="td_center">Ex</td>
+<td class="td_center">Tot</td>
+<td class="td_center">SP</td>
+
+<td class="td_center">T1</td>
+<td class="td_center">T2</td>
+<td class="td_center">Ex</td>
+<td class="td_center">Tot</td>
+<td class="td_center">SP</td>
+
+<td class="td_center">T1</td>
+<td class="td_center">T2</td>
+<td class="td_center">Ex</td>
+<td class="td_center">Tot</td>
+<td class="td_center">SP</td>
+
+</tr>
+<?php endwhile; ?>
+                             
                             </tbody>
 
                         </table>
-                    </div>
+                    </div-->
                 </div>
     </section>
     <div>

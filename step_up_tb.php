@@ -7,7 +7,7 @@ include_once './model/inc/student_dash_header.php';
 ?>
 <main role="main" class="col-lg-10 ml-sm-auto col-lg-10 px-md-4">
     <div class=" page-head d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h6">Second Term Examination Time Table</h1>
+        <h1 class="h6">Third Term Mid-Term Time Table</h1>
         <div class=" mb-2 mb-md-0">
             <div class="mr-2">
                 <p>Welcome <?php echo $_SESSION['st-username']; ?></p>
@@ -28,95 +28,61 @@ include_once './model/inc/student_dash_header.php';
 
 
             <div class="table-responsive">
-                <table class="table table-striped table-bordered">
+            <table class="table table-striped table-bordered">
                     <thead class="dark">
                         <tr style="font-size: 20px;">
                             <th scope="col">Day</th>
                             <th scope="col">Date</th>
-                            <th scope="col">Paper 1</th>
-                            <th scope="col">Paper 2</th>
-
-
+                            <th scope="col" colspan="2">Subject</th>
                         </tr>
                     </thead>
+
                     <tbody>
 
                         <tr>
                             <td>Wednesday</td>
-                            <td>16/03/2022</td>
-                            <td>Verbal Skills</td>
-                            <td>-</td>
-                        </tr>
-                        <tr>
-                            <td>Thursday</td>
-                            <td>17/03/2022</td>
-                            <td>Literature</td>
-                            <td>-</td>
-
-                        </tr>
-                        <tr>
-                            <td>Friday</td>
-                            <td>18/03/2022</td>
-                            <td>Quantitative Skills</td>
-                            <td>-</td>
-
-                        </tr>
-                        <tr>
-                            <td>Monday</td>
-                            <td>21/03/2022</td>
-                            <td>Mathematics</td>
-                            <td>-</td>
-
-
-                        </tr>
-                        <tr>
-                            <td>Tuesday</td>
-                            <td>22/03/2022</td>
-                            <td>English Language</td>
-                            <td>-</td>
-                        </tr>
-
-                        <tr>
-                            <td>Wednesday</td>
-                            <td>23/03/2022</td>
+                            <td>08/06/2022</td>
                             <td>Elementary Science</td>
-                            <td>-</td>
+                            <td>Verbal Skills</td>
                         </tr>
-
                         <tr>
                             <td>Thursday</td>
-                            <td>24/03/2022</td>
+                            <td>09/06/2022</td>
+                            <td>Quantitative Skills  </td>
                             <td>Social Studies</td>
-                            <td> French</td>
                         </tr>
-
                         <tr>
                             <td>Friday</td>
-                            <td>25/03/2022</td>
-                            <td>Health Education</td>
-                            <td>-</td>
+                            <td>10/06/2022</td>
+                            <td>Mathematics</td>
+                            <td>Moral Instruction</td>
                         </tr>
-
                         <tr>
                             <td>Monday</td>
-                            <td>28/03/2022</td>
-                            <td>Moral Instructions</td>
-                            <td>-</td>
+                            <td>13/06/2022</td>
+                            <td colspan="2" style="text-align: center">Public Holiday</td>
                         </tr>
-
                         <tr>
                             <td>Tuesday</td>
-                            <td>29/03/2022</td>
-                            <td>Fine Art</td>
-                            <td> - </td>
+                            <td>14/06/2022</td>
+                            <td>English Language</td>
+                            <td>Literature / French </td>
                         </tr>
 
                         <tr>
                             <td>Wednesday</td>
-                            <td>30/03/2022</td>
-                            <td>Language Art</td>
-                            <td> - </td>
+                            <td>15/06/2022</td>
+                            <td>Health Education</td>
+                            <td>Songs and Rhyme</td>
                         </tr>
+
+                        <tr>
+                            <td>Thursday</td>
+                            <td>16/06/2022</td>
+                            <td>Language Art</td>
+                            <td>-</td>
+                        </tr>
+                        
                     </tbody>
 
                 </table>

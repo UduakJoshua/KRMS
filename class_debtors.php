@@ -118,13 +118,14 @@ $a_session = $_SESSION['aSession'];
                                 <tr style="font-size: 19px; font-weight:500;">
 
                                     <?php
+                                    $bal = 0;                            
                                     $sql = "SELECT
                                 sum(total_fees )as actual_bill,
                                 sum(amount_paid)as total_paid,
                                 sum(balance) as total_balance
-                                FROM fees_total WHERE term =? && student_arm = ? && student_class = ? && a_session =?";
+                                FROM fees_total WHERE term =? && student_arm = ? && student_class = ? && a_session =? && balance >= ?";
                                     $stmt = $conn->prepare($sql);
-                                    $stmt->bind_param('ssss', $term, $student_arm, $student_class, $a_session);
+                                    $stmt->bind_param('ssssi', $term, $student_arm, $student_class, $a_session, $bal);
                                     $stmt->execute();
                                     $result = $stmt->get_result();
                                     if ($row = $result->num_rows > 0);

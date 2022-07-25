@@ -55,36 +55,36 @@ include_once './model/inc/student_dash_header.php';
       <!-- col 3-->
       <?php if ($row['class_name'] == "JSS Three") : ?>
         <div class="col-md-4">
-          <a href="tb_jss3.php" class="text-decoration-none"><button class="btn btn-dark btn-block mt-4">Exam Time Table</button></a>
+          <a href="tb_jss3.php" class="text-decoration-none"><button class="btn btn-dark btn-block mt-4">Promotion Exam Time Table</button></a>
         </div>
       <?php elseif ($row['class_name'] == "SSS Three") : ?>
         <div class="col-md-4">
-          <a href="tb_sss3.php" class="text-decoration-none"><button class="btn btn-danger btn-block mt-4">Exam Time Table</button></a>
+          <a href="tb_sss3.php" class="text-decoration-none"><button class="btn btn-danger btn-block mt-4">Promotion Exam Time Table</button></a>
         </div>
       <?php elseif ($row['class_name'] == "JSS One" || $row['class_name'] == "JSS Two") : ?>
         <div class="col-md-4">
-          <a href="tb_jss1_2.php" class="text-decoration-none"><button class="btn btn-danger btn-block mt-4">Exam Time Table</button></a>
+          <a href="tb_jss1_2.php" class="text-decoration-none"><button class="btn btn-danger btn-block mt-4">Promotion Exam Time Table</button></a>
         </div>
       <?php elseif ($row['class_name'] == "SSS One" || $row['class_name'] == "SSS Two") : ?>
         <div class="col-md-4">
-          <a href="tb_sss1_2.php" class="text-decoration-none"><button class="btn btn-danger btn-block mt-4">Exam Time Table</button></a>
+          <a href="tb_sss1_2.php" class="text-decoration-none"><button class="btn btn-danger btn-block mt-4">Promotion Exam Time Table</button></a>
         </div>
       <?php elseif ($row['class_name'] == "Step Up") : ?>
         <div class="col-md-4">
-          <a href="step_up_tb.php" class="text-decoration-none"><button class="btn btn-danger btn-block mt-4">Exam Time Table</button></a>
+          <a href="step_up_tb.php" class="text-decoration-none"><button class="btn btn-danger btn-block mt-4">Promotion Exam Time Table</button></a>
         </div>
       <?php elseif ($row['class_name'] == "Progressive") : ?>
         <div class="col-md-4">
-          <a href="progressive_tb.php" class="text-decoration-none"><button class="btn btn-danger btn-block mt-4">Exam Time Table</button></a>
+          <a href="progressive_tb.php" class="text-decoration-none"><button class="btn btn-danger btn-block mt-4">Promotion Exam Time Table</button></a>
         </div>
       <?php elseif ($row['class_name'] == "Bloomers") : ?>
         <div class="col-md-4">
-          <a href="pre_nursery_tb.php" class="text-decoration-none"><button class="btn btn-danger btn-block mt-4">Exam Time Table</button></a>
+          <a href="pre_nursery_tb.php" class="text-decoration-none"><button class="btn btn-danger btn-block mt-4">Promotion Exam Time Table</button></a>
         </div>
 
       <?php else : ?>
         <div class="col-md-4">
-          <a href="basic_tb.php" class="text-decoration-none"><button class="btn btn-secondary btn-block mt-4"> Exam Time Table</button></a>
+          <a href="basic_tb.php" class="text-decoration-none"><button class="btn btn-secondary btn-block mt-4">Promotion Exam Time Table</button></a>
         </div>
       <?php endif; ?>
       <div class="col-md-4">

@@ -83,7 +83,7 @@ $a_session = $_SESSION['a_session'];
                                         sum(arrears)as arrears,
                                         sum(boarding_fees)as boarding_fees,
                                         sum(balance) as total_balance, term, a_session 
-                                        FROM fees_total WHERE term ='$term'  && a_session ='$a_session'";
+                                        FROM fees_total WHERE term ='$term'  && a_session ='$a_session' ";
                                 $result = $conn->query($sql);
                                 $count = 1;
 

@@ -76,8 +76,11 @@ $ad_no = $_SESSION['admin_no'];
                         <p>
                             <strong>Date:</strong> <?php if ($term == "1st Term") {
                                                         echo "5<sup>th</sup> - November - 2021 ";
-                                                    } else {
+                                                    } elseif ($term == "2nd Term") {
                                                         echo "21<sup>st</sup> - February - 2022 ";
+                                                    }
+                                                    else {
+                                                        echo "4<sup>th</sup> - July - 2022 ";
                                                     } ?>
                             |
                             <span><strong>Sex:</strong> <?php echo $row['gender']; ?> </span>
@@ -99,7 +102,7 @@ $ad_no = $_SESSION['admin_no'];
             </div>
 
             <?php
-
+            $count = 1;
             $select_sql = "SELECT * FROM mid_term_scores WHERE admission_no='$ad_no' && term= '$term' && session = '$academic_session' ORDER BY subject ASC";
             $sql_result = $conn->query($select_sql);
             if (mysqli_num_rows($sql_result) > 0) : ?>
@@ -108,6 +111,7 @@ $ad_no = $_SESSION['admin_no'];
                 <table class="table table-striped table-sm display">
                     <thead class="thead-dark ">
                         <tr style="font-size: 18px; text-align:center;">
+                            <th scope="col" >S/N</th>
                             <th scope="col " style="font-size: 18px; text-align:left;">Subject</th>
                             <th scope="col">T2 (20%)</th>
                             <th scope="col">Grade</th>
@@ -126,6 +130,7 @@ $ad_no = $_SESSION['admin_no'];
                         ?>
 
                             <tr style="font-size: 17px; text-align:center;">
+                                <td><?php echo $count; ?></td>
                                 <td style=" text-align:left; width:30%"><?php echo $row['subject'] ?></td>
 
                                 <td><?php echo $T2 ?></td>
@@ -163,7 +168,10 @@ $ad_no = $_SESSION['admin_no'];
 
                             </tr>
 
-                        <?php endwhile; ?>
+                        <?php 
+                     $count++;
+
+                     endwhile; ?>
 
                     </tbody>
 

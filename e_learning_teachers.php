@@ -28,8 +28,8 @@ include_once './model/inc/staff_dashboard_header.php';
           <span class="fa fa-desktop icon" aria-hidden="true"></span>
         </div>
         <div>
-          <a href="e_videos.php" class="text-decoration-none icon-a">
-            <p class="text-center text-white">Upload E-Video</p>
+          <a href="add_cbt_questions.php" class="text-decoration-none icon-a">
+            <p class="text-center text-white">Upload CBT Questions</p>
           </a>
         </div>
       </div>
